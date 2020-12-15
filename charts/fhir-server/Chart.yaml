@@ -1,20 +1,13 @@
 apiVersion: v2
 name: fhir-server
-description: A Helm chart for deploying the Microsoft FHIR Server for Azure
+description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+home: https://github.com/microsoft/fhir-server
+keywords:
+  - fhir
+  - fhir-server
 maintainers:
   - name: chgl
-    url: https://github.com/chgl
-
-# A chart can be either an 'application' or a 'library' chart.
-#
-# Application charts are a collection of templates that can be packaged into versioned archives
-# to be deployed.
-#
-# Library charts provide useful utilities or functions for the chart developer. They're included as
-# a dependency of application charts to inject those utilities and functions into the rendering
-# pipeline. Library charts do not define any templates and therefore cannot be deployed.
+sources:
+  - https://github.com/microsoft/fhir-server
 type: application
-
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-version: 0.4.1
+version: 0.4.2
