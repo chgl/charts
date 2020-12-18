@@ -6,7 +6,7 @@ on:
       - "charts/**"
 
 jobs:
-  lint-chart:
+  ct-lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,3 +27,17 @@ jobs:
 
       - name: Run chart-testing (lint)
         run: ct lint
+
+  power-lint:
+    container: quay.io/chgl/kube-powertools:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Check if documentation is up-to-date
+        run: bash scripts/generate-docs.sh && git diff --exit-code HEAD
+      - name: Run YAML lint
+        run: yamllint .
+      - name: Run Powerlint
+        run: bash scripts/chart-powerlint.sh

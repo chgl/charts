@@ -1,0 +1,19 @@
+project:
+  name: Microsoft FHIR Server
+  shortName: fhir-server
+  url: https://github.com/OHDSI
+  description: Helm chart for deploying the Microsoft FHIR Server for Azure.
+  app: the Microsoft FHIR Server for Azure.
+repository:
+  url: https://chgl.github.io/charts
+  name: chgl
+chart:
+  name: fhir-server
+  values: "-- generate from values file --"
+  valuesExample: "-- generate from values file --"
+prerequisites:
+  - "Kubernetes v1.16+"
+  - "Helm v3"
+release:
+  name: fhir-server
+  namespace: fhir
