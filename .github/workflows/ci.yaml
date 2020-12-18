@@ -36,8 +36,8 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: Check if documentation is up-to-date
-        run: bash scripts/generate-docs.sh && git diff --exit-code HEAD
+      # - name: Check if documentation is up-to-date
+      #   run: bash scripts/generate-docs.sh && git diff --exit-code HEAD
       - name: Run YAML lint
         run: yamllint .
       - name: Run Powerlint
