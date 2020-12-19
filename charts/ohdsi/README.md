@@ -47,77 +47,77 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The following table lists the configurable parameters of the `ohdsi` chart and their default values.
 
-| Parameter                                    | Description                                                                                                            | Default                  |
-| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| imagePullSecrets                             |                                                                                                                        | `[]`                     |
-| nameOverride                                 |                                                                                                                        | `""`                     |
-| fullnameOverride                             |                                                                                                                        | `""`                     |
-| global.postgresql.existingSecret             |                                                                                                                        | `""`                     |
-| global.postgresql.database                   |                                                                                                                        | `"ohdsi"`                |
-| postgresqlha.enabled                         |                                                                                                                        | `true`                   |
-| postgresqlha.postgresqlImage.tag             |                                                                                                                        | `13.1.0`                 |
-| webapi.enabled                               |                                                                                                                        | `true`                   |
-| webapi.replicaCount                          |                                                                                                                        | `1`                      |
-| webapi.image.registry                        |                                                                                                                        | `ghcr.io`                |
-| webapi.image.repository                      |                                                                                                                        | `chgl/ohdsi/webapi`      |
-| webapi.image.tag                             |                                                                                                                        | `2.8.0-snapshot`         |
-| webapi.image.pullPolicy                      |                                                                                                                        | `Always`                 |
-| webapi.db.host                               |                                                                                                                        | `"db"`                   |
-| webapi.db.port                               |                                                                                                                        | `5432`                   |
-| webapi.db.database                           |                                                                                                                        | `"ohdsi"`                |
-| webapi.db.username                           |                                                                                                                        | `"postgres"`             |
-| webapi.db.password                           |                                                                                                                        | `"postgresql-password1"` |
-| webapi.db.existingSecret                     | name of an existing secret containing the password to the DB. The key for the password has to be `postgresql-password` | `""`                     |
-| webapi.podAnnotations                        |                                                                                                                        | `{}`                     |
-| webapi.podSecurityContext                    |                                                                                                                        | `{}`                     |
-| webapi.securityContext.runAsNonRoot          | readOnlyRootFilesystem: true                                                                                           | `true`                   |
-| webapi.securityContext.runAsUser             |                                                                                                                        | `101`                    |
-| webapi.service.type                          |                                                                                                                        | `ClusterIP`              |
-| webapi.service.port                          |                                                                                                                        | `8080`                   |
-| webapi.ingress.enabled                       |                                                                                                                        | `false`                  |
-| webapi.ingress.annotations                   |                                                                                                                        | `{}`                     |
-| webapi.ingress.tls                           |                                                                                                                        | `[]`                     |
-| webapi.resources                             |                                                                                                                        | `{}`                     |
-| webapi.readinessProbe.failureThreshold       |                                                                                                                        | `5`                      |
-| webapi.readinessProbe.initialDelaySeconds    |                                                                                                                        | `45`                     |
-| webapi.readinessProbe.periodSeconds          |                                                                                                                        | `15`                     |
-| webapi.readinessProbe.successThreshold       |                                                                                                                        | `1`                      |
-| webapi.readinessProbe.timeoutSeconds         |                                                                                                                        | `15`                     |
-| webapi.nodeSelector                          |                                                                                                                        | `{}`                     |
-| webapi.tolerations                           |                                                                                                                        | `[]`                     |
-| webapi.affinity                              |                                                                                                                        | `{}`                     |
-| webapi.extraEnv                              | extra environment variables                                                                                            | `[]`                     |
-| atlas.enabled                                |                                                                                                                        | `true`                   |
-| atlas.replicaCount                           |                                                                                                                        | `1`                      |
-| atlas.image.registry                         |                                                                                                                        | `ghcr.io`                |
-| atlas.image.repository                       |                                                                                                                        | `chgl/ohdsi/atlas`       |
-| atlas.image.tag                              |                                                                                                                        | `2.8.0-dev`              |
-| atlas.image.pullPolicy                       |                                                                                                                        | `Always`                 |
-| atlas.podAnnotations                         |                                                                                                                        | `{}`                     |
-| atlas.podSecurityContext                     |                                                                                                                        | `{}`                     |
-| atlas.securityContext.readOnlyRootFilesystem |                                                                                                                        | `false`                  |
-| atlas.securityContext.runAsNonRoot           |                                                                                                                        | `true`                   |
-| atlas.securityContext.runAsUser              |                                                                                                                        | `101`                    |
-| atlas.service.type                           |                                                                                                                        | `ClusterIP`              |
-| atlas.service.port                           |                                                                                                                        | `8080`                   |
-| atlas.ingress.enabled                        |                                                                                                                        | `false`                  |
-| atlas.ingress.annotations                    |                                                                                                                        | `{}`                     |
-| atlas.ingress.tls                            |                                                                                                                        | `[]`                     |
-| atlas.resources                              |                                                                                                                        | `{}`                     |
-| atlas.readinessProbe.failureThreshold        |                                                                                                                        | `5`                      |
-| atlas.readinessProbe.initialDelaySeconds     |                                                                                                                        | `30`                     |
-| atlas.readinessProbe.periodSeconds           |                                                                                                                        | `15`                     |
-| atlas.readinessProbe.successThreshold        |                                                                                                                        | `1`                      |
-| atlas.readinessProbe.timeoutSeconds          |                                                                                                                        | `15`                     |
-| atlas.livenessProbe.failureThreshold         |                                                                                                                        | `5`                      |
-| atlas.livenessProbe.initialDelaySeconds      |                                                                                                                        | `30`                     |
-| atlas.livenessProbe.periodSeconds            |                                                                                                                        | `15`                     |
-| atlas.livenessProbe.successThreshold         |                                                                                                                        | `1`                      |
-| atlas.livenessProbe.timeoutSeconds           |                                                                                                                        | `15`                     |
-| atlas.nodeSelector                           |                                                                                                                        | `{}`                     |
-| atlas.tolerations                            |                                                                                                                        | `[]`                     |
-| atlas.affinity                               |                                                                                                                        | `{}`                     |
-| atlas.extraEnv                               | extra environment variables                                                                                            | `[]`                     |
+| Parameter                                    | Description                                                                                                            | Default             |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------------------- |
+| imagePullSecrets                             |                                                                                                                        | `[]`                |
+| nameOverride                                 |                                                                                                                        | `""`                |
+| fullnameOverride                             |                                                                                                                        | `""`                |
+| global.postgresql.existingSecret             |                                                                                                                        | `""`                |
+| global.postgresql.database                   |                                                                                                                        | `"ohdsi"`           |
+| postgresqlha.enabled                         |                                                                                                                        | `true`              |
+| postgresqlha.postgresqlImage.tag             |                                                                                                                        | `13.1.0`            |
+| webapi.enabled                               |                                                                                                                        | `true`              |
+| webapi.replicaCount                          |                                                                                                                        | `1`                 |
+| webapi.image.registry                        |                                                                                                                        | `ghcr.io`           |
+| webapi.image.repository                      |                                                                                                                        | `chgl/ohdsi/webapi` |
+| webapi.image.tag                             |                                                                                                                        | `2.8.0-snapshot`    |
+| webapi.image.pullPolicy                      |                                                                                                                        | `Always`            |
+| webapi.db.host                               |                                                                                                                        | `"db"`              |
+| webapi.db.port                               |                                                                                                                        | `5432`              |
+| webapi.db.database                           |                                                                                                                        | `"ohdsi"`           |
+| webapi.db.username                           |                                                                                                                        | `"postgres"`        |
+| webapi.db.password                           |                                                                                                                        | `"postgres"`        |
+| webapi.db.existingSecret                     | name of an existing secret containing the password to the DB. The key for the password has to be `postgresql-password` | `""`                |
+| webapi.podAnnotations                        |                                                                                                                        | `{}`                |
+| webapi.podSecurityContext                    |                                                                                                                        | `{}`                |
+| webapi.securityContext.runAsNonRoot          | readOnlyRootFilesystem: true                                                                                           | `true`              |
+| webapi.securityContext.runAsUser             |                                                                                                                        | `101`               |
+| webapi.service.type                          |                                                                                                                        | `ClusterIP`         |
+| webapi.service.port                          |                                                                                                                        | `8080`              |
+| webapi.ingress.enabled                       |                                                                                                                        | `false`             |
+| webapi.ingress.annotations                   |                                                                                                                        | `{}`                |
+| webapi.ingress.tls                           |                                                                                                                        | `[]`                |
+| webapi.resources                             |                                                                                                                        | `{}`                |
+| webapi.readinessProbe.failureThreshold       |                                                                                                                        | `5`                 |
+| webapi.readinessProbe.initialDelaySeconds    |                                                                                                                        | `45`                |
+| webapi.readinessProbe.periodSeconds          |                                                                                                                        | `15`                |
+| webapi.readinessProbe.successThreshold       |                                                                                                                        | `1`                 |
+| webapi.readinessProbe.timeoutSeconds         |                                                                                                                        | `15`                |
+| webapi.nodeSelector                          |                                                                                                                        | `{}`                |
+| webapi.tolerations                           |                                                                                                                        | `[]`                |
+| webapi.affinity                              |                                                                                                                        | `{}`                |
+| webapi.extraEnv                              | extra environment variables                                                                                            | `[]`                |
+| atlas.enabled                                |                                                                                                                        | `true`              |
+| atlas.replicaCount                           |                                                                                                                        | `1`                 |
+| atlas.image.registry                         |                                                                                                                        | `ghcr.io`           |
+| atlas.image.repository                       |                                                                                                                        | `chgl/ohdsi/atlas`  |
+| atlas.image.tag                              |                                                                                                                        | `2.8.0-dev`         |
+| atlas.image.pullPolicy                       |                                                                                                                        | `Always`            |
+| atlas.podAnnotations                         |                                                                                                                        | `{}`                |
+| atlas.podSecurityContext                     |                                                                                                                        | `{}`                |
+| atlas.securityContext.readOnlyRootFilesystem |                                                                                                                        | `false`             |
+| atlas.securityContext.runAsNonRoot           |                                                                                                                        | `true`              |
+| atlas.securityContext.runAsUser              |                                                                                                                        | `101`               |
+| atlas.service.type                           |                                                                                                                        | `ClusterIP`         |
+| atlas.service.port                           |                                                                                                                        | `8080`              |
+| atlas.ingress.enabled                        |                                                                                                                        | `false`             |
+| atlas.ingress.annotations                    |                                                                                                                        | `{}`                |
+| atlas.ingress.tls                            |                                                                                                                        | `[]`                |
+| atlas.resources                              |                                                                                                                        | `{}`                |
+| atlas.readinessProbe.failureThreshold        |                                                                                                                        | `5`                 |
+| atlas.readinessProbe.initialDelaySeconds     |                                                                                                                        | `30`                |
+| atlas.readinessProbe.periodSeconds           |                                                                                                                        | `15`                |
+| atlas.readinessProbe.successThreshold        |                                                                                                                        | `1`                 |
+| atlas.readinessProbe.timeoutSeconds          |                                                                                                                        | `15`                |
+| atlas.livenessProbe.failureThreshold         |                                                                                                                        | `5`                 |
+| atlas.livenessProbe.initialDelaySeconds      |                                                                                                                        | `30`                |
+| atlas.livenessProbe.periodSeconds            |                                                                                                                        | `15`                |
+| atlas.livenessProbe.successThreshold         |                                                                                                                        | `1`                 |
+| atlas.livenessProbe.timeoutSeconds           |                                                                                                                        | `15`                |
+| atlas.nodeSelector                           |                                                                                                                        | `{}`                |
+| atlas.tolerations                            |                                                                                                                        | `[]`                |
+| atlas.affinity                               |                                                                                                                        | `{}`                |
+| atlas.extraEnv                               | extra environment variables                                                                                            | `[]`                |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 

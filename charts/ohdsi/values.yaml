@@ -30,7 +30,7 @@ webapi:
     port: 5432
     database: "ohdsi"
     username: "postgres"
-    password: "postgresql-password1"
+    password: "postgres"
     # name of an existing secret containing the password to the DB.
     # The key for the password has to be `postgresql-password`
     existingSecret: ""
