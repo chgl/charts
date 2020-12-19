@@ -1,4 +1,4 @@
-{{- with .Values.webapi }}
+{{- with .Values.webApi }}
 {{- if .enabled }}
 apiVersion: apps/v1
 kind: Deployment

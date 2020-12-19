@@ -15,7 +15,7 @@ postgresqlha:
   postgresqlImage:
     tag: 13.1.0
 
-webapi:
+webApi:
   enabled: true
   replicaCount: 1
   image:
@@ -115,6 +115,11 @@ atlas:
     repository: chgl/ohdsi/atlas
     tag: 2.8.0-dev
     pullPolicy: Always
+
+  # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
+  # if this value is not set but `webapi.ingress.enabled=true`, then this
+  # URL is constructed from `webapi.ingress`
+  webApiUrl: ""
 
   podAnnotations: {}
 

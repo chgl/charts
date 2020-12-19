@@ -62,9 +62,14 @@ spec:
           resources:
             {{- toYaml .resources | nindent 12 }}
           env:
-            {{- if .ingress.enabled }}
+            {{- if .webApiUrl }}
             - name: WEBAPI_URL
-              value: http{{ if .ingress.tls }}s{{ end }}://{{ (index .ingress.hosts 0).host }}/atlas
+              value: {{ .webApiUrl }}
+            {{- else if $.Values.webApi.ingress.enabled }}
+            - name: WEBAPI_URL
+              {{- $host := (index $.Values.webApi.ingress.hosts 0) }}
+              {{- $path := index (index $.Values.webApi.ingress.hosts 0).paths 0 }}
+              value: http{{ if $.Values.webApi.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path }}
             {{- end }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
