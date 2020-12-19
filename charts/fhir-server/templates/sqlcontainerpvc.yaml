@@ -3,7 +3,7 @@
 {{- $dbservicename := printf "%s-mssql" $fullName }}
 kind: PersistentVolumeClaim
 apiVersion: v1
-metadata:  
+metadata:
   name: {{ $dbservicename }}
   labels:
     {{- include "fhir-server.labels" . | nindent 4 }}
