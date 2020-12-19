@@ -13,17 +13,17 @@ spec:
       image: busybox:1
       imagePullPolicy: Always
       command: ['wget', '-O', '-']
-      args: ['{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/atlas/']
+      args: ['{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/WebAPI/info']
       securityContext:
         readOnlyRootFilesystem: true
-        runAsUser: 1111
+        runAsUser: 22222
         runAsNonRoot: true
     - name: test-atlas
       image: busybox:1
       imagePullPolicy: Always
       command: ['wget', '-O', '-']
-      args: ['{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/WebAPI/info']
+      args: ['{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/atlas/']
       securityContext:
         readOnlyRootFilesystem: true
-        runAsUser: 1111
+        runAsUser: 33333
         runAsNonRoot: true

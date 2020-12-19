@@ -8,6 +8,8 @@ fullnameOverride: ""
 
 global:
   postgresql:
+    # name of an existing secret containing the following keys and passwords:
+    # `postgresql-password`, `repmgr-password`, `admin-password`
     existingSecret: ""
     database: "ohdsi"
 postgresqlha:
