@@ -1,12 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
-SCHEMA_LOCATION="https://raw.githubusercontent.com/instrumenta/kubernetes-json-schema/master/"
-KUBERNETES_VERSIONS="v1.16.0 v1.17.0 v1.18.0 v1.19.0"
 CHARTS_DIR=${CHARTS_DIR:-"charts/*"}
 SHOULD_UPDATE_DEPENDENCIES=${SHOULD_UPDATE_DEPENDENCIES:-""}
 
-POLARIS_SCORE_THRESHOLD=${POLARIS_SCORE_THRESHOLD:-86}
+POLARIS_SCORE_THRESHOLD=${POLARIS_SCORE_THRESHOLD:-90}
 SKIP_KUBE_SCORE=${SKIP_KUBE_SCORE:-"1"}
 KUBE_SCORE_ARGS=""
 SKIP_KUBE_LINTER=${SKIP_KUBE_LINTER:-"1"}
@@ -24,21 +22,6 @@ for CHART_PATH in $CHARTS_DIR; do
     if [ -f "$TEST_VALUES_FILE" ]; then
         HELM_TEMPLATE_ARGS="-f ${CHART_PATH}/values-test.yaml"
     fi
-
-    echo "Kubeval check..."
-
-    for KUBERNETES_VERSION in ${KUBERNETES_VERSIONS}; do
-        echo "Validating against Kubernetes version $KUBERNETES_VERSION:"
-
-        if ! helm template ${HELM_TEMPLATE_ARGS} ${CHART_PATH} |
-            kubeval --strict \
-                --ignore-missing-schemas \
-                --kubernetes-version "${KUBERNETES_VERSION#v}" \
-                --schema-location "${SCHEMA_LOCATION}"; then
-            echo "kubeval validation failed"
-            exit 1
-        fi
-    done
 
     echo "Polaris check..."
 
