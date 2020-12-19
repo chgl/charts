@@ -56,7 +56,6 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 | global.postgresql.database                   |                                                                                                                        | `"ohdsi"`                |
 | postgresqlha.enabled                         |                                                                                                                        | `true`                   |
 | postgresqlha.postgresqlImage.tag             |                                                                                                                        | `13.1.0`                 |
-| postgresqlha.database                        |                                                                                                                        | `"ohdsi"`                |
 | webapi.enabled                               |                                                                                                                        | `true`                   |
 | webapi.replicaCount                          |                                                                                                                        | `1`                      |
 | webapi.image.registry                        |                                                                                                                        | `ghcr.io`                |
