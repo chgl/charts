@@ -1,0 +1,19 @@
+project:
+  name: OHDSI
+  shortName: ohdsi
+  url: https://github.com/OHDSI
+  description: Helm chart for deploying the OHDSI ATLAS web tool.
+  app: the OHDSI WebAPI and ATLAS app.
+repository:
+  url: https://chgl.github.io/charts
+  name: chgl
+chart:
+  name: ohdsi
+  values: "-- generate from values file --"
+  valuesExample: "-- generate from values file --"
+prerequisites:
+  - "Kubernetes v1.16+"
+  - "Helm v3"
+release:
+  name: ohdsi
+  namespace: ohdsi

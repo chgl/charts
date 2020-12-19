@@ -1,0 +1,90 @@
+{{- with .Values.webapi }}
+{{- if .enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-webapi
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
+    app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
+      app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+  template:
+    metadata:
+    {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
+        app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      automountServiceAccountToken: false
+      containers:
+        - name: webapi
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
+          env:
+            - name: DATASOURCE_URL
+              value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
+            - name: DATASOURCE_USERNAME
+              value: {{ .db.username }}
+            - name: DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
+                  key: "postgresql-password"
+            - name: FLYWAY_DATASOURCE_URL
+              value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
+            - name: FLYWAY_DATASOURCE_USERNAME
+              value: {{ .db.username }}
+            - name: FLYWAY_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
+                  key: "postgresql-password"
+          {{- if .extraEnv }}
+          {{- toYaml .extraEnv | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /WebAPI/info
+              port: http
+            initialDelaySeconds: {{ .readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .readinessProbe.successThreshold }}
+            failureThreshold: {{ .readinessProbe.failureThreshold }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+      {{- with .nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
+{{- end }}

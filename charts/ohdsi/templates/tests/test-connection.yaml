@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "ohdsi.fullname" . }}-test-connection"
+  labels:
+    {{- include "ohdsi.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  restartPolicy: Never
+  containers:
+    - name: test-webapi
+      image: busybox:1
+      imagePullPolicy: Always
+      command: ['wget', '-O', '-']
+      args: ['{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webapi.service.port }}/atlas/']
+      securityContext:
+        readOnlyRootFilesystem: true
+        runAsUser: 1111
+        runAsNonRoot: true
+    - name: test-atlas
+      image: busybox:1
+      imagePullPolicy: Always
+      command: ['wget', '-O', '-']
+      args: ['{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/WebAPI/info']
+      securityContext:
+        readOnlyRootFilesystem: true
+        runAsUser: 1111
+        runAsNonRoot: true

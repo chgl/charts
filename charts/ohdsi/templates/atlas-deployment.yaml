@@ -1,0 +1,85 @@
+{{- with .Values.atlas }}
+{{- if .enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-atlas
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
+    app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
+      app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+  template:
+    metadata:
+    {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
+        app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+        - name: atlas
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /atlas/
+              port: http
+            initialDelaySeconds: {{ .livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .livenessProbe.successThreshold }}
+            failureThreshold: {{ .livenessProbe.failureThreshold }}
+          readinessProbe:
+            httpGet:
+              path: /atlas/
+              port: http
+            initialDelaySeconds: {{ .readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .readinessProbe.successThreshold }}
+            failureThreshold: {{ .readinessProbe.failureThreshold }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+          env:
+            {{- if .ingress.enabled }}
+            - name: WEBAPI_URL
+              value: http{{ if .ingress.tls }}s{{ end }}://{{ (index .ingress.hosts 0).host }}/atlas
+            {{- end }}
+          {{- if .extraEnv }}
+          {{- toYaml .extraEnv | nindent 12 }}
+          {{- end }}
+      {{- with .nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
+{{- end }}

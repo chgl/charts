@@ -1,0 +1,22 @@
+{{- with .Values.webapi }}
+{{- if .enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-webapi
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
+    app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+spec:
+  type: {{ .service.type }}
+  ports:
+    - port: {{ .service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
+    app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+{{- end }}
+{{- end }}

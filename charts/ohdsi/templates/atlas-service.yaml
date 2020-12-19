@@ -1,0 +1,22 @@
+{{- with .Values.atlas }}
+{{- if .enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-atlas
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
+    app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+spec:
+  type: {{ .service.type }}
+  ports:
+    - port: {{ .service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
+    app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+{{- end }}
+{{- end }}
