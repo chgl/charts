@@ -13,7 +13,7 @@ spec:
       image: busybox:1
       imagePullPolicy: Always
       command: ['wget', '-O', '-']
-      args: ['{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webapi.service.port }}/atlas/']
+      args: ['{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/atlas/']
       securityContext:
         readOnlyRootFilesystem: true
         runAsUser: 1111

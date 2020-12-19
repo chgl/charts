@@ -9,11 +9,18 @@ helm repo update
 
 ## Development
 
-1. Install the [pre-commit](https://pre-commit.com/) hooks
+1. (Optional) Install the [pre-commit](https://pre-commit.com/) hooks
 
    ```sh
    pip install pre-commit
    pre-commit install
+   ```
+
+1. (Optional) Setup a KinD cluster with Nginx ingress support
+
+   ```sh
+   kind create cluster --config=hack/kind-config.yaml
+   kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
    ```
 
 1. Make changes to the charts

@@ -1,21 +1,21 @@
-{{- if .Values.webapi.enabled }}
+{{- if .Values.webApi.enabled }}
 - Get the application URL for the WebAPI running these commands:
-{{- if .Values.webapi.ingress.enabled }}
-{{- range $host := .Values.webapi.ingress.hosts }}
+{{- if .Values.webApi.ingress.enabled }}
+{{- range $host := .Values.webApi.ingress.hosts }}
   {{- range .paths }}
-  http{{ if $.Values.webapi.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
+  http{{ if $.Values.webApi.ingress.tls }}s{{ end }}://{{ $host.host }}{{ . }}
   {{- end }}
 {{- end }}
-{{- else if contains "NodePort" .Values.webapi.service.type }}
+{{- else if contains "NodePort" .Values.webApi.service.type }}
   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "ohdsi.fullname" . }})
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
   echo http://$NODE_IP:$NODE_PORT
-{{- else if contains "LoadBalancer" .Values.webapi.service.type }}
+{{- else if contains "LoadBalancer" .Values.webApi.service.type }}
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
            You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "ohdsi.fullname" . }}'
   export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "ohdsi.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  echo http://$SERVICE_IP:{{ .Values.webapi.service.port }}
-{{- else if contains "ClusterIP" .Values.webapi.service.type }}
+  echo http://$SERVICE_IP:{{ .Values.webApi.service.port }}
+{{- else if contains "ClusterIP" .Values.webApi.service.type }}
   export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "ohdsi.name" . }}-webapi,app.kubernetes.io/instance={{ .Release.Name }}-webapi" -o jsonpath="{.items[0].metadata.name}")
   echo "Visit http://127.0.0.1:8080 to use your application"
   kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:80

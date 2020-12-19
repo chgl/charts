@@ -52,8 +52,8 @@ Get the name of the secret containing the DB password
 {{- else -}}
 {{ printf "%s-%s" $fullname "postgresqlha-postgresql" }}
 {{- end -}}
-{{- else if .Values.webapi.db.existingSecret -}}
-{{ .Values.webapi.db.existingSecret | quote }}
+{{- else if .Values.webApi.db.existingSecret -}}
+{{ .Values.webApi.db.existingSecret | quote }}
 {{- else -}}
 {{ printf "%s-%s" $fullname "webapi-db-secret" }}
 {{- end -}}
@@ -68,6 +68,6 @@ Create the JDBC URL from the host, port and database name.
 {{- $pgpoolServiceName := ( printf "%s-%s" $fullname "postgresqlha-pgpool") -}}
 {{ printf "jdbc:postgresql://%s:%d/%s" $pgpoolServiceName 5432 .Values.global.postgresql.database }}
 {{- else -}}
-{{ printf "jdbc:postgresql://%s:%d/%s" .Values.webapi.db.host (int64 .Values.webapi.db.port) .Values.webapi.db.database }}
+{{ printf "jdbc:postgresql://%s:%d/%s" .Values.webApi.db.host (int64 .Values.webApi.db.port) .Values.webApi.db.database }}
 {{- end -}}
 {{- end -}}
