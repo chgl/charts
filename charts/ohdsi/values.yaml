@@ -115,7 +115,7 @@ atlas:
   image:
     registry: ghcr.io
     repository: chgl/ohdsi/atlas
-    tag: 2.8.0-dev
+    tag: 2.8.0
     pullPolicy: Always
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
