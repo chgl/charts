@@ -35,7 +35,6 @@ webApi:
     tag: 2.8.0-snapshot
     pullPolicy: Always
 
-  # these values are ignored if `postgresql.enabled=true`
   db:
     host: "db"
     port: 5432
@@ -203,9 +202,9 @@ atlas:
     # - name: "TEST"
     #   value: "TEST"
 
-# this doesn't work yet as by default achilles requires the password
-# to be included in the JDBC URL. Dedicated env vars should be added
-# to https://github.com/OHDSI/Achilles/blob/master/docker-run instead
+# by default, Achilles connects to the same DB that the WebAPI uses
+# this assumes that it contains both the WebAPI schema (`ohdsi`) as well
+# as any CDM schemas. Future versions may allow for more flexibility here.
 achilles:
   enabled: false
   schedule: "@daily"
@@ -219,3 +218,11 @@ achilles:
     vocab: "synpuf_vocab"
     res: "synpuf_results"
   cdmVersion: "5.3.1"
+
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    runAsUser: 10001

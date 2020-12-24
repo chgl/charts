@@ -46,7 +46,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "ohdsi.webapi.db-secret-name" $ }}
+                  {{- if .db.existingSecret }}
+                  key: {{ .db.existingSecretKey }}
+                  {{- else }}
                   key: "postgresql-password"
+                  {{- end }}
             - name: FLYWAY_DATASOURCE_URL
               value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
             - name: FLYWAY_DATASOURCE_USERNAME
@@ -55,7 +59,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "ohdsi.webapi.db-secret-name" $ }}
+                  {{- if .db.existingSecret }}
+                  key: {{ .db.existingSecretKey }}
+                  {{- else }}
                   key: "postgresql-password"
+                  {{- end }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
           {{- end }}
