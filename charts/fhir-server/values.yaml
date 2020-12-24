@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   registry: healthplatformregistry.azurecr.io
   repository: r4_fhir-server
-  tag: 1.0.738
+  tag: 1.0.753
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
