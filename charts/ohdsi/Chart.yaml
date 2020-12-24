@@ -2,7 +2,7 @@ apiVersion: v2
 name: ohdsi
 description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
 type: application
-version: 0.1.9
+version: 0.2.0
 home: https://github.com/OHDSI
 keywords:
   - ohdsi
@@ -11,11 +11,11 @@ keywords:
 sources:
   - https://github.com/OHDSI/Atlas
   - https://github.com/OHDSI/WebAPI
+  - https://github.com/OHDSI/Achilles
 maintainers:
   - name: chgl
 dependencies:
-  - name: postgresql-ha
-    alias: postgresqlha
-    version: 6.3.0
+  - name: postgresql
+    version: 10.2.0
     repository: https://charts.bitnami.com/bitnami
-    condition: postgresqlha.enabled
+    condition: postgresql.enabled

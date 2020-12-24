@@ -61,18 +61,3 @@ installing the chart. For example:
 ```console
 $ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }}{{ with .Chart.Version }} --version={{.}}{{ end }} --values values.yaml
 ```
-
-## Use an existing secret with DB connection parameters
-
-```yaml
-kind: Secret
-apiVersion: v1
-metadata:
-  name: test
-  namespace: {{ .Release.Namespace }}
-type: Opaque
-data:
-  repmgr-password: cmVwbWdyLXBhc3N3b3JkMQ==
-  postgresql-password: cG9zdGdyZXNxbC1wYXNzd29yZDE=
-  admin-password: YWRtaW4tcGFzc3dvcmQx
-```
