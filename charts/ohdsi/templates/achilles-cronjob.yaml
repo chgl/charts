@@ -1,0 +1,41 @@
+{{- with .Values.achilles }}
+{{- if .enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-achilles-cron
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-achilles-cron
+    app.kubernetes.io/instance: {{ $.Release.Name }}-achilles-cron
+spec:
+  schedule: {{ .schedule | quote }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: achilles-cron
+              securityContext:
+                {{- toYaml .securityContext | nindent 16 }}
+              image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
+              imagePullPolicy: {{ .image.pullPolicy }}
+              resources:
+                {{- toYaml .resources | nindent 16 }}
+              env:
+                - name: ACHILLES_DB_URI
+                  value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
+                - name: ACHILLES_CDM_SCHEMA
+                  value: {{ .schemas.cdm }}
+                - name: ACHILLES_VOCAB_SCHEMA
+                  value: {{ .schemas.vocab }}
+                - name: ACHILLES_RES_SCHEMA
+                  value: {{ .schemas.res }}
+                - name: ACHILLES_CDM_VERSION
+                  value: {{ .cdmVersion }}
+                {{- if .extraEnv }}
+                {{- toYaml .extraEnv | nindent 16 }}
+                {{- end }}
+          restartPolicy: Never
+{{- end }}
+{{- end }}

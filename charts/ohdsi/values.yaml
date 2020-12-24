@@ -1,21 +1,30 @@
-# Default values for atlas.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-global:
-  postgresql:
-    # name of an existing secret containing the following keys and passwords:
-    # `postgresql-password`, `repmgr-password`, `admin-password`
-    existingSecret: ""
-    database: "ohdsi"
-postgresqlha:
+postgresql:
   enabled: true
-  postgresqlImage:
+  image:
     tag: 13.1.0
+    pullPolicy: Always
+  postgresqlDatabase: "ohdsi"
+  # Name of existing secret to use for PostgreSQL passwords.
+  # The secret has to contain the keys `postgresql-password`
+  # which is the password for `postgresqlUsername` when it is
+  # different of `postgres`, `postgresql-postgres-password` which
+  # will override `postgresqlPassword`, `postgresql-replication-password`
+  # which will override `replication.password` and `postgresql-ldap-password`
+  # which will be sed to authenticate on LDAP. The value is evaluated as a template.
+  existingSecret: ""
+  replication:
+    # should be true for production use
+    enabled: false
+    readReplicas: 2
+    synchronousCommit: "on"
+    numSynchronousReplicas: 1
+  metrics:
+    # should also be true for production use
+    enabled: false
 
 webApi:
   enabled: true
@@ -26,7 +35,7 @@ webApi:
     tag: 2.8.0-snapshot
     pullPolicy: Always
 
-  # these values are ignored if `postgresqlha.enabled=true`
+  # these values are ignored if `postgresql.enabled=true`
   db:
     host: "db"
     port: 5432
@@ -34,8 +43,9 @@ webApi:
     username: "postgres"
     password: "postgres"
     # name of an existing secret containing the password to the DB.
-    # The key for the password has to be `postgresql-password`
     existingSecret: ""
+    # name of the key in `webApi.db.existingSecret` to use as the password to the DB.
+    existingSecretKey: "postgresql-postgres-password"
 
   podAnnotations: {}
 
@@ -192,3 +202,20 @@ atlas:
     []
     # - name: "TEST"
     #   value: "TEST"
+
+# this doesn't work yet as by default achilles requires the password
+# to be included in the JDBC URL. Dedicated env vars should be added
+# to https://github.com/OHDSI/Achilles/blob/master/docker-run instead
+achilles:
+  enabled: false
+  schedule: "@daily"
+  image:
+    registry: ghcr.io
+    repository: chgl/ohdsi/achilles
+    tag: master
+    pullPolicy: Always
+  schemas:
+    cdm: "synpuf_cdm"
+    vocab: "synpuf_vocab"
+    res: "synpuf_results"
+  cdmVersion: "5.3.1"

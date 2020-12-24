@@ -19,6 +19,19 @@ spec:
         readOnlyRootFilesystem: true
         runAsUser: 22222
         runAsNonRoot: true
+      resources:
+        limits:
+          cpu: 100m
+          memory: 128Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]
     {{- end }}
     {{ if .Values.atlas.enabled }}
     - name: test-atlas
@@ -30,4 +43,17 @@ spec:
         readOnlyRootFilesystem: true
         runAsUser: 33333
         runAsNonRoot: true
+      resources:
+        limits:
+          cpu: 100m
+          memory: 128Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]
     {{- end }}
