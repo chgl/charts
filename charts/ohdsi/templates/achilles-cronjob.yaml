@@ -14,6 +14,13 @@ spec:
     spec:
       template:
         spec:
+          {{- with $.Values.imagePullSecrets }}
+          imagePullSecrets:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          automountServiceAccountToken: false
+          securityContext:
+            {{- toYaml .podSecurityContext | nindent 12 }}
           containers:
             - name: achilles-cron
               securityContext:
@@ -25,6 +32,17 @@ spec:
               env:
                 - name: ACHILLES_DB_URI
                   value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
+                - name: ACHILLES_DB_USERNAME
+                  value: {{ $.Values.webApi.db.username }}
+                - name: ACHILLES_DB_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: {{ include "ohdsi.webapi.db-secret-name" $ }}
+                      {{- if $.Values.webApi.db.existingSecret }}
+                      key: {{ $.Values.webApi.db.existingSecretKey }}
+                      {{- else }}
+                      key: "postgresql-password"
+                      {{- end }}
                 - name: ACHILLES_CDM_SCHEMA
                   value: {{ .schemas.cdm }}
                 - name: ACHILLES_VOCAB_SCHEMA
