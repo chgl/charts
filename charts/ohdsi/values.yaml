@@ -1,8 +1,16 @@
+# image pull secrets used by all pods
 imagePullSecrets: []
+# partially override the release name
 nameOverride: ""
+# fully override the release name
 fullnameOverride: ""
 
+# annotations applied to the WebAPI and Atlas deployments
+commonAnnotations: []
+
 postgresql:
+  # enable an included PostgreSQL DB.
+  # if set to `false`, the values under `webApi.db` are used
   enabled: true
   image:
     tag: 13.1.0
@@ -25,11 +33,30 @@ postgresql:
   metrics:
     # should also be true for production use
     enabled: false
+  # Example for creating an ohdsi_admin_user
+  # initdbScripts:
+  #   00-init-ohdsi-admin-user.sh: |
+  #     #!/bin/bash
+  #     set -e
+
+  #     psql -v ON_ERROR_STOP=1 <<-EOSQL
+  #         CREATE ROLE ohdsi_admin_user LOGIN PASSWORD '${OHDSI_ADMIN_PASSWORD}' VALID UNTIL 'infinity';
+  #         COMMENT ON ROLE ohdsi_admin_user IS 'Admin user account for OHDSI applications';
+  #         CREATE ROLE ohdsi_admin CREATEDB REPLICATION VALID UNTIL 'infinity';
+  #         COMMENT ON ROLE ohdsi_admin IS 'Administration group for OHDSI applications';
+  #         GRANT ohdsi_admin TO ohdsi_admin_user;
+  #         GRANT ALL ON DATABASE ${POSTGRES_DB} TO GROUP ohdsi_admin;
+  #     EOSQL
+  # extraEnv:
+  #   - name: OHDSI_ADMIN_PASSWORD
+  #     value: admin1
 
 webApi:
+  # enable the OHDSI WebAPI deployment
   enabled: true
+  # number of pod replicas for the WebAPI
   replicaCount: 1
-  image:
+  image: # +doc-gen:break
     registry: ghcr.io
     repository: chgl/ohdsi/webapi
     tag: 2.8.0-snapshot
@@ -46,13 +73,16 @@ webApi:
     # name of the key in `webApi.db.existingSecret` to use as the password to the DB.
     existingSecretKey: "postgresql-postgres-password"
 
+  # annotations applied to the WebAPI pod
   podAnnotations: {}
 
+  # security context for the WebAPI pod
   podSecurityContext:
     {}
     # fsGroup: 2000
 
-  securityContext:
+  # security context for the WebAPI container
+  securityContext: # +doc-gen:break
     capabilities:
       drop:
         - ALL
@@ -71,7 +101,7 @@ webApi:
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     hosts:
-      - host: chart-example.local
+      - host: ohdsi.127.0.0.1.xip.io
         paths: ["/WebAPI"]
     tls: []
     #  - secretName: chart-example-tls
@@ -91,7 +121,7 @@ webApi:
     #   cpu: 100m
     #   memory: 128Mi
 
-  readinessProbe:
+  readinessProbe: # +doc-gen:break
     failureThreshold: 5
     initialDelaySeconds: 45
     periodSeconds: 15
@@ -119,9 +149,10 @@ webApi:
     #   value: "TEST"
 
 atlas:
+  # enable the OHDSI Atlas deployment
   enabled: true
   replicaCount: 1
-  image:
+  image: # +doc-gen:break
     registry: ghcr.io
     repository: chgl/ohdsi/atlas
     tag: 2.8.0
@@ -138,7 +169,7 @@ atlas:
     {}
     # fsGroup: 2000
 
-  securityContext:
+  securityContext: # +doc-gen:break
     capabilities:
       drop:
         - ALL
@@ -157,7 +188,7 @@ atlas:
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     hosts:
-      - host: chart-example.local
+      - host: ohdsi.127.0.0.1.xip.io
         paths: ["/atlas"]
     tls: []
     #  - secretName: chart-example-tls
@@ -177,13 +208,13 @@ atlas:
     #   cpu: 100m
     #   memory: 128Mi
 
-  readinessProbe:
+  readinessProbe: # +doc-gen:break
     failureThreshold: 5
     initialDelaySeconds: 30
     periodSeconds: 15
     successThreshold: 1
     timeoutSeconds: 15
-  livenessProbe:
+  livenessProbe: # +doc-gen:break
     failureThreshold: 5
     initialDelaySeconds: 30
     periodSeconds: 15
@@ -206,23 +237,28 @@ atlas:
 # this assumes that it contains both the WebAPI schema (`ohdsi`) as well
 # as any CDM schemas. Future versions may allow for more flexibility here.
 achilles:
+  # whether or not to enable the Achilles cron job
   enabled: false
+  # when to run the Achilles job. See <https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#cron-schedule-syntax>
   schedule: "@daily"
-  image:
+  image: # +doc-gen:break
     registry: ghcr.io
     repository: chgl/ohdsi/achilles
     tag: master
     pullPolicy: Always
   schemas:
+    # name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.
     cdm: "synpuf_cdm"
+    # name of the schema containing the vocabulary. Equivalent to the Achilles `ACHILLES_VOCAB_SCHEMA` env var.
     vocab: "synpuf_vocab"
+    # name of the schema containing the cohort generation results. Equivalent to the Achilles `ACHILLES_RES_SCHEMA` env var.
     res: "synpuf_results"
+  # version of the CDM. Equivalent to the Achilles `ACHILLES_CDM_VERSION` env var.
   cdmVersion: "5.3.1"
 
   securityContext:
     capabilities:
       drop:
         - ALL
-    readOnlyRootFilesystem: true
     runAsNonRoot: true
     runAsUser: 10001
