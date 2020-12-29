@@ -8,6 +8,10 @@ metadata:
     {{- include "ohdsi.labels" $ | nindent 4 }}
     app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
     app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+  {{- with $.Values.commonAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   replicas: {{ .replicaCount }}
   selector:
