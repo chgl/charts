@@ -32,7 +32,7 @@ spec:
                 {{- toYaml .resources | nindent 16 }}
               env:
                 - name: ACHILLES_DB_URI
-                  value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
+                  value: {{ include "ohdsi.webapi.jdbcUrl" $ | replace "jdbc:" ""}}
                 - name: ACHILLES_DB_USERNAME
                   value: {{ $.Values.webApi.db.username }}
                 - name: ACHILLES_DB_PASSWORD
