@@ -1,0 +1,67 @@
+{{- with .Values.cdmInitJob }}
+{{- if .enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-cdm-init
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-cdm-init
+    app.kubernetes.io/instance: {{ $.Release.Name }}-cdm-init
+  {{- with $.Values.commonAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  backoffLimit: 4
+  template:
+    metadata:
+    {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-cdm-init
+        app.kubernetes.io/instance: {{ $.Release.Name }}-cdm-init
+    spec:
+      restartPolicy: Never
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      automountServiceAccountToken: false
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+        - name: cdm-init
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
+                  {{- if $.Values.webApi.db.existingSecret }}
+                  key: {{ $.Values.webApi.db.existingSecretKey }}
+                  {{- else }}
+                  key: "postgresql-password"
+                  {{- end }}
+            - name: PGUSER
+              value: {{ $.Values.webApi.db.username }}
+            - name: PGHOST
+              {{- $fullname := ( include "ohdsi.fullname" $ ) }}
+              {{- $pgServiceName := ( printf "%s-%s" $fullname "postgresql") }}
+              value: "{{ $pgServiceName }}"
+            - name: PGPORT
+              value: {{ $.Values.webApi.db.port | quote }}
+            - name: PGDATABASE
+              value: {{ $.Values.webApi.db.database }}
+            - name: WEBAPI_URL
+              value: "http://{{ include "ohdsi.fullname" $ }}-webapi:{{ $.Values.webApi.service.port }}/WebAPI"
+            {{- if .extraEnv }}
+            {{- toYaml .extraEnv | nindent 12 }}
+            {{- end }}
+{{- end }}
+{{- end }}
