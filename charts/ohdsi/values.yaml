@@ -169,6 +169,7 @@ atlas:
     {}
     # fsGroup: 2000
 
+  # ContainerSecurityContext for the Atlas container
   securityContext: # +doc-gen:break
     capabilities:
       drop:
@@ -233,6 +234,35 @@ atlas:
     # - name: "TEST"
     #   value: "TEST"
 
+# define a custom init container to be run as part of the installation.
+cdmInitJob:
+  # if enabled, create a Kubernetes Job running the specified container
+  # see [cdm-init-job.yaml](templates/cdm-init-job.yaml) for the env vars
+  # that are passed by default
+  enabled: false
+  image:
+    registry: docker.io
+    repository: docker/whalesay
+    tag: latest
+    pullPolicy: Always
+
+  # annotations set on the cdm-init pod
+  podAnnotations: {}
+
+  # PodSecurityContext for the cdm-init pod
+  podSecurityContext:
+    {}
+    # fsGroup: 2000
+
+  # ContainerSecurityContext for the cdm-init container
+  securityContext: {}
+
+  # extra environment variables to set
+  extraEnv:
+    []
+    # - name: "TEST"
+    #   value: "TEST"
+
 # by default, Achilles connects to the same DB that the WebAPI uses
 # this assumes that it contains both the WebAPI schema (`ohdsi`) as well
 # as any CDM schemas. Future versions may allow for more flexibility here.
@@ -253,10 +283,12 @@ achilles:
     vocab: "synpuf_vocab"
     # name of the schema containing the cohort generation results. Equivalent to the Achilles `ACHILLES_RES_SCHEMA` env var.
     res: "synpuf_results"
+
   # version of the CDM. Equivalent to the Achilles `ACHILLES_CDM_VERSION` env var.
   cdmVersion: "5.3.1"
 
-  securityContext:
+  # ContainerSecurityContext for the Achilles container
+  securityContext: # +doc-gen:break
     capabilities:
       drop:
         - ALL
