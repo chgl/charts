@@ -63,10 +63,15 @@ webApi:
     pullPolicy: Always
 
   db:
-    host: "db"
+    # database hostname
+    host: "host.example.com"
+    # port used to connect to the postgres DB
     port: 5432
+    # name of the database inside. If postgresql.enabled=true, then postgresql.postgresqlDatabase is used
     database: "ohdsi"
+    # username used to connect to the DB. Note that this name is currently used even if postgresql.enabled=true
     username: "postgres"
+    # the database password. Only used if postgresql.enabled=false, otherwise the secret created by the postgresql chart is used
     password: "postgres"
     # name of an existing secret containing the password to the DB.
     existingSecret: ""

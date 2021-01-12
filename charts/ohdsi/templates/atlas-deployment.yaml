@@ -33,12 +33,16 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       automountServiceAccountToken: false
+      {{- with .podSecurityContext}}
       securityContext:
-        {{- toYaml .podSecurityContext | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
         - name: atlas
+          {{- with .securityContext}}
           securityContext:
-            {{- toYaml .securityContext | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: {{ .image.pullPolicy }}
           ports:
@@ -63,8 +67,10 @@ spec:
             timeoutSeconds: {{ .readinessProbe.timeoutSeconds }}
             successThreshold: {{ .readinessProbe.successThreshold }}
             failureThreshold: {{ .readinessProbe.failureThreshold }}
+          {{- with .resources}}
           resources:
-            {{- toYaml .resources | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           env:
             {{- if .webApiUrl }}
             - name: WEBAPI_URL
@@ -74,6 +80,8 @@ spec:
               {{- $host := (index $.Values.webApi.ingress.hosts 0) }}
               {{- $path := index (index $.Values.webApi.ingress.hosts 0).paths 0 }}
               value: http{{ if $.Values.webApi.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path }}
+            {{- else }}
+            []
             {{- end }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}

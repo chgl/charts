@@ -20,16 +20,22 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           automountServiceAccountToken: false
+          {{- with .podSecurityContext}}
           securityContext:
-            {{- toYaml .podSecurityContext | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           containers:
             - name: achilles-cron
-              securityContext:
-                {{- toYaml .securityContext | nindent 16 }}
               image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
               imagePullPolicy: {{ .image.pullPolicy }}
+              {{- with .securityContext}}
+              securityContext:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              {{- with .resources}}
               resources:
-                {{- toYaml .resources | nindent 16 }}
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
               env:
                 - name: ACHILLES_DB_URI
                   value: {{ include "ohdsi.webapi.jdbcUrl" $ | replace "jdbc:" ""}}
