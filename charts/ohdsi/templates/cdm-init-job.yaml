@@ -30,8 +30,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       automountServiceAccountToken: false
+      {{- with .securityContext }}
       securityContext:
-        {{- toYaml .podSecurityContext | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
         - name: cdm-init
           image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
@@ -51,15 +53,27 @@ spec:
             - name: PGUSER
               value: {{ $.Values.webApi.db.username }}
             - name: PGHOST
+            {{- if $.Values.postgresql.enabled }}
               {{- $fullname := ( include "ohdsi.fullname" $ ) }}
               {{- $pgServiceName := ( printf "%s-%s" $fullname "postgresql") }}
               value: "{{ $pgServiceName }}"
+            {{- else }}
+              value: {{ $.Values.webApi.db.host }}
+            {{- end }}
             - name: PGPORT
               value: {{ $.Values.webApi.db.port | quote }}
             - name: PGDATABASE
+            {{- if $.Values.postgresql.enabled }}
+              value: {{ $.Values.postgresql.postgresqlDatabase }}
+            {{- else }}
               value: {{ $.Values.webApi.db.database }}
+            {{- end }}
             - name: WEBAPI_URL
+            {{- if $.Values.atlas.webApiUrl }}
+              value: {{ $.Values.atlas.webApiUrl }}
+            {{- else }}
               value: "http://{{ include "ohdsi.fullname" $ }}-webapi:{{ $.Values.webApi.service.port }}/WebAPI"
+            {{- end }}
             {{- if .extraEnv }}
             {{- toYaml .extraEnv | nindent 12 }}
             {{- end }}
