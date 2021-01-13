@@ -64,5 +64,6 @@ $ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {
 
 ## Initialize the CDM using a custom container
 
-The `cdmInitJob` configuration parameter can be used to configure a
-custom container that is run as a Kubernetes Job when the chart is installed.
+The `cdmInitJob` configuration parameter can be used to configure a custom container that is run as a Kubernetes Job
+when the chart is installed. See [templates/cdm-init-job.yaml](templates/cdm-init-job.yaml) for a list of default environment
+variables passed to the container.

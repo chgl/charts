@@ -5,9 +5,10 @@ nameOverride: ""
 # fully override the release name
 fullnameOverride: ""
 
-# annotations applied to the WebAPI and Atlas deployments
+# annotations applied to all deployments and jobs
 commonAnnotations: []
 
+# see <https://github.com/bitnami/charts/tree/master/bitnami/postgresql> for details
 postgresql:
   # enable an included PostgreSQL DB.
   # if set to `false`, the values under `webApi.db` are used
@@ -56,7 +57,8 @@ webApi:
   enabled: true
   # number of pod replicas for the WebAPI
   replicaCount: 1
-  image:
+  # the WebAPI image
+  image: # +doc-gen:break
     registry: ghcr.io
     repository: chgl/ohdsi/webapi
     tag: 2.8.0-snapshot
@@ -78,10 +80,10 @@ webApi:
     # name of the key in `webApi.db.existingSecret` to use as the password to the DB.
     existingSecretKey: "postgresql-postgres-password"
 
-  # annotations applied to the WebAPI pod
+  # annotations applied to the pod
   podAnnotations: {}
 
-  # security context for the WebAPI pod
+  # security context for the pod
   podSecurityContext:
     {}
     # fsGroup: 2000
@@ -95,11 +97,13 @@ webApi:
     runAsNonRoot: true
     runAsUser: 101
 
+  # the service used to expose the WebAPI web port
   service:
     type: ClusterIP
     port: 8080
 
   ingress:
+    # whether to create an Ingress to expose the WebAPI
     enabled: false
     annotations:
       {}
@@ -113,6 +117,7 @@ webApi:
     #    hosts:
     #      - chart-example.local
 
+  # resource requests and limits for the container
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -156,8 +161,10 @@ webApi:
 atlas:
   # enable the OHDSI Atlas deployment
   enabled: true
+  # number of replicas
   replicaCount: 1
-  image:
+  # the Atlas image
+  image: # +doc-gen:break
     registry: ghcr.io
     repository: chgl/ohdsi/atlas
     tag: 2.8.0
@@ -168,8 +175,10 @@ atlas:
   # URL is constructed from `webapi.ingress`
   webApiUrl: ""
 
+  # annotations for the pod
   podAnnotations: {}
 
+  # security context for the pod
   podSecurityContext:
     {}
     # fsGroup: 2000
@@ -183,11 +192,13 @@ atlas:
     runAsNonRoot: true
     runAsUser: 101
 
-  service:
+  # the service used to expose the Atlas web port
+  service: # +doc-gen:break
     type: ClusterIP
     port: 8080
 
   ingress:
+    # whether to create an Ingress to expose the Atlas web interface
     enabled: false
     annotations:
       {}
@@ -201,6 +212,7 @@ atlas:
     #    hosts:
     #      - chart-example.local
 
+  # resource requests and limits for the container
   resources:
     {}
     # We usually recommend not to specify default resources and to leave this as a conscious
@@ -245,7 +257,8 @@ cdmInitJob:
   # see [cdm-init-job.yaml](templates/cdm-init-job.yaml) for the env vars
   # that are passed by default
   enabled: false
-  image:
+  # the Achilles image
+  image: # +doc-gen:break
     registry: docker.io
     repository: docker/whalesay
     tag: latest
@@ -276,7 +289,8 @@ achilles:
   enabled: true
   # when to run the Achilles job. See <https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#cron-schedule-syntax>
   schedule: "@daily"
-  image:
+  # the Achilles image
+  image: # +doc-gen:break
     registry: ghcr.io
     repository: chgl/ohdsi/achilles
     tag: master

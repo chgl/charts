@@ -8,6 +8,10 @@ metadata:
     {{- include "ohdsi.labels" $ | nindent 4 }}
     app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-achilles-cron
     app.kubernetes.io/instance: {{ $.Release.Name }}-achilles-cron
+  {{- with $.Values.commonAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   schedule: {{ .schedule | quote }}
   jobTemplate:
