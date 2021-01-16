@@ -84,6 +84,24 @@ spec:
             timeoutSeconds: {{ .readinessProbe.timeoutSeconds }}
             successThreshold: {{ .readinessProbe.successThreshold }}
             failureThreshold: {{ .readinessProbe.failureThreshold }}
+          startupProbe:
+            httpGet:
+              path: /WebAPI/info
+              port: http
+            initialDelaySeconds: {{ .startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .startupProbe.timeoutSeconds }}
+            successThreshold: {{ .startupProbe.successThreshold }}
+            failureThreshold: {{ .startupProbe.failureThreshold }}
+          livenessProbe:
+            httpGet:
+              path: /WebAPI/info
+              port: http
+            initialDelaySeconds: {{ .livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .livenessProbe.successThreshold }}
+            failureThreshold: {{ .livenessProbe.failureThreshold }}
           resources:
             {{- toYaml .resources | nindent 12 }}
           volumeMounts:
