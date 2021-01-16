@@ -43,9 +43,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: 1
-      # - name: Check if documentation is up-to-date
-      #   run: bash scripts/generate-docs.sh && git diff --exit-code HEAD
+          fetch-depth: 0
+      - name: Check if documentation is up-to-date
+        run: bash scripts/generate-docs.sh && git diff --exit-code HEAD
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
       - name: Run YAML lint
