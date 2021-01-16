@@ -2,7 +2,7 @@ apiVersion: v2
 name: ohdsi
 description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
 type: application
-version: 0.3.2
+version: 0.3.3
 home: https://github.com/OHDSI
 keywords:
   - ohdsi

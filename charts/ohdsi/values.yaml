@@ -13,9 +13,12 @@ postgresql:
   # enable an included PostgreSQL DB.
   # if set to `false`, the values under `webApi.db` are used
   enabled: true
-  image:
+  # update the default Postgres version to 13.1
+  image: # +doc-gen:break
     tag: 13.1.0
     pullPolicy: Always
+  # name of the database to create
+  # see: <https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run>
   postgresqlDatabase: "ohdsi"
   # Name of existing secret to use for PostgreSQL passwords.
   # The secret has to contain the keys `postgresql-password`
@@ -28,8 +31,11 @@ postgresql:
   replication:
     # should be true for production use
     enabled: false
+    # number of read replicas
     readReplicas: 2
+    # set synchronous commit mode: on, off, remote_apply, remote_write and local
     synchronousCommit: "on"
+    # from the number of `readReplicas` defined above, set the number of those that will have synchronous replication
     numSynchronousReplicas: 1
   metrics:
     # should also be true for production use
@@ -98,13 +104,14 @@ webApi:
     runAsUser: 101
 
   # the service used to expose the WebAPI web port
-  service:
+  service: # +doc-gen:break
     type: ClusterIP
     port: 8080
 
   ingress:
     # whether to create an Ingress to expose the WebAPI
     enabled: false
+    # provide any additional annotations which may be required. Evaluated as a template.
     annotations:
       {}
       # kubernetes.io/ingress.class: nginx
@@ -112,6 +119,7 @@ webApi:
     hosts:
       - host: ohdsi.127.0.0.1.xip.io
         paths: ["/WebAPI"]
+    # ingress TLS config
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
@@ -131,25 +139,38 @@ webApi:
     #   cpu: 100m
     #   memory: 128Mi
 
+  # readiness probe
   readinessProbe: # +doc-gen:break
     failureThreshold: 5
-    initialDelaySeconds: 45
+    initialDelaySeconds: 10
     periodSeconds: 15
     successThreshold: 1
     timeoutSeconds: 15
-  # currentyl disabled due to the potentially large time the migration may take
-  # we can use startupProbe starting in k8s 1.20
-  # livenessProbe:
-  #   failureThreshold: 5
-  #   initialDelaySeconds: 30
-  #   periodSeconds: 15
-  #   successThreshold: 1
-  #   timeoutSeconds: 15
+  # startup probe
+  startupProbe: # +doc-gen:break
+    failureThreshold: 10
+    initialDelaySeconds: 60
+    periodSeconds: 20
+    successThreshold: 1
+    timeoutSeconds: 30
+  # liveness probe
+  livenessProbe: # +doc-gen:break
+    failureThreshold: 5
+    initialDelaySeconds: 10
+    periodSeconds: 15
+    successThreshold: 1
+    timeoutSeconds: 15
 
+  # node labels for PostgreSQL primary pods assignment
+  # see: <https://kubernetes.io/docs/user-guide/node-selection/>
   nodeSelector: {}
 
+  # tolerations for PostgreSQL primary pods assignment
+  # see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>
   tolerations: []
 
+  # affinity for PostgreSQL primary pods assignment
+  # see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>
   affinity: {}
 
   # extra environment variables
@@ -200,6 +221,7 @@ atlas:
   ingress:
     # whether to create an Ingress to expose the Atlas web interface
     enabled: false
+    # provide any additional annotations which may be required. Evaluated as a template.
     annotations:
       {}
       # kubernetes.io/ingress.class: nginx
@@ -207,6 +229,7 @@ atlas:
     hosts:
       - host: ohdsi.127.0.0.1.xip.io
         paths: ["/atlas"]
+    # ingress TLS config
     tls: []
     #  - secretName: chart-example-tls
     #    hosts:
@@ -226,12 +249,14 @@ atlas:
     #   cpu: 100m
     #   memory: 128Mi
 
+  # readiness probe
   readinessProbe: # +doc-gen:break
     failureThreshold: 5
     initialDelaySeconds: 30
     periodSeconds: 15
     successThreshold: 1
     timeoutSeconds: 15
+  # liveness probe
   livenessProbe: # +doc-gen:break
     failureThreshold: 5
     initialDelaySeconds: 30
@@ -239,10 +264,16 @@ atlas:
     successThreshold: 1
     timeoutSeconds: 15
 
+  # node labels for PostgreSQL primary pods assignment
+  # see: <https://kubernetes.io/docs/user-guide/node-selection/>
   nodeSelector: {}
 
+  # tolerations for PostgreSQL primary pods assignment
+  # see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>
   tolerations: []
 
+  # affinity for PostgreSQL primary pods assignment
+  # see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>
   affinity: {}
 
   # extra environment variables

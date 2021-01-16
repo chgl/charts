@@ -1,0 +1,20 @@
+postgresql:
+  postgresqlPassword: "postgres"
+
+webApi:
+  ingress:
+    enabled: true
+
+atlas:
+  ingress:
+    enabled: true
+
+achilles:
+  schedule: "@hourly"
+  schemas:
+    # name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.
+    cdm: "cds_cdm"
+    # name of the schema containing the vocabulary. Equivalent to the Achilles `ACHILLES_VOCAB_SCHEMA` env var.
+    vocab: "cds_cdm"
+    # name of the schema containing the cohort generation results. Equivalent to the Achilles `ACHILLES_RES_SCHEMA` env var.
+    res: "cds_results"
