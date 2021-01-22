@@ -75,11 +75,10 @@ spec:
             {{- if .webApiUrl }}
             - name: WEBAPI_URL
               value: {{ .webApiUrl }}
-            {{- else if $.Values.webApi.ingress.enabled }}
+            {{- else if $.Values.ingress.enabled }}
             - name: WEBAPI_URL
-              {{- $host := (index $.Values.webApi.ingress.hosts 0) }}
-              {{- $path := index (index $.Values.webApi.ingress.hosts 0).paths 0 }}
-              value: http{{ if $.Values.webApi.ingress.tls }}s{{ end }}://{{ $host.host }}{{ $path }}
+              {{- $host := (index $.Values.ingress.hosts 0) }}
+              value: http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/WebAPI
             {{- else }}
             []
             {{- end }}

@@ -10,7 +10,12 @@ $ helm repo update
 $ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }}{{ with .Chart.Version }} --version={{.}}{{ end }}
 ```
 
-There isn't (yet) a Keycloak sub-chart included.
+## Breaking Changes
+
+### 0.4
+
+Starting with v0.4.0, the two seperate ingress resources for WebAPI and Atlas have been merged into a single one with the `/WebAPI/` and `/atlas/` paths
+mapping to the WebAPI and Atlas service respectively. Set `ingress.enabled=true` and configure `ingress.hosts[]` to enabled it.
 
 ## Introduction
 
