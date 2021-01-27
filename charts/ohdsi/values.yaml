@@ -67,7 +67,7 @@ webApi:
   image: # +doc-gen:break
     registry: ghcr.io
     repository: chgl/ohdsi/webapi
-    tag: 2.8.0-snapshot
+    tag: 2.8.0
     pullPolicy: Always
 
   db:
@@ -254,7 +254,7 @@ cdmInitJob:
   # see [cdm-init-job.yaml](templates/cdm-init-job.yaml) for the env vars
   # that are passed by default
   enabled: false
-  # the Achilles image
+  # the container image used to create the CDM initialization job
   image: # +doc-gen:break
     registry: docker.io
     repository: docker/whalesay
