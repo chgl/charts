@@ -21,7 +21,6 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      automountServiceAccountToken: false
       securityContext:
         {{- toYaml .Values.database.sqlContainer.podSecurityContext | nindent 8 }}
       containers:

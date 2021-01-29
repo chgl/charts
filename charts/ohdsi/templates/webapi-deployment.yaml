@@ -34,7 +34,6 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
-      automountServiceAccountToken: false
       containers:
         - name: webapi
           securityContext:
