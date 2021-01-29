@@ -23,7 +23,6 @@ spec:
           imagePullSecrets:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          automountServiceAccountToken: false
           {{- with .podSecurityContext}}
           securityContext:
             {{- toYaml . | nindent 12 }}
