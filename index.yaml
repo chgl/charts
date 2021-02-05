@@ -132,7 +132,53 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
+  hapi-fhir-jpaserver:
+  - apiVersion: v2
+    appVersion: 5.2.0
+    created: "2021-02-05T16:46:31.486010227Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.2.0
+    description: A Helm chart for deploying the HAPI FHIR JPA server starter on Kubernetes.
+    digest: 899ceae4f428c5a2ae2ce276788efe12c1a50f31ec914c5b915cce708dbb4d5d
+    home: https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    maintainers:
+    - name: chgl
+    name: hapi-fhir-jpaserver
+    sources:
+    - https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
+    version: 0.1.0
   ohdsi:
+  - apiVersion: v2
+    created: "2021-02-05T16:46:31.581863156Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.2.0
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 01eae8234360e9a560757cbf6ace06ae961bdb98858b7197e3cfb96caae5d491
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.4.3/ohdsi-0.4.3.tgz
+    version: 0.4.3
   - apiVersion: v2
     created: "2021-01-29T19:41:02.976082886Z"
     dependencies:
