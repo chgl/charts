@@ -30,7 +30,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 8080
 
 ingress:
   # whether to create an Ingress to expose the FHIR server web interface
