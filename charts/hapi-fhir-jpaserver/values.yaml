@@ -106,6 +106,21 @@ postgresql:
       # the labels used for Prometheus autodiscover, e.g. could be `release: prometheus`
       additionalLabels: {}
 
+# readiness probe
+readinessProbe: # +doc-gen:break
+  failureThreshold: 5
+  initialDelaySeconds: 10
+  periodSeconds: 15
+  successThreshold: 1
+  timeoutSeconds: 15
+# startup probe
+startupProbe: # +doc-gen:break
+  failureThreshold: 10
+  initialDelaySeconds: 60
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 30
+
 # only used if `postgresql.enabeld=false`
 externalDatabase:
   # Database host

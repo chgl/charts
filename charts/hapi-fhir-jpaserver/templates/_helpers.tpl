@@ -51,30 +51,65 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create the JDBC URL from the host, port and database name.
+Create a default fully qualified postgresql name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
-{{- define "hapi-fhir-jpaserver.jdbcUrl" -}}
-{{- if .Values.postgresql.enabled -}}
-{{- $pgServiceName := ( printf "%s-%s" .Release.Name "postgresql") -}}
-{{ printf "jdbc:postgresql://%s:%d/%s" $pgServiceName 5432 .Values.postgresql.postgresqlDatabase }}
-{{- else -}}
-{{ printf "jdbc:postgresql://%s:%d/%s" .Values.externalDatabase.host (int64 .Values.externalDatabase.port) .Values.externalDatabase.database }}
+{{- define "hapi-fhir-jpaserver.postgresql.fullname" -}}
+{{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Get the Postgresql credentials secret.
+*/}}
+{{- define "hapi-fhir-jpaserver.postgresql.secretName" -}}
+{{- if and (.Values.postgresql.enabled) (not .Values.postgresql.existingSecret) -}}
+    {{- printf "%s" (include "hapi-fhir-jpaserver.postgresql.fullname" .) -}}
+{{- else if and (.Values.postgresql.enabled) (.Values.postgresql.existingSecret) -}}
+    {{- printf "%s" .Values.postgresql.existingSecret -}}
+{{- else }}
+    {{- if .Values.externalDatabase.existingSecret -}}
+        {{- printf "%s" .Values.externalDatabase.existingSecret -}}
+    {{- else -}}
+        {{ printf "%s-%s" .Release.Name "externaldb" }}
+    {{- end -}}
 {{- end -}}
 {{- end -}}
 
 {{/*
-Get the name of the secret containing the DB password
+Add environment variables to configure database values
 */}}
-{{- define "hapi-fhir-jpaserver.db-secretName" -}}
-{{- if .Values.postgresql.enabled -}}
-{{- if .Values.postgresql.existingSecret -}}
-    {{ .Values.postgresql.existingSecret | quote }}
-{{- else -}}
-    {{ printf "%s-%s" .Release.Name "postgresql" }}
+{{- define "hapi-fhir-jpaserver.database.host" -}}
+{{- ternary (include "hapi-fhir-jpaserver.postgresql.fullname" .) .Values.externalDatabase.host .Values.postgresql.enabled -}}
 {{- end -}}
-{{- else if .Values.externalDatabase.existingSecret -}}
-    {{ .Values.externalDatabase.existingSecret | quote }}
-{{- else -}}
-    {{ printf "%s-%s" .Release.Name "externaldb" }}
+
+{{/*
+Add environment variables to configure database values
+*/}}
+{{- define "hapi-fhir-jpaserver.database.user" -}}
+{{- ternary .Values.postgresql.postgresqlUsername .Values.externalDatabase.user .Values.postgresql.enabled | quote -}}
 {{- end -}}
+
+{{/*
+Add environment variables to configure database values
+*/}}
+{{- define "hapi-fhir-jpaserver.database.name" -}}
+{{- ternary .Values.postgresql.postgresqlDatabase .Values.externalDatabase.database .Values.postgresql.enabled -}}
+{{- end -}}
+
+{{/*
+Add environment variables to configure database values
+*/}}
+{{- define "hapi-fhir-jpaserver.database.port" -}}
+{{- ternary "5432" .Values.externalDatabase.port .Values.postgresql.enabled -}}
+{{- end -}}
+
+{{/*
+Create the JDBC URL from the host, port and database name.
+*/}}
+{{- define "hapi-fhir-jpaserver.database.jdbcUrl" -}}
+{{- $host := (include "hapi-fhir-jpaserver.database.host" .) -}}
+{{- $port := (include "hapi-fhir-jpaserver.database.port" .) -}}
+{{- $name := (include "hapi-fhir-jpaserver.database.name" .) -}}
+{{ printf "jdbc:postgresql://%s:%d/%s" $host (int $port) $name }}
 {{- end -}}

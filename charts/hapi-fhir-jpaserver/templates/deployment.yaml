@@ -55,21 +55,35 @@ spec:
             httpGet:
               path: /fhir/metadata
               port: http
+          {{- with .Values.readinessProbe }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          startupProbe:
+            httpGet:
+              path: /fhir/metadata
+              port: http
+          {{- with .Values.startupProbe }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: SPRING_DATASOURCE_URL
-              value: {{ include "hapi-fhir-jpaserver.jdbcUrl" $ }}
+              value: {{ include "hapi-fhir-jpaserver.database.jdbcUrl" $ }}
             - name: SPRING_DATASOURCE_USERNAME
-              {{- if .Values.postgresql.enabled }}
-              value: {{ .Values.postgresql.postgresqlUsername }}
-              {{- else }}
-              value: {{ .Values.externalDatabase.user | quote }}
-              {{- end }}
+              value: {{ include "hapi-fhir-jpaserver.database.user" $ }}
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ template "hapi-fhir-jpaserver.db-secretName" . }}
+                  name: {{ include "hapi-fhir-jpaserver.postgresql.secretName" . }}
                   key: postgresql-password
             - name: SPRING_DATASOURCE_DRIVERCLASSNAME
               value: org.postgresql.Driver
