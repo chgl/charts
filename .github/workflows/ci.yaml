@@ -52,3 +52,18 @@ jobs:
         run: yamllint .
       - name: Run Powerlint
         run: bash scripts/chart-powerlint.sh
+
+  test-in-cluster:
+    runs-on: ubuntu-20.04
+    needs:
+      - ct-lint
+      - power-lint
+    steps:
+      - name: Create k8s Kind Cluster
+        uses: helm/kind-action@v1.1.0
+
+      - name: Run chart-testing (install)
+        uses: helm/chart-testing-action@v2.0.1
+        with:
+          config: .github/ct/install.yaml
+          command: install
