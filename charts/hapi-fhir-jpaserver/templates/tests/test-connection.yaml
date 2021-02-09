@@ -11,8 +11,8 @@ spec:
   containers:
     - name: wget
       image: busybox:1
-      command: ['wget']
-      args: ['{{ include "hapi-fhir-jpaserver.fullname" . }}:{{ .Values.service.port }}/fhir/metadata']
+      command: ['wget', '-O', '-']
+      args: ['http://{{ include "hapi-fhir-jpaserver.fullname" . }}:{{ .Values.service.port }}/fhir/Patient?_count=1']
       securityContext:
         readOnlyRootFilesystem: true
         runAsUser: 22222
