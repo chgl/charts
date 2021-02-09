@@ -5,38 +5,16 @@ on:
     branches: [master]
 
 jobs:
-  ct-lint:
+  pre-commit:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Set up Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.4.0
-
+      - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-        with:
-          python-version: 3.7
+      - uses: pre-commit/action@v2.0.0
 
-      - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.0.1
-
-      - name: Run chart-testing (list-changed)
-        id: list-changed
-        run: |
-          changed=$(ct list-changed)
-          if [[ -n "$changed" ]]; then
-            echo "::set-output name=changed::true"
-          fi
-
-      - name: Run chart-testing (lint)
-        run: ct lint --config .github/ct/ct.yaml
-
-  power-lint:
+  lint:
+    needs:
+      - pre-commit
     runs-on: ubuntu-20.04
     container: quay.io/chgl/kube-powertools:latest
     steps:
@@ -50,20 +28,37 @@ jobs:
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
       - name: Run YAML lint
         run: yamllint .
+      - name: Run chart-testing (lint)
+        run: ct lint --config .github/ct/ct.yaml
       - name: Run Powerlint
         run: bash scripts/chart-powerlint.sh
 
-  test-in-cluster:
+  test:
     runs-on: ubuntu-20.04
     needs:
       - ct-lint
       - power-lint
     steps:
+      - name: Set up Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.5.2
+
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        run: |
+          changed=$(ct list-changed)
+          if [[ -n "$changed" ]]; then
+            echo "::set-output name=changed::true"
+          fi
+
       - name: Create k8s Kind Cluster
         uses: helm/kind-action@v1.1.0
+        if: steps.list-changed.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
-        uses: helm/chart-testing-action@v2.0.1
-        with:
-          config: .github/ct/install.yaml
-          command: install
+        run: ct install --config .github/ct/install.yaml
