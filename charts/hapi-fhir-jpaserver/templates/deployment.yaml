@@ -53,7 +53,7 @@ spec:
               protocol: TCP
           readinessProbe:
             httpGet:
-              path: /fhir/metadata
+              path: /fhir/Patient?_count=1
               port: http
           {{- with .Values.readinessProbe }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
@@ -64,7 +64,7 @@ spec:
           {{- end }}
           startupProbe:
             httpGet:
-              path: /fhir/metadata
+              path: /fhir/Patient?_count=1
               port: http
           {{- with .Values.startupProbe }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
