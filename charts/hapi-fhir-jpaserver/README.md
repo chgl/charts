@@ -16,7 +16,7 @@ This chart deploys the HAPI FHIR JPA starter server. on a [Kubernetes](http://ku
 
 ## Prerequisites
 
-- Kubernetes v1.16+
+- Kubernetes v1.18+
 - Helm v3
 
 ## Installing the Chart
