@@ -36,8 +36,7 @@ jobs:
   test:
     runs-on: ubuntu-20.04
     needs:
-      - ct-lint
-      - power-lint
+      - lint
     steps:
       - name: Set up Helm
         uses: azure/setup-helm@v1
