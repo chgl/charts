@@ -10,9 +10,15 @@ KUBE_SCORE_ARGS=""
 SKIP_KUBE_LINTER=${SKIP_KUBE_LINTER:-"1"}
 
 for CHART_PATH in $CHARTS_DIR; do
+
+    if test ! -f "${CHART_PATH}/Chart.yaml"; then
+        echo "Skipping over ${CHART_PATH}"
+        continue
+    fi
+
     echo "Power-linting ${CHART_PATH}:"
 
-    if [ "$SHOULD_UPDATE_DEPENDENCIES" = true ]; then
+    if [ "$SHOULD_UPDATE_DEPENDENCIES" = "1" ]; then
         echo "Updating helm dependencies"
         helm dependency update ${CHART_PATH}
     fi
@@ -22,6 +28,10 @@ for CHART_PATH in $CHARTS_DIR; do
     if [ -f "$TEST_VALUES_FILE" ]; then
         HELM_TEMPLATE_ARGS="-f ${CHART_PATH}/values-test.yaml"
     fi
+
+    echo "Helm lint..."
+
+    helm lint "${CHART_PATH}"
 
     echo "Polaris check..."
 
