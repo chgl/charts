@@ -34,6 +34,23 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
+      {{- if $.Values.postgresql.enabled }}
+      initContainers:
+        - name: wait-for-db
+          image: busybox:1.32
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            privileged: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            runAsUser: 11111
+            runAsGroup: 11111
+          command: ["sh", "-c", "while ! nc -z {{ $.Release.Name }}-postgresql 5432 -w 5; do echo $(date) waiting for database; sleep 5; done;"]
+      {{- end }}
       containers:
         - name: webapi
           securityContext:
