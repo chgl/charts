@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "fhir-server.fullname" . }}-test-connection"
+  labels:
+    {{- include "fhir-server.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  restartPolicy: Never
+  containers:
+    - name: wget
+      image: busybox:1
+      command: ['wget', '-O', '-']
+      args: ['http://{{ include "fhir-server.fullname" . }}:{{ .Values.service.port }}/Patient?_count=1']
+      securityContext:
+        readOnlyRootFilesystem: true
+        runAsUser: 22222
+        runAsNonRoot: true
+      resources:
+        limits:
+          cpu: 100m
+          memory: 128Mi
+        requests:
+          cpu: 100m
+          memory: 128Mi
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]
