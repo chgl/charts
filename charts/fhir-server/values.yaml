@@ -57,7 +57,7 @@ database:
     edition: 5
     maxPoolSize: 100
     schema:
-      automaticUpdatesEnabled: false
+      automaticUpdatesEnabled: true
   cosmosDb:
     initialCollectionThroughput: "400"
     # databaseId: health
