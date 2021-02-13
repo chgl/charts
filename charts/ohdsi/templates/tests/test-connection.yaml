@@ -16,6 +16,10 @@ spec:
       command: ['wget', '-O', '-']
       args: ['{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/WebAPI/info']
       securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
         readOnlyRootFilesystem: true
         runAsUser: 22222
         runAsNonRoot: true
@@ -40,6 +44,10 @@ spec:
       command: ['wget', '-O', '-']
       args: ['{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/atlas/']
       securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
         readOnlyRootFilesystem: true
         runAsUser: 33333
         runAsNonRoot: true

@@ -21,6 +21,7 @@ podSecurityContext:
   # fsGroup: 2000
 
 securityContext:
+  allowPrivilegeEscalation: false
   capabilities:
     drop:
       - ALL
@@ -105,6 +106,11 @@ postgresql:
       enabled: false
       # the labels used for Prometheus autodiscover, e.g. could be `release: prometheus`
       additionalLabels: {}
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
 
 # readiness probe
 readinessProbe: # +doc-gen:break

@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  registry: healthplatformregistry.azurecr.io
-  repository: r4_fhir-server
+  registry: mcr.microsoft.com
+  repository: healthcareapis/r4-fhir-server
   tag: 1.0.800
   pullPolicy: IfNotPresent
 
@@ -28,6 +28,7 @@ podSecurityContext:
   # fsGroup: 2000
 
 securityContext:
+  allowPrivilegeEscalation: false
   capabilities:
     drop:
       - ALL
@@ -82,7 +83,8 @@ database:
       annotations:
         {}
         # "helm.sh/resource-policy": keep
-    securityContext: {}
+    securityContext:
+      allowPrivilegeEscalation: false
     podSecurityContext:
       # mssql container has user mssql defined with id 10001
       runAsUser: 10001

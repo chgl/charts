@@ -57,6 +57,12 @@ postgresql:
   # extraEnv:
   #   - name: OHDSI_ADMIN_PASSWORD
   #     value: admin1
+  containerSecurityContext:
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+        - ALL
+
 
 webApi:
   # enable the OHDSI WebAPI deployment
@@ -96,6 +102,7 @@ webApi:
 
   # security context for the WebAPI container
   securityContext: # +doc-gen:break
+    allowPrivilegeEscalation: false
     capabilities:
       drop:
         - ALL
@@ -189,6 +196,7 @@ atlas:
 
   # ContainerSecurityContext for the Atlas container
   securityContext: # +doc-gen:break
+    allowPrivilegeEscalation: false
     capabilities:
       drop:
         - ALL
@@ -305,6 +313,7 @@ achilles:
 
   # ContainerSecurityContext for the Achilles container
   securityContext: # +doc-gen:break
+    allowPrivilegeEscalation: false
     capabilities:
       drop:
         - ALL
