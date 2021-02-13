@@ -5,7 +5,7 @@ checks:
   memoryLimitsMissing: ignore
   # images
   tagNotSpecified: danger
-  pullPolicyNotAlways: warning
+  pullPolicyNotAlways: ignore
   # healthChecks
   readinessProbeMissing: warning
   livenessProbeMissing: warning
