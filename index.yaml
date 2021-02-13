@@ -2,6 +2,23 @@ apiVersion: v1
 entries:
   fhir-server:
   - apiVersion: v2
+    created: "2021-02-13T22:05:12.265865199Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 70aadef61d297ed5a66e2eeccc712bd0576673efaf2fde25883432afc242ca9e
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.4.11/fhir-server-0.4.11.tgz
+    version: 0.4.11
+  - apiVersion: v2
     created: "2021-02-10T16:48:01.793967937Z"
     description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
     digest: 5774b2e3d6dd479c1314c30ef6457710380079e67a4378552f8ed7bf9b97eb4d
@@ -152,6 +169,26 @@ entries:
   hapi-fhir-jpaserver:
   - apiVersion: v2
     appVersion: 5.2.0
+    created: "2021-02-13T22:05:12.72112767Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.2.0
+    description: A Helm chart for deploying the HAPI FHIR JPA server starter on Kubernetes.
+    digest: 059d1f49a14729a18a148730b0ecca5c665959cc2eb69d7a1e89559099b20f37
+    home: https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    maintainers:
+    - name: chgl
+    name: hapi-fhir-jpaserver
+    sources:
+    - https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.5/hapi-fhir-jpaserver-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 5.2.0
     created: "2021-02-09T19:01:20.650256545Z"
     dependencies:
     - condition: postgresql.enabled
@@ -251,6 +288,31 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - apiVersion: v2
+    created: "2021-02-13T22:05:13.186148074Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.2.0
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 66fcf50c5107e67e6b8868317beef74e3d2e3b43f4d8172b2876ae7be700ab42
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.4.6/ohdsi-0.4.6.tgz
+    version: 0.4.6
   - apiVersion: v2
     created: "2021-02-10T17:58:07.804991518Z"
     dependencies:
