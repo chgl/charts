@@ -14,6 +14,10 @@ spec:
       command: ['wget', '-O', '-']
       args: ['http://{{ include "hapi-fhir-jpaserver.fullname" . }}:{{ .Values.service.port }}/fhir/Patient?_count=1']
       securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
         readOnlyRootFilesystem: true
         runAsUser: 22222
         runAsNonRoot: true

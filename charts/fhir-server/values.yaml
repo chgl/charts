@@ -83,7 +83,8 @@ database:
       annotations:
         {}
         # "helm.sh/resource-policy": keep
-    securityContext: {}
+    securityContext:
+      allowPrivilegeEscalation: false
     podSecurityContext:
       # mssql container has user mssql defined with id 10001
       runAsUser: 10001
