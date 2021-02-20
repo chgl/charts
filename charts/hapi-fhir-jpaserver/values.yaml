@@ -119,15 +119,15 @@ postgresql:
 # readiness probe
 readinessProbe: # +doc-gen:break
   failureThreshold: 5
-  initialDelaySeconds: 10
-  periodSeconds: 15
+  initialDelaySeconds: 30
+  periodSeconds: 20
   successThreshold: 1
-  timeoutSeconds: 15
+  timeoutSeconds: 20
 # startup probe
 startupProbe: # +doc-gen:break
   failureThreshold: 10
   initialDelaySeconds: 60
-  periodSeconds: 20
+  periodSeconds: 30
   successThreshold: 1
   timeoutSeconds: 30
 
