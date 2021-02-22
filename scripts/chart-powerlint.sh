@@ -4,6 +4,8 @@ set -euo pipefail
 CHARTS_DIR=${CHARTS_DIR:-"charts/*"}
 SHOULD_UPDATE_DEPENDENCIES=${SHOULD_UPDATE_DEPENDENCIES:-""}
 
+KUBERNETES_VERSIONS="1.18.0 1.19.0 1.20.0"
+
 POLARIS_SCORE_THRESHOLD=${POLARIS_SCORE_THRESHOLD:-90}
 SKIP_KUBE_SCORE=${SKIP_KUBE_SCORE:-"1"}
 KUBE_SCORE_ARGS=""
@@ -32,6 +34,25 @@ for CHART_PATH in $CHARTS_DIR; do
     echo "Helm lint..."
 
     helm lint "${CHART_PATH}"
+    
+    echo "Kubeconform check..."
+
+    for KUBERNETES_VERSION in ${KUBERNETES_VERSIONS}; do
+        echo "Validating against Kubernetes version $KUBERNETES_VERSION:"
+
+        if ! helm template ${HELM_TEMPLATE_ARGS} ${CHART_PATH} |
+            kubeconform \
+                -ignore-missing-schemas \
+                -cache /tmp \
+                -strict \
+                -kubernetes-version "$KUBERNETES_VERSION" \
+                -verbose \
+                -exit-on-error \
+                -summary -; then
+            echo "kubeconform validation failed"
+            exit 1
+        fi
+    done
 
     echo "Polaris check..."
 
