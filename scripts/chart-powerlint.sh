@@ -32,9 +32,8 @@ for CHART_PATH in $CHARTS_DIR; do
     fi
 
     echo "Helm lint..."
-
     helm lint "${CHART_PATH}"
-    
+
     echo "Kubeconform check..."
 
     for KUBERNETES_VERSION in ${KUBERNETES_VERSIONS}; do
