@@ -94,12 +94,12 @@ export PGDATABASE=${PGDATABASE:-"ohdsi"}
 export PGUSER=${PGUSER:-"postgres"}
 export PGPORT=${PGPORT:-"5432"}
 
-CDM_DIR="$VOCABS_DIR/cdm_20201110"
+CDM_DIR="$VOCABS_DIR/cdm"
 
 mkdir -p "$VOCABS_DIR"
 
 echo "$(date): Extracting CDM vocabs"
-tar -xzvf "$SOURCES_DIR/cdm_20201110.tar.gz" -C "$VOCABS_DIR/"
+tar -xzvf "$SOURCES_DIR/cdm.tar.gz" -C "$VOCABS_DIR/"
 
 echo "$(date): Checking if Postgres @ $PGHOST:$PGPORT is up"
 until psql -c "select 1"; do
@@ -180,9 +180,9 @@ RUN apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main a
 
 WORKDIR /opt/omop-init/sources
 
-ARG SYNPUF_URL=https://<s3-url>/tar-gz-containing-synpuf-sample-data
-RUN curl -LSs ${SYNPUF_URL} \
-    -o SynPUF.tar.gz
+ARG CDM_URL=https://<s3-url>/tar-gz-containing-cdm-vocabulary
+RUN curl -LSs ${CDM_URL} \
+    -o cdm.tar.gz
 
 WORKDIR /opt/omop-init
 RUN chown -R 10001 .
