@@ -71,6 +71,14 @@ spec:
                   {{- else }}
                   key: "postgresql-password"
                   {{- end }}
+            - name: DATASOURCE_OHDSI_SCHEMA
+              value: {{ .db.schema }}
+            - name: SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA
+              value: {{ .db.schema }}
+            - name: FLYWAY_SCHEMAS
+              value: {{ .db.schema }}
+            - name: FLYWAY_PLACEHOLDERS_OHDSISCHEMA
+              value: {{ .db.schema }}
             - name: FLYWAY_DATASOURCE_URL
               value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
             - name: FLYWAY_DATASOURCE_USERNAME

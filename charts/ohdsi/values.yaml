@@ -63,7 +63,6 @@ postgresql:
       drop:
         - ALL
 
-
 webApi:
   # enable the OHDSI WebAPI deployment
   enabled: true
@@ -91,6 +90,8 @@ webApi:
     existingSecret: ""
     # name of the key in `webApi.db.existingSecret` to use as the password to the DB.
     existingSecretKey: "postgresql-postgres-password"
+    # schema used for the WebAPI's tables. Also referred to as the "OHDSI schema"
+    schema: "ohdsi"
 
   # annotations applied to the pod
   podAnnotations: {}
