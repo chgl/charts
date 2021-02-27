@@ -78,6 +78,7 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 | webApi.db.password                                           | the database password. Only used if postgresql.enabled=false, otherwise the secret created by the postgresql chart is used                                                                                                                                                                                                                                                                                                                                                 | `"postgres"`                                                                                                                            |
 | webApi.db.existingSecret                                     | name of an existing secret containing the password to the DB.                                                                                                                                                                                                                                                                                                                                                                                                              | `""`                                                                                                                                    |
 | webApi.db.existingSecretKey                                  | name of the key in `webApi.db.existingSecret` to use as the password to the DB.                                                                                                                                                                                                                                                                                                                                                                                            | `"postgresql-postgres-password"`                                                                                                        |
+| webApi.db.schema                                             | schema used for the WebAPI's tables. Also referred to as the "OHDSI schema"                                                                                                                                                                                                                                                                                                                                                                                                | `"ohdsi"`                                                                                                                               |
 | webApi.podAnnotations                                        | annotations applied to the pod                                                                                                                                                                                                                                                                                                                                                                                                                                             | `{}`                                                                                                                                    |
 | webApi.podSecurityContext                                    | security context for the pod                                                                                                                                                                                                                                                                                                                                                                                                                                               | `{}`                                                                                                                                    |
 | webApi.securityContext                                       | security context for the WebAPI container                                                                                                                                                                                                                                                                                                                                                                                                                                  | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":101}`  |
@@ -141,3 +142,131 @@ $ helm install ohdsi chgl/ohdsi -n ohdsi --values values.yaml
 The `cdmInitJob` configuration parameter can be used to configure a custom container that is run as a Kubernetes Job
 when the chart is installed. See [templates/cdm-init-job.yaml](templates/cdm-init-job.yaml) for a list of default environment
 variables passed to the container.
+
+As an example, here's one such container's `entrypoint.sh` and the associated Dockerfile below:
+
+```sh
+#!/bin/bash
+set -e
+
+OMOP_INIT_BASE_DIR="/opt/omop-init"
+
+SOURCES_DIR="$OMOP_INIT_BASE_DIR/sources"
+VOCABS_DIR="$OMOP_INIT_BASE_DIR/vocabs"
+SCHEMAS_DIR="$OMOP_INIT_BASE_DIR/schemas"
+POSTINIT_DIR="$OMOP_INIT_BASE_DIR/postinit"
+
+WEBAPI_URL=${WEBAPI_URL:?"WEBAPI_URL required but not set"}
+PGPASSWORD=${PGPASSWORD:?"PGPASSWORD required but not set"}
+PGHOST=${PGHOST:?"PGHOST required but not set"}
+
+export PGDATABASE=${PGDATABASE:-"ohdsi"}
+export PGUSER=${PGUSER:-"postgres"}
+export PGPORT=${PGPORT:-"5432"}
+
+CDM_DIR="$VOCABS_DIR/cdm_20201110"
+
+mkdir -p "$VOCABS_DIR"
+
+echo "$(date): Extracting CDM vocabs"
+tar -xzvf "$SOURCES_DIR/cdm_20201110.tar.gz" -C "$VOCABS_DIR/"
+
+echo "$(date): Checking if Postgres @ $PGHOST:$PGPORT is up"
+until psql -c "select 1"; do
+    echo "$(date): Waiting for Postgres to be up"
+    sleep 5
+done
+echo "$(date): Postgres is up"
+
+echo "$(date): Creating Schema"
+for SQL_FILE in init_omop/*; do
+    echo "$(date): Applying $SQL_FILE"
+    psql -f "$SQL_FILE"
+done
+
+echo "$(date): Copying vocabulary"
+
+psql <<-EOSQL
+    \COPY cdm.drug_strength FROM '$CDM_DIR/DRUG_STRENGTH.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.concept FROM '$CDM_DIR/CONCEPT.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.concept_relationship FROM '$CDM_DIR/CONCEPT_RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.concept_ancestor FROM '$CDM_DIR/CONCEPT_ANCESTOR.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.concept_synonym FROM '$CDM_DIR/CONCEPT_SYNONYM.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.vocabulary FROM '$CDM_DIR/VOCABULARY.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.relationship FROM '$CDM_DIR/RELATIONSHIP.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.concept_class FROM '$CDM_DIR/CONCEPT_CLASS.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+    \COPY cdm.domain FROM '$CDM_DIR/DOMAIN.csv' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b';
+EOSQL
+
+echo "$(date): Creating DB indices"
+PGOPTIONS=--search_path=cdm psql -f "$POSTINIT_DIR/indexes.sql"
+
+echo "$(date): Creating DB constraints"
+PGOPTIONS=--search_path=cdm psql -f "$POSTINIT_DIR/constraints.sql"
+
+echo "$(date): Creating CDM results tables"
+PGOPTIONS=--search_path=cdm psql -f "$POSTINIT_DIR/restabs_cdm.sql"
+
+echo "$(date): Waiting for WebAPI @ $WEBAPI_URL to be up"
+until [ "$(curl -s -o /dev/null -L -w '%{http_code}' "$WEBAPI_URL/info")" == "200" ]; do
+    echo "$(date): Waiting for WebAPI to be up"
+    sleep 5
+done
+
+
+# This is better solved by invoking the WebAPI dynamically instead
+echo "$(date): Updating OHDSI WebAPI CDM sources"
+psql <<-EOSQL
+    INSERT INTO ohdsi.source(source_id, source_name, source_key, source_connection, username, password, source_dialect)
+    VALUES (1, 'CDM V5.3.1 Database', 'CDMV5', 'jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE}', '$PGUSER', '$PGPASSWORD', 'postgresql');
+
+    INSERT INTO ohdsi.source_daimon(source_daimon_id, source_id, daimon_type, table_qualifier, priority)
+    VALUES (5, 1, 0, 'cdm', 2);
+
+    INSERT INTO ohdsi.source_daimon(source_daimon_id, source_id, daimon_type, table_qualifier, priority)
+    VALUES (6, 1, 1, 'cdm', 2);
+
+    INSERT INTO ohdsi.source_daimon(source_daimon_id, source_id, daimon_type, table_qualifier, priority)
+    VALUES (7, 1, 2, 'cdm_results', 2);
+
+    INSERT INTO ohdsi.source_daimon(source_daimon_id, source_id, daimon_type, table_qualifier, priority)
+    VALUES (8, 1, 3, 'cdm_results', 2);
+EOSQL
+
+echo "$(date): Refreshing sources"
+curl -s -L -o /dev/null "$WEBAPI_URL/source/refresh"
+
+echo "$(date): Completed initialization."
+exit 0
+```
+
+```Dockerfile
+FROM alpine:3.12
+# hadolint ignore=DL3018
+RUN apk --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/main add \
+    curl \
+    bash \
+    postgresql-client
+
+WORKDIR /opt/omop-init/sources
+
+ARG SYNPUF_URL=https://<s3-url>/tar-gz-containing-synpuf-sample-data
+RUN curl -LSs ${SYNPUF_URL} \
+    -o SynPUF.tar.gz
+
+WORKDIR /opt/omop-init
+RUN chown -R 10001 .
+
+# contains the CDM schema SQLs (fetching this within the Dockerfile may be cleaner)
+COPY --chown=10001:10001 init_omop init_omop/
+# scripts to setup custom schema names
+COPY --chown=10001:10001 init_scripts init_scripts/
+# scripts to apply indizes
+COPY --chown=10001:10001 postinit postinit/
+# the entrypoint.sh from above
+COPY --chown=10001:10001 entrypoint.sh /entrypoint.sh
+
+USER 10001
+ENTRYPOINT [ "/bin/bash" ]
+CMD [ "/entrypoint.sh" ]
+```

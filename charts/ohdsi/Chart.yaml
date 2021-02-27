@@ -2,7 +2,6 @@ apiVersion: v2
 name: ohdsi
 description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
 type: application
-version: 0.4.6
 home: https://github.com/OHDSI
 keywords:
   - ohdsi
@@ -19,3 +18,4 @@ dependencies:
     version: 10.2.0
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
+version: 0.4.7
