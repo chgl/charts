@@ -62,11 +62,11 @@ spec:
               value: {{ .cors.enabled | quote }}
             {{- if and .cors.enabled (or .cors.allowedOrigin $.Values.ingress.enabled) }}
             - name: SECURITY_ORIGIN
-              {{- if $.Values.ingress.enabled}}
+              {{- if .cors.allowedOrigin }}
+              value: {{ .cors.allowedOrigin | quote }}
+              {{- else if $.Values.ingress.enabled}}
               {{- $host := (index $.Values.ingress.hosts 0) }}
               value: {{ $host.host | quote }}
-              {{- else if .cors.allowedOrigin }}
-              value: {{ .cors.allowedOrigin | quote }}
               {{- end }}
             {{- end }}
             - name: DATASOURCE_URL
