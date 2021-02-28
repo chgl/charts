@@ -42,7 +42,7 @@ service:
 
 database:
   # options: ExistingSqlServer, SqlServer, SqlContainer, CosmosDb
-  dataStore: "SqlContainer"
+  dataStore: "SqlServer"
   resourceGroup: ""
   location: ""
   sql:
@@ -65,7 +65,7 @@ database:
     # collectionId: fhir
   sqlContainer:
     # Accept EULA when deploying with --set database.sqlContainer.acceptEula="Y"
-    acceptEula: "y"
+    acceptEula: "n"
     edition: "Developer"
     image:
       registry: mcr.microsoft.com
