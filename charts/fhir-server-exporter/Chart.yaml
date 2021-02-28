@@ -1,0 +1,10 @@
+apiVersion: v2
+name: fhir-server-exporter
+description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+type: application
+home: https://github.com/chgl/fhir-server-exporter
+sources:
+  - https://github.com/chgl/fhir-server-exporter
+maintainers:
+  - name: chgl
+version: 0.1.0
