@@ -1,0 +1,19 @@
+project:
+  name: FHIR© Server Exporter
+  shortName: fhir-server-exporter
+  url: https://github.com/chgl/fhir-server-exporter
+  description: Helm chart for deploying the Prometheus FHIR© server exporter
+  app: the FHIR© server exporter.
+repository:
+  url: https://chgl.github.io/charts
+  name: chgl
+chart:
+  name: fhir-server-exporter
+  values: "-- generate from values file --"
+  valuesExample: "-- generate from values file --"
+prerequisites:
+  - "Kubernetes v1.18+"
+  - "Helm v3"
+release:
+  name: fhir-server-exporter
+  namespace: fhir

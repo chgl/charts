@@ -1,0 +1,88 @@
+{{- with .Values }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "fhir-server-exporter.fullname" $ }}-exporter
+  labels:
+    {{- include "fhir-server-exporter.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: fhir-server-exporter
+  {{- with $.Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "fhir-server-exporter.selectorLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: fhir-server-exporter
+  template:
+    metadata:
+      {{- with $.Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "fhir-server-exporter.selectorLabels" $ | nindent 8 }}
+        app.kubernetes.io/component: fhir-server-exporter
+    spec:
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+        - name: fhir-server-exporter
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
+          ports:
+            - name: metrics
+              containerPort: 9797
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          {{- with .livenessProbe }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: metrics
+          {{- with .readinessProbe }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+          env:
+            - name: COMPlus_EnableDiagnostics
+              value: "0"
+            - name: FHIRSERVERURL
+              value: {{ .fhirServerUrl | quote }}
+            - name: FETCHINTERVALSECONDS
+              value: {{ .fetchIntervalSeconds | quote }}
+      {{- with .nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}
