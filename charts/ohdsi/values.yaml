@@ -96,6 +96,14 @@ webApi:
   # annotations applied to the pod
   podAnnotations: {}
 
+  cors:
+    # whether CORS is enabled for the WebAPI. Sets the `security.cors.enabled` property.
+    enabled: true
+    # value of the `Access-Control-Allow-Origin` header. Sets the `security.origin` property.
+    # set to `*` to allow requests from all origins.
+    # if `cors.enabled=true` and `ingress.enabled=true`, then `ingress.hosts[0].host` is used.
+    allowedOrigin: "*"
+
   # security context for the pod
   podSecurityContext:
     {}

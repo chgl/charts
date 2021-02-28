@@ -78,7 +78,7 @@ spec:
             - name: WEBAPI_URL
               {{- $host := (index $.Values.ingress.hosts 0) }}
               value: http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/WebAPI
-            {{- else }}
+            {{- else if not .extraEnv}}
             []
             {{- end }}
           {{- if .extraEnv }}
