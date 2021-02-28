@@ -58,6 +58,17 @@ spec:
           image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: {{ .image.pullPolicy }}
           env:
+            - name: SECURITY_CORS_ENABLED
+              value: {{ .cors.enabled | quote }}
+            {{- if and .cors.enabled (or .cors.allowedOrigin $.Values.ingress.enabled) }}
+            - name: SECURITY_ORIGIN
+              {{- if $.Values.ingress.enabled}}
+              {{- $host := (index $.Values.ingress.hosts 0) }}
+              value: {{ $host.host | quote }}
+              {{- else if .cors.allowedOrigin }}
+              value: {{ .cors.allowedOrigin | quote }}
+              {{- end }}
+            {{- end }}
             - name: DATASOURCE_URL
               value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
             - name: DATASOURCE_USERNAME
