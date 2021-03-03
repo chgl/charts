@@ -4,7 +4,7 @@
 
 replicaCount: 1
 
-image:
+image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/hapi/hapi-fhir-jpaserver-starter
   tag: "5.2.0-distroless"
@@ -24,7 +24,7 @@ podSecurityContext:
   {}
   # fsGroup: 2000
 
-securityContext:
+securityContext: # +doc-gen:ignore
   allowPrivilegeEscalation: false
   capabilities:
     drop:
@@ -110,21 +110,21 @@ postgresql:
       enabled: false
       # the labels used for Prometheus autodiscover, e.g. could be `release: prometheus`
       additionalLabels: {}
-  containerSecurityContext:
+  containerSecurityContext: # +doc-gen:ignore
     allowPrivilegeEscalation: false
     capabilities:
       drop:
         - ALL
 
 # readiness probe
-readinessProbe: # +doc-gen:break
+readinessProbe: # +doc-gen:ignore
   failureThreshold: 5
   initialDelaySeconds: 30
   periodSeconds: 20
   successThreshold: 1
   timeoutSeconds: 20
 # startup probe
-startupProbe: # +doc-gen:break
+startupProbe: # +doc-gen:ignore
   failureThreshold: 10
   initialDelaySeconds: 60
   periodSeconds: 30

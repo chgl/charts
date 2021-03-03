@@ -14,7 +14,7 @@ postgresql:
   # if set to `false`, the values under `webApi.db` are used
   enabled: true
   # update the default Postgres version to 13.1
-  image: # +doc-gen:break
+  image: # +doc-gen:ignore
     tag: 13.1.0
     pullPolicy: Always
   # name of the database to create
@@ -57,7 +57,7 @@ postgresql:
   # extraEnv:
   #   - name: OHDSI_ADMIN_PASSWORD
   #     value: admin1
-  containerSecurityContext:
+  containerSecurityContext: # +doc-gen:ignore
     allowPrivilegeEscalation: false
     capabilities:
       drop:
@@ -69,7 +69,7 @@ webApi:
   # number of pod replicas for the WebAPI
   replicaCount: 1
   # the WebAPI image
-  image: # +doc-gen:break
+  image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/webapi
     tag: 2.8.0
@@ -110,7 +110,7 @@ webApi:
     # fsGroup: 2000
 
   # security context for the WebAPI container
-  securityContext: # +doc-gen:break
+  securityContext: # +doc-gen:ignore
     allowPrivilegeEscalation: false
     capabilities:
       drop:
@@ -139,21 +139,21 @@ webApi:
     #   memory: 128Mi
 
   # readiness probe
-  readinessProbe: # +doc-gen:break
+  readinessProbe: # +doc-gen:ignore
     failureThreshold: 5
     initialDelaySeconds: 10
     periodSeconds: 15
     successThreshold: 1
     timeoutSeconds: 15
   # startup probe
-  startupProbe: # +doc-gen:break
+  startupProbe: # +doc-gen:ignore
     failureThreshold: 10
     initialDelaySeconds: 60
     periodSeconds: 20
     successThreshold: 1
     timeoutSeconds: 30
   # liveness probe
-  livenessProbe: # +doc-gen:break
+  livenessProbe: # +doc-gen:ignore
     failureThreshold: 5
     initialDelaySeconds: 10
     periodSeconds: 15
@@ -184,7 +184,7 @@ atlas:
   # number of replicas
   replicaCount: 1
   # the Atlas image
-  image: # +doc-gen:break
+  image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/atlas
     tag: 2.8.0
@@ -204,7 +204,7 @@ atlas:
     # fsGroup: 2000
 
   # ContainerSecurityContext for the Atlas container
-  securityContext: # +doc-gen:break
+  securityContext: # +doc-gen:ignore
     allowPrivilegeEscalation: false
     capabilities:
       drop:
@@ -233,14 +233,14 @@ atlas:
     #   memory: 128Mi
 
   # readiness probe
-  readinessProbe: # +doc-gen:break
+  readinessProbe: # +doc-gen:ignore
     failureThreshold: 5
     initialDelaySeconds: 30
     periodSeconds: 15
     successThreshold: 1
     timeoutSeconds: 15
   # liveness probe
-  livenessProbe: # +doc-gen:break
+  livenessProbe: # +doc-gen:ignore
     failureThreshold: 5
     initialDelaySeconds: 30
     periodSeconds: 15
@@ -304,7 +304,7 @@ achilles:
   # when to run the Achilles job. See <https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#cron-schedule-syntax>
   schedule: "@daily"
   # the Achilles image
-  image: # +doc-gen:break
+  image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/achilles
     tag: master
@@ -321,7 +321,7 @@ achilles:
   cdmVersion: "5.3.1"
 
   # ContainerSecurityContext for the Achilles container
-  securityContext: # +doc-gen:break
+  securityContext: # +doc-gen:ignore
     allowPrivilegeEscalation: false
     capabilities:
       drop:
