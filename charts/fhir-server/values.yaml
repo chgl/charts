@@ -4,10 +4,10 @@
 
 replicaCount: 1
 
-image:
+image: # +doc-gen:ignore
   registry: mcr.microsoft.com
   repository: healthcareapis/r4-fhir-server
-  tag: 1.0.800
+  tag: 1.0.829
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -27,7 +27,7 @@ podSecurityContext:
   {}
   # fsGroup: 2000
 
-securityContext:
+securityContext: # +doc-gen:ignore
   allowPrivilegeEscalation: false
   capabilities:
     drop:

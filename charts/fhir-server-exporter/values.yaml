@@ -21,10 +21,10 @@ serviceMonitor:
 replicaCount: 1
 
 # the exporter image
-image: # +doc-gen:break
+image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/fhir-server-exporter
-  tag: "v1.1.16"
+  tag: v1.1.17
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -41,7 +41,7 @@ podSecurityContext:
   {}
   # fsGroup: 2000
 
-securityContext:
+securityContext: # +doc-gen:ignore
   allowPrivilegeEscalation: false
   capabilities:
     drop:
@@ -74,7 +74,7 @@ tolerations: []
 affinity: {}
 
 # readiness probe
-readinessProbe: # +doc-gen:break
+readinessProbe: # +doc-gen:ignore
   failureThreshold: 5
   initialDelaySeconds: 30
   periodSeconds: 20
@@ -82,7 +82,7 @@ readinessProbe: # +doc-gen:break
   timeoutSeconds: 20
 
 # readiness probe
-livenessProbe: # +doc-gen:break
+livenessProbe: # +doc-gen:ignore
   failureThreshold: 5
   initialDelaySeconds: 30
   periodSeconds: 20
