@@ -54,13 +54,15 @@ spec:
                       key: "postgresql-password"
                       {{- end }}
                 - name: ACHILLES_CDM_SCHEMA
-                  value: {{ .schemas.cdm }}
+                  value: {{ .schemas.cdm | quote }}
                 - name: ACHILLES_VOCAB_SCHEMA
-                  value: {{ .schemas.vocab }}
+                  value: {{ .schemas.vocab | quote }}
                 - name: ACHILLES_RES_SCHEMA
-                  value: {{ .schemas.res }}
+                  value: {{ .schemas.res | quote }}
                 - name: ACHILLES_CDM_VERSION
-                  value: {{ .cdmVersion }}
+                  value: {{ .cdmVersion | quote }}
+                - name: ACHILLES_SOURCE
+                  value: {{ .sourceName | quote }}
                 {{- if .extraEnv }}
                 {{- toYaml .extraEnv | nindent 16 }}
                 {{- end }}

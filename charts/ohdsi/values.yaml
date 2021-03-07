@@ -320,6 +320,9 @@ achilles:
   # version of the CDM. Equivalent to the Achilles `ACHILLES_CDM_VERSION` env var.
   cdmVersion: "5.3.1"
 
+  # the CDM source name. Equivalent to the Achilles `ACHILLES_SOURCE` env var.
+  sourceName: "synpuf-5.3.1"
+
   # ContainerSecurityContext for the Achilles container
   securityContext: # +doc-gen:ignore
     allowPrivilegeEscalation: false
