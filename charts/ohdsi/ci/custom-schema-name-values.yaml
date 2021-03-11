@@ -1,0 +1,3 @@
+webApi:
+  db:
+    schema: webapi
