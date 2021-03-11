@@ -47,15 +47,15 @@ Get the name of the secret containing the DB password
 {{- define "ohdsi.webapi.db-secret-name" -}}
 {{- $fullname := ( include "ohdsi.fullname" . ) -}}
 {{- if .Values.postgresql.enabled -}}
-{{- if .Values.postgresql.existingSecret -}}
-{{ .Values.postgresql.existingSecret | quote }}
-{{- else -}}
-{{ printf "%s-%s" $fullname "postgresql" }}
-{{- end -}}
+    {{- if .Values.postgresql.existingSecret -}}
+        {{ .Values.postgresql.existingSecret | quote }}
+    {{- else -}}
+        {{ printf "%s-%s" $fullname "postgresql" }}
+    {{- end -}}
 {{- else if .Values.webApi.db.existingSecret -}}
-{{ .Values.webApi.db.existingSecret | quote }}
+    {{ .Values.webApi.db.existingSecret | quote }}
 {{- else -}}
-{{ printf "%s-%s" $fullname "webapi-db-secret" }}
+    {{ printf "%s-%s" $fullname "webapi-db-secret" }}
 {{- end -}}
 {{- end -}}
 
@@ -64,10 +64,10 @@ Create the JDBC URL from the host, port and database name.
 */}}
 {{- define "ohdsi.webapi.jdbcUrl" -}}
 {{- if .Values.postgresql.enabled -}}
-{{- $fullname := ( include "ohdsi.fullname" . ) -}}
-{{- $pgServiceName := ( printf "%s-%s" $fullname "postgresql") -}}
-{{ printf "jdbc:postgresql://%s:%d/%s" $pgServiceName 5432 .Values.postgresql.postgresqlDatabase }}
+    {{- $fullname := ( include "ohdsi.fullname" . ) -}}
+    {{- $pgServiceName := ( printf "%s-%s" $fullname "postgresql") -}}
+    {{ printf "jdbc:postgresql://%s:%d/%s" $pgServiceName 5432 .Values.postgresql.postgresqlDatabase }}
 {{- else -}}
-{{ printf "jdbc:postgresql://%s:%d/%s" .Values.webApi.db.host (int64 .Values.webApi.db.port) .Values.webApi.db.database }}
+    {{ printf "jdbc:postgresql://%s:%d/%s" .Values.webApi.db.host (int64 .Values.webApi.db.port) .Values.webApi.db.database }}
 {{- end -}}
 {{- end -}}

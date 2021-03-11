@@ -69,6 +69,8 @@ spec:
               value: {{ $host.host | quote }}
               {{- end }}
             {{- end }}
+            - name: DATASOURCE_DRIVERCLASSNAME
+              value: org.postgresql.Driver
             - name: DATASOURCE_URL
               value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
             - name: DATASOURCE_USERNAME
@@ -86,6 +88,12 @@ spec:
               value: {{ .db.schema }}
             - name: SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA
               value: {{ .db.schema }}
+            - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT
+              value: org.hibernate.dialect.PostgreSQLDialect
+            - name: SPRING_BATCH_REPOSITORY_TABLEPREFIX
+              value: {{ .db.schema }}.BATCH_
+            - name: FLYWAY_DATASOURCE_DRIVERCLASSNAME
+              value: org.postgresql.Driver
             - name: FLYWAY_SCHEMAS
               value: {{ .db.schema }}
             - name: FLYWAY_PLACEHOLDERS_OHDSISCHEMA
