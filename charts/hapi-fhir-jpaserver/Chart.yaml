@@ -9,8 +9,8 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 10.3.11
+    version: 10.3.13
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 5.3.0
-version: 0.2.2
+version: 0.2.3
