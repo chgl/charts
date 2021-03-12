@@ -249,6 +249,26 @@ entries:
   hapi-fhir-jpaserver:
   - apiVersion: v2
     appVersion: 5.3.0
+    created: "2021-03-12T13:18:59.326235207Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.3.13
+    description: A Helm chart for deploying the HAPI FHIR JPA server starter on Kubernetes.
+    digest: 6707d5bc8b9151dee9227210d73e3ba1acf8e48cac3d251972574d0e64e95a0e
+    home: https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    maintainers:
+    - name: chgl
+    name: hapi-fhir-jpaserver
+    sources:
+    - https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.2.3/hapi-fhir-jpaserver-0.2.3.tgz
+    version: 0.2.3
+  - apiVersion: v2
+    appVersion: 5.3.0
     created: "2021-03-06T22:56:12.087585493Z"
     dependencies:
     - condition: postgresql.enabled
@@ -488,6 +508,31 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - apiVersion: v2
+    created: "2021-03-12T13:18:59.438194991Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.3.13
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 1b279c4e17e362041c7a2d139f496d29d25d763e3f3a46bbe0413beccd63cfe0
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.4.16/ohdsi-0.4.16.tgz
+    version: 0.4.16
   - apiVersion: v2
     created: "2021-03-11T14:52:11.656560703Z"
     dependencies:
@@ -1213,4 +1258,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-03-11T14:52:11.656922318Z"
+generated: "2021-03-12T13:18:59.438841791Z"
