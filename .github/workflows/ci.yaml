@@ -23,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Check if documentation is up-to-date
-        run: bash scripts/generate-docs.sh && git diff --exit-code HEAD
+        run: bash generate-docs.sh && git diff --exit-code HEAD
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
       - name: Run YAML lint
@@ -31,7 +31,7 @@ jobs:
       - name: Run chart-testing (lint)
         run: ct lint --config .github/ct/ct.yaml
       - name: Run Powerlint
-        run: bash scripts/chart-powerlint.sh
+        run: bash chart-powerlint.sh
 
   test:
     runs-on: ubuntu-20.04
