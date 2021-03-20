@@ -72,7 +72,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/webapi
-    tag: 2.8.0
+    tag: 2.9.0-snapshot
     pullPolicy: Always
 
   db:
@@ -125,7 +125,13 @@ webApi:
     port: 8080
 
   # resource requests and limits for the container. <br>
-  # 2Gi+ of RAM are recommended (<https://github.com/OHDSI/WebAPI/issues/1811#issuecomment-792988811>)
+  # 2Gi+ of RAM are recommended (<https://github.com/OHDSI/WebAPI/issues/1811#issuecomment-792988811>) <br>
+  # You might also want to use `webApi.extraEnv` to set `MinRAMPercentage` and `MaxRAMPercentage`:
+  #
+  # Example:
+  # helm template charts/ohdsi \
+  #    --set webApi.extraEnv[0].name="JAVA_OPTS" \
+  #    --set webApi.extraEnv[0].value="-XX:MinRAMPercentage=60.0 -XX:MaxRAMPercentage=80.0"
   resources:
     {}
     # If you do want to specify resources, uncomment the following
@@ -186,7 +192,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/atlas
-    tag: 2.8.0
+    tag: 2.9.0-dev
     pullPolicy: Always
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
