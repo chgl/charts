@@ -64,6 +64,7 @@ The following table lists the configurable parameters of the `fhir-server-export
 | nodeSelector                    |                                                                                        | `{}`        |
 | tolerations                     |                                                                                        | `[]`        |
 | affinity                        |                                                                                        | `{}`        |
+| extraEnv                        | extra env vars to set on the fhir-server-exporter container                            | `[]`        |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 

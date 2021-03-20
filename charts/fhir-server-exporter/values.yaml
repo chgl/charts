@@ -88,3 +88,8 @@ livenessProbe: # +doc-gen:ignore
   periodSeconds: 20
   successThreshold: 1
   timeoutSeconds: 20
+
+# extra env vars to set on the fhir-server-exporter container
+extraEnv: []
+# - name: "FOO"
+#   value: "BAR"

@@ -73,6 +73,9 @@ spec:
               value: {{ .fhirServerUrl | quote }}
             - name: FETCHINTERVALSECONDS
               value: {{ .fetchIntervalSeconds | quote }}
+          {{- if .extraEnv }}
+          {{- toYaml .extraEnv | nindent 12 }}
+          {{- end }}
       {{- with .nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
