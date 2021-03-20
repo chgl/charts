@@ -1,0 +1,4 @@
+webApi:
+  extraEnv:
+    - name: "JAVA_OPTS"
+      value: "-XX:MinRAMPercentage=60.0 -XX:MaxRAMPercentage=80.0"

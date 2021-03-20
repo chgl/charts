@@ -34,7 +34,7 @@ helm repo update
 1. Run chart-testing and the `chart-powerlint.sh` script to lint the chart
 
    ```sh
-   ct lint --config .github/ct/ct.yaml && scripts/chart-powerlint.sh
+   ct lint --config .github/ct/ct.yaml && chart-powerlint.sh
    ```
 
 1. (Optional) View the results of the [polaris audit check](https://github.com/FairwindsOps/polaris) in your browser
@@ -49,7 +49,7 @@ helm repo update
 1. Run `generate-docs.sh` to auto-generate an updated README
 
    ```sh
-   scripts/generate-docs.sh
+   generate-docs.sh
    ```
 
 1. Bump the version in the changed Chart.yaml according to SemVer (The `ct lint` step above will complain if you forget to update the version.)
