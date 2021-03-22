@@ -99,6 +99,8 @@ database:
     # the secret must have a key named `DATABASEPASSWORD` with the password as its value.
     existingSecret: ""
     port: 1433
+  # sets the connection timeout (`Connection Timeout` parameter of the connection string)
+  connectionTimeoutSeconds: 30
 
 appInsights:
   secretKey: "instrumentationKey"

@@ -10,4 +10,4 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.4.15
+version: 0.4.16
