@@ -73,6 +73,8 @@ spec:
             - name: FhirServer__Security__Authentication__Audience
               value: {{ .Values.security.audience | lower | quote }}
               {{- end }}
+            - name: DATABASE_CONNECTION_TIMEOUT
+              value: {{ .Values.database.connectionTimeoutSeconds | quote }}
             {{- if eq .Values.database.dataStore "SqlServer" }}
             - name: DataStore
               value: "SqlServer"
@@ -102,7 +104,7 @@ spec:
             - name: MAX_POOL_SIZE
               value: {{ .Values.database.sql.maxPoolSize | quote }}
             - name: SqlServer__ConnectionString
-              value: "Server=tcp:$(DATABASESERVERNAME),1433;Initial Catalog=$(DATABASENAME);Persist Security Info=False;User ID=$(DATABASEUSERNAME);Password=$(DATABASEPASSWORD);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Max Pool Size=$(MAX_POOL_SIZE)"
+              value: "Server=tcp:$(DATABASESERVERNAME),1433;Initial Catalog=$(DATABASENAME);Persist Security Info=False;User ID=$(DATABASEUSERNAME);Password=$(DATABASEPASSWORD);MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=$(DATABASE_CONNECTION_TIMEOUT);Max Pool Size=$(MAX_POOL_SIZE)"
             {{- end }}
             {{- if eq .Values.database.dataStore "SqlContainer" }}
             - name: DataStore
@@ -125,7 +127,7 @@ spec:
             - name: DATABASESERVERNAME
               value: {{ $dbservicename }}
             - name: SqlServer__ConnectionString
-              value: "Server=tcp:$(DATABASESERVERNAME),1433;Initial Catalog=$(DATABASENAME);Persist Security Info=False;User ID=$(DATABASEUSERNAME);Password=$(DATABASEPASSWORD);MultipleActiveResultSets=False;Connection Timeout=30"
+              value: "Server=tcp:$(DATABASESERVERNAME),1433;Initial Catalog=$(DATABASENAME);Persist Security Info=False;User ID=$(DATABASEUSERNAME);Password=$(DATABASEPASSWORD);MultipleActiveResultSets=False;Connection Timeout=$(DATABASE_CONNECTION_TIMEOUT)"
             {{- end }}
             {{- if eq .Values.database.dataStore "ExistingSqlServer" }}
             - name: DataStore
@@ -155,7 +157,7 @@ spec:
             - name: DATABASESERVERPORT
               value: {{ .Values.database.existingSqlServer.port | quote }}
             - name: SqlServer__ConnectionString
-              value: "Server=tcp:$(DATABASESERVERNAME),$(DATABASESERVERPORT);Initial Catalog=$(DATABASENAME);Persist Security Info=False;User ID=$(DATABASEUSERNAME);Password=$(DATABASEPASSWORD);MultipleActiveResultSets=False;Connection Timeout=30"
+              value: "Server=tcp:$(DATABASESERVERNAME),$(DATABASESERVERPORT);Initial Catalog=$(DATABASENAME);Persist Security Info=False;User ID=$(DATABASEUSERNAME);Password=$(DATABASEPASSWORD);MultipleActiveResultSets=False;Connection Timeout=$(DATABASE_CONNECTION_TIMEOUT)"
             {{- end }}
             {{- if eq .Values.database.dataStore "CosmosDb" }}
             - name: DataStore
