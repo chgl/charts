@@ -200,3 +200,43 @@ USER 10001
 ENTRYPOINT [ "/bin/bash" ]
 CMD [ "/entrypoint.sh" ]
 ```
+
+## Override config-local.js for Atlas
+
+To use a custom config-local.js file to configure Atlas, you can use the `atlas.config.local` key:
+
+```yaml
+atlas:
+  config:
+    local: |
+      define([], function () {
+        var configLocal = {};
+
+        // clearing local storage otherwise source cache will obscure the override settings
+        localStorage.clear();
+
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host;
+
+        // WebAPI
+        configLocal.api = {
+          name: "OHDSI",
+          url: baseUrl + "/WebAPI/",
+        };
+
+        configLocal.cohortComparisonResultsEnabled = false;
+        configLocal.userAuthenticationEnabled = true;
+        configLocal.plpResultsEnabled = false;
+
+        configLocal.authProviders = [
+          {
+            name: "OpenID",
+            url: "user/login/openid",
+            ajax: false,
+            icon: "fa fa-openid",
+          },
+        ];
+
+        return configLocal;
+      });
+```
