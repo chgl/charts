@@ -74,15 +74,22 @@ spec:
             {{- if .webApiUrl }}
             - name: WEBAPI_URL
               value: {{ .webApiUrl }}
-            {{- else if $.Values.ingress.enabled }}
+            {{- else if (and .constructWebApiUrlFromIngress $.Values.ingress.enabled) }}
             - name: WEBAPI_URL
               {{- $host := (index $.Values.ingress.hosts 0) }}
               value: http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/WebAPI
-            {{- else if not .extraEnv}}
-            []
+            {{- else }}
+            - name: WEBAPI_URL
+              value: ""
             {{- end }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
+          {{- end }}
+          {{- if .config.local }}
+          volumeMounts:
+            - name: atlas-config
+              mountPath: /usr/share/nginx/html/atlas/js/config-local.js
+              subPath: config-local.js
           {{- end }}
       {{- with .nodeSelector }}
       nodeSelector:
@@ -95,6 +102,12 @@ spec:
       {{- with .tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .config.local }}
+      volumes:
+        - name: atlas-config
+          configMap:
+            name: {{ include "ohdsi.fullname" $ }}-atlas-config
       {{- end }}
 {{- end }}
 {{- end }}

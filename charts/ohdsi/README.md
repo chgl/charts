@@ -88,7 +88,8 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 | webApi.extraEnv                               | extra environment variables                                                                                                                                                                                                                                                                                                                                                                                                                                                | `[]`                                                                                           |
 | atlas.enabled                                 | enable the OHDSI Atlas deployment                                                                                                                                                                                                                                                                                                                                                                                                                                          | `true`                                                                                         |
 | atlas.replicaCount                            | number of replicas                                                                                                                                                                                                                                                                                                                                                                                                                                                         | `1`                                                                                            |
-| atlas.webApiUrl                               | the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI if this value is not set but `webapi.ingress.enabled=true`, then this URL is constructed from `webapi.ingress`                                                                                                                                                                                                                                                                                           | `""`                                                                                           |
+| atlas.webApiUrl                               | the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI if this value is not set but `ingress.enabled=true` and `constructWebApiUrlFromIngress=true`, then this URL is constructed from `ingress`                                                                                                                                                                                                                                                                | `""`                                                                                           |
+| atlas.constructWebApiUrlFromIngress           | if enabled, sets the WebAPI URL to `http://ingress.hosts[0]/WebAPI`                                                                                                                                                                                                                                                                                                                                                                                                        | `true`                                                                                         |
 | atlas.podAnnotations                          | annotations for the pod                                                                                                                                                                                                                                                                                                                                                                                                                                                    | `{}`                                                                                           |
 | atlas.podSecurityContext                      | security context for the pod                                                                                                                                                                                                                                                                                                                                                                                                                                               | `{}`                                                                                           |
 | atlas.service                                 | the service used to expose the Atlas web port                                                                                                                                                                                                                                                                                                                                                                                                                              | `{"port":8080,"type":"ClusterIP"}`                                                             |
@@ -97,6 +98,7 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 | atlas.tolerations                             | tolerations for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>                                                                                                                                                                                                                                                                                                                                                             | `[]`                                                                                           |
 | atlas.affinity                                | affinity for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>                                                                                                                                                                                                                                                                                                                                          | `{}`                                                                                           |
 | atlas.extraEnv                                | extra environment variables                                                                                                                                                                                                                                                                                                                                                                                                                                                | `[]`                                                                                           |
+| atlas.config.local                            | this value is expected to contain the config-local.js contents                                                                                                                                                                                                                                                                                                                                                                                                             | `""`                                                                                           |
 | cdmInitJob.enabled                            | if enabled, create a Kubernetes Job running the specified container see [cdm-init-job.yaml](templates/cdm-init-job.yaml) for the env vars that are passed by default                                                                                                                                                                                                                                                                                                       | `false`                                                                                        |
 | cdmInitJob.image                              | the container image used to create the CDM initialization job                                                                                                                                                                                                                                                                                                                                                                                                              | `{"pullPolicy":"Always","registry":"docker.io","repository":"docker/whalesay","tag":"latest"}` |
 | cdmInitJob.podAnnotations                     | annotations set on the cdm-init pod                                                                                                                                                                                                                                                                                                                                                                                                                                        | `{}`                                                                                           |
@@ -259,4 +261,44 @@ COPY --chown=10001:10001 entrypoint.sh /entrypoint.sh
 USER 10001
 ENTRYPOINT [ "/bin/bash" ]
 CMD [ "/entrypoint.sh" ]
+```
+
+## Override config-local.js for Atlas
+
+To use a custom config-local.js file to configure Atlas, you can use the `atlas.config.local` key:
+
+```yaml
+atlas:
+  config:
+    local: |
+      define([], function () {
+        var configLocal = {};
+
+        // clearing local storage otherwise source cache will obscure the override settings
+        localStorage.clear();
+
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host;
+
+        // WebAPI
+        configLocal.api = {
+          name: "OHDSI",
+          url: baseUrl + "/WebAPI/",
+        };
+
+        configLocal.cohortComparisonResultsEnabled = false;
+        configLocal.userAuthenticationEnabled = true;
+        configLocal.plpResultsEnabled = false;
+
+        configLocal.authProviders = [
+          {
+            name: "OpenID",
+            url: "user/login/openid",
+            ajax: false,
+            icon: "fa fa-openid",
+          },
+        ];
+
+        return configLocal;
+      });
 ```

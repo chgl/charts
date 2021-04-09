@@ -192,13 +192,17 @@ atlas:
   image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/atlas
-    tag: 2.9.0-dev
+    # used until https://github.com/OHDSI/Atlas/pull/2502 is merged
+    tag: 2.9.0-pr2502
     pullPolicy: Always
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
-  # if this value is not set but `webapi.ingress.enabled=true`, then this
-  # URL is constructed from `webapi.ingress`
+  # if this value is not set but `ingress.enabled=true` and `constructWebApiUrlFromIngress=true`,
+  # then this URL is constructed from `ingress`
   webApiUrl: ""
+
+  # if enabled, sets the WebAPI URL to `http://ingress.hosts[0]/WebAPI`
+  constructWebApiUrlFromIngress: true
 
   # annotations for the pod
   podAnnotations: {}
@@ -269,6 +273,11 @@ atlas:
     []
     # - name: "TEST"
     #   value: "TEST"
+
+  # override the config files to configure Atlas
+  config:
+    # this value is expected to contain the config-local.js contents
+    local: ""
 
 # define a custom init container to be run as part of the installation.
 cdmInitJob:

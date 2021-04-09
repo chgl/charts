@@ -1,0 +1,11 @@
+{{- if .Values.atlas.config.local }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ohdsi.fullname" . }}-atlas-config
+  labels:
+    {{- include "ohdsi.labels" . | nindent 4 }}
+data:
+  config-local.js: |
+{{ .Values.atlas.config.local | indent 4 }}
+{{- end }}
