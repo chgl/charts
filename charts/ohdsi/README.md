@@ -269,6 +269,9 @@ To use a custom config-local.js file to configure Atlas, you can use the `atlas.
 
 ```yaml
 atlas:
+  # makes sure the WEBAPI_URL env var isn't automatically set to ingress.host
+  # this needed is when specifying config.local
+  constructWebApiUrlFromIngress: false
   config:
     local: |
       define([], function () {
@@ -302,3 +305,87 @@ atlas:
         return configLocal;
       });
 ```
+
+## Securing Atlas using OpenID Connect
+
+You can secure the access to the WebAPI and consequently limit what Atlas users can and cannot do.
+
+See <https://github.com/OHDSI/WebAPI/wiki/Security-Configuration> and <https://github.com/OHDSI/WebAPI/wiki/Atlas-Security> for details.
+
+As an example, here's a values.yaml file that enables OpenID Connect authentication (tested using Keycloak):
+
+```yaml
+ingress:
+  enabled: true
+  hosts:
+    - host: omop.example.com
+  tls:
+    - secretName: omop.example.com-tls
+      hosts:
+        - omop.example.com
+atlas:
+  # makes sure the WEBAPI_URL env var isn't automatically set to ingress.host
+  # this needed is when specifying config.local
+  constructWebApiUrlFromIngress: false
+  config:
+    local: |
+      define([], function () {
+        var configLocal = {};
+
+        // clearing local storage otherwise source cache will obscure the override settings
+        localStorage.clear();
+
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host;
+
+        // WebAPI
+        configLocal.api = {
+          name: "OHDSI",
+          url: baseUrl + "/WebAPI/",
+        };
+
+        configLocal.cohortComparisonResultsEnabled = false;
+        configLocal.userAuthenticationEnabled = true;
+        configLocal.plpResultsEnabled = false;
+
+        configLocal.authProviders = [
+          {
+            name: "OpenID Connect",
+            url: "user/login/openid",
+            ajax: false,
+            icon: "fa fa-openid",
+          },
+        ];
+
+        return configLocal;
+      });
+webApi:
+  extraEnv:
+    - name: SECURITY_PROVIDER
+      value: "AtlasRegularSecurity"
+    - name: SECURITY_AUTH_OPENID_ENABLED
+      value: "true"
+    # omop.example.com is the same host as set in the ingress
+    - name: SECURITY_OAUTH_CALLBACK_API
+      value: "https://omop.example.com/WebAPI/user/oauth/callback"
+    - name: SECURITY_OAUTH_CALLBACK_UI
+      value: "https://omop.example.com/atlas/index.html#/welcome/"
+    - name: SECURITY_OID_REDIRECTURL
+      value: "https://omop.example.com/atlas/index.html#/welcome/null"
+    - name: SECURITY_OID_LOGOUTURL
+      value: "https://omop.example.com/atlas/index.html#/welcome/"
+    # auth.example.com is your local Keycloak server. TEST is the realm containing the omop client
+    - name: SECURITY_OID_URL
+      value: "https://auth.example.com/auth/realms/TEST/.well-known/openid-configuration"
+    # the client-id from setting up the omop client in Keycloak
+    - name: SECURITY_OID_CLIENTID
+      value: "omop"
+    # this contains the client-secret
+    - name: SECURITY_OID_APISECRET
+      valueFrom:
+        secretKeyRef:
+          name: omop-db-secrets
+          key: keycloak-secret
+```
+
+Make sure to give any logged-in user the appropriate permissions by following: <https://github.com/OHDSI/WebAPI/wiki/Atlas-Security#defining-an-administrator>.
