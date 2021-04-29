@@ -2,6 +2,23 @@ apiVersion: v1
 entries:
   fhir-server:
   - apiVersion: v2
+    created: "2021-04-29T17:57:14.985161016Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: cc8ef0f0884f6257be904d2651c2fccc9ec9031724b49620b6d5719bc0b7a87c
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.4.18/fhir-server-0.4.18.tgz
+    version: 0.4.18
+  - apiVersion: v2
     created: "2021-03-22T12:45:28.301089562Z"
     description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
     digest: 680ef2537fc2f8f61d78da5dcd5be60a3daca8d24b78ef248db4de96b3424855
@@ -1451,4 +1468,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-04-20T20:38:48.889499272Z"
+generated: "2021-04-29T17:57:14.985522122Z"
