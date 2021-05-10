@@ -2,6 +2,23 @@ apiVersion: v1
 entries:
   fhir-server:
   - apiVersion: v2
+    created: "2021-05-10T19:25:05.506920437Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 7ef661a075236cc47889f15a2ce73775ba16f1c829e50076e0665366d3afb977
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.4.19/fhir-server-0.4.19.tgz
+    version: 0.4.19
+  - apiVersion: v2
     created: "2021-04-29T17:57:14.985161016Z"
     description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
     digest: cc8ef0f0884f6257be904d2651c2fccc9ec9031724b49620b6d5719bc0b7a87c
@@ -270,6 +287,20 @@ entries:
     version: 0.4.1
   fhir-server-exporter:
   - apiVersion: v2
+    created: "2021-05-10T19:25:05.636701083Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 83317fa69c196c0f9b99e53eae90c1b83a4e5c048986000e14ba080f04b5988d
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.1.4/fhir-server-exporter-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     created: "2021-04-29T18:02:05.22078174Z"
     description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
     digest: 4f1fbd6dfc04ba9e053cfb4657f143c15574e3b984f3fe24a438652ddb22951e
@@ -326,6 +357,26 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.1.0/fhir-server-exporter-0.1.0.tgz
     version: 0.1.0
   hapi-fhir-jpaserver:
+  - apiVersion: v2
+    appVersion: 5.3.0
+    created: "2021-05-10T19:25:05.773828983Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.4.3
+    description: A Helm chart for deploying the HAPI FHIR JPA server starter on Kubernetes.
+    digest: 4a4dc87ada1da8be0b59d6f3958c4d2e0bf5d70086816bd9641a8b7e1b9b2026
+    home: https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    maintainers:
+    - name: chgl
+    name: hapi-fhir-jpaserver
+    sources:
+    - https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.2.7/hapi-fhir-jpaserver-0.2.7.tgz
+    version: 0.2.7
   - apiVersion: v2
     appVersion: 5.3.0
     created: "2021-04-29T17:57:34.862037487Z"
@@ -627,6 +678,31 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - apiVersion: v2
+    created: "2021-05-10T19:25:05.918358437Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.4.3
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 81eb08d59d45311f6d4e6eab9c728e8c08d268131f05237f753e654cbd73acfa
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.5.4/ohdsi-0.5.4.tgz
+    version: 0.5.4
   - apiVersion: v2
     created: "2021-04-29T17:57:34.99308916Z"
     dependencies:
@@ -1527,4 +1603,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-04-29T18:02:05.221197972Z"
+generated: "2021-05-10T19:25:05.919024041Z"
