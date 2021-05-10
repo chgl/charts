@@ -6,8 +6,8 @@ replicaCount: 1
 
 image: # +doc-gen:ignore
   registry: ghcr.io
-  repository: chgl/hapi-fhir-jpaserver-starter
-  tag: v1.1.1-hapi5.3.0-distroless
+  repository: chgl/hapifhir/hapi-fhir-jpaserver-starter
+  tag: v5.3.0-distroless
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
