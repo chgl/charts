@@ -696,6 +696,31 @@ entries:
     version: 0.1.0
   ohdsi:
   - apiVersion: v2
+    created: "2021-05-18T21:42:05.681302907Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.4.3
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 57f31a258861c4baa4326732f36f22aa63fb5eeeedb4af3af95409c5cfca1403
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.5.5/ohdsi-0.5.5.tgz
+    version: 0.5.5
+  - apiVersion: v2
     created: "2021-05-10T19:25:05.918358437Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1620,4 +1645,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-05-12T13:58:59.405206571Z"
+generated: "2021-05-18T21:42:05.681932316Z"
