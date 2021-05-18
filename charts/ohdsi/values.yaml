@@ -190,10 +190,9 @@ atlas:
   replicaCount: 1
   # the Atlas image
   image: # +doc-gen:ignore
-    registry: ghcr.io
-    repository: chgl/ohdsi/atlas
-    # used until https://github.com/OHDSI/Atlas/pull/2502 is merged
-    tag: 2.9.0-pr2502
+    registry: docker.io
+    repository: ohdsi/atlas
+    tag: 2.9.0
     pullPolicy: Always
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
