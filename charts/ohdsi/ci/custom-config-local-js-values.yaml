@@ -1,4 +1,5 @@
 atlas:
+  constructWebApiUrlFromIngress: false
   config:
     local: |
       define([], function () {
