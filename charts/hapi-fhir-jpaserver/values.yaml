@@ -8,7 +8,7 @@ image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/hapifhir/hapi-fhir-jpaserver-starter
   tag: v5.4.0-distroless
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
 
 imagePullSecrets: []
 nameOverride: ""
