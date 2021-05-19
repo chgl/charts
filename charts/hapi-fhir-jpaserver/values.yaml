@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/hapifhir/hapi-fhir-jpaserver-starter
-  tag: v5.3.0-distroless
+  tag: v5.4.0-distroless
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -79,9 +79,9 @@ postgresql:
   # enable an included PostgreSQL DB.
   # if set to `false`, the values under `webApi.db` are used
   enabled: true
-  # update the default Postgres version to 13.1
+  # update the default Postgres version to 13.3
   image: # +doc-gen:break
-    tag: 13.1.0
+    tag: 13.3.0
   # name of the database to create
   # see: <https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run>
   postgresqlDatabase: "fhir"
@@ -97,7 +97,7 @@ postgresql:
     # should be true for production use
     enabled: false
     # number of read replicas
-    readReplicas: 2
+    readReplicas: 1
     # set synchronous commit mode: on, off, remote_apply, remote_write and local
     synchronousCommit: "on"
     # from the number of `readReplicas` defined above, set the number of those that will have synchronous replication

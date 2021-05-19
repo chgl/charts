@@ -68,7 +68,7 @@ spec:
           {{- end }}
           startupProbe:
             httpGet:
-              path: /fhir/Patient?_count=1
+              path: /fhir/metadata
               port: http
           {{- with .Values.startupProbe }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
