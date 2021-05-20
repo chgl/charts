@@ -300,7 +300,8 @@ cdmInitJob:
     # fsGroup: 2000
 
   # ContainerSecurityContext for the cdm-init container
-  securityContext: {}
+  securityContext:
+    {}
 
   # extra environment variables to set
   extraEnv:
