@@ -34,7 +34,7 @@ helm repo update
 1. Run chart-testing and the `chart-powerlint.sh` script to lint the chart
 
    ```sh
-   ct lint --config .github/ct/ct.yaml && chart-powerlint.sh
+   chart-powerlint.sh
    ```
 
 1. (Optional) View the results of the [polaris audit check](https://github.com/FairwindsOps/polaris) in your browser

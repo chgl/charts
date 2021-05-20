@@ -42,32 +42,66 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
+Create a default fully qualified postgresql name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ohdsi.postgresql.fullname" -}}
+{{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Get the name of the secret containing the DB password
 */}}
 {{- define "ohdsi.webapi.db-secret-name" -}}
-{{- $fullname := ( include "ohdsi.fullname" . ) -}}
 {{- if .Values.postgresql.enabled -}}
     {{- if .Values.postgresql.existingSecret -}}
         {{ .Values.postgresql.existingSecret | quote }}
     {{- else -}}
-        {{ printf "%s-%s" $fullname "postgresql" }}
+        {{ ( include "ohdsi.postgresql.fullname" . ) }}
     {{- end -}}
 {{- else if .Values.webApi.db.existingSecret -}}
     {{ .Values.webApi.db.existingSecret | quote }}
 {{- else -}}
+    {{- $fullname := ( include "ohdsi.fullname" . ) -}}
     {{ printf "%s-%s" $fullname "webapi-db-secret" }}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Add environment variables to configure database values
+*/}}
+{{- define "ohdsi.database.host" -}}
+{{- ternary (include "ohdsi.postgresql.fullname" .) .Values.webApi.db.host .Values.postgresql.enabled -}}
+{{- end -}}
+
+{{/*
+Add environment variables to configure database values
+*/}}
+{{- define "ohdsi.database.user" -}}
+{{- ternary .Values.postgresql.postgresqlUsername .Values.webApi.db.username .Values.postgresql.enabled | quote -}}
+{{- end -}}
+
+{{/*
+Add environment variables to configure database values
+*/}}
+{{- define "ohdsi.database.name" -}}
+{{- ternary .Values.postgresql.postgresqlDatabase .Values.webApi.db.database .Values.postgresql.enabled -}}
+{{- end -}}
+
+{{/*
+Add environment variables to configure database values
+*/}}
+{{- define "ohdsi.database.port" -}}
+{{- ternary "5432" .Values.webApi.db.port .Values.postgresql.enabled -}}
 {{- end -}}
 
 {{/*
 Create the JDBC URL from the host, port and database name.
 */}}
 {{- define "ohdsi.webapi.jdbcUrl" -}}
-{{- if .Values.postgresql.enabled -}}
-    {{- $fullname := ( include "ohdsi.fullname" . ) -}}
-    {{- $pgServiceName := ( printf "%s-%s" $fullname "postgresql") -}}
-    {{ printf "jdbc:postgresql://%s:%d/%s" $pgServiceName 5432 .Values.postgresql.postgresqlDatabase }}
-{{- else -}}
-    {{ printf "jdbc:postgresql://%s:%d/%s" .Values.webApi.db.host (int64 .Values.webApi.db.port) .Values.webApi.db.database }}
-{{- end -}}
+{{- $host := (include "ohdsi.database.host" .) -}}
+{{- $port := (include "ohdsi.database.port" .) -}}
+{{- $name := (include "ohdsi.database.name" .) -}}
+{{ printf "jdbc:postgresql://%s:%d/%s" $host (int $port) $name }}
 {{- end -}}

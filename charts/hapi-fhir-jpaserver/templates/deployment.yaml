@@ -43,7 +43,7 @@ spec:
             runAsNonRoot: true
             runAsUser: 11111
             runAsGroup: 11111
-          command: ["sh", "-c", "while ! nc -z {{ .Release.Name }}-postgresql 5432 -w 5; do echo $(date) waiting for database; sleep 5; done;"]
+          command: ["sh", "-c", "while ! nc -z {{ include "hapi-fhir-jpaserver.database.host" . }} {{ include "hapi-fhir-jpaserver.database.port" . }} -w 5; do echo $(date) waiting for database; sleep 5; done;"]
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
