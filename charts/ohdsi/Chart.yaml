@@ -18,4 +18,4 @@ dependencies:
     version: 10.4.5
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-version: 0.5.7
+version: 0.5.8
