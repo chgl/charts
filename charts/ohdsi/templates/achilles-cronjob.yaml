@@ -43,7 +43,7 @@ spec:
                 - name: ACHILLES_DB_URI
                   value: {{ include "ohdsi.webapi.jdbcUrl" $ | replace "jdbc:" ""}}
                 - name: ACHILLES_DB_USERNAME
-                  value: {{ $.Values.webApi.db.username }}
+                  value: {{ include "ohdsi.database.user" $ }}
                 - name: ACHILLES_DB_PASSWORD
                   valueFrom:
                     secretKeyRef:

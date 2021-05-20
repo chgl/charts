@@ -50,23 +50,13 @@ spec:
                   key: "postgresql-password"
                   {{- end }}
             - name: PGUSER
-              value: {{ $.Values.webApi.db.username }}
+              value: {{ include "ohdsi.database.user" $ | quote }}
             - name: PGHOST
-            {{- if $.Values.postgresql.enabled }}
-              {{- $fullname := ( include "ohdsi.fullname" $ ) }}
-              {{- $pgServiceName := ( printf "%s-%s" $fullname "postgresql") }}
-              value: "{{ $pgServiceName }}"
-            {{- else }}
-              value: {{ $.Values.webApi.db.host }}
-            {{- end }}
+              value: {{ include "ohdsi.database.host" $ | quote }}
             - name: PGPORT
-              value: {{ $.Values.webApi.db.port | quote }}
+              value: {{ include "ohdsi.database.port" $ | quote }}
             - name: PGDATABASE
-            {{- if $.Values.postgresql.enabled }}
-              value: {{ $.Values.postgresql.postgresqlDatabase }}
-            {{- else }}
-              value: {{ $.Values.webApi.db.database }}
-            {{- end }}
+              value: {{ include "ohdsi.database.name" $ | quote }}
             - name: WEBAPI_URL
             {{- if $.Values.atlas.webApiUrl }}
               value: {{ $.Values.atlas.webApiUrl }}
