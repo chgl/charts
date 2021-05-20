@@ -79,7 +79,7 @@ Add environment variables to configure database values
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.user" -}}
-{{- ternary .Values.postgresql.postgresqlUsername .Values.webApi.db.username .Values.postgresql.enabled | quote -}}
+{{- ternary .Values.postgresql.postgresqlUsername .Values.webApi.db.username .Values.postgresql.enabled -}}
 {{- end -}}
 
 {{/*
