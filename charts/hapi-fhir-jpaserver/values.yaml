@@ -46,7 +46,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: fhir-server.127.0.0.1.xip.io
+    - host: fhir-server.127.0.0.1.nip.io
       pathType: ImplementationSpecific
       paths: ["/"]
   # ingress TLS config
@@ -145,3 +145,23 @@ externalDatabase:
   database: fhir
   # Database port number
   port: 5432
+
+networkPolicy:
+  # Enable NetworkPolicy
+  enabled: false
+  # A Kubernetes LabelSelector to explicitly select namespaces from which ingress traffic could be allowed
+  explicitNamespacesSelector:
+    {}
+    # matchLabels:
+    #   team: one
+    #   test: foo
+
+  # Additional allowed NetworkPolicyPeer specs
+  # Evaluated as a template so you could do:
+  #
+  # Example:
+  # allowedFrom:
+  #   - podSelector:
+  #       matchLabels:
+  #         app.kubernetes.io/name: {{ $.Release.Name }}
+  allowedFrom: []
