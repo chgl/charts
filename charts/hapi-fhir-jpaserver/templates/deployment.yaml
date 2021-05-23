@@ -52,13 +52,13 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
+            - name: fhir-api
               containerPort: 8080
               protocol: TCP
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: fhir-api
           {{- with .Values.readinessProbe }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}
@@ -69,7 +69,7 @@ spec:
           startupProbe:
             httpGet:
               path: /fhir/metadata
-              port: http
+              port: fhir-api
           {{- with .Values.startupProbe }}
             initialDelaySeconds: {{ .initialDelaySeconds }}
             periodSeconds: {{ .periodSeconds }}

@@ -8,8 +8,8 @@ spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: fhir-api
       protocol: TCP
-      name: http
+      name: fhir-api
   selector:
     {{- include "hapi-fhir-jpaserver.selectorLabels" . | nindent 4 }}

@@ -16,10 +16,12 @@ helm repo update
    pre-commit install
    ```
 
-1. (Optional) Setup a KinD cluster with Nginx ingress support
+1. (Optional) Setup a KinD cluster with Nginx ingress and Calico (to test Ingress and NetworkPolicy resources)
 
    ```sh
    kind create cluster --config=hack/kind-config.yaml
+   kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+   kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
    ```
 

@@ -4,6 +4,7 @@ metadata:
   name: "{{ include "hapi-fhir-jpaserver.fullname" . }}-test-connection"
   labels:
     {{- include "hapi-fhir-jpaserver.labels" . | nindent 4 }}
+    {{ include "hapi-fhir-jpaserver.fullname" . }}-client: "true"
   annotations:
     "helm.sh/hook": test
 spec:
