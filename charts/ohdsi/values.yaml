@@ -72,7 +72,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/webapi
-    tag: 2.9.0-snapshot
+    tag: 2.9.0
     pullPolicy: Always
 
   db:
@@ -355,7 +355,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: ohdsi.127.0.0.1.xip.io
+    - host: ohdsi.127.0.0.1.nip.io
       pathType: ImplementationSpecific
   # ingress TLS config
   tls: []
