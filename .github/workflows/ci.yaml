@@ -64,11 +64,11 @@ jobs:
           fi
 
       - name: Create k8s Kind Cluster
-        uses: container-tools/kind-action@v1
-        # uses: helm/kind-action@v1.1.0
+        uses: helm/kind-action@v1.1.0
         if: steps.list-changed.outputs.changed == 'true'
         with:
           wait: 300s
+          log_level: DEBUG
 
       - name: Run chart-testing (install)
         run: ct install --config .github/ct/install.yaml
