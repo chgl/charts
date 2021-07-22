@@ -45,16 +45,26 @@ The command removes all the Kubernetes components associated with the chart and 
 
 The following table lists the configurable parameters of the `fhir-server-exporter` chart and their default values.
 
-| Parameter              | Description                                                                            | Default     |
-| ---------------------- | -------------------------------------------------------------------------------------- | ----------- |
-| fhirServerUrl          | the URL of the FHIR server whose metrics should be scraped                             | `""`        |
-| fetchIntervalSeconds   | FHIR server exporter fetch interval in seconds                                         | `300`       |
-| serviceMonitor.enabled | if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring | `false`     |
-| replicaCount           | number of replicas                                                                     | `1`         |
-| nameOverride           |                                                                                        | `""`        |
-| fullnameOverride       |                                                                                        | `""`        |
-| service.type           |                                                                                        | `ClusterIP` |
-| service.port           |                                                                                        | `8080`      |
+| Parameter                       | Description                                                                            | Default     |
+| ------------------------------- | -------------------------------------------------------------------------------------- | ----------- |
+| fhirServerUrl                   | the URL of the FHIR server whose metrics should be scraped                             | `""`        |
+| fetchIntervalSeconds            | FHIR server exporter fetch interval in seconds                                         | `300`       |
+| serviceMonitor.enabled          | if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring | `false`     |
+| serviceMonitor.additionalLabels | additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`    | `{}`        |
+| replicaCount                    | number of replicas                                                                     | `1`         |
+| imagePullSecrets                |                                                                                        | `[]`        |
+| nameOverride                    |                                                                                        | `""`        |
+| fullnameOverride                |                                                                                        | `""`        |
+| deploymentAnnotations           | annotations applied to the server deployment                                           | `{}`        |
+| podAnnotations                  | annotations applied to the server pod                                                  | `{}`        |
+| podSecurityContext              |                                                                                        | `{}`        |
+| service.type                    |                                                                                        | `ClusterIP` |
+| service.port                    |                                                                                        | `8080`      |
+| resources                       |                                                                                        | `{}`        |
+| nodeSelector                    |                                                                                        | `{}`        |
+| tolerations                     |                                                                                        | `[]`        |
+| affinity                        |                                                                                        | `{}`        |
+| extraEnv                        | extra env vars to set on the fhir-server-exporter container                            | `[]`        |
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
