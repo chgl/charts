@@ -111,5 +111,6 @@ Create the JDBC URL from the host, port and database name.
 {{- $host := (include "hapi-fhir-jpaserver.database.host" .) -}}
 {{- $port := (include "hapi-fhir-jpaserver.database.port" .) -}}
 {{- $name := (include "hapi-fhir-jpaserver.database.name" .) -}}
-{{ printf "jdbc:postgresql://%s:%d/%s" $host (int $port) $name }}
+{{- $appName := .Release.Name -}}
+{{ printf "jdbc:postgresql://%s:%d/%s?ApplicationName=%s" $host (int $port) $name $appName }}
 {{- end -}}

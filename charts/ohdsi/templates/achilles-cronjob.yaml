@@ -41,7 +41,7 @@ spec:
               {{- end }}
               env:
                 - name: ACHILLES_DB_URI
-                  value: {{ include "ohdsi.webapi.jdbcUrl" $ | replace "jdbc:" ""}}
+                  value: {{ include "ohdsi.achilles.dbUrl" $ }}
                 - name: ACHILLES_DB_USERNAME
                   value: {{ include "ohdsi.database.user" $ }}
                 - name: ACHILLES_DB_PASSWORD
