@@ -72,7 +72,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/webapi
-    tag: 2.9.0
+    tag: 2.9.1
     pullPolicy: Always
 
   db:
