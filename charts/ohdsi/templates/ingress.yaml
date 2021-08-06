@@ -1,12 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "ohdsi.fullname" $ -}}
-{{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
-apiVersion: networking.k8s.io/v1
-{{- else if semverCompare ">=1.14-0" $.Capabilities.KubeVersion.GitVersion }}
-apiVersion: networking.k8s.io/v1beta1
-{{ else }}
-apiVersion: extensions/v1beta1
-{{- end }}
+apiVersion: {{ include "ohdsi.ingress.apiVersion" . }}
 kind: Ingress
 metadata:
   name: {{ $fullName }}-ingress
@@ -37,11 +31,11 @@ spec:
         paths:
           {{- if $.Values.webApi.enabled }}
           - path: /WebAPI
-            {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+            {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
             pathType: {{ $pathType | default "ImplementationSpecific" }}
             {{- end }}
             backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
               service:
                 name: {{ $fullName }}-webapi
                 port:
@@ -53,11 +47,11 @@ spec:
           {{- end }}
           {{- if $.Values.atlas.enabled }}
           - path: /atlas
-            {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+            {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
             pathType: {{ $pathType | default "ImplementationSpecific" }}
             {{- end }}
             backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
               service:
                 name: {{ $fullName }}-atlas
                 port:
