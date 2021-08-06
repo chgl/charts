@@ -1,6 +1,6 @@
 {{- with .Values.achilles }}
 {{- if .enabled }}
-apiVersion: batch/v1beta1
+apiVersion: {{ include "ohdsi.cronJob.apiVersion" $ }}
 kind: CronJob
 metadata:
   name: {{ include "ohdsi.fullname" $ }}-achilles-cron

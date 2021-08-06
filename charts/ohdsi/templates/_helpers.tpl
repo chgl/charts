@@ -117,3 +117,27 @@ Create the Achilles DB URL from the host, port and database name.
 {{- $appName := printf "%s-achilles" .Release.Name -}}
 {{ printf "postgresql://%s:%d/%s?ApplicationName=%s" $host (int $port) $name $appName}}
 {{- end -}}
+
+{{/*
+Return the appropriate apiVersion for Ingress
+*/}}
+{{- define "ohdsi.ingress.apiVersion" -}}
+{{- if semverCompare "<1.14-0" .Capabilities.KubeVersion.Version -}}
+{{- print "extensions/v1beta1" -}}
+{{- else if semverCompare "<1.19-0" .Capabilities.KubeVersion.Version -}}
+{{- print "networking.k8s.io/v1beta1" -}}
+{{- else -}}
+{{- print "networking.k8s.io/v1" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the appropriate apiVersion for CronJob
+*/}}
+{{- define "ohdsi.cronJob.apiVersion" -}}
+{{- if semverCompare ">=1.21-0" .Capabilities.KubeVersion.Version -}}
+{{- print "batch/v1" -}}
+{{- else -}}
+{{- print "batch/v1beta1" -}}
+{{- end -}}
+{{- end -}}
