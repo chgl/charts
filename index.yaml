@@ -423,6 +423,20 @@ entries:
     version: 0.4.1
   fhir-server-exporter:
   - apiVersion: v2
+    created: "2021-08-16T18:43:00.457996493Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 06bac9486406b6ce3f78b9d3ffbbc670f3dfb208a6acf0d3e8464d464371d999
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.1.7/fhir-server-exporter-0.1.7.tgz
+    version: 0.1.7
+  - apiVersion: v2
     created: "2021-07-22T14:10:52.240124656Z"
     description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
     digest: 98d9e139bd37f1e74634541fa2cb1945a504c02246f62655cc7e0d31f252c903
@@ -2289,4 +2303,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-08-16T18:37:02.258239883Z"
+generated: "2021-08-16T18:43:00.459129008Z"
