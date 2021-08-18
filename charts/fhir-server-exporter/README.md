@@ -48,6 +48,7 @@ The following table lists the configurable parameters of the `fhir-server-export
 | Parameter                       | Description                                                                            | Default     |
 | ------------------------------- | -------------------------------------------------------------------------------------- | ----------- |
 | fhirServerUrl                   | the URL of the FHIR server whose metrics should be scraped                             | `""`        |
+| fhirServerName                  | the name of the FHIR server (included in the metrics as `server_name`)                 | `""`        |
 | fetchIntervalSeconds            | FHIR server exporter fetch interval in seconds                                         | `300`       |
 | serviceMonitor.enabled          | if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring | `false`     |
 | serviceMonitor.additionalLabels | additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`    | `{}`        |

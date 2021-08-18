@@ -71,6 +71,8 @@ spec:
               value: "0"
             - name: FHIRSERVERURL
               value: {{ .fhirServerUrl | quote }}
+            - name: FHIRSERVERNAME
+              value: {{ .fhirServerName | quote }}
             - name: FETCHINTERVALSECONDS
               value: {{ .fetchIntervalSeconds | quote }}
           {{- if .extraEnv }}
