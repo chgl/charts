@@ -45,7 +45,6 @@ postgresql:
   #   00-init-ohdsi-admin-user.sh: |
   #     #!/bin/bash
   #     set -e
-
   #     psql -v ON_ERROR_STOP=1 <<-EOSQL
   #         CREATE ROLE ohdsi_admin_user LOGIN PASSWORD '${OHDSI_ADMIN_PASSWORD}' VALID UNTIL 'infinity';
   #         COMMENT ON ROLE ohdsi_admin_user IS 'Admin user account for OHDSI applications';
@@ -291,6 +290,9 @@ cdmInitJob:
     tag: latest
     pullPolicy: Always
 
+  # the number of retries before considering the Job as failed
+  backoffLimit: 6
+
   # annotations set on the cdm-init pod
   podAnnotations: {}
 
@@ -300,8 +302,7 @@ cdmInitJob:
     # fsGroup: 2000
 
   # ContainerSecurityContext for the cdm-init container
-  securityContext:
-    {}
+  securityContext: {}
 
   # extra environment variables to set
   extraEnv:
