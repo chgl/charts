@@ -8,12 +8,16 @@ metadata:
     {{- include "ohdsi.labels" $ | nindent 4 }}
     app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-cdm-init
     app.kubernetes.io/instance: {{ $.Release.Name }}-cdm-init
-  {{- with $.Values.commonAnnotations }}
   annotations:
+    helm.sh/hook: post-install
+  {{- with .annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with $.Values.commonAnnotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
-  backoffLimit: 4
+  backoffLimit: {{ .backoffLimit }}
   template:
     metadata:
     {{- with $.Values.podAnnotations }}
