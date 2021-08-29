@@ -1095,6 +1095,38 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: Annotated the CDM init Job to run as a Helm post-install hook
+          links:
+            - name: GitHub Issue
+              url: https://github.com/chgl/charts/issues/126
+    apiVersion: v2
+    created: "2021-08-29T22:45:07.272870612Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.7.0
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: fde1e69af79218439a88d9a2fb43041c6a592bfa48b6a8050c1f7ff435e2deae
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.6.0/ohdsi-0.6.0.tgz
+    version: 0.6.0
   - apiVersion: v2
     created: "2021-08-06T20:02:56.736121446Z"
     dependencies:
@@ -2345,4 +2377,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-08-24T10:15:43.498877864Z"
+generated: "2021-08-29T22:45:07.27349542Z"
