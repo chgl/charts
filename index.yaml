@@ -577,6 +577,33 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.1.0/fhir-server-exporter-0.1.0.tgz
     version: 0.1.0
   hapi-fhir-jpaserver:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: |
+            when using an existing secret for the PostgreSQL DB,
+            the key within that secret can now be specified as `existingSecretKey`
+      artifacthub.io/license: MIT
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
+    created: "2021-09-04T21:12:51.327913852Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.7.0
+    description: A Helm chart for deploying the HAPI FHIR JPA server starter on Kubernetes.
+    digest: a34b39e4154f4ac4c35a8487e3faed8d4c43bb7c382b31c975ab3a2cdfcb9301
+    home: https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    maintainers:
+    - name: chgl
+    name: hapi-fhir-jpaserver
+    sources:
+    - https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.4.7/hapi-fhir-jpaserver-0.4.7.tgz
+    version: 0.4.7
   - apiVersion: v2
     created: "2021-07-27T20:50:44.81436058Z"
     dependencies:
@@ -2377,4 +2404,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-08-29T22:45:07.27349542Z"
+generated: "2021-09-04T21:12:51.328516457Z"
