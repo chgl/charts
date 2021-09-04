@@ -88,7 +88,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "hapi-fhir-jpaserver.postgresql.secretName" . }}
-                  key: postgresql-password
+                  key: {{ include "hapi-fhir-jpaserver.postgresql.secretKey" . }}
             - name: SPRING_DATASOURCE_DRIVERCLASSNAME
               value: org.postgresql.Driver
             - name: SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT

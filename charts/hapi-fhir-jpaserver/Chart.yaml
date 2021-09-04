@@ -12,4 +12,12 @@ dependencies:
     version: 10.7.0
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-version: 0.4.6
+annotations:
+  artifacthub.io/changes: |
+    - kind: added
+      description: |
+        when using an existing secret for the PostgreSQL DB,
+        the key within that secret can now be specified as `existingSecretKey`
+  artifacthub.io/license: MIT
+  artifacthub.io/prerelease: "true"
+version: 0.4.7
