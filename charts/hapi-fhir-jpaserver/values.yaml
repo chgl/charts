@@ -139,8 +139,10 @@ externalDatabase:
   user: fhir
   # Database password
   password: ""
-  # Name of an existing secret resource containing the DB password in a 'postgresql-password' key
+  # Name of an existing secret resource containing the DB password in the `existingSecretKey` key
   existingSecret: ""
+  # Name of the key inside the `existingSecret`
+  existingSecretKey: "postgresql-password"
   # Database name
   database: fhir
   # Database port number

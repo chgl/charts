@@ -60,7 +60,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
-Get the Postgresql credentials secret.
+Get the Postgresql credentials secret name.
 */}}
 {{- define "hapi-fhir-jpaserver.postgresql.secretName" -}}
 {{- if and (.Values.postgresql.enabled) (not .Values.postgresql.existingSecret) -}}
@@ -71,8 +71,19 @@ Get the Postgresql credentials secret.
     {{- if .Values.externalDatabase.existingSecret -}}
         {{- printf "%s" .Values.externalDatabase.existingSecret -}}
     {{- else -}}
-        {{ printf "%s-%s" .Release.Name "externaldb" }}
+        {{ printf "%s-%s" (include "hapi-fhir-jpaserver.fullname" .) "external-db" }}
     {{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Get the Postgresql credentials secret key.
+*/}}
+{{- define "hapi-fhir-jpaserver.postgresql.secretKey" -}}
+{{- if (.Values.externalDatabase.existingSecret) -}}
+    {{- printf "%s" .Values.externalDatabase.existingSecretKey -}}
+{{- else }}
+    {{- printf "postgresql-password" -}}
 {{- end -}}
 {{- end -}}
 
