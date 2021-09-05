@@ -8,8 +8,6 @@ metadata:
     {{- include "ohdsi.labels" $ | nindent 4 }}
     app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-cdm-init
     app.kubernetes.io/instance: {{ $.Release.Name }}-cdm-init
-  annotations:
-    helm.sh/hook: post-install
   {{- with .annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}

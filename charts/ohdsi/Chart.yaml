@@ -20,9 +20,9 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
-      description: Annotated the CDM init Job to run as a Helm post-install hook
-      links:
-        - name: GitHub Issue
-          url: https://github.com/chgl/charts/issues/126
-version: 0.6.0
+    # When using the list of objects option the valid supported kinds are added,
+    # changed, deprecated, removed, fixed and security.
+    - kind: removed
+      description: |
+        Removed Helm post-install hook annotation from CDM init Job due to timeout concerns for long-running init jobs
+version: 0.6.1
