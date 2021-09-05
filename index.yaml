@@ -1124,6 +1124,38 @@ entries:
   ohdsi:
   - annotations:
       artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: removed
+          description: |
+            Removed Helm post-install hook annotation from CDM init Job due to timeout concerns for long-running init jobs
+    apiVersion: v2
+    created: "2021-09-05T17:47:12.039172831Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.7.0
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 2e288c8b4453b0f1634abdba9527e088e2f682c557ea6e9612b929d7d86692a0
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.6.1/ohdsi-0.6.1.tgz
+    version: 0.6.1
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: Annotated the CDM init Job to run as a Helm post-install hook
           links:
@@ -2404,4 +2436,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-09-04T21:12:51.328516457Z"
+generated: "2021-09-05T17:47:12.040159838Z"
