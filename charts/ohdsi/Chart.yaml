@@ -22,7 +22,8 @@ annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are added,
     # changed, deprecated, removed, fixed and security.
-    - kind: removed
+    - kind: changed
       description: |
-        Removed Helm post-install hook annotation from CDM init Job due to timeout concerns for long-running init jobs
-version: 0.6.1
+        updated WebAPI and Atlas to v2.10.0
+version: 0.7.0
+appVersion: 2.10.0
