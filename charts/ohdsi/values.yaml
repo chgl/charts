@@ -69,9 +69,9 @@ webApi:
   replicaCount: 1
   # the WebAPI image
   image: # +doc-gen:ignore
-    registry: ghcr.io
-    repository: chgl/ohdsi/webapi
-    tag: 2.9.1
+    registry: docker.io
+    repository: ohdsi/webapi
+    tag: 2.10.0
     pullPolicy: Always
 
   db:
@@ -191,7 +191,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/atlas
-    tag: 2.9.1
+    tag: 2.10.0
     pullPolicy: Always
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
