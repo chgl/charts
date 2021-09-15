@@ -42,15 +42,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 
 {{/*
-Create a default fully qualified postgresql name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-*/}}
-{{- define "ohdsi.postgresql.fullname" -}}
-{{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
 Get the name of the secret containing the DB password
 */}}
 {{- define "ohdsi.webapi.db-secret-name" -}}
@@ -58,7 +49,7 @@ Get the name of the secret containing the DB password
     {{- if .Values.postgresql.existingSecret -}}
         {{ .Values.postgresql.existingSecret | quote }}
     {{- else -}}
-        {{ ( include "ohdsi.postgresql.fullname" . ) }}
+        {{ ( include "postgresql.primary.fullname" .Subcharts.postgresql ) }}
     {{- end -}}
 {{- else if .Values.webApi.db.existingSecret -}}
     {{ .Values.webApi.db.existingSecret | quote }}
@@ -72,7 +63,7 @@ Get the name of the secret containing the DB password
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.host" -}}
-{{- ternary (include "ohdsi.postgresql.fullname" .) .Values.webApi.db.host .Values.postgresql.enabled -}}
+{{- ternary ( include "postgresql.primary.fullname" .Subcharts.postgresql ) .Values.webApi.db.host .Values.postgresql.enabled -}}
 {{- end -}}
 
 {{/*

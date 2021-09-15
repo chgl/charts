@@ -51,20 +51,11 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
-Create a default fully qualified postgresql name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-*/}}
-{{- define "hapi-fhir-jpaserver.postgresql.fullname" -}}
-{{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
-{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
 Get the Postgresql credentials secret name.
 */}}
 {{- define "hapi-fhir-jpaserver.postgresql.secretName" -}}
 {{- if and (.Values.postgresql.enabled) (not .Values.postgresql.existingSecret) -}}
-    {{- printf "%s" (include "hapi-fhir-jpaserver.postgresql.fullname" .) -}}
+    {{- printf "%s" ( include "postgresql.primary.fullname" .Subcharts.postgresql ) -}}
 {{- else if and (.Values.postgresql.enabled) (.Values.postgresql.existingSecret) -}}
     {{- printf "%s" .Values.postgresql.existingSecret -}}
 {{- else }}
@@ -91,7 +82,7 @@ Get the Postgresql credentials secret key.
 Add environment variables to configure database values
 */}}
 {{- define "hapi-fhir-jpaserver.database.host" -}}
-{{- ternary (include "hapi-fhir-jpaserver.postgresql.fullname" .) .Values.externalDatabase.host .Values.postgresql.enabled -}}
+{{- ternary ( include "postgresql.primary.fullname" .Subcharts.postgresql ) .Values.externalDatabase.host .Values.postgresql.enabled -}}
 {{- end -}}
 
 {{/*

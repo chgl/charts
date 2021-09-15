@@ -24,7 +24,7 @@ This chart deploys the OHDSI WebAPI and ATLAS app. on a [Kubernetes](http://kube
 ## Prerequisites
 
 - Kubernetes v1.18+
-- Helm v3
+- Helm v3.7+
 
 ## Installing the Chart
 

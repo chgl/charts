@@ -24,6 +24,6 @@ annotations:
     # changed, deprecated, removed, fixed and security.
     - kind: changed
       description: |
-        updated WebAPI and Atlas to v2.10.0
-version: 0.7.0
+        use Helm's new SubChart templating feature: https://github.com/helm/helm/pull/9957. Requires Helm 3.7+
+version: 0.8.0
 appVersion: 2.10.0

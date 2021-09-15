@@ -14,10 +14,9 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
+    - kind: changed
       description: |
-        when using an existing secret for the PostgreSQL DB,
-        the key within that secret can now be specified as `existingSecretKey`
+        use Helm's new SubChart templating feature: https://github.com/helm/helm/pull/9957. Requires Helm 3.7+
   artifacthub.io/license: MIT
   artifacthub.io/prerelease: "true"
-version: 0.4.7
+version: 0.5.0
