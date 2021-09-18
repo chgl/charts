@@ -27,7 +27,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/fhir-server-exporter
-  tag: v1.3.2
+  tag: v1.4.0
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -96,3 +96,13 @@ livenessProbe: # +doc-gen:ignore
 extraEnv: []
 # - name: "FOO"
 #   value: "BAR"
+
+# specify custom queries as a list of `name`, `query` and `description` objects.
+# see <https://github.com/chgl/fhir-server-exporter#custom-queries> for details.
+customQueries:
+  []
+  # - name: fhir_male_patient_count
+  #   query: Patient?gender=male
+  #   description: Male patients
+  # - name: fhir_female_patient_count
+  #   query: Patient?gender=female

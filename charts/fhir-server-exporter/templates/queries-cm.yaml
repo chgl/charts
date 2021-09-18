@@ -1,0 +1,12 @@
+{{- if .Values.customQueries -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "fhir-server-exporter.fullname" . }}-custom-queries
+  labels:
+    {{- include "fhir-server-exporter.labels" . | nindent 4 }}
+data:
+  queries.yaml: |-
+    queries:
+      {{ toYaml .Values.customQueries | nindent 6 }}
+{{- end }}

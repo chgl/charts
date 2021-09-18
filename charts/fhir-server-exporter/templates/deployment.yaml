@@ -78,6 +78,13 @@ spec:
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
           {{- end }}
+          {{- if .customQueries }}
+          volumeMounts:
+            - name: custom-queries
+              mountPath: /opt/fhir-server-exporter/queries.yaml
+              subPath: queries.yaml
+              readOnly: true
+          {{- end }}
       {{- with .nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -89,5 +96,11 @@ spec:
       {{- with .tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .customQueries }}
+      volumes:
+        - name: custom-queries
+          configMap:
+            name: {{ include "fhir-server-exporter.fullname" $ }}-custom-queries
       {{- end }}
 {{- end }}
