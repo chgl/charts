@@ -641,6 +641,34 @@ entries:
       artifacthub.io/license: Apache-2.0
       artifacthub.io/prerelease: "true"
     apiVersion: v2
+    created: "2021-09-27T21:59:32.662529279Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.3
+    description: A Helm chart for deploying the HAPI FHIR JPA server starter on Kubernetes.
+    digest: 5e8ff95fa2344de2a17e9e52fd59feb301edcb28477aed43059d1678f8f0462b
+    home: https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    maintainers:
+    - name: chgl
+    name: hapi-fhir-jpaserver
+    sources:
+    - https://github.com/hapifhir/hapi-fhir-jpaserver-starter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.5.1/hapi-fhir-jpaserver-0.5.1.tgz
+    version: 0.5.1
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed, and security.
+        - kind: changed
+          description: |
+            updated HAPI FHIR starter image to 5.5.0
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/prerelease: "true"
+    apiVersion: v2
     created: "2021-09-27T20:20:50.954282199Z"
     dependencies:
     - condition: postgresql.enabled
@@ -1204,6 +1232,39 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
+            updated WebAPI and Atlas to v2.10.0
+    apiVersion: v2
+    appVersion: 2.10.0
+    created: "2021-09-27T21:59:32.806864071Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.3
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 49a2f8f9d7f96078ebf25944581c766ead2cea15c5660fe89dbab721c7242c83
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.7.1/ohdsi-0.7.1.tgz
+    version: 0.7.1
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are added,
@@ -2551,4 +2612,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-09-27T20:20:50.955233007Z"
+generated: "2021-09-27T21:59:32.807802529Z"
