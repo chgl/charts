@@ -14,10 +14,11 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    - kind: added
+    # When using the list of objects option the valid supported kinds are
+    # added, changed, deprecated, removed, fixed, and security.
+    - kind: changed
       description: |
-        when using an existing secret for the PostgreSQL DB,
-        the key within that secret can now be specified as `existingSecretKey`
-  artifacthub.io/license: MIT
+        updated HAPI FHIR starter image to 5.5.0
+  artifacthub.io/license: Apache-2.0
   artifacthub.io/prerelease: "true"
-version: 0.4.7
+version: 0.5.0

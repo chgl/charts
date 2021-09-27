@@ -28,10 +28,9 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if .Values.postgresql.enabled }}
       initContainers:
-        - name: wait-for-db
-          image: busybox:1.32
+        - name: wait-for-db-to-be-ready
+          image: "{{ .Values.postgresql.image.registry }}/{{ .Values.postgresql.image.repository }}:{{ .Values.postgresql.image.tag }}"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
@@ -41,10 +40,22 @@ spec:
               drop:
                 - ALL
             runAsNonRoot: true
-            runAsUser: 11111
-            runAsGroup: 11111
-          command: ["sh", "-c", "while ! nc -z {{ include "hapi-fhir-jpaserver.database.host" . }} {{ include "hapi-fhir-jpaserver.database.port" . }} -w 5; do echo $(date) waiting for database; sleep 5; done;"]
-      {{- end }}
+            runAsUser: 1001
+            runAsGroup: 1001
+          env:
+            - name: PGHOST
+              value: "{{ include "hapi-fhir-jpaserver.database.host" . }}"
+            - name: PGPORT
+              value: "{{ include "hapi-fhir-jpaserver.database.port" . }}"
+            - name: PGUSER
+              value: "{{ include "hapi-fhir-jpaserver.database.user" . }}"
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until pg_isready; do
+                echo "Waiting for DB ${PGUSER}@${PGHOST}:${PGPORT} to be up";
+                sleep 15;
+              done;
       containers:
         - name: {{ .Chart.Name }}
           securityContext:

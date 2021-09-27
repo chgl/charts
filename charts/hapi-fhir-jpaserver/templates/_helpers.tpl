@@ -98,7 +98,7 @@ Add environment variables to configure database values
 Add environment variables to configure database values
 */}}
 {{- define "hapi-fhir-jpaserver.database.user" -}}
-{{- ternary .Values.postgresql.postgresqlUsername .Values.externalDatabase.user .Values.postgresql.enabled | quote -}}
+{{- ternary .Values.postgresql.postgresqlUsername .Values.externalDatabase.user .Values.postgresql.enabled -}}
 {{- end -}}
 
 {{/*
