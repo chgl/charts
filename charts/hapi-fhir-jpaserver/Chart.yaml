@@ -18,7 +18,8 @@ annotations:
     # added, changed, deprecated, removed, fixed, and security.
     - kind: changed
       description: |
-        updated HAPI FHIR starter image to 5.5.0
+        updated HAPI FHIR starter image to 5.5.1
   artifacthub.io/license: Apache-2.0
   artifacthub.io/prerelease: "true"
-version: 0.5.1
+appVersion: 5.5.1
+version: 0.5.2

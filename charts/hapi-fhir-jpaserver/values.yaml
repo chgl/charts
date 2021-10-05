@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: docker.io
   repository: hapiproject/hapi
-  tag: v5.5.0-distroless
+  tag: v5.5.1-distroless
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
