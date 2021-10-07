@@ -22,4 +22,5 @@ annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/prerelease: "true"
 appVersion: 5.5.1
-version: 0.5.2
+deprecated: true
+version: 1.0.0
