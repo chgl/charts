@@ -11,6 +11,6 @@ annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: added
-      description: support for specifying custom queries
-version: 0.3.0
+    - kind: changed
+      description: updated exporter to latest version
+version: 0.3.1
