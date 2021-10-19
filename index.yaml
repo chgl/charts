@@ -2,6 +2,23 @@ apiVersion: v1
 entries:
   fhir-server:
   - apiVersion: v2
+    created: "2021-10-19T09:08:37.755817178Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 718af3e13323b7f545b9d4339bc14a0d6bbd561ccfeed4b890bd322bb665fe23
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.12/fhir-server-0.5.12.tgz
+    version: 0.5.12
+  - apiVersion: v2
     created: "2021-10-12T20:10:28.22378241Z"
     description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
     digest: ad492e5f5bdd95a88e2740a2e25e3233e33b46e81cd1a03078f4165bd45b751b
@@ -490,6 +507,26 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated exporter to latest version
+    apiVersion: v2
+    created: "2021-10-19T09:08:37.891404148Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 4f0f4d39a925f52c17f811e62252e3259f2788d04efbd1d07c00a066f7404577
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.3.1/fhir-server-exporter-0.3.1.tgz
+    version: 0.3.1
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -2705,4 +2742,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-10-12T20:10:28.225074316Z"
+generated: "2021-10-19T09:08:37.892820723Z"
