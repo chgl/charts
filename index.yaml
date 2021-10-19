@@ -1371,6 +1371,39 @@ entries:
             updated WebAPI and Atlas to v2.10.0
     apiVersion: v2
     appVersion: 2.10.0
+    created: "2021-10-19T09:09:04.077817794Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.12.4
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: c39e1a5ff236477fa0b295aab44adeca9c588928065f491881f2a0e267a8b7f6
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.7.2/ohdsi-0.7.2.tgz
+    version: 0.7.2
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
+            updated WebAPI and Atlas to v2.10.0
+    apiVersion: v2
+    appVersion: 2.10.0
     created: "2021-09-27T21:59:32.806864071Z"
     dependencies:
     - condition: postgresql.enabled
@@ -2742,4 +2775,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-10-19T09:08:37.892820723Z"
+generated: "2021-10-19T09:09:04.078735757Z"
