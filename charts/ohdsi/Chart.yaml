@@ -15,7 +15,7 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 10.12.4
+    version: 10.12.7
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 annotations:
@@ -25,5 +25,5 @@ annotations:
     - kind: changed
       description: |
         updated WebAPI and Atlas to v2.10.0
-version: 0.7.2
+version: 0.7.3
 appVersion: 2.10.0
