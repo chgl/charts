@@ -10,4 +10,10 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.5.12
+annotations:
+  artifacthub.io/changes: |
+    # When using the list of objects option the valid supported kinds are added,
+    # changed, deprecated, removed, fixed and security.
+    - kind: changed
+      description: version bump to test changelog generation
+version: 0.5.13

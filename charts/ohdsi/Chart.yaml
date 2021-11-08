@@ -18,12 +18,11 @@ dependencies:
     version: 10.12.7
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
+appVersion: 2.10.0
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are added,
     # changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: |
-        updated WebAPI and Atlas to v2.10.0
-version: 0.7.3
-appVersion: 2.10.0
+      description: version bump to test changelog generation
+version: 0.7.4
