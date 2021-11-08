@@ -12,5 +12,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated exporter to latest version
-version: 0.3.1
+      description: version bump to test changelog generation
+version: 0.3.2
