@@ -1,6 +1,29 @@
 apiVersion: v1
 entries:
   fhir-server:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: version bump to test changelog generation
+    apiVersion: v2
+    created: "2021-11-08T13:28:23.727917832Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 40bb2478311a6541ae3a45ea1a0ac9d7c88300f8c7df3b00559dc2ce98ceec68
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.13/fhir-server-0.5.13.tgz
+    version: 0.5.13
   - apiVersion: v2
     created: "2021-10-19T09:08:37.755817178Z"
     description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
@@ -507,6 +530,26 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: version bump to test changelog generation
+    apiVersion: v2
+    created: "2021-11-08T13:28:23.981673418Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: f36b99086a9240401c77cf1f22a5ceb6ec7e8c3dbe6c19534c92df734bac98e6
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.3.2/fhir-server-exporter-0.3.2.tgz
+    version: 0.3.2
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -1362,6 +1405,38 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: version bump to test changelog generation
+    apiVersion: v2
+    appVersion: 2.10.0
+    created: "2021-11-08T13:28:24.153603478Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.12.7
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: d4dfecbada2112c315aa323cadc8aed677613282257c63295943e66ccf570909
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.7.4/ohdsi-0.7.4.tgz
+    version: 0.7.4
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are added,
@@ -2808,4 +2883,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-10-23T00:01:00.749047738Z"
+generated: "2021-11-08T13:28:24.15457129Z"
