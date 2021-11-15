@@ -70,9 +70,9 @@ spec:
             - name: COMPlus_EnableDiagnostics
               value: "0"
             - name: FHIRSERVERURL
-              value: {{ .fhirServerUrl | quote }}
+              value: {{ tpl .fhirServerUrl $ }}
             - name: FHIRSERVERNAME
-              value: {{ .fhirServerName | quote }}
+              value: {{ tpl .fhirServerName $ }}
             - name: FETCHINTERVALSECONDS
               value: {{ .fetchIntervalSeconds | quote }}
           {{- if .extraEnv }}

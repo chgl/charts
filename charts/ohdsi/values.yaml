@@ -71,7 +71,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/webapi
-    tag: 2.10.0
+    tag: 2.10.1
     pullPolicy: Always
 
   db:
@@ -191,7 +191,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/atlas
-    tag: 2.10.0
+    tag: 2.10.1
     pullPolicy: Always
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
@@ -288,7 +288,7 @@ cdmInitJob:
     registry: docker.io
     repository: docker/whalesay
     tag: latest
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
   # the number of retries before considering the Job as failed
   backoffLimit: 6
@@ -323,7 +323,7 @@ achilles:
     registry: ghcr.io
     repository: chgl/ohdsi/achilles
     tag: master
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   schemas:
     # name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.
     cdm: "synpuf_cdm"
@@ -331,6 +331,18 @@ achilles:
     vocab: "synpuf_vocab"
     # name of the schema containing the cohort generation results. Equivalent to the Achilles `ACHILLES_RES_SCHEMA` env var.
     res: "synpuf_results"
+
+  # The number of successful finished jobs to retain. Value must be non-negative integer.
+  successfulJobsHistoryLimit: 3
+
+  # The number of failed finished jobs to retain. Value must be non-negative integer.
+  failedJobsHistoryLimit: 1
+
+  # Specifies how to treat concurrent executions of a Job. Valid values are:
+  # - "Allow" (default): allows CronJobs to run concurrently;
+  # - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet;
+  # - "Replace": cancels currently running job and replaces it with a new one
+  concurrencyPolicy: Forbid
 
   # version of the CDM. Equivalent to the Achilles `ACHILLES_CDM_VERSION` env var.
   cdmVersion: "5.3.1"
