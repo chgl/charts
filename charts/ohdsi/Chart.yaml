@@ -18,11 +18,15 @@ dependencies:
     version: 10.12.7
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-appVersion: 2.10.0
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are added,
     # changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: version bump to test changelog generation
-version: 0.7.4
+      description: updated WebAPI and ATLAS images to v2.10.1
+    - kind: added
+      description: |
+        allow overriding Achilles CronJob successfulJobsHistoryLimit, failedJobsHistoryLimit,
+        and concurrencyPolicy
+appVersion: 2.10.1
+version: 0.8.0
