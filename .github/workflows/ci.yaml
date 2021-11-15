@@ -35,6 +35,13 @@ jobs:
       - name: Run chart-testing (lint)
         run: ct lint --config .github/ct/ct.yaml
 
+      - name: Cache kubeconform schemas
+        id: cache-powerlint-kubeconform
+        uses: actions/cache@v2
+        with:
+          path: /tmp
+          key: ${{ runner.os }}-powerlint-kubeconform
+
       - name: Run Powerlint
         env:
           # Don't support 1.22 yet since we can't explicitely pass a a Kubernetes version number to
