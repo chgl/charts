@@ -44,9 +44,7 @@ jobs:
 
       - name: Run Powerlint
         env:
-          # Don't support 1.22 yet since we can't explicitely pass a a Kubernetes version number to
-          # `helm template`
-          KUBERNETES_VERSIONS: "1.18.0 1.19.0 1.20.0 1.21.0"
+          KUBERNETES_VERSIONS: "1.19.0 1.20.0 1.21.0 1.22.0"
         run: chart-powerlint.sh
 
       # used to test whether the changelog generation process works properly
