@@ -22,11 +22,7 @@ annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are added,
     # changed, deprecated, removed, fixed and security.
-    - kind: changed
-      description: updated WebAPI and ATLAS images to v2.10.1
     - kind: added
-      description: |
-        allow overriding Achilles CronJob successfulJobsHistoryLimit, failedJobsHistoryLimit,
-        and concurrencyPolicy
+      description: specify ttlSecondsAfterFinished for cdm init job
 appVersion: 2.10.1
-version: 0.8.0
+version: 0.8.1
