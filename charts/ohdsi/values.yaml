@@ -293,6 +293,9 @@ cdmInitJob:
   # the number of retries before considering the Job as failed
   backoffLimit: 6
 
+  # clean up Job and dependent objects after job completion <https://kubernetes.io/docs/concepts/workloads/controllers/job/#ttl-mechanism-for-finished-jobs>
+  ttlSecondsAfterFinished: 120
+
   # annotations set on the cdm-init pod
   podAnnotations: {}
 
