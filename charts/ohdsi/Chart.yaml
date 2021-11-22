@@ -25,4 +25,4 @@ annotations:
     - kind: added
       description: specify ttlSecondsAfterFinished for cdm init job
 appVersion: 2.10.1
-version: 0.8.1
+version: 0.8.2
