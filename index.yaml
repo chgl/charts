@@ -1499,6 +1499,38 @@ entries:
           description: specify ttlSecondsAfterFinished for cdm init job
     apiVersion: v2
     appVersion: 2.10.1
+    created: "2021-11-22T22:33:27.841756115Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.12.7
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 8dd1d6d3e36c6272d9e348d9eb2b7fd709ff76c3585187042c7c2a2367cee089
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.8.2/ohdsi-0.8.2.tgz
+    version: 0.8.2
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: added
+          description: specify ttlSecondsAfterFinished for cdm init job
+    apiVersion: v2
+    appVersion: 2.10.1
     created: "2021-11-21T17:35:03.917269033Z"
     dependencies:
     - condition: postgresql.enabled
@@ -3037,4 +3069,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-11-21T17:35:03.918187945Z"
+generated: "2021-11-22T22:33:27.843475536Z"
