@@ -36,7 +36,7 @@ spec:
         {{- toYaml .podSecurityContext | nindent 8 }}
       initContainers:
         - name: wait-for-db
-          image: busybox:1.32
+          image: "{{ $.Values.postgresql.image.registry }}/{{ $.Values.postgresql.image.repository }}:{{ $.Values.postgresql.image.tag }}"
           imagePullPolicy: IfNotPresent
           securityContext:
             allowPrivilegeEscalation: false
@@ -46,9 +46,22 @@ spec:
               drop:
                 - ALL
             runAsNonRoot: true
-            runAsUser: 11111
-            runAsGroup: 11111
-          command: ["sh", "-c", "while ! nc -z {{ include "ohdsi.database.host" $ }} {{ include "ohdsi.database.port" $ }} -w 5; do echo $(date) waiting for database; sleep 5; done;"]
+            runAsUser: 65532
+            runAsGroup: 65532
+          env:
+            - name: PGHOST
+              value: "{{ include "ohdsi.database.host" $ }}"
+            - name: PGPORT
+              value: "{{ include "ohdsi.database.port" $ }}"
+            - name: PGUSER
+              value: "{{ include "ohdsi.database.user" $ }}"
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until pg_isready; do
+                echo "Waiting for DB ${PGUSER}@${PGHOST}:${PGPORT} to be up";
+                sleep 15;
+              done;
       containers:
         - name: webapi
           securityContext:
