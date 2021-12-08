@@ -22,7 +22,7 @@ annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are added,
     # changed, deprecated, removed, fixed and security.
-    - kind: added
-      description: specify ttlSecondsAfterFinished for cdm init job
+    - kind: changed
+      description: use postgres image for the wait-for-db init container
 appVersion: 2.10.1
-version: 0.8.2
+version: 0.8.3

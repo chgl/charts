@@ -16,7 +16,6 @@ postgresql:
   # update the default Postgres version to 13.1
   image: # +doc-gen:ignore
     tag: 13.1.0
-    pullPolicy: Always
   # name of the database to create
   # see: <https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run>
   postgresqlDatabase: "ohdsi"
