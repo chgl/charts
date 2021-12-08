@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are added,
         # changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v2.2.36
+    apiVersion: v2
+    created: "2021-12-08T22:50:03.648621856Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: a0f4ff951dea61fcd5e54489b7428859ecc724422a75ad96e19ac41ef5eec09f
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.16/fhir-server-0.5.16.tgz
+    version: 0.5.16
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v2.2.24
     apiVersion: v2
     created: "2021-11-15T22:10:54.527493544Z"
@@ -3069,4 +3092,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-11-22T22:33:27.843475536Z"
+generated: "2021-12-08T22:50:03.649877613Z"
