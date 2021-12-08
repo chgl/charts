@@ -1518,6 +1518,38 @@ entries:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are added,
         # changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: use postgres image for the wait-for-db init container
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2021-12-08T22:56:36.487150864Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.12.7
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: ec88b97270bd6651e8ad27e7dcecabc18d77e328a2929f101fb6d8820f2fc135
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.8.3/ohdsi-0.8.3.tgz
+    version: 0.8.3
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
         - kind: added
           description: specify ttlSecondsAfterFinished for cdm init job
     apiVersion: v2
@@ -3092,4 +3124,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-12-08T22:50:03.649877613Z"
+generated: "2021-12-08T22:56:36.488130176Z"
