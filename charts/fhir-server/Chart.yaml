@@ -15,5 +15,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are added,
     # changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v2.2.24
-version: 0.5.15
+      description: update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v2.2.36
+version: 0.5.16
