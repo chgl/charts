@@ -298,32 +298,25 @@ atlas:
         return configLocal;
       });
 webApi:
-  extraEnv:
-    - name: SECURITY_PROVIDER
-      value: "AtlasRegularSecurity"
-    - name: SECURITY_AUTH_OPENID_ENABLED
-      value: "true"
-    # omop.example.com is the same host as set in the ingress
-    - name: SECURITY_OAUTH_CALLBACK_API
-      value: "https://omop.example.com/WebAPI/user/oauth/callback"
-    - name: SECURITY_OAUTH_CALLBACK_UI
-      value: "https://omop.example.com/atlas/index.html#/welcome/"
-    - name: SECURITY_OID_REDIRECTURL
-      value: "https://omop.example.com/atlas/index.html#/welcome/null"
-    - name: SECURITY_OID_LOGOUTURL
-      value: "https://omop.example.com/atlas/index.html#/welcome/"
-    # auth.example.com is your local Keycloak server. TEST is the realm containing the omop client
-    - name: SECURITY_OID_URL
-      value: "https://auth.example.com/auth/realms/TEST/.well-known/openid-configuration"
-    # the client-id from setting up the omop client in Keycloak
-    - name: SECURITY_OID_CLIENTID
-      value: "omop"
-    # this contains the client-secret
-    - name: SECURITY_OID_APISECRET
-      valueFrom:
-        secretKeyRef:
-          name: omop-db-secrets
-          key: keycloak-secret
+  auth:
+    openid:
+      enabled: true
+      clientId: "ohdsi"
+      clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa"
+      # Required. Points to the openid-configuration endpoint of the provider,
+      oidUrl: "https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration"
+      # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      callbackApi: ""
+      # URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      callbackUI: ""
+      # URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      logoutUrl: ""
+      # OpenID redirect URL, e.g. `https://example.com/atlas/index.html#/welcome/null`
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      redirectUrl: ""
 ```
 
 Make sure to give any logged-in user the appropriate permissions by following: <https://github.com/OHDSI/WebAPI/wiki/Atlas-Security#defining-an-administrator>.

@@ -20,7 +20,7 @@ spec:
       app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
   template:
     metadata:
-    {{- with $.Values.podAnnotations }}
+    {{- with .podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
@@ -122,6 +122,29 @@ spec:
                   {{- else }}
                   key: "postgresql-password"
                   {{- end }}
+            {{- if .auth.openid.enabled }}
+            - name: SECURITY_PROVIDER
+              value: "AtlasRegularSecurity"
+            - name: SECURITY_AUTH_OPENID_ENABLED
+              value: "true"
+            - name: SECURITY_OID_CLIENTID
+              value: {{ .auth.openid.clientId | quote }}
+            - name: SECURITY_OID_APISECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "ohdsi.auth.secretName" $ }}
+                  key: {{ include "ohdsi.auth.secretKey" $ }}
+            - name: SECURITY_OAUTH_CALLBACK_API
+              value: {{ include "ohdsi.oauth.callback.api" $ }}
+            - name: SECURITY_OAUTH_CALLBACK_UI
+              value: {{ include "ohdsi.oauth.callback.ui" $ }}
+            - name: SECURITY_OID_LOGOUTURL
+              value: {{ include "ohdsi.oid.logoutUrl" $ }}
+            - name: SECURITY_OID_REDIRECTURL
+              value: {{ include "ohdsi.oid.redirectUrl" $ }}
+            - name: SECURITY_OID_URL
+              value: {{ .auth.openid.oidUrl | quote }}
+            {{- end }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
           {{- end }}
@@ -129,33 +152,39 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          {{- with .readinessProbe }}
           readinessProbe:
             httpGet:
               path: /WebAPI/info
               port: http
-            initialDelaySeconds: {{ .readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .readinessProbe.periodSeconds }}
-            timeoutSeconds: {{ .readinessProbe.timeoutSeconds }}
-            successThreshold: {{ .readinessProbe.successThreshold }}
-            failureThreshold: {{ .readinessProbe.failureThreshold }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          {{- with .startupProbe }}
           startupProbe:
             httpGet:
               path: /WebAPI/info
               port: http
-            initialDelaySeconds: {{ .startupProbe.initialDelaySeconds }}
-            periodSeconds: {{ .startupProbe.periodSeconds }}
-            timeoutSeconds: {{ .startupProbe.timeoutSeconds }}
-            successThreshold: {{ .startupProbe.successThreshold }}
-            failureThreshold: {{ .startupProbe.failureThreshold }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          {{- with .livenessProbe }}
           livenessProbe:
             httpGet:
               path: /WebAPI/info
               port: http
-            initialDelaySeconds: {{ .livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .livenessProbe.periodSeconds }}
-            timeoutSeconds: {{ .livenessProbe.timeoutSeconds }}
-            successThreshold: {{ .livenessProbe.successThreshold }}
-            failureThreshold: {{ .livenessProbe.failureThreshold }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
           resources:
             {{- toYaml .resources | nindent 12 }}
           volumeMounts:

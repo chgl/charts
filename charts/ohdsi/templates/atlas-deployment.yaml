@@ -20,7 +20,7 @@ spec:
       app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
   template:
     metadata:
-    {{- with $.Values.podAnnotations }}
+    {{- with .podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
@@ -48,24 +48,28 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          {{- with .livenessProbe}}
           livenessProbe:
             httpGet:
               path: /atlas/
               port: http
-            initialDelaySeconds: {{ .livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .livenessProbe.periodSeconds }}
-            timeoutSeconds: {{ .livenessProbe.timeoutSeconds }}
-            successThreshold: {{ .livenessProbe.successThreshold }}
-            failureThreshold: {{ .livenessProbe.failureThreshold }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          {{- with .readinessProbe}}
           readinessProbe:
             httpGet:
               path: /atlas/
               port: http
-            initialDelaySeconds: {{ .readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .readinessProbe.periodSeconds }}
-            timeoutSeconds: {{ .readinessProbe.timeoutSeconds }}
-            successThreshold: {{ .readinessProbe.successThreshold }}
-            failureThreshold: {{ .readinessProbe.failureThreshold }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
           {{- with .resources}}
           resources:
             {{- toYaml . | nindent 12 }}

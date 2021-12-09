@@ -20,9 +20,9 @@ dependencies:
     condition: postgresql.enabled
 annotations:
   artifacthub.io/changes: |
-    # When using the list of objects option the valid supported kinds are added,
-    # changed, deprecated, removed, fixed and security.
-    - kind: changed
-      description: use postgres image for the wait-for-db init container
+    # When using the list of objects option the valid supported kinds are
+    # added, changed, deprecated, removed, fixed and security.
+    - kind: added
+      description: options to configure OpenID/Keycloak auth
 appVersion: 2.10.1
-version: 0.8.3
+version: 0.9.0
