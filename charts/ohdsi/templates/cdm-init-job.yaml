@@ -19,7 +19,7 @@ spec:
   ttlSecondsAfterFinished: {{ .ttlSecondsAfterFinished }}
   template:
     metadata:
-    {{- with $.Values.podAnnotations }}
+    {{- with .podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
     {{- end }}

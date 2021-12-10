@@ -91,6 +91,37 @@ webApi:
     # schema used for the WebAPI's tables. Also referred to as the "OHDSI schema"
     schema: "ohdsi"
 
+  auth:
+    openid:
+      # enable securing the WebAPI via an OpenId connect provider.
+      # make sure to also configure `atlas.config.local` appropriately to enable the auth provider in ATLAS.
+      # See "[Securing Atlas using OpenID Connect](#securing-atlas-using-openid-connect)" below
+      enabled: false
+      # Required. Points to the openid-configuration endpoint of the provider,
+      # e.g. `https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration`
+      oidUrl: ""
+      # the client id
+      clientId: ""
+      # the client secret
+      clientSecret: ""
+      # name of an existing Kubernetes secret containing the OpenId client secret
+      existingSecret: ""
+      # name of the key inside the secret whose value is the OpenId client secret
+      existingSecretKey: "webapi-openid-client-secret"
+      # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      callbackApi: ""
+      # URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      callbackUI: ""
+      # URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      logoutUrl: ""
+      # OpenID redirect URL, e.g. `https://example.com/atlas/index.html#/welcome/null`
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      redirectUrl: ""
+
+
   # annotations applied to the pod
   podAnnotations: {}
 

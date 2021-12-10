@@ -76,6 +76,16 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 | webApi.db.existingSecret                      | name of an existing secret containing the password to the DB.                                                                                                                                                                                                                                                                                                                                                                                                              | `""`                                                                                                 |
 | webApi.db.existingSecretKey                   | name of the key in `webApi.db.existingSecret` to use as the password to the DB.                                                                                                                                                                                                                                                                                                                                                                                            | `"postgresql-postgres-password"`                                                                     |
 | webApi.db.schema                              | schema used for the WebAPI's tables. Also referred to as the "OHDSI schema"                                                                                                                                                                                                                                                                                                                                                                                                | `"ohdsi"`                                                                                            |
+| webApi.auth.openid.enabled                    | enable securing the WebAPI via an OpenId connect provider. make sure to also configure `atlas.config.local` appropriately to enable the auth provider in ATLAS. See "[Securing Atlas using OpenID Connect](#securing-atlas-using-openid-connect)" below                                                                                                                                                                                                                    | `false`                                                                                              |
+| webApi.auth.openid.oidUrl                     | Required. Points to the openid-configuration endpoint of the provider, e.g. `https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration`                                                                                                                                                                                                                                                                                                                  | `""`                                                                                                 |
+| webApi.auth.openid.clientId                   | the client id                                                                                                                                                                                                                                                                                                                                                                                                                                                              | `""`                                                                                                 |
+| webApi.auth.openid.clientSecret               | the client secret                                                                                                                                                                                                                                                                                                                                                                                                                                                          | `""`                                                                                                 |
+| webApi.auth.openid.existingSecret             | name of an existing Kubernetes secret containing the OpenId client secret                                                                                                                                                                                                                                                                                                                                                                                                  | `""`                                                                                                 |
+| webApi.auth.openid.existingSecretKey          | name of the key inside the secret whose value is the OpenId client secret                                                                                                                                                                                                                                                                                                                                                                                                  | `"webapi-openid-client-secret"`                                                                      |
+| webApi.auth.openid.callbackApi                | URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`. If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                               | `""`                                                                                                 |
+| webApi.auth.openid.callbackUI                 | URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`. If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                     | `""`                                                                                                 |
+| webApi.auth.openid.logoutUrl                  | URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`. If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                                    | `""`                                                                                                 |
+| webApi.auth.openid.redirectUrl                | OpenID redirect URL, e.g. `https://example.com/atlas/index.html#/welcome/null` If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                                                      | `""`                                                                                                 |
 | webApi.podAnnotations                         | annotations applied to the pod                                                                                                                                                                                                                                                                                                                                                                                                                                             | `{}`                                                                                                 |
 | webApi.cors.enabled                           | whether CORS is enabled for the WebAPI. Sets the `security.cors.enabled` property.                                                                                                                                                                                                                                                                                                                                                                                         | `false`                                                                                              |
 | webApi.cors.allowedOrigin                     | value of the `Access-Control-Allow-Origin` header. Sets the `security.origin` property. set to `*` to allow requests from all origins. if `cors.enabled=true`, `cors.allowedOrigin=""` and `ingress.enabled=true`, then `ingress.hosts[0].host` is used.                                                                                                                                                                                                                   | `""`                                                                                                 |
@@ -365,32 +375,25 @@ atlas:
         return configLocal;
       });
 webApi:
-  extraEnv:
-    - name: SECURITY_PROVIDER
-      value: "AtlasRegularSecurity"
-    - name: SECURITY_AUTH_OPENID_ENABLED
-      value: "true"
-    # omop.example.com is the same host as set in the ingress
-    - name: SECURITY_OAUTH_CALLBACK_API
-      value: "https://omop.example.com/WebAPI/user/oauth/callback"
-    - name: SECURITY_OAUTH_CALLBACK_UI
-      value: "https://omop.example.com/atlas/index.html#/welcome/"
-    - name: SECURITY_OID_REDIRECTURL
-      value: "https://omop.example.com/atlas/index.html#/welcome/null"
-    - name: SECURITY_OID_LOGOUTURL
-      value: "https://omop.example.com/atlas/index.html#/welcome/"
-    # auth.example.com is your local Keycloak server. TEST is the realm containing the omop client
-    - name: SECURITY_OID_URL
-      value: "https://auth.example.com/auth/realms/TEST/.well-known/openid-configuration"
-    # the client-id from setting up the omop client in Keycloak
-    - name: SECURITY_OID_CLIENTID
-      value: "omop"
-    # this contains the client-secret
-    - name: SECURITY_OID_APISECRET
-      valueFrom:
-        secretKeyRef:
-          name: omop-db-secrets
-          key: keycloak-secret
+  auth:
+    openid:
+      enabled: true
+      clientId: "ohdsi"
+      clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa"
+      # Required. Points to the openid-configuration endpoint of the provider,
+      oidUrl: "https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration"
+      # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      callbackApi: ""
+      # URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      callbackUI: ""
+      # URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      logoutUrl: ""
+      # OpenID redirect URL, e.g. `https://example.com/atlas/index.html#/welcome/null`
+      # If unset, a URL is constructed from `ingress.hosts[0]`
+      redirectUrl: ""
 ```
 
 Make sure to give any logged-in user the appropriate permissions by following: <https://github.com/OHDSI/WebAPI/wiki/Atlas-Security#defining-an-administrator>.
