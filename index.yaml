@@ -1516,6 +1516,38 @@ entries:
   ohdsi:
   - annotations:
       artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: added
+          description: options to configure OpenID/Keycloak auth
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2021-12-10T23:37:26.557290516Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.12.7
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 80a36aa26d8eb28db8ffa76e57da7e3ee534ab5168e131986c6ca35eb7077d96
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.9.0/ohdsi-0.9.0.tgz
+    version: 0.9.0
+  - annotations:
+      artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are added,
         # changed, deprecated, removed, fixed and security.
         - kind: changed
@@ -3124,4 +3156,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-12-08T22:56:36.488130176Z"
+generated: "2021-12-10T23:37:26.558809424Z"
