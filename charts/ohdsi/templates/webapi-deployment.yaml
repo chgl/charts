@@ -122,9 +122,10 @@ spec:
                   {{- else }}
                   key: "postgresql-password"
                   {{- end }}
-            {{- if .auth.openid.enabled }}
+            {{- if (or .auth.openid.enabled .auth.basic.enabled) }}
             - name: SECURITY_PROVIDER
               value: "AtlasRegularSecurity"
+            {{- if .auth.openid.enabled }}
             - name: SECURITY_AUTH_OPENID_ENABLED
               value: "true"
             - name: SECURITY_OID_CLIENTID
@@ -144,6 +145,28 @@ spec:
               value: {{ include "ohdsi.oid.redirectUrl" $ }}
             - name: SECURITY_OID_URL
               value: {{ .auth.openid.oidUrl | quote }}
+            {{- end }}
+            {{- if .auth.basic.enabled }}
+            - name: SECURITY_DB_DATASOURCE_URL
+              value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
+            - name: SECURITY_DB_DATASOURCE_DRIVERCLASSNAME
+              value: "org.postgresql.Driver"
+            - name: SECURITY_DB_DATASOURCE_SCHEMA
+              value: {{ default .db.schema .auth.basic.schema }}
+            - name: SECURITY_DB_DATASOURCE_USERNAME
+              value: {{ include "ohdsi.database.user" $ }}
+            - name: SECURITY_DB_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
+                  {{- if .db.existingSecret }}
+                  key: {{ .db.existingSecretKey }}
+                  {{- else }}
+                  key: "postgresql-password"
+                  {{- end }}
+            - name: SECURITY_DB_DATASOURCE_AUTHENTICATIONQUERY
+              value: {{ tpl .auth.basic.query $ }}
+            {{- end }}
             {{- end }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}

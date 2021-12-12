@@ -71,7 +71,7 @@ webApi:
     registry: docker.io
     repository: ohdsi/webapi
     tag: 2.10.1
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
   db:
     # database hostname
@@ -120,7 +120,20 @@ webApi:
       # OpenID redirect URL, e.g. `https://example.com/atlas/index.html#/welcome/null`
       # If unset, a URL is constructed from `ingress.hosts[0]`
       redirectUrl: ""
-
+    basic:
+      # enable securing access to the WebAPI using basic security configuration.
+      # See <https://github.com/OHDSI/WebAPI/wiki/Basic-Security-Configuration> for details.
+      enabled: false
+      # schema inside the database specified in `.Values.webApi.db` which contains tables used for querying basic
+      # security users. If unset, defaults to `.Values.webApi.db.schema`.
+      schema: ""
+      # SQL query used to fetch entries in the basic security table by their username. Requires a table called `basic_security_users`
+      # to exist within the above schema, see [webapi-enable-auth-values.yaml](ci/webapi-enable-auth-values.yaml)
+      # for an example DB setup. Evaluated as a template.
+      query: >-
+        SELECT password, first_name AS firstname, middle_name AS middlename, last_name AS lastname, username
+        FROM basic_security_users
+        WHERE username = ?
 
   # annotations applied to the pod
   podAnnotations: {}
@@ -222,7 +235,7 @@ atlas:
     registry: docker.io
     repository: ohdsi/atlas
     tag: 2.10.1
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
   # if this value is not set but `ingress.enabled=true` and `constructWebApiUrlFromIngress=true`,
