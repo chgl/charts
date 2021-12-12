@@ -208,7 +208,7 @@ To use a custom config-local.js file to configure Atlas, you can use the `atlas.
 ```yaml
 atlas:
   # makes sure the WEBAPI_URL env var isn't automatically set to ingress.host
-  # this needed is when specifying config.local
+  # this is needed when setting config.local
   constructWebApiUrlFromIngress: false
   config:
     local: |

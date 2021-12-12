@@ -1,0 +1,84 @@
+postgresql:
+  postgresqlPassword: "ohdsi-pg-pw"
+  initdbScripts:
+    00-init-db-for-basic-security.sh: |
+      #!/bin/bash
+      set -e
+      export PGPASSWORD=${POSTGRES_PASSWORD}
+      export PGDATABASE=${POSTGRES_DB}
+      psql -v ON_ERROR_STOP=1 <<-EOSQL
+          CREATE SCHEMA IF NOT EXISTS ohdsi;
+
+          CREATE TABLE IF NOT EXISTS ohdsi.basic_security_users
+          (
+              username    character varying(255),
+              password    character varying(255),
+              first_name  character varying(255),
+              middle_name character varying(255),
+              last_name   character varying(255),
+              email       character varying(255)
+          );
+
+          -- note that we escaped the dollar signs to prevent '\$2: unbound variable' errors
+          -- bcrypt 'pass123' = '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy'
+          INSERT INTO ohdsi.basic_security_users (username, password, email)
+          VALUES ('test', '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy', 'test@example.com')
+      EOSQL
+  extraEnv:
+    - name: OHDSI_ADMIN_PASSWORD
+      value: admin1
+
+webApi:
+  auth:
+    basic:
+      enabled: true
+    openid:
+      enabled: true
+      clientId: "ohdsi"
+      clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa"
+      oidUrl: "https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration"
+
+ingress:
+  enabled: true
+
+atlas:
+  constructWebApiUrlFromIngress: false
+  config:
+    local: |
+      define([], function () {
+        var configLocal = {};
+
+        // clearing local storage otherwise source cache will obscure the override settings
+        localStorage.clear();
+
+        var getUrl = window.location;
+        var baseUrl = getUrl.protocol + "//" + getUrl.host;
+
+        // WebAPI
+        configLocal.api = {
+          name: "OHDSI",
+          url: baseUrl + "/WebAPI/",
+        };
+
+        configLocal.cohortComparisonResultsEnabled = false;
+        configLocal.userAuthenticationEnabled = true;
+        configLocal.plpResultsEnabled = false;
+
+        configLocal.authProviders = [
+          {
+            name: "Basic Security Login",
+            url: "user/login/db",
+            ajax: true,
+            icon: "fa fa-database",
+            isUseCredentialsForm: true
+          },
+          {
+            name: "OpenID Connect",
+            url: "user/login/openid",
+            ajax: false,
+            icon: "fa fa-openid",
+          },
+        ];
+
+        return configLocal;
+      });

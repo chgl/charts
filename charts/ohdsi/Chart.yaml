@@ -23,6 +23,6 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: added
-      description: options to configure OpenID/Keycloak auth
+      description: options to configure WebAPI basic security
 appVersion: 2.10.1
-version: 0.9.0
+version: 0.10.0
