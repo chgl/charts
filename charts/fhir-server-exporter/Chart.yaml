@@ -12,5 +12,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: interpret fhirServerUrl and fhirServerName as a template string
-version: 0.4.0
+      description: updated exporter image to latest
+version: 0.4.1
