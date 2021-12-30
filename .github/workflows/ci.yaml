@@ -47,9 +47,9 @@ jobs:
           KUBERNETES_VERSIONS: "1.19.0 1.20.0 1.21.0 1.22.0 1.23.0"
         run: chart-powerlint.sh
 
-      # used to test whether the changelog generation process works properly
+      # used to test whether the changelog generation process works
       - name: Generate changelogs (test)
-        run: .github/generate-chart-changelogs.sh
+        run: generate-chart-changelog.sh
 
   test:
     runs-on: ubuntu-20.04
