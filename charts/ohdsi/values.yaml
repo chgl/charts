@@ -73,6 +73,14 @@ webApi:
     tag: 2.10.1
     pullPolicy: IfNotPresent
 
+  podDisruptionBudget:
+    # create a PodDisruptionBudget resource for the OHDSI Atlas pods
+    enabled: false
+    # Minimum available instances; ignored if there is no PodDisruptionBudget
+    minAvailable: 1
+    # Maximum unavailable instances; ignored if there is no PodDisruptionBudget
+    maxUnavailable: ""
+
   db:
     # database hostname
     host: "host.example.com"
@@ -236,6 +244,14 @@ atlas:
     repository: ohdsi/atlas
     tag: 2.10.1
     pullPolicy: IfNotPresent
+
+  podDisruptionBudget:
+    # create a PodDisruptionBudget resource for the OHDSI Atlas pods
+    enabled: false
+    # Minimum available instances; ignored if there is no PodDisruptionBudget
+    minAvailable: 1
+    # Maximum unavailable instances; ignored if there is no PodDisruptionBudget
+    maxUnavailable: ""
 
   # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
   # if this value is not set but `ingress.enabled=true` and `constructWebApiUrlFromIngress=true`,

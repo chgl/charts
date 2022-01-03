@@ -23,6 +23,6 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: added
-      description: options to configure WebAPI basic security
+      description: PodDisruptionBudget resources for Atlas and WebAPI
 appVersion: 2.10.1
-version: 0.10.0
+version: 0.11.0
