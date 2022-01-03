@@ -12,7 +12,7 @@ chart:
   values: "-- generate from values file --"
   valuesExample: "-- generate from values file --"
 prerequisites:
-  - "Kubernetes v1.18+"
+  - "Kubernetes v1.21+"
   - "Helm v3"
 release:
   name: ohdsi

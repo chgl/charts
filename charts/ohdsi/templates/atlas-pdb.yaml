@@ -1,0 +1,23 @@
+{{- with .Values.atlas }}
+{{- if .podDisruptionBudget.enabled }}
+kind: PodDisruptionBudget
+apiVersion: policy/v1
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-atlas
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
+    app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+spec:
+  {{- if .podDisruptionBudget.minAvailable }}
+  minAvailable: {{ .podDisruptionBudget.minAvailable }}
+  {{- end }}
+  {{- if .podDisruptionBudget.maxUnavailable }}
+  maxUnavailable: {{ .podDisruptionBudget.maxUnavailable }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
+      app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+{{- end }}
+{{- end }}

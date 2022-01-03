@@ -42,7 +42,7 @@ helm repo update
 
    ```sh
    $ docker run --rm -it -p 9090:8080 -v $PWD:/usr/src/app ghcr.io/chgl/kube-powertools:latest
-   bash-5.0: helm template charts/fhir-server/ | polaris dashboard --audit-path -
+   bash-5.0: helm template charts/fhir-server/ | polaris dashboard --config=.polaris.yaml --audit-path=-
    ```
 
    You can now open your browser at <http://localhost:9090> and see the results and recommendations.
