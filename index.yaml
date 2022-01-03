@@ -1585,6 +1585,38 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: added
+          description: PodDisruptionBudget resources for Atlas and WebAPI
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-01-03T22:53:20.582541224Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.12.7
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 10c7559fab14cb85ebd676a31fd2ba49180038a32d7ac3fa5805448d9bfa9ff9
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.11.0/ohdsi-0.11.0.tgz
+    version: 0.11.0
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: added
           description: options to configure WebAPI basic security
     apiVersion: v2
     appVersion: 2.10.1
@@ -3254,4 +3286,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2021-12-30T20:42:10.023534632Z"
+generated: "2022-01-03T22:53:20.584459542Z"
