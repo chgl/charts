@@ -13,4 +13,4 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: updated exporter image to latest
-version: 0.4.1
+version: 0.4.2
