@@ -652,6 +652,26 @@ entries:
         - kind: changed
           description: updated exporter image to latest
     apiVersion: v2
+    created: "2022-01-10T05:47:12.873568981Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 081bf24e9e375476594034b48e1d3346cdc1ffc7e41eeabb2fdb90e7d5776d4c
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.4.2/fhir-server-exporter-0.4.2.tgz
+    version: 0.4.2
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated exporter image to latest
+    apiVersion: v2
     created: "2021-12-12T00:41:57.003291871Z"
     description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
     digest: 71dca79b21edac3e3422e29d8fff8eac1c522babe546a68531ce96e9134e8744
@@ -3286,4 +3306,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-01-03T22:53:20.584459542Z"
+generated: "2022-01-10T05:47:12.878738807Z"
