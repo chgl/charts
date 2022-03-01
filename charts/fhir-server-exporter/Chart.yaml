@@ -12,5 +12,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated exporter image to latest
-version: 0.4.2
+      description: updated docs using latest version of chart-doc-gen
+version: 0.4.3
