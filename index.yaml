@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are added,
         # changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: updated docs using latest version of chart-doc-gen
+    apiVersion: v2
+    created: "2022-03-01T22:36:04.898422186Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 4afcf4ade743f92f373c23a5d193936a36b6409a3828108e69954eed9ea70fb7
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.19/fhir-server-0.5.19.tgz
+    version: 0.5.19
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v2.2.45
     apiVersion: v2
     created: "2021-12-30T20:42:10.021807901Z"
@@ -645,6 +668,26 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated docs using latest version of chart-doc-gen
+    apiVersion: v2
+    created: "2022-03-01T22:36:05.028989318Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 0c3f2ade834b450ee3396f81fce0d44e3abc60811fb4ca720d2732943ad78e98
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.4.3/fhir-server-exporter-0.4.3.tgz
+    version: 0.4.3
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -1600,6 +1643,40 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
+            updated docs using latest version of chart-doc-gen.
+            Fixes rendering issue of the `webApi.auth.basic.query` default value.
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-03-01T22:36:05.164876082Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.12.7
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 4d6959c39a65aea10b7d03520f85d0d2ac1d22b68de8e51f4c909641c76d009b
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.11.1/ohdsi-0.11.1.tgz
+    version: 0.11.1
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -3306,4 +3383,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-01-10T05:47:12.878738807Z"
+generated: "2022-03-01T22:36:05.16640822Z"
