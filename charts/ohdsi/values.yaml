@@ -13,53 +13,44 @@ postgresql:
   # enable an included PostgreSQL DB.
   # if set to `false`, the values under `webApi.db` are used
   enabled: true
-  # update the default Postgres version to 13.1
-  image: # +doc-gen:ignore
-    tag: 13.1.0
-  # name of the database to create
-  # see: <https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run>
-  postgresqlDatabase: "ohdsi"
-  # Name of existing secret to use for PostgreSQL passwords.
-  # The secret has to contain the keys `postgresql-password`
-  # which is the password for `postgresqlUsername` when it is
-  # different of `postgres`, `postgresql-postgres-password` which
-  # will override `postgresqlPassword`, `postgresql-replication-password`
-  # which will override `replication.password` and `postgresql-ldap-password`
-  # which will be sed to authenticate on LDAP. The value is evaluated as a template.
-  existingSecret: ""
-  replication:
-    # should be true for production use
-    enabled: false
-    # number of read replicas
-    readReplicas: 2
-    # set synchronous commit mode: on, off, remote_apply, remote_write and local
-    synchronousCommit: "on"
-    # from the number of `readReplicas` defined above, set the number of those that will have synchronous replication
-    numSynchronousReplicas: 1
-  metrics:
-    # should also be true for production use
-    enabled: false
-  # Example for creating an ohdsi_admin_user
-  # initdbScripts:
-  #   00-init-ohdsi-admin-user.sh: |
-  #     #!/bin/bash
-  #     set -e
-  #     psql -v ON_ERROR_STOP=1 <<-EOSQL
-  #         CREATE ROLE ohdsi_admin_user LOGIN PASSWORD '${OHDSI_ADMIN_PASSWORD}' VALID UNTIL 'infinity';
-  #         COMMENT ON ROLE ohdsi_admin_user IS 'Admin user account for OHDSI applications';
-  #         CREATE ROLE ohdsi_admin CREATEDB REPLICATION VALID UNTIL 'infinity';
-  #         COMMENT ON ROLE ohdsi_admin IS 'Administration group for OHDSI applications';
-  #         GRANT ohdsi_admin TO ohdsi_admin_user;
-  #         GRANT ALL ON DATABASE ${POSTGRES_DB} TO GROUP ohdsi_admin;
-  #     EOSQL
-  # extraEnv:
-  #   - name: OHDSI_ADMIN_PASSWORD
-  #     value: admin1
-  containerSecurityContext: # +doc-gen:ignore
-    allowPrivilegeEscalation: false
-    capabilities:
-      drop:
-        - ALL
+  auth:
+    # name of the database to create
+    # see: <https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run>
+    database: "ohdsi"
+    #  Name of existing secret to use for PostgreSQL credentials
+    # `auth.postgresPassword`, `auth.password`, and `auth.replicationPassword` will be ignored and picked up from this secret
+    # The secret must contain the keys `postgres-password` (which is the password for "postgres" admin user),
+    # `password` (which is the password for the custom user to create when `auth.username` is set),
+    # and `replication-password` (which is the password for replication user).
+    # The secret might also contains the key `ldap-password` if LDAP is enabled. `ldap.bind_password` will be ignored and
+    # picked from this secret in this case.
+    # The value is evaluated as a template.
+    existingSecret: ""
+  primary:
+    initdb:
+      # Dictionary of initdb scripts
+      # Specify dictionary of scripts to be run at first boot
+      scripts:
+        {}
+        # 00-init-ohdsi-admin-user.sh: |
+        #   #!/bin/bash
+        #   set -e
+        #   psql -v ON_ERROR_STOP=1 <<-EOSQL
+        #       CREATE ROLE ohdsi_admin_user LOGIN PASSWORD '${OHDSI_ADMIN_PASSWORD}' VALID UNTIL 'infinity';
+        #       COMMENT ON ROLE ohdsi_admin_user IS 'Admin user account for OHDSI applications';
+        #       CREATE ROLE ohdsi_admin CREATEDB REPLICATION VALID UNTIL 'infinity';
+        #       COMMENT ON ROLE ohdsi_admin IS 'Administration group for OHDSI applications';
+        #       GRANT ohdsi_admin TO ohdsi_admin_user;
+        #       GRANT ALL ON DATABASE ${POSTGRES_DB} TO GROUP ohdsi_admin;
+        #   EOSQL
+    # extraEnvVars:
+    #   - name: OHDSI_ADMIN_PASSWORD
+    #     value: admin1
+    containerSecurityContext: # +doc-gen:ignore
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
 
 webApi:
   # enable the OHDSI WebAPI deployment

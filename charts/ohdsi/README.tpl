@@ -12,6 +12,15 @@ $ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {
 
 ## Breaking Changes
 
+### 0.12
+
+Updates the included Bitnami PostgreSQL sub-chart to v11. The default Postgres version is now 14.2.
+
+Steps to upgrade from an existing installation:
+
+1. if you are using the sub-chart, either manually upgrade an existing postgres installation to v14.2 or set `postgresql.image.tag: 13.1.0`.
+1. the default key name for the postgres secret has been renamed from `postgresql-password` to `postgres-password`. If you are using the `existingSecret` option, you may have to manually update accordingly.
+
 ### 0.4
 
 Starting with v0.4.0, the two seperate ingress resources for WebAPI and Atlas have been merged into a single one with the `/WebAPI/` and `/atlas/` paths

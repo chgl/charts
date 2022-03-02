@@ -93,7 +93,7 @@ spec:
                   {{- if .db.existingSecret }}
                   key: {{ .db.existingSecretKey }}
                   {{- else }}
-                  key: "postgresql-password"
+                  key: "postgres-password"
                   {{- end }}
             - name: DATASOURCE_OHDSI_SCHEMA
               value: {{ .db.schema }}
@@ -120,7 +120,7 @@ spec:
                   {{- if .db.existingSecret }}
                   key: {{ .db.existingSecretKey }}
                   {{- else }}
-                  key: "postgresql-password"
+                  key: "postgres-password"
                   {{- end }}
             {{- if (or .auth.openid.enabled .auth.basic.enabled) }}
             - name: SECURITY_PROVIDER
@@ -162,7 +162,7 @@ spec:
                   {{- if .db.existingSecret }}
                   key: {{ .db.existingSecretKey }}
                   {{- else }}
-                  key: "postgresql-password"
+                  key: "postgres-password"
                   {{- end }}
             - name: SECURITY_DB_DATASOURCE_AUTHENTICATIONQUERY
               value: {{ tpl .auth.basic.query $ }}

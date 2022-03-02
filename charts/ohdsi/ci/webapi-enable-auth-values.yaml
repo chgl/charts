@@ -1,32 +1,35 @@
 postgresql:
-  postgresqlPassword: "ohdsi-pg-pw"
-  initdbScripts:
-    00-init-db-for-basic-security.sh: |
-      #!/bin/bash
-      set -e
-      export PGPASSWORD=${POSTGRES_PASSWORD}
-      export PGDATABASE=${POSTGRES_DB}
-      psql -v ON_ERROR_STOP=1 <<-EOSQL
-          CREATE SCHEMA IF NOT EXISTS ohdsi;
+  auth:
+    postgresPassword: "ohdsi-pg-pw"
+  primary:
+    initdb:
+      scripts:
+        00-init-db-for-basic-security.sh: |
+          #!/bin/bash
+          set -e
+          export PGPASSWORD=${POSTGRES_PASSWORD}
+          export PGDATABASE=${POSTGRES_DB}
+          psql -v ON_ERROR_STOP=1 <<-EOSQL
+              CREATE SCHEMA IF NOT EXISTS ohdsi;
 
-          CREATE TABLE IF NOT EXISTS ohdsi.basic_security_users
-          (
-              username    character varying(255),
-              password    character varying(255),
-              first_name  character varying(255),
-              middle_name character varying(255),
-              last_name   character varying(255),
-              email       character varying(255)
-          );
+              CREATE TABLE IF NOT EXISTS ohdsi.basic_security_users
+              (
+                  username    character varying(255),
+                  password    character varying(255),
+                  first_name  character varying(255),
+                  middle_name character varying(255),
+                  last_name   character varying(255),
+                  email       character varying(255)
+              );
 
-          -- note that we escaped the dollar signs to prevent '\$2: unbound variable' errors
-          -- bcrypt 'pass123' = '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy'
-          INSERT INTO ohdsi.basic_security_users (username, password, email)
-          VALUES ('test', '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy', 'test@example.com')
-      EOSQL
-  extraEnv:
-    - name: OHDSI_ADMIN_PASSWORD
-      value: admin1
+              -- note that we escaped the dollar signs to prevent '\$2: unbound variable' errors
+              -- bcrypt 'pass123' = '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy'
+              INSERT INTO ohdsi.basic_security_users (username, password, email)
+              VALUES ('test', '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy', 'test@example.com')
+          EOSQL
+    extraEnvVars:
+      - name: OHDSI_ADMIN_PASSWORD
+        value: admin1
 
 webApi:
   auth:
