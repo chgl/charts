@@ -55,8 +55,8 @@ Get the name of the secret containing the DB password
 */}}
 {{- define "ohdsi.webapi.db-secret-name" -}}
 {{- if .Values.postgresql.enabled -}}
-    {{- if .Values.postgresql.existingSecret -}}
-        {{ .Values.postgresql.existingSecret | quote }}
+    {{- if .Values.postgresql.auth.existingSecret -}}
+        {{ .Values.postgresql.auth.existingSecret | quote }}
     {{- else -}}
         {{ ( include "ohdsi.postgresql.fullname" . ) }}
     {{- end -}}
@@ -79,14 +79,14 @@ Add environment variables to configure database values
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.user" -}}
-{{- ternary .Values.postgresql.postgresqlUsername .Values.webApi.db.username .Values.postgresql.enabled -}}
+{{- ternary "postgres" .Values.webApi.db.username .Values.postgresql.enabled -}}
 {{- end -}}
 
 {{/*
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.name" -}}
-{{- ternary .Values.postgresql.postgresqlDatabase .Values.webApi.db.database .Values.postgresql.enabled -}}
+{{- ternary .Values.postgresql.auth.database .Values.webApi.db.database .Values.postgresql.enabled -}}
 {{- end -}}
 
 {{/*

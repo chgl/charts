@@ -54,7 +54,7 @@ spec:
                       {{- if $.Values.webApi.db.existingSecret }}
                       key: {{ $.Values.webApi.db.existingSecretKey }}
                       {{- else }}
-                      key: "postgresql-password"
+                      key: "postgres-password"
                       {{- end }}
                 - name: ACHILLES_CDM_SCHEMA
                   value: {{ .schemas.cdm | quote }}

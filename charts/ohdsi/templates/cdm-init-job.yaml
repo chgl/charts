@@ -52,7 +52,7 @@ spec:
                   {{- if $.Values.webApi.db.existingSecret }}
                   key: {{ $.Values.webApi.db.existingSecretKey }}
                   {{- else }}
-                  key: "postgresql-password"
+                  key: "postgres-password"
                   {{- end }}
             - name: PGUSER
               value: {{ include "ohdsi.database.user" $ | quote }}
