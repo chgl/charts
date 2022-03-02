@@ -1649,6 +1649,40 @@ entries:
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
+            BREAKING CHANGE: updates the included PostgreSQL sub-chart to v11.
+            See README.md for instructions on how to migrate.
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-03-02T00:40:04.487905809Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.3
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 61fff928876c6bee75435074d00d3184631681cd24e94e980216662313a436e1
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.12.0/ohdsi-0.12.0.tgz
+    version: 0.12.0
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
             updated docs using latest version of chart-doc-gen.
             Fixes rendering issue of the `webApi.auth.basic.query` default value.
     apiVersion: v2
@@ -3383,4 +3417,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-03-01T22:36:05.16640822Z"
+generated: "2022-03-02T00:40:04.489624121Z"
