@@ -57,7 +57,7 @@ jobs:
       - lint
     strategy:
       matrix:
-        k8s-version: [1.21.2, 1.22.4, 1.23.0]
+        k8s-version: [1.21.10, 1.22.7, 1.23.4]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -83,6 +83,7 @@ jobs:
         uses: helm/kind-action@v1.2.0
         if: steps.list-changed.outputs.changed == 'true'
         with:
+          version: v0.12.0
           cluster_name: kind-cluster-k8s-${{ matrix.k8s-version }}
           node_image: kindest/node:v${{ matrix.k8s-version }}
 
