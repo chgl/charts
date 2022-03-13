@@ -365,7 +365,7 @@ cdmInitJob:
 
 # by default, Achilles connects to the same DB that the WebAPI uses
 # this assumes that it contains both the WebAPI schema (`ohdsi`) as well
-# as any CDM schemas. Future versions may allow for more flexibility here.
+# as any CDM schemas. Future versions may allow for more flexible configuration.
 achilles:
   # whether or not to enable the Achilles cron job
   enabled: true
@@ -375,7 +375,7 @@ achilles:
   image: # +doc-gen:ignore
     registry: ghcr.io
     repository: chgl/ohdsi/achilles
-    tag: master
+    tag: c6b7ad
     pullPolicy: IfNotPresent
   schemas:
     # name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.
