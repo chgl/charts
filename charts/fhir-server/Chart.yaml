@@ -16,4 +16,4 @@ annotations:
     # changed, deprecated, removed, fixed and security.
     - kind: changed
       description: updated docs using latest version of chart-doc-gen
-version: 0.5.19
+version: 0.5.20
