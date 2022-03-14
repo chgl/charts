@@ -8,6 +8,29 @@ entries:
         - kind: changed
           description: updated docs using latest version of chart-doc-gen
     apiVersion: v2
+    created: "2022-03-14T00:34:24.85976277Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 5d9d7f5de8ca6659e9cd8e7c35b3f00957e989cf6d0004a58730e94e96b5ccb7
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.20/fhir-server-0.5.20.tgz
+    version: 0.5.20
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are added,
+        # changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated docs using latest version of chart-doc-gen
+    apiVersion: v2
     created: "2022-03-01T22:36:04.898422186Z"
     description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
     digest: 4afcf4ade743f92f373c23a5d193936a36b6409a3828108e69954eed9ea70fb7
@@ -668,6 +691,26 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated docs using latest version of chart-doc-gen
+    apiVersion: v2
+    created: "2022-03-14T00:34:24.964811327Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: ecc5b72a82c0f986d2c0af74bb11ce6c53e91af334cb610289565784edc696a4
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.4.4/fhir-server-exporter-0.4.4.tgz
+    version: 0.4.4
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -1643,6 +1686,39 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
+            updated the achilles container image to a more current commit.
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-03-14T00:34:25.093555599Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.3
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 91487a4519987e1c6625e98c047d0998fff57345450b3ea4ff85ed45fa519f07
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.12.1/ohdsi-0.12.1.tgz
+    version: 0.12.1
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -3417,4 +3493,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-03-02T00:40:04.489624121Z"
+generated: "2022-03-14T00:34:25.095394016Z"
