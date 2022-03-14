@@ -47,10 +47,10 @@ helm repo update
 
    You can now open your browser at <http://localhost:9090> and see the results and recommendations.
 
+1. Bump the version in the changed Chart.yaml according to SemVer (The `ct lint` step above will complain if you forget to update the version.)
+
 1. Run `generate-docs.sh` to auto-generate an updated README
 
    ```sh
    generate-docs.sh
    ```
-
-1. Bump the version in the changed Chart.yaml according to SemVer (The `ct lint` step above will complain if you forget to update the version.)

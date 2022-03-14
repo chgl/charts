@@ -7,7 +7,7 @@
 ```console
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm install ohdsi chgl/ohdsi -n ohdsi
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.12.1
 ```
 
 ## Breaking Changes
@@ -20,6 +20,7 @@ Steps to upgrade from an existing installation:
 
 1. if you are using the sub-chart, either manually upgrade an existing postgres installation to v14.2 or set `postgresql.image.tag: 13.1.0`.
 1. the default key name for the postgres secret has been renamed from `postgresql-password` to `postgres-password`. If you are using the `existingSecret` option, you may have to manually update accordingly.
+1. if you are overriding any other of the sub-chart's values, please see <https://docs.bitnami.com/kubernetes/infrastructure/postgresql/administration/upgrade/> for instructions on upgrading.
 
 ### 0.4
 
@@ -40,7 +41,7 @@ This chart deploys the OHDSI WebAPI and ATLAS app. on a [Kubernetes](http://kube
 To install the chart with the release name `ohdsi`:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.12.1
 ```
 
 The command deploys the OHDSI WebAPI and ATLAS app. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -148,14 +149,14 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --set postgresql.auth.database="ohdsi"
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.12.1 --set postgresql.auth.database="ohdsi"
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --values values.yaml
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.12.1 --values values.yaml
 ```
 
 ## Initialize the CDM using a custom container

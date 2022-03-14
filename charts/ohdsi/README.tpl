@@ -20,6 +20,7 @@ Steps to upgrade from an existing installation:
 
 1. if you are using the sub-chart, either manually upgrade an existing postgres installation to v14.2 or set `postgresql.image.tag: 13.1.0`.
 1. the default key name for the postgres secret has been renamed from `postgresql-password` to `postgres-password`. If you are using the `existingSecret` option, you may have to manually update accordingly.
+1. if you are overriding any other of the sub-chart's values, please see <https://docs.bitnami.com/kubernetes/infrastructure/postgresql/administration/upgrade/> for instructions on upgrading.
 
 ### 0.4
 
