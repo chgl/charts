@@ -3,6 +3,33 @@ entries:
   fhir-server:
   - annotations:
       artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated docs using latest version of chart-doc-gen
+        - kind: changed
+          description: updated image tag to latest v2.2.106
+        - kind: changed
+          description: trusting mssql DB server certificates by default
+    apiVersion: v2
+    created: "2022-03-27T20:42:23.442299144Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 41621a9d971096ff6fe07f8198ea03bf84be5eedcf3553dc587176e7289a289c
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.21/fhir-server-0.5.21.tgz
+    version: 0.5.21
+  - annotations:
+      artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are added,
         # changed, deprecated, removed, fixed and security.
         - kind: changed
@@ -691,6 +718,28 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated docs using latest version of chart-doc-gen
+        - kind: changed
+          description: updated image version to v1.4.5
+    apiVersion: v2
+    created: "2022-03-27T20:42:23.561447991Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 96d250c917ade3e018395a65937ddd2daa70e0f80342ee4e31590eb03714c929
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.4.5/fhir-server-exporter-0.4.5.tgz
+    version: 0.4.5
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -1686,6 +1735,39 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
+            updated docs using latest chart-doc-gen
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-03-27T20:42:23.69864256Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.3
+    description: A Helm chart for deploying OHDSI ATLAS and WebAPI.
+    digest: 53932bd15b1ef79e38a8e23d98b8d507e4797855ff4ead7419d1ff8b1e3e5a84
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.12.2/ohdsi-0.12.2.tgz
+    version: 0.12.2
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -3493,4 +3575,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-03-14T00:34:25.095394016Z"
+generated: "2022-03-27T20:42:23.700154562Z"
