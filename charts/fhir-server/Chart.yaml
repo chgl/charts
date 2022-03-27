@@ -10,10 +10,14 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
+version: 0.5.21
 annotations:
   artifacthub.io/changes: |
-    # When using the list of objects option the valid supported kinds are added,
-    # changed, deprecated, removed, fixed and security.
+    # When using the list of objects option the valid supported kinds are
+    # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: updated docs using latest version of chart-doc-gen
-version: 0.5.20
+    - kind: changed
+      description: updated image tag to latest v2.2.106
+    - kind: changed
+      description: trusting mssql DB server certificates by default

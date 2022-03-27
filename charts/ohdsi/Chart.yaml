@@ -24,6 +24,6 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: |
-        updated the achilles container image to a more current commit.
+        updated docs using latest chart-doc-gen
 appVersion: 2.10.1
-version: 0.12.1
+version: 0.12.2
