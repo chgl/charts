@@ -1741,6 +1741,43 @@ entries:
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
+            use Achilles image from the official OHDSI broadsea container registry
+        - kind: changed
+          description: |
+            documented extraEnv option for the achilles job
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-04-02T20:39:24.140516279Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.14
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: d32caa8477b05a50e0b7948efb43299b8f38e8da429563d45185f13eb8d60527
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.13.0/ohdsi-0.13.0.tgz
+    version: 0.13.0
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
             updated docs using latest chart-doc-gen
     apiVersion: v2
     appVersion: 2.10.1
@@ -3575,4 +3612,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-03-27T20:42:23.700154562Z"
+generated: "2022-04-02T20:39:24.141816139Z"
