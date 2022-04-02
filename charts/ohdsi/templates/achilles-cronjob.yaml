@@ -42,6 +42,11 @@ spec:
               resources:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
+              volumeMounts:
+                - mountPath: /opt/achilles/output
+                  name: achilles-reports-volume
+                - mountPath: /tmp
+                  name: r-tempdir-volume
               env:
                 - name: ACHILLES_DB_URI
                   value: {{ include "ohdsi.achilles.dbUrl" $ }}
@@ -69,5 +74,10 @@ spec:
                 {{- if .extraEnv }}
                 {{- toYaml .extraEnv | nindent 16 }}
                 {{- end }}
+          volumes:
+            - name: achilles-reports-volume
+              emptyDir: {}
+            - name: r-tempdir-volume
+              emptyDir: {}
 {{- end }}
 {{- end }}
