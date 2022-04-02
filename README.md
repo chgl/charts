@@ -19,6 +19,7 @@ helm repo update
 1. (Optional) Setup a KinD cluster with Nginx ingress
 
    ```sh
+   # configures kind to listen on port 80 and 443 and make nodes ingress-ready
    kind create cluster --config=hack/kind-config.yaml
    # setup NGINX Ingress controller
    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml

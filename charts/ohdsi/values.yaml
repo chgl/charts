@@ -365,7 +365,7 @@ cdmInitJob:
 
 # by default, Achilles connects to the same DB that the WebAPI uses
 # this assumes that it contains both the WebAPI schema (`ohdsi`) as well
-# as any CDM schemas. Future versions may allow for more flexible configuration.
+# as any CDM schemas. See <https://github.com/OHDSI/Broadsea-Achilles> for details on the container used.
 achilles:
   # whether or not to enable the Achilles cron job
   enabled: true
@@ -373,9 +373,9 @@ achilles:
   schedule: "@daily"
   # the Achilles image
   image: # +doc-gen:ignore
-    registry: ghcr.io
-    repository: chgl/ohdsi/achilles
-    tag: c6b7ad
+    registry: docker.io
+    repository: ohdsi/broadsea-achilles
+    tag: master
     pullPolicy: IfNotPresent
   schemas:
     # name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.
@@ -398,19 +398,28 @@ achilles:
   concurrencyPolicy: Forbid
 
   # version of the CDM. Equivalent to the Achilles `ACHILLES_CDM_VERSION` env var.
-  cdmVersion: "5.3.1"
+  cdmVersion: "5.3"
 
   # the CDM source name. Equivalent to the Achilles `ACHILLES_SOURCE` env var.
   sourceName: "synpuf-5.3.1"
 
   # ContainerSecurityContext for the Achilles container
   securityContext: # +doc-gen:ignore
+    # the container can't be run on a read-only FS yet as the achilles script tries writing a log-file in the current directory:
+    # https://github.com/OHDSI/Achilles/blob/c6b7adb6330e75c2311880db2eb3dc4c12341c4f/R/Achilles.R#L336
+    readOnlyRootFilesystem: false
     allowPrivilegeEscalation: false
     capabilities:
       drop:
         - ALL
     runAsNonRoot: true
     runAsUser: 10001
+
+  # extra environment variables to pass to the Achilles container
+  extraEnv:
+    []
+    # - name: "TEST"
+    #   value: "TEST"
 
 ingress:
   # whether to create an Ingress to expose the Atlas web interface
