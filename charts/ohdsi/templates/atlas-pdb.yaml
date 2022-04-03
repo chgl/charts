@@ -6,8 +6,7 @@ metadata:
   name: {{ include "ohdsi.fullname" $ }}-atlas
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
-    app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+    app.kubernetes.io/component: atlas
 spec:
   {{- if .podDisruptionBudget.minAvailable }}
   minAvailable: {{ .podDisruptionBudget.minAvailable }}
@@ -17,7 +16,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
-      app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+      {{- include "ohdsi.matchLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: atlas
 {{- end }}
 {{- end }}

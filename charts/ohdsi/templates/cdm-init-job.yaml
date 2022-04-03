@@ -6,8 +6,7 @@ metadata:
   name: {{ include "ohdsi.fullname" $ }}-cdm-init
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-cdm-init
-    app.kubernetes.io/instance: {{ $.Release.Name }}-cdm-init
+    app.kubernetes.io/component: cdm-init
   {{- with .annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -24,8 +23,8 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-cdm-init
-        app.kubernetes.io/instance: {{ $.Release.Name }}-cdm-init
+        {{- include "ohdsi.labels" $ | nindent 8 }}
+        app.kubernetes.io/component: cdm-init
     spec:
       restartPolicy: Never
       {{- with $.Values.imagePullSecrets }}

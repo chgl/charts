@@ -4,8 +4,12 @@ metadata:
   name: "{{ include "ohdsi.fullname" . }}-test-connection"
   labels:
     {{- include "ohdsi.labels" . | nindent 4 }}
+    app.kubernetes.io/component: test-connection
   annotations:
     "helm.sh/hook": test-success
+    {{- with .podAnnotations }}
+      {{- toYaml . | nindent 6 }}
+    {{- end }}
 spec:
   restartPolicy: Never
   containers:

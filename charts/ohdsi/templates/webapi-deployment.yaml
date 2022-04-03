@@ -6,8 +6,7 @@ metadata:
   name: {{ include "ohdsi.fullname" $ }}-webapi
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
-    app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+    app.kubernetes.io/component: webapi
   {{- with $.Values.commonAnnotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -16,8 +15,8 @@ spec:
   replicas: {{ .replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
-      app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+      {{- include "ohdsi.matchLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: webapi
   template:
     metadata:
     {{- with .podAnnotations }}
@@ -25,8 +24,8 @@ spec:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       labels:
-        app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
-        app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+        {{- include "ohdsi.labels" $ | nindent 8 }}
+        app.kubernetes.io/component: webapi
     spec:
       {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:

@@ -6,8 +6,7 @@ metadata:
   name: {{ include "ohdsi.fullname" $ }}-atlas
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
-    app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+    app.kubernetes.io/component: atlas
 spec:
   type: {{ .service.type }}
   ports:
@@ -16,7 +15,7 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-atlas
-    app.kubernetes.io/instance: {{ $.Release.Name }}-atlas
+    {{- include "ohdsi.matchLabels" $ | nindent 4 }}
+    app.kubernetes.io/component: atlas
 {{- end }}
 {{- end }}
