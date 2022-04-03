@@ -1741,6 +1741,42 @@ entries:
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
+            ⚠️ BREAKING CHANGE: standardized all labels to align with the Bitnami labelling conventions. See README.md for help when upgrading.
+        - kind: fixed
+          description: WebAPI auth secret is now only created if `.Values.webApi.auth.openid.enabled` is actually set to `true`
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-04-03T21:12:38.773769433Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.14
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: f132225563536e2e194050d36c5bc0fcf794f96a6feca281f7dd559e8d33ea0e
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.14.0/ohdsi-0.14.0.tgz
+    version: 0.14.0
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
             use Achilles image from the official OHDSI broadsea container registry
         - kind: changed
           description: |
@@ -3612,4 +3648,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-04-02T20:39:24.141816139Z"
+generated: "2022-04-03T21:12:38.775923503Z"
