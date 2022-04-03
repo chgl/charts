@@ -6,8 +6,7 @@ metadata:
   name: {{ include "ohdsi.fullname" $ }}-webapi
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
-    app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+    app.kubernetes.io/component: webapi
 spec:
   type: {{ .service.type }}
   ports:
@@ -16,7 +15,7 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-webapi
-    app.kubernetes.io/instance: {{ $.Release.Name }}-webapi
+    {{- include "ohdsi.matchLabels" $ | nindent 4 }}
+    app.kubernetes.io/component: webapi
 {{- end }}
 {{- end }}

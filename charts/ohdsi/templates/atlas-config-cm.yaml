@@ -5,6 +5,7 @@ metadata:
   name: {{ include "ohdsi.fullname" . }}-atlas-config
   labels:
     {{- include "ohdsi.labels" . | nindent 4 }}
+    app.kubernetes.io/component: atlas
 data:
   config-local.js: |
 {{ .Values.atlas.config.local | indent 4 }}

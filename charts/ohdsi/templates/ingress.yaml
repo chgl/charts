@@ -6,8 +6,6 @@ metadata:
   name: {{ $fullName }}-ingress
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-ingress
-    app.kubernetes.io/instance: {{ $.Release.Name }}-ingress
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

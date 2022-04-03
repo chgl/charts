@@ -6,8 +6,7 @@ metadata:
   name: {{ include "ohdsi.fullname" $ }}-achilles-cron
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
-    app.kubernetes.io/name: {{ include "ohdsi.name" $ }}-achilles-cron
-    app.kubernetes.io/instance: {{ $.Release.Name }}-achilles-cron
+    app.kubernetes.io/component: achilles-cron
   {{- with $.Values.commonAnnotations }}
   annotations:
     {{- toYaml . | nindent 4 }}

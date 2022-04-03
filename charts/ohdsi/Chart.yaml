@@ -24,9 +24,8 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: |
-        use Achilles image from the official OHDSI broadsea container registry
-    - kind: changed
-      description: |
-        documented extraEnv option for the achilles job
+        ⚠️ BREAKING CHANGE: standardized all labels to align with the Bitnami labelling conventions. See README.md for help when upgrading.
+    - kind: fixed
+      description: WebAPI auth secret is now only created if `.Values.webApi.auth.openid.enabled` is actually set to `true`
 appVersion: 2.10.1
-version: 0.13.0
+version: 0.14.0

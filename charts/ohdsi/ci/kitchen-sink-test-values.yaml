@@ -31,7 +31,14 @@ postgresql:
       - name: OHDSI_ADMIN_PASSWORD
         value: admin1
 
+cdmInitJob:
+  enabled: true
+
 webApi:
+  podDisruptionBudget:
+    enabled: true
+  db:
+    schema: ohdsi
   auth:
     basic:
       enabled: true
@@ -40,12 +47,17 @@ webApi:
       clientId: "ohdsi"
       clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa"
       oidUrl: "https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration"
+  extraEnv:
+    - name: "JAVA_OPTS"
+      value: "-XX:MinRAMPercentage=60.0 -XX:MaxRAMPercentage=80.0"
 
 ingress:
   enabled: true
 
 atlas:
   constructWebApiUrlFromIngress: false
+  podDisruptionBudget:
+    enabled: true
   config:
     local: |
       define([], function () {

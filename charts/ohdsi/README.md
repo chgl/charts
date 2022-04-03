@@ -7,10 +7,48 @@
 ```console
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.13.0
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0
 ```
 
 ## Breaking Changes
+
+### 0.14
+
+Updates all object labels to follow the Bitnami chart conventions: <https://github.com/bitnami/charts/blob/master/bitnami/common/templates/_labels.tpl>.
+
+If you have installed a previous version and attempt to update, you will most likely receive something similar to the following message:
+
+```console
+Error: UPGRADE FAILED: cannot patch "ohdsi-atlas" with kind Deployment: Deployment.apps "ohdsi-atlas" is invalid: spec.selector:
+Invalid value: v1.LabelSelector{MatchLabels:map[string]string{"app.kubernetes.io/component":"atlas", "app.kubernetes.io/instance":"ohdsi", "app.kubernetes.io/name":"ohdsi"},
+MatchExpressions:[]v1.LabelSelectorRequirement(nil)}: field is immutable [...]
+```
+
+Unfortunately, the only solution is to delete and re-install the chart.
+The following assumes that you have previously installed version `0.13.0`
+of the chart in the `ohdsi` namespace and used the included PostgreSQL sub-chart:
+
+```sh
+$ helm ls -n ohdsi
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+ohdsi   ohdsi           3               2022-04-03 22:21:13.8195241 +0200 CEST  deployed        ohdsi-0.13.0    2.10.1
+
+# if not saved anywhere else, first retrieve the password used by the PostgreSQL sub-chart
+export POSTGRES_PASSWORD=$(kubectl get secret --namespace ohdsi ohdsi-postgresql -o jsonpath="{.data.postgres-password}" | base64 --decode)
+
+# if you depend on the data used by the PostgreSQL sub-chart, please make sure
+# uninstalling the release doesn't automatically delete the PVC before running the following
+$ helm uninstall -n ohdsi ohdsi
+release "ohdsi" uninstalled
+
+$ kubectl get pvc -n ohdsi
+NAME                      STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+data-ohdsi-postgresql-0   Bound    pvc-91614c49-cfe6-421a-8990-3317dfd88030   8Gi        RWO            standard       17m
+
+# this uses the $POSTGRES_PASSWORD retrieved in the first step
+# since we didn't rename the release, this will re-use the PVC `data-ohdsi-postgresql-0` used for the previous installation
+helm upgrade --install -n ohdsi --render-subchart-notes --set postgresql.auth.postgresPassword="${POSTGRES_PASSWORD}" ohdsi charts/ohdsi/
+```
 
 ### 0.12
 
@@ -41,7 +79,7 @@ This chart deploys the OHDSI WebAPI and ATLAS app. on a [Kubernetes](http://kube
 To install the chart with the release name `ohdsi`:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.13.0
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0
 ```
 
 The command deploys the OHDSI WebAPI and ATLAS app. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -150,14 +188,14 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.13.0 --set postgresql.auth.database="ohdsi"
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0 --set postgresql.auth.database="ohdsi"
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.13.0 --values values.yaml
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0 --values values.yaml
 ```
 
 ## Initialize the CDM using a custom container
