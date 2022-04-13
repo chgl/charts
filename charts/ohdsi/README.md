@@ -7,7 +7,7 @@
 ```console
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.1
 ```
 
 ## Breaking Changes
@@ -62,7 +62,7 @@ Steps to upgrade from an existing installation:
 
 ### 0.4
 
-Starting with v0.4.0, the two seperate ingress resources for WebAPI and Atlas have been merged into a single one with the `/WebAPI/` and `/atlas/` paths
+Starting with v0.4.0, the two separate ingress resources for WebAPI and Atlas have been merged into a single one with the `/WebAPI/` and `/atlas/` paths
 mapping to the WebAPI and Atlas service respectively. Set `ingress.enabled=true` and configure `ingress.hosts[]` to enabled it.
 
 ## Introduction
@@ -79,7 +79,7 @@ This chart deploys the OHDSI WebAPI and ATLAS app. on a [Kubernetes](http://kube
 To install the chart with the release name `ohdsi`:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.1
 ```
 
 The command deploys the OHDSI WebAPI and ATLAS app. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -130,7 +130,7 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 | webApi.auth.openid.existingSecret         | name of an existing Kubernetes secret containing the OpenId client secret                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | <code>""</code>                                                                                                                                                                       |
 | webApi.auth.openid.existingSecretKey      | name of the key inside the secret whose value is the OpenId client secret                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | <code>"webapi-openid-client-secret"</code>                                                                                                                                            |
 | webApi.auth.openid.callbackApi            | URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`. If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | <code>""</code>                                                                                                                                                                       |
-| webApi.auth.openid.callbackUI             | URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`. If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           | <code>""</code>                                                                                                                                                                       |
+| webApi.auth.openid.callbackUI             | URL including the callback URL referring to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`. If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <code>""</code>                                                                                                                                                                       |
 | webApi.auth.openid.logoutUrl              | URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`. If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | <code>""</code>                                                                                                                                                                       |
 | webApi.auth.openid.redirectUrl            | OpenID redirect URL, e.g. `https://example.com/atlas/index.html#/welcome/null` If unset, a URL is constructed from `ingress.hosts[0]`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            | <code>""</code>                                                                                                                                                                       |
 | webApi.auth.basic.enabled                 | enable securing access to the WebAPI using basic security configuration. See <https://github.com/OHDSI/WebAPI/wiki/Basic-Security-Configuration> for details.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    | <code>false</code>                                                                                                                                                                    |
@@ -188,14 +188,14 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0 --set postgresql.auth.database="ohdsi"
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.1 --set postgresql.auth.database="ohdsi"
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.0 --values values.yaml
+$ helm install ohdsi chgl/ohdsi -n ohdsi --version=0.14.1 --values values.yaml
 ```
 
 ## Initialize the CDM using a custom container
@@ -322,7 +322,7 @@ RUN chown -R 10001 .
 COPY --chown=10001:10001 init_omop init_omop/
 # scripts to setup custom schema names
 COPY --chown=10001:10001 init_scripts init_scripts/
-# scripts to apply indizes
+# scripts to apply indexes
 COPY --chown=10001:10001 postinit postinit/
 # the entrypoint.sh from above
 COPY --chown=10001:10001 entrypoint.sh /entrypoint.sh
@@ -439,7 +439,7 @@ webApi:
       # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
       # If unset, a URL is constructed from `ingress.hosts[0]`
       callbackApi: ""
-      # URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # URL including the callback URL referring to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
       # If unset, a URL is constructed from `ingress.hosts[0]`
       callbackUI: ""
       # URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`.

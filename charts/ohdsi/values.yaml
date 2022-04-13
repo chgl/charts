@@ -110,7 +110,7 @@ webApi:
       # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
       # If unset, a URL is constructed from `ingress.hosts[0]`
       callbackApi: ""
-      # URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # URL including the callback URL referring to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
       # If unset, a URL is constructed from `ingress.hosts[0]`
       callbackUI: ""
       # URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`.

@@ -62,7 +62,7 @@ Steps to upgrade from an existing installation:
 
 ### 0.4
 
-Starting with v0.4.0, the two seperate ingress resources for WebAPI and Atlas have been merged into a single one with the `/WebAPI/` and `/atlas/` paths
+Starting with v0.4.0, the two separate ingress resources for WebAPI and Atlas have been merged into a single one with the `/WebAPI/` and `/atlas/` paths
 mapping to the WebAPI and Atlas service respectively. Set `ingress.enabled=true` and configure `ingress.hosts[]` to enabled it.
 
 ## Introduction
@@ -239,7 +239,7 @@ RUN chown -R 10001 .
 COPY --chown=10001:10001 init_omop init_omop/
 # scripts to setup custom schema names
 COPY --chown=10001:10001 init_scripts init_scripts/
-# scripts to apply indizes
+# scripts to apply indexes
 COPY --chown=10001:10001 postinit postinit/
 # the entrypoint.sh from above
 COPY --chown=10001:10001 entrypoint.sh /entrypoint.sh
@@ -356,7 +356,7 @@ webApi:
       # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
       # If unset, a URL is constructed from `ingress.hosts[0]`
       callbackApi: ""
-      # URL including the callback URL refering to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # URL including the callback URL referring to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
       # If unset, a URL is constructed from `ingress.hosts[0]`
       callbackUI: ""
       # URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`.
