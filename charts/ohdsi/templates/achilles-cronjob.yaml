@@ -55,11 +55,7 @@ spec:
                   valueFrom:
                     secretKeyRef:
                       name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                      {{- if $.Values.webApi.db.existingSecret }}
-                      key: {{ $.Values.webApi.db.existingSecretKey }}
-                      {{- else }}
-                      key: "postgres-password"
-                      {{- end }}
+                      key: {{ include "ohdsi.webapi.db-secret-key" $ }}
                 - name: ACHILLES_CDM_SCHEMA
                   value: {{ .schemas.cdm | quote }}
                 - name: ACHILLES_VOCAB_SCHEMA

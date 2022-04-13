@@ -26,6 +26,12 @@ postgresql:
     # picked from this secret in this case.
     # The value is evaluated as a template.
     existingSecret: ""
+    # Assign a password to the "postgres" admin user. Otherwise, remote access will be blocked for this user
+    enablePostgresUser: true
+    # Name for a custom user to create
+    username: ""
+    # Password for the custom user to create
+    password: ""
   primary:
     initdb:
       # Dictionary of initdb scripts

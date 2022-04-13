@@ -24,6 +24,7 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: |
-        fixed typos
+        Support for using the PostgreSQL sub-charts username and password feature.
+        When setting `postgresql.auth.username` and optionally `postgresql.auth.password` these values are now used by the WebAPI, Achilles and the CDM init job.
 appVersion: 2.10.1
-version: 0.14.1
+version: 0.15.0

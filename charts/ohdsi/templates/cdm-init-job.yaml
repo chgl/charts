@@ -48,11 +48,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  {{- if $.Values.webApi.db.existingSecret }}
-                  key: {{ $.Values.webApi.db.existingSecretKey }}
-                  {{- else }}
-                  key: "postgres-password"
-                  {{- end }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
             - name: PGUSER
               value: {{ include "ohdsi.database.user" $ | quote }}
             - name: PGHOST
