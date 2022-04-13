@@ -1,0 +1,5 @@
+postgresql:
+  auth:
+    enablePostgresUser: false
+    username: "ohdsi_admin"
+    password: "ohdsi_password"

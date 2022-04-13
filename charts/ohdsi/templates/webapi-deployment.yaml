@@ -49,11 +49,11 @@ spec:
             runAsGroup: 65532
           env:
             - name: PGHOST
-              value: "{{ include "ohdsi.database.host" $ }}"
+              value: {{ include "ohdsi.database.host" $ }}
             - name: PGPORT
-              value: "{{ include "ohdsi.database.port" $ }}"
+              value: {{ include "ohdsi.database.port" $ | quote }}
             - name: PGUSER
-              value: "{{ include "ohdsi.database.user" $ }}"
+              value: {{ include "ohdsi.database.user" $ }}
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -89,11 +89,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  {{- if .db.existingSecret }}
-                  key: {{ .db.existingSecretKey }}
-                  {{- else }}
-                  key: "postgres-password"
-                  {{- end }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
             - name: DATASOURCE_OHDSI_SCHEMA
               value: {{ .db.schema }}
             - name: SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA
@@ -116,11 +112,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  {{- if .db.existingSecret }}
-                  key: {{ .db.existingSecretKey }}
-                  {{- else }}
-                  key: "postgres-password"
-                  {{- end }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
             {{- if (or .auth.openid.enabled .auth.basic.enabled) }}
             - name: SECURITY_PROVIDER
               value: "AtlasRegularSecurity"
@@ -158,11 +150,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  {{- if .db.existingSecret }}
-                  key: {{ .db.existingSecretKey }}
-                  {{- else }}
-                  key: "postgres-password"
-                  {{- end }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
             - name: SECURITY_DB_DATASOURCE_AUTHENTICATIONQUERY
               value: {{ tpl .auth.basic.query $ }}
             {{- end }}
