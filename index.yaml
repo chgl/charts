@@ -1741,6 +1741,40 @@ entries:
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
+            Updated workspace and output dir in Achilles job due to latest image changes.
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-04-16T17:53:45.255130407Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.14
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 88864d01124e6af714d0b46a6f3165696714ebc974f63e39c8e8c4f97f5da85c
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.15.1/ohdsi-0.15.1.tgz
+    version: 0.15.1
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
             Support for using the PostgreSQL sub-charts username and password feature.
             When setting `postgresql.auth.username` and optionally `postgresql.auth.password` these values are now used by the WebAPI, Achilles and the CDM init job.
     apiVersion: v2
@@ -3717,4 +3751,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-04-13T19:58:54.982058977Z"
+generated: "2022-04-16T17:53:45.256382512Z"
