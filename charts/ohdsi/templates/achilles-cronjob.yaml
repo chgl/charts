@@ -42,8 +42,8 @@ spec:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
               volumeMounts:
-                - mountPath: /opt/achilles/output
-                  name: achilles-reports-volume
+                - mountPath: /opt/achilles/workspace
+                  name: achilles-workspace-volume
                 - mountPath: /tmp
                   name: r-tempdir-volume
               env:
@@ -70,7 +70,7 @@ spec:
                 {{- toYaml .extraEnv | nindent 16 }}
                 {{- end }}
           volumes:
-            - name: achilles-reports-volume
+            - name: achilles-workspace-volume
               emptyDir: {}
             - name: r-tempdir-volume
               emptyDir: {}

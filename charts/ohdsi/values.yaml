@@ -382,7 +382,8 @@ achilles:
     registry: docker.io
     repository: ohdsi/broadsea-achilles
     tag: master
-    pullPolicy: IfNotPresent
+    # the policy is set to `Always` by default until an immutable image tag for the broadsea-achilles image is available
+    pullPolicy: Always
   schemas:
     # name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.
     cdm: "synpuf_cdm"
@@ -411,9 +412,7 @@ achilles:
 
   # ContainerSecurityContext for the Achilles container
   securityContext: # +doc-gen:ignore
-    # the container can't be run on a read-only FS yet as the achilles script tries writing a log-file in the current directory:
-    # https://github.com/OHDSI/Achilles/blob/c6b7adb6330e75c2311880db2eb3dc4c12341c4f/R/Achilles.R#L336
-    readOnlyRootFilesystem: false
+    readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
     capabilities:
       drop:
