@@ -18,12 +18,12 @@ dependencies:
     version: 11.1.14
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
+appVersion: 2.10.1
+version: 0.15.2
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: |
-        Updated workspace and output dir in Achilles job due to latest image changes.
-appVersion: 2.10.1
-version: 0.15.1
+        Allow removing `cdmInitJob.ttlSecondsAfterFinished` by leaving it empty, ie. `--set=cdmInitJob.ttlSecondsAfterFinished=""`
