@@ -1741,6 +1741,40 @@ entries:
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
+            Allow removing `cdmInitJob.ttlSecondsAfterFinished` by leaving it empty, ie. `--set=cdmInitJob.ttlSecondsAfterFinished=""`
+    apiVersion: v2
+    appVersion: 2.10.1
+    created: "2022-04-17T15:42:49.756461446Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.14
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: bd8e3fcc6bc223b677bbe19fdfa9f1c55053577884b70e25d00bdf4f3ea8e62d
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.15.2/ohdsi-0.15.2.tgz
+    version: 0.15.2
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
             Updated workspace and output dir in Achilles job due to latest image changes.
     apiVersion: v2
     appVersion: 2.10.1
@@ -3751,4 +3785,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-04-16T17:53:45.256382512Z"
+generated: "2022-04-17T15:42:49.757824853Z"
