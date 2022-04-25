@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: updated image tag to latest v2.2.116
+    apiVersion: v2
+    created: "2022-04-25T20:50:28.008149101Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: c7e505e779a64bf1cfbeead85e095fc70efa23c2121ca94da113668952e5d2ca
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.22/fhir-server-0.5.22.tgz
+    version: 0.5.22
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: updated docs using latest version of chart-doc-gen
         - kind: changed
           description: updated image tag to latest v2.2.106
@@ -718,6 +741,26 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated image version to v1.4.9
+    apiVersion: v2
+    created: "2022-04-25T20:50:28.136272655Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: b0162ca4d063907a908a3d5174cf1269c079e7845377ef81cb3f888375e805ee
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-0.4.6/fhir-server-exporter-0.4.6.tgz
+    version: 0.4.6
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -1735,6 +1778,43 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
+            Updated PostgreSQL sub-chart to version `11.1.24`
+        - kind: changed
+          description: |
+            Updated WebAPI and Atlas to version `2.11.0`
+    apiVersion: v2
+    appVersion: 2.11.0
+    created: "2022-04-25T20:50:28.278189548Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.24
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 41f209458bb2cf88bb85bddff3eb8ada75bd654c51ee4af3eaad5ecdef8e3ea4
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.16.0/ohdsi-0.16.0.tgz
+    version: 0.16.0
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -3785,4 +3865,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-04-17T15:42:49.757824853Z"
+generated: "2022-04-25T20:50:28.279537751Z"
