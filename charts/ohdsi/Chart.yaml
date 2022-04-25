@@ -15,15 +15,18 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.1.14
+    version: 11.1.24
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-appVersion: 2.10.1
-version: 0.15.2
+appVersion: 2.11.0
+version: 0.16.0
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: |
-        Allow removing `cdmInitJob.ttlSecondsAfterFinished` by leaving it empty, ie. `--set=cdmInitJob.ttlSecondsAfterFinished=""`
+        Updated PostgreSQL sub-chart to version `11.1.24`
+    - kind: changed
+      description: |
+        Updated WebAPI and Atlas to version `2.11.0`
