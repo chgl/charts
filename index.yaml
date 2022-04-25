@@ -1784,6 +1784,40 @@ entries:
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
+            Actually updated WebAPI and Atlas to version `2.11.0`
+    apiVersion: v2
+    appVersion: 2.11.0
+    created: "2022-04-25T21:43:10.54351048Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.24
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: a10c79e0ec38f4fc49145e1dd9356ae2fab441e4286651ad8bc338e747f7bc09
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.16.1/ohdsi-0.16.1.tgz
+    version: 0.16.1
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
             Updated PostgreSQL sub-chart to version `11.1.24`
         - kind: changed
           description: |
@@ -3865,4 +3899,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-04-25T20:50:28.279537751Z"
+generated: "2022-04-25T21:43:10.545375591Z"
