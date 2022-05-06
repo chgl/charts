@@ -19,11 +19,11 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.16.1
+version: 0.17.0
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: changed
+    - kind: added
       description: |
-        Actually updated WebAPI and Atlas to version `2.11.0`
+        option to configure `topologySpreadConstraints`. See <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
