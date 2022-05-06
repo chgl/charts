@@ -224,6 +224,10 @@ webApi:
   # see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>
   affinity: {}
 
+  # pod topology spread configuration
+  # see: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api
+  topologySpreadConstraints: {}
+
   # extra environment variables
   extraEnv:
     []
@@ -321,6 +325,10 @@ atlas:
   # affinity for pods assignment
   # see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>
   affinity: {}
+
+  # pod topology spread configuration
+  # see: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api
+  topologySpreadConstraints: {}
 
   # extra environment variables
   extraEnv:
