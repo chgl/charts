@@ -1782,6 +1782,40 @@ entries:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
+        - kind: added
+          description: |
+            option to configure `topologySpreadConstraints`. See <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
+    apiVersion: v2
+    appVersion: 2.11.0
+    created: "2022-05-06T16:45:59.967009003Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.24
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 36328bc25e7e32903e1fdeb48706cedcda9b9fc965cbf4b7601808f6c4721174
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.0/ohdsi-0.17.0.tgz
+    version: 0.17.0
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
             Actually updated WebAPI and Atlas to version `2.11.0`
@@ -3899,4 +3933,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-04-25T21:43:10.545375591Z"
+generated: "2022-05-06T16:45:59.968673804Z"
