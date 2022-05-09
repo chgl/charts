@@ -19,11 +19,11 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.17.0
+version: 0.17.1
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: added
+    - kind: fixed
       description: |
-        option to configure `topologySpreadConstraints`. See <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
+        default `topologySpreadConstraints` set to `[]` instead of `{}`

@@ -50,14 +50,29 @@ webApi:
   extraEnv:
     - name: "JAVA_OPTS"
       value: "-XX:MinRAMPercentage=60.0 -XX:MaxRAMPercentage=80.0"
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/component: webapi
 
 ingress:
   enabled: true
 
 atlas:
   constructWebApiUrlFromIngress: false
+  replicaCount: 2
   podDisruptionBudget:
     enabled: true
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/component: atlas
   config:
     local: |
       define([], function () {
