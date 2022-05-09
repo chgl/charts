@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: updated image tag to v2.3.3
+    apiVersion: v2
+    created: "2022-05-09T22:49:01.889506374Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 32a9db4a688f6e61085eac5232fa6bb31d0b5aaf20d858d8430c06f92b9bf6e9
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.23/fhir-server-0.5.23.tgz
+    version: 0.5.23
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: updated image tag to latest v2.2.116
     apiVersion: v2
     created: "2022-04-25T20:50:28.008149101Z"
@@ -3967,4 +3990,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-05-09T22:42:02.136998451Z"
+generated: "2022-05-09T22:49:01.89155351Z"
