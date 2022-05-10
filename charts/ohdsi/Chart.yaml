@@ -26,4 +26,4 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: |
-        update helm release postgresql to v11.1.28 
+        update helm release postgresql to v11.1.28
