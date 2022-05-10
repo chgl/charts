@@ -24,6 +24,6 @@ annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: fixed
+    - kind: changed
       description: |
-        default `topologySpreadConstraints` set to `[]` instead of `{}`
+        update helm release postgresql to v11.1.28 
