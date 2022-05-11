@@ -70,6 +70,15 @@ webApi:
     tag: ""
     pullPolicy: IfNotPresent
 
+  waitForDatabaseInitContainer:
+    # image to use for the init container which waits until the database
+    # is ready to accept connections
+    image: # +doc-gen:ignore
+      registry: docker.io
+      repository: bitnami/postgresql
+      tag: 14.2.0-debian-10-r94
+      pullPolicy: IfNotPresent
+
   podDisruptionBudget:
     # create a PodDisruptionBudget resource for the OHDSI Atlas pods
     enabled: false
