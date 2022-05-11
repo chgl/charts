@@ -135,7 +135,8 @@ Create the JDBC URL from the host, port and database name.
 {{- $host := (include "ohdsi.database.host" .) -}}
 {{- $port := (include "ohdsi.database.port" .) -}}
 {{- $name := (include "ohdsi.database.name" .) -}}
-{{- $appName := printf "%s-webapi" .Release.Name -}}
+{{- $releaseName := (include "ohdsi.fullname" .) -}}
+{{- $appName := printf "%s-webapi" $releaseName -}}
 {{ printf "jdbc:postgresql://%s:%d/%s?ApplicationName=%s" $host (int $port) $name $appName}}
 {{- end -}}
 
@@ -156,7 +157,8 @@ Create the Achilles DB URL from the host, port and database name.
 {{- $host := (include "ohdsi.database.host" .) -}}
 {{- $port := (include "ohdsi.database.port" .) -}}
 {{- $name := (include "ohdsi.database.name" .) -}}
-{{- $appName := printf "%s-achilles" .Release.Name -}}
+{{- $releaseName := (include "ohdsi.fullname" .) -}}
+{{- $appName := printf "%s-achilles" $releaseName -}}
 {{ printf "postgresql://%s:%d/%s?ApplicationName=%s" $host (int $port) $name $appName}}
 {{- end -}}
 

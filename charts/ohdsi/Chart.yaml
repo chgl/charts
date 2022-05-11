@@ -19,12 +19,12 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.17.3
+version: 0.17.4
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: fixed
+    - kind: changed
       description: |
-        Use a hard-coded but configurable image for the `wait-for-db` initContainer of the webApi.
-        Fixes an issue when `postgresql.enabled` is set to `false`.
+        construct JDBC `ApplicationName` part from `ohdsi.fullname` template which includes
+        the chart name itself and respects overriding the release name.
