@@ -140,6 +140,16 @@ Create the JDBC URL from the host, port and database name.
 {{- end -}}
 
 {{/*
+Get the container image for the wait-for-db init container used by the WebAPI component
+*/}}
+{{- define "ohdsi.webapi.waitForDatabaseInitContainerImage" -}}
+{{- $registry := .Values.webApi.waitForDatabaseInitContainer.image.registry -}}
+{{- $repository := .Values.webApi.waitForDatabaseInitContainer.image.repository -}}
+{{- $tag := .Values.webApi.waitForDatabaseInitContainer.image.tag -}}
+{{ printf "%s/%s:%s" $registry $repository $tag}}
+{{- end -}}
+
+{{/*
 Create the Achilles DB URL from the host, port and database name.
 */}}
 {{- define "ohdsi.achilles.dbUrl" -}}

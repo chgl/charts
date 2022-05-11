@@ -35,8 +35,8 @@ spec:
         {{- toYaml .podSecurityContext | nindent 8 }}
       initContainers:
         - name: wait-for-db
-          image: "{{ $.Values.postgresql.image.registry }}/{{ $.Values.postgresql.image.repository }}:{{ $.Values.postgresql.image.tag }}"
-          imagePullPolicy: IfNotPresent
+          image: {{ include "ohdsi.webapi.waitForDatabaseInitContainerImage" $ }}
+          imagePullPolicy: {{ .waitForDatabaseInitContainer.image.pullPolicy }}
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
