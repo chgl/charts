@@ -1805,6 +1805,41 @@ entries:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: |
+            construct JDBC `ApplicationName` part from `ohdsi.fullname` template which includes
+            the chart name itself and respects overriding the release name.
+    apiVersion: v2
+    appVersion: 2.11.0
+    created: "2022-05-11T20:03:02.217571671Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.28
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 3c5f17620837ac3215f3e246d6c53f9356afd3bab0d238c5a56bc614688d4e89
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.4/ohdsi-0.17.4.tgz
+    version: 0.17.4
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
         - kind: fixed
           description: |
             Use a hard-coded but configurable image for the `wait-for-db` initContainer of the webApi.
@@ -4059,4 +4094,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-05-11T19:34:09.25595004Z"
+generated: "2022-05-11T20:03:02.218937389Z"
