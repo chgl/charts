@@ -15,16 +15,16 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.1.28
+    version: 11.1.29
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.17.4
+version: 0.17.5
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: changed
+    - kind: fixed
       description: |
-        construct JDBC `ApplicationName` part from `ohdsi.fullname` template which includes
-        the chart name itself and respects overriding the release name.
+        automatically roll the atlas deployment if the rules configuration has changed by adding a `checksum/config` annotation to the pod.
+        See <https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments> for the solution details.

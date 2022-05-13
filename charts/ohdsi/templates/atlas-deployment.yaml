@@ -19,10 +19,13 @@ spec:
       app.kubernetes.io/component: atlas
   template:
     metadata:
-    {{- with .podAnnotations }}
       annotations:
-        {{- toYaml . | nindent 8 }}
-    {{- end }}
+        {{- if .config.local }}
+        checksum/config: {{ include (print $.Template.BasePath "/atlas-config-cm.yaml") $ | sha256sum | quote }}
+        {{- end }}
+        {{- with .podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
       labels:
         {{- include "ohdsi.labels" $ | nindent 8 }}
         app.kubernetes.io/component: atlas
