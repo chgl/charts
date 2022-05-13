@@ -1805,6 +1805,41 @@ entries:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
+        - kind: fixed
+          description: |
+            automatically roll the atlas deployment if the rules configuration has changed by adding a `checksum/config` annotation to the pod.
+            See <https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments> for the solution details.
+    apiVersion: v2
+    appVersion: 2.11.0
+    created: "2022-05-13T18:20:23.207555091Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.1.29
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 3b76d6ae9f27a42b4ebbcebaaacdc1265762f386ba0139a7897b0ede07da4c01
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.5/ohdsi-0.17.5.tgz
+    version: 0.17.5
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: |
             construct JDBC `ApplicationName` part from `ohdsi.fullname` template which includes
@@ -4094,4 +4129,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-05-11T20:03:02.218937389Z"
+generated: "2022-05-13T18:20:23.208885716Z"
