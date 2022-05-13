@@ -27,4 +27,4 @@ annotations:
     - kind: fixed
       description: |
         automatically roll the atlas deployment if the rules configuration has changed by adding a `checksum/config` annotation to the pod.
-        See <https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments> for the soultion details.
+        See <https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments> for the solution details.
