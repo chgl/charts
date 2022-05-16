@@ -12,5 +12,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated image version to v1.4.9
-version: 0.4.6
+      description: updated image version to v1.4.10
+version: 0.4.7
