@@ -16,7 +16,7 @@ jobs:
     needs:
       - pre-commit
     runs-on: ubuntu-20.04
-    container: ghcr.io/chgl/kube-powertools:v1.16.11
+    container: ghcr.io/chgl/kube-powertools:v1.17.3
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -63,10 +63,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
-      - uses: actions/setup-python@v3
-        with:
-          python-version: 3.9
 
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.2.1
