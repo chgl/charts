@@ -15,11 +15,11 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.2.5
+    version: 11.3.0
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.17.6
+version: 0.17.7
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
