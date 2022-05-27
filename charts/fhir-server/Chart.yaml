@@ -10,10 +10,14 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.5.23
+version: 0.5.24
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated image tag to v2.3.3
+      description: update mcr.microsoft.com/healthcareapis/r4-fhir-server to v2.3.22
+    - kind: changed
+      description: |
+        algorithm for randomly generating the SA SQL container password to
+        more consistently make the chart testing runs succeed.

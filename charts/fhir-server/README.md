@@ -1,14 +1,13 @@
 # fhir-server
 
-[Microsoft FHIR Server](https://github.com/OHDSI) - Helm chart for deploying the Microsoft FHIR Server for Azure.
+[Microsoft FHIR Server](https://github.com/microsoft/fhir-server) - Helm chart for deploying the Microsoft FHIR Server for Azure.
 
 ## TL;DR;
 
-```bash
+```sh
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm search repo chgl/fhir-server --version=0.5.23
-$ helm upgrade -i fhir-server chgl/fhir-server -n fhir --create-namespace --version=0.5.23
+$ helm install fhir-server chgl/fhir-server -n fhir
 ```
 
 ## Introduction
@@ -22,10 +21,10 @@ This chart deploys the Microsoft FHIR Server for Azure. on a [Kubernetes](http:/
 
 ## Installing the Chart
 
-To install/upgrade the chart with the release name `fhir-server`:
+To install the chart with the release name `fhir-server`:
 
-```bash
-$ helm upgrade -i fhir-server chgl/fhir-server -n fhir --create-namespace --version=0.5.23
+```sh
+$ helm install fhir-server chgl/fhir-server -n fhir
 ```
 
 The command deploys the Microsoft FHIR Server for Azure. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -34,10 +33,10 @@ The command deploys the Microsoft FHIR Server for Azure. on the Kubernetes clust
 
 ## Uninstalling the Chart
 
-To uninstall the `fhir-server`:
+To uninstall/delete the `fhir-server`:
 
-```bash
-$ helm uninstall fhir-server -n fhir
+```console
+$ helm delete fhir-server -n fhir
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -111,15 +110,15 @@ The following table lists the configurable parameters of the `fhir-server` chart
 | affinity                                                       |                                                                                                                                                                                                                                           | <code>{}</code>                                             |
 | extraEnv                                                       | add additional environment variables                                                                                                                                                                                                      | <code>[]</code>                                             |
 
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
-```bash
-$ helm upgrade -i fhir-server chgl/fhir-server -n fhir --create-namespace --version=0.5.23 --set replicaCount=1
+```console
+$ helm install fhir-server chgl/fhir-server -n fhir --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
-```bash
-$ helm upgrade -i fhir-server chgl/fhir-server -n fhir --create-namespace --version=0.5.23 --values values.yaml
+```sh
+$ helm install fhir-server chgl/fhir-server -n fhir --values values.yaml
 ```
