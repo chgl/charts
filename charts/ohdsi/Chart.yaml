@@ -25,4 +25,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update helm release postgresql to v11.2.5
+      description: update helm release postgresql to v11.3.0
