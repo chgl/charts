@@ -1,7 +1,7 @@
 project:
   name: Microsoft FHIR Server
   shortName: fhir-server
-  url: https://github.com/OHDSI
+  url: https://github.com/microsoft/fhir-server
   description: Helm chart for deploying the Microsoft FHIR Server for Azure.
   app: the Microsoft FHIR Server for Azure.
 repository:
