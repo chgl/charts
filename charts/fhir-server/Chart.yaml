@@ -17,3 +17,7 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: update mcr.microsoft.com/healthcareapis/r4-fhir-server to v2.3.22
+    - kind: changed
+      description: |
+        algorithm for randomly generating the SA SQL container password to
+        more consistently make the chart testing runs succeed.
