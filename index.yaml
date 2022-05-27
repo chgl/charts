@@ -6,6 +6,33 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: update mcr.microsoft.com/healthcareapis/r4-fhir-server to v2.3.22
+        - kind: changed
+          description: |
+            algorithm for randomly generating the SA SQL container password to
+            more consistently make the chart testing runs succeed.
+    apiVersion: v2
+    created: "2022-05-27T10:06:59.163464226Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: b3b03b5e093b5f5199ded402930762b62280f7944cd9479d0a4f82587259d512
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.5.24/fhir-server-0.5.24.tgz
+    version: 0.5.24
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: updated image tag to v2.3.3
     apiVersion: v2
     created: "2022-05-09T22:49:01.889506374Z"
@@ -4215,4 +4242,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-05-27T09:45:33.514984392Z"
+generated: "2022-05-27T10:06:59.164695122Z"
