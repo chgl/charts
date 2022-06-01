@@ -1,0 +1,21 @@
+# TODO: could be extended to also update Chart.yaml's artifacthub changelog annotations
+name: Auto-generate docs for renovate PRs
+
+on:
+  push:
+    branches:
+      - "renovate/**"
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-22.04
+    container: ghcr.io/chgl/kube-powertools:v1.17.5@sha256:973ee1377d54822c25eaa8651840ba085671d7dd70c691a079850b7439e34335
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3.0.2
+        with:
+          token: ${{secrets.PAT_TO_UPDATE_DOCS}}
+      - name: Generate docs
+        run: generate-docs.sh
+      - name: Add and commit updated docs
+        uses: EndBug/add-and-commit@050a66787244b10a4874a2a5f682130263edc192 # tag=v9.0.0
