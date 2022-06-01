@@ -15,8 +15,8 @@ jobs:
   lint:
     needs:
       - pre-commit
-    runs-on: ubuntu-20.04
-    container: ghcr.io/chgl/kube-powertools:v1.17.5@sha256:973ee1377d54822c25eaa8651840ba085671d7dd70c691a079850b7439e34335
+    runs-on: ubuntu-22.04
+    container: ghcr.io/chgl/kube-powertools:v1.17.3@sha256:00a0b9f6f4bc4b9e7002fab03753a9c45a1585b402b2c71c4c74f849d5cac18a
     steps:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
