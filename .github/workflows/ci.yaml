@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
-      - uses: actions/setup-python@0ebf233433c08fb9061af664d501c3f3ff0e9e20 # renovate: tag=v3.0.0
+      - uses: actions/setup-python@98f2ad02fd48d057ee3b4d4f66525b231c3e52b6 # tag=v3.1.2
       - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe # renovate: tag=v2.0.3
 
   lint:
