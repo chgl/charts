@@ -6,20 +6,20 @@ on:
 
 jobs:
   pre-commit:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
-      - uses: pre-commit/action@v2.0.3
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
+      - uses: actions/setup-python@0ebf233433c08fb9061af664d501c3f3ff0e9e20 # renovate: tag=v3.0.0
+      - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe # renovate: tag=v2.0.3
 
   lint:
     needs:
       - pre-commit
-    runs-on: ubuntu-20.04
-    container: ghcr.io/chgl/kube-powertools:v1.17.3
+    runs-on: ubuntu-22.04
+    container: ghcr.io/chgl/kube-powertools:v1.17.5@sha256:973ee1377d54822c25eaa8651840ba085671d7dd70c691a079850b7439e34335
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
         with:
           fetch-depth: 0
 
@@ -52,7 +52,7 @@ jobs:
         run: generate-chart-changelog.sh
 
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs:
       - lint
     strategy:
@@ -60,12 +60,12 @@ jobs:
         k8s-version: [1.21.10, 1.22.7, 1.23.4, 1.24.0]
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
         with:
           fetch-depth: 0
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@v2.2.1
+        uses: helm/chart-testing-action@dae259e86a35ff09145c0805e2d7dd3f7207064a # renovate: tag=v2.2.1
 
       - name: Run chart-testing (list-changed)
         id: list-changed
@@ -76,7 +76,7 @@ jobs:
           fi
 
       - name: Create k8s Kind Cluster
-        uses: helm/kind-action@v1.2.0
+        uses: helm/kind-action@94729529f85113b88f4f819c17ce61382e6d8478 # renovate: tag=v1.2.0
         if: steps.list-changed.outputs.changed == 'true'
         with:
           version: v0.13.0
