@@ -23,6 +23,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Generate Chart.yaml changelog for renovate PRs
+        run: echo "TODO:updating chart.yaml changelog..."
+        if: ${{startsWith(github.ref_name, "renovate/")}}
+
+      - name: Add and commit updated Chart.yaml changelog
+        uses: EndBug/add-and-commit@050a66787244b10a4874a2a5f682130263edc192 # tag=v9.0.0
+        if: ${{startsWith(github.ref_name, "renovate/")}}
+        with:
+          message: "docs: automatically updated chart changelog"
+
       - name: Check if documentation is up-to-date
         run: generate-docs.sh && git diff --exit-code HEAD
 
