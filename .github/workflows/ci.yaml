@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
       - uses: actions/setup-python@98f2ad02fd48d057ee3b4d4f66525b231c3e52b6 # tag=v3.1.2
-      - uses: pre-commit/action@9b88afc9cd57fd75b655d5c71bd38146d07135fe # renovate: tag=v2.0.3
+      - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507 # tag=v3.0.0
 
   lint:
     needs:
