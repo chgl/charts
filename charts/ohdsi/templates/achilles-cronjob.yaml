@@ -19,6 +19,14 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            {{- include "ohdsi.labels" $ | nindent 12 }}
+            app.kubernetes.io/component: achilles-cron
+          {{- with .podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
         spec:
           restartPolicy: Never
           {{- with $.Values.imagePullSecrets }}

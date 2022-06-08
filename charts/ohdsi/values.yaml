@@ -459,6 +459,9 @@ achilles:
     # - name: "TEST"
     #   value: "TEST"
 
+  # annotations applied to the pod managed by this CronJob
+  podAnnotations: {}
+
 ingress:
   # whether to create an Ingress to expose the Atlas web interface
   enabled: false
