@@ -19,8 +19,9 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.17.8
+version: 0.17.9
 annotations:
+  artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
