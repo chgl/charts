@@ -10,13 +10,15 @@ jobs:
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
       - uses: actions/setup-python@d09bd5e6005b175076f227b13d9730d56e9dcfcb # tag=v4.0.0
+        with:
+          python-version: "3.x"
       - uses: pre-commit/action@646c83fcd040023954eafda54b4db0192ce70507 # tag=v3.0.0
 
   lint:
     needs:
       - pre-commit
     runs-on: ubuntu-22.04
-    container: ghcr.io/chgl/kube-powertools:v1.17.3@sha256:00a0b9f6f4bc4b9e7002fab03753a9c45a1585b402b2c71c4c74f849d5cac18a
+    container: ghcr.io/chgl/kube-powertools:v1.18.1@sha256:4d884690c940118efa465941f9f19f8ec7629cf54c0077a5e17983f6e6aaa3b2
     steps:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
