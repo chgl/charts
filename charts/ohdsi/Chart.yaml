@@ -15,11 +15,11 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.6.5
+    version: 11.6.7
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.17.9
+version: 0.17.10
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
