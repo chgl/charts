@@ -4,14 +4,16 @@ metadata:
   name: "{{ include "fhir-server-exporter.fullname" . }}-test-connection"
   labels:
     {{- include "fhir-server-exporter.labels" . | nindent 4 }}
+    app.kubernetes.io/component: test-connection
   annotations:
     "helm.sh/hook": test
 spec:
   restartPolicy: Never
   containers:
-    - name: wget
-      image: busybox:1
-      command: ['wget', '-O', '-']
+    - name: probe-metrics-endpoint
+      image: docker.io/curlimages/curl:7.83.1
+      imagePullPolicy: IfNotPresent
+      command: ["curl", "--fail-with-body"]
       args: ['http://{{ include "fhir-server-exporter.fullname" . }}:{{ .Values.service.port }}/metrics']
       securityContext:
         allowPrivilegeEscalation: false
@@ -19,7 +21,7 @@ spec:
           drop:
             - ALL
         readOnlyRootFilesystem: true
-        runAsUser: 22222
+        runAsUser: 65532
         runAsNonRoot: true
       resources:
         limits:

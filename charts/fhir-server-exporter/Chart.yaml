@@ -12,5 +12,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update helm values ghcr.io/chgl/fhir-server-exporter to v2.0.1
-version: 1.0.1
+      description: use `curl` for helm test jobs
+version: 1.0.2

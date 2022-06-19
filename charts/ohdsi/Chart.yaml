@@ -15,17 +15,19 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.6.5
+    version: 11.6.7
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 appVersion: 2.11.0
-version: 0.17.9
+version: 0.17.10
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update helm release postgresql to v11.6.5
-    - kind: added
-      description: support for adding annotations to the achilles cronjob
+      description: update helm release postgresql to v11.6.7
+    - kind: changed
+      description: removed `podAnnotations` from test jobs
+    - kind: changed
+      description: use `curl` for helm test jobs

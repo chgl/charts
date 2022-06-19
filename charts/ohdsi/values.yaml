@@ -76,7 +76,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 14.2.0-debian-10-r94
+      tag: 14.4.0-debian-11-r0
       pullPolicy: IfNotPresent
 
   podDisruptionBudget:

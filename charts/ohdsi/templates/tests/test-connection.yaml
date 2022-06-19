@@ -7,18 +7,15 @@ metadata:
     app.kubernetes.io/component: test-connection
   annotations:
     "helm.sh/hook": test-success
-    {{- with .podAnnotations }}
-      {{- toYaml . | nindent 6 }}
-    {{- end }}
 spec:
   restartPolicy: Never
   containers:
     {{- if .Values.webApi.enabled }}
     - name: test-webapi
-      image: busybox:1
-      imagePullPolicy: Always
-      command: ['wget', '-O', '-']
-      args: ['{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/WebAPI/info']
+      image: docker.io/curlimages/curl:7.83.1
+      imagePullPolicy: IfNotPresent
+      command: ["curl", "--fail-with-body"]
+      args: ["http://{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/WebAPI/info"]
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
@@ -43,10 +40,10 @@ spec:
     {{- end }}
     {{ if .Values.atlas.enabled }}
     - name: test-atlas
-      image: busybox:1
-      imagePullPolicy: Always
-      command: ['wget', '-O', '-']
-      args: ['{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/atlas/']
+      image: docker.io/curlimages/curl:7.83.1
+      imagePullPolicy: IfNotPresent
+      command: ["curl", "--fail-with-body"]
+      args: ["http://{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/atlas/"]
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
