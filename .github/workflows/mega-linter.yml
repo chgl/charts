@@ -35,7 +35,7 @@ jobs:
         id: ml
         # You can override MegaLinter flavor used to have faster performances
         # More info at https://megalinter.github.io/flavors/
-        uses: megalinter/megalinter@v5
+        uses: megalinter/megalinter@982c82d840217f38f56f0d35d50eb0845fc07822 # tag=v5
         env:
           # All available variables are described in documentation
           # https://megalinter.github.io/configuration/
@@ -46,7 +46,7 @@ jobs:
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
         if: ${{ success() }} || ${{ failure() }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@82c141cc518b40d92cc801eee768e7aafc9c2fa2 # tag=v2
         with:
           name: MegaLinter reports
           path: |
