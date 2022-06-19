@@ -26,6 +26,8 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update helm release postgresql to v11.6.5
-    - kind: added
-      description: support for adding annotations to the achilles cronjob
+      description: update helm release postgresql to v11.6.7
+    - kind: changed
+      description: removed `podAnnotations` from test jobs
+    - kind: changed
+      description: use `curl` for helm test jobs

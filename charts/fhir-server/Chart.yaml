@@ -10,10 +10,10 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.6.0
+version: 0.6.1
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update mcr.microsoft.com/mssql/server to v2022
+      description: update mcr.microsoft.com/healthcareapis/r4-fhir-server to v2.3.58
