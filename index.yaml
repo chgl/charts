@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: update mcr.microsoft.com/healthcareapis/r4-fhir-server to v2.3.58
+    apiVersion: v2
+    created: "2022-06-19T16:55:30.328854346Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: ba6f6633f03c15fd9a65cbfc17aa12501297a563c655597045d39295834792fd
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.6.1/fhir-server-0.6.1.tgz
+    version: 0.6.1
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: update mcr.microsoft.com/mssql/server to v2022
     apiVersion: v2
     created: "2022-06-09T21:41:32.100107988Z"
@@ -814,6 +837,26 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: use `curl` for helm test jobs
+    apiVersion: v2
+    created: "2022-06-19T16:55:30.436341805Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: d9ba09d2e19b8271fb1b93a8cf027ac1f38807114cb9fd419a0a187ff25b1865
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.0.2/fhir-server-exporter-1.0.2.tgz
+    version: 1.0.2
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -1911,6 +1954,44 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: update helm release postgresql to v11.6.7
+        - kind: changed
+          description: removed `podAnnotations` from test jobs
+        - kind: changed
+          description: use `curl` for helm test jobs
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.11.0
+    created: "2022-06-19T16:55:30.558009449Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.7
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: f60c226288b6e484007e3987b6771d6288e03f60987e655f5435a8f4249b071f
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.10/ohdsi-0.17.10.tgz
+    version: 0.17.10
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -4341,4 +4422,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-06-09T21:41:32.541974588Z"
+generated: "2022-06-19T16:55:30.55989498Z"
