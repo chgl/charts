@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: update mcr.microsoft.com/healthcareapis/r4-fhir-server to v3.0.9
+    apiVersion: v2
+    created: "2022-07-02T19:52:45.534821129Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 3f584a1cc6a83fc9aebac60dcb96da7af8ccea3ca6905188f74806964fd106f9
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.7.0/fhir-server-0.7.0.tgz
+    version: 0.7.0
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: update mcr.microsoft.com/healthcareapis/r4-fhir-server to v2.3.58
     apiVersion: v2
     created: "2022-06-19T16:55:30.328854346Z"
@@ -1954,6 +1977,40 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated WebAPI and ATLAS to version 2.11.1
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    appVersion: 2.11.1
+    created: "2022-07-02T19:52:45.719306117Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.12
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: aece1a5277c46121f1566f9c86c4087578236d38a4f619a3366a905ce7004e37
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.11/ohdsi-0.17.11.tgz
+    version: 0.17.11
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -4422,4 +4479,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-06-19T16:55:30.55989498Z"
+generated: "2022-07-02T19:52:45.720694914Z"
