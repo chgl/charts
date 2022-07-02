@@ -15,19 +15,18 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.6.7
+    version: 11.6.12
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-appVersion: 2.11.0
-version: 0.17.10
+# assumes that the ohdsi/webapi and ohdsi/atlas are released using the same version roughly at the same time
+# if this doesn't work out, we'll need to specify them in the values.yaml again.
+# renovate: datasource=docker depName=OHDSI/WebAPI
+appVersion: 2.11.1
+version: 0.17.11
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update helm release postgresql to v11.6.7
-    - kind: changed
-      description: removed `podAnnotations` from test jobs
-    - kind: changed
-      description: use `curl` for helm test jobs
+      description: updated WebAPI and ATLAS to version 2.11.1
