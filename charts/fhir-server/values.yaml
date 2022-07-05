@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: mcr.microsoft.com
   repository: healthcareapis/r4-fhir-server
-  tag: 3.0.9
+  tag: 3.0.9@sha256:4a178c52c0a1b560f54b1b1ba75bfa87c85388c39e8e1e6f5d10dacbca845383
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
