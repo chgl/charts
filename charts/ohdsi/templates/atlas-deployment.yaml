@@ -44,7 +44,7 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          image: "{{ .image.registry }}/{{ .image.repository }}:{{ default $.Chart.AppVersion .image.tag }}"
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: {{ .image.pullPolicy }}
           ports:
             - name: http

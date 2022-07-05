@@ -6,14 +6,9 @@
     "helpers:pinGitHubActionDigests"
   ],
   "bumpVersion": "patch",
-  "regexManagers": [
-    {
-      "fileMatch": ["^charts/ohdsi/Chart.yaml$"],
-      "matchStrings": [
-        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( extractVersion=(?<extractVersion>.*?))?( versioning=(?<versioning>.*?))?\\sappVersion:\\s(?<currentValue>.*)\\s"
-      ],
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}",
-      "extractVersionTemplate": "{{#if extractVersion}}{{{extractVersion}}}{{else}}^v(?<version>.*)${{/if}}"
+  "docker": {
+    "digest": {
+      "enabled": true
     }
-  ]
+  }
 }

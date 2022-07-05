@@ -15,18 +15,20 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.6.12
+    version: 11.6.14
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-# assumes that the ohdsi/webapi and ohdsi/atlas are released using the same version roughly at the same time
-# if this doesn't work out, we'll need to specify them in the values.yaml again.
-# renovate: datasource=docker depName=OHDSI/WebAPI
-appVersion: 2.11.1
-version: 0.17.11
+version: 0.17.12
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated WebAPI and ATLAS to version 2.11.1
+      description: updated postgresql to 11.6.14
+    - kind: changed
+      description: use immutable git commit sha tag for achilles image
+    - kind: changed
+      description: pinned all image tags to their digest
+    - kind: changed
+      description: no longer set or depend on Chart.appVersion
