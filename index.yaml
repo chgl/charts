@@ -865,6 +865,26 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: added digest to image tag
+    apiVersion: v2
+    created: "2022-07-05T21:11:18.820709925Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 607db0a447b3519afb5f22919aed3dffd3ea2aeea24542f1c18584765fe5446b
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.0.3/fhir-server-exporter-1.0.3.tgz
+    version: 1.0.3
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: use `curl` for helm test jobs
     apiVersion: v2
     created: "2022-06-19T16:55:30.436341805Z"
@@ -1977,6 +1997,45 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated postgresql to 11.6.14
+        - kind: changed
+          description: use immutable git commit sha tag for achilles image
+        - kind: changed
+          description: pinned all image tags to their digest
+        - kind: changed
+          description: no longer set or depend on Chart.appVersion
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-07-05T21:11:19.092697282Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.14
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: c12dc9e337a9ea789f25e8b14f8352ba05009d45e1151da9ccefc43dc0c14c09
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.12/ohdsi-0.17.12.tgz
+    version: 0.17.12
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -4479,4 +4538,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-07-02T19:52:45.720694914Z"
+generated: "2022-07-05T21:11:19.095155418Z"
