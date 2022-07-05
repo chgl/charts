@@ -7,10 +7,10 @@ sources:
   - https://github.com/chgl/fhir-server-exporter
 maintainers:
   - name: chgl
+version: 1.0.3
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: use `curl` for helm test jobs
-version: 1.0.2
+      description: added digest to image tag
