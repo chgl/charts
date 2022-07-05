@@ -65,7 +65,7 @@ spec:
         - name: webapi
           securityContext:
             {{- toYaml .securityContext | nindent 12 }}
-          image: "{{ .image.registry }}/{{ .image.repository }}:{{ default $.Chart.AppVersion .image.tag }}"
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: {{ .image.pullPolicy }}
           env:
             - name: SECURITY_CORS_ENABLED
