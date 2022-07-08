@@ -1,5 +1,7 @@
 # Charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/chgl)](https://artifacthub.io/packages/search?repo=chgl)
+
 > A collection of Helm charts
 
 ```sh
