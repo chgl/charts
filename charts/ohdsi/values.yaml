@@ -174,6 +174,9 @@ webApi:
     readOnlyRootFilesystem: true
     runAsNonRoot: true
     runAsUser: 101
+    runAsGroup: 101
+    seccompProfile:
+      type: RuntimeDefault
 
   # the service used to expose the WebAPI web port
   service: # +doc-gen:break
@@ -234,7 +237,7 @@ webApi:
   affinity: {}
 
   # pod topology spread configuration
-  # see: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api
+  # see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
   topologySpreadConstraints:
     []
     # - maxSkew: 1
@@ -271,7 +274,7 @@ atlas:
     # Maximum unavailable instances; ignored if there is no PodDisruptionBudget
     maxUnavailable: ""
 
-  # the base URL of the OHDSI WebAPI, e.g. https://example.com/WebAPI
+  # the base URL of the OHDSI WebAPI, e.g. `https://example.com/WebAPI`
   # if this value is not set but `ingress.enabled=true` and `constructWebApiUrlFromIngress=true`,
   # then this URL is constructed from `ingress`
   webApiUrl: ""
@@ -296,7 +299,9 @@ atlas:
     readOnlyRootFilesystem: false
     runAsNonRoot: true
     runAsUser: 101
-
+    runAsGroup: 101
+    seccompProfile:
+      type: RuntimeDefault
   # the service used to expose the Atlas web port
   service: # +doc-gen:break
     type: ClusterIP
@@ -344,7 +349,7 @@ atlas:
   affinity: {}
 
   # pod topology spread configuration
-  # see: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api
+  # see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
   topologySpreadConstraints:
     []
     # - maxSkew: 1
@@ -452,6 +457,9 @@ achilles:
         - ALL
     runAsNonRoot: true
     runAsUser: 10001
+    runAsGroup: 10001
+    seccompProfile:
+      type: RuntimeDefault
 
   # extra environment variables to pass to the Achilles container
   extraEnv:

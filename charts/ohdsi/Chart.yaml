@@ -15,20 +15,18 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.6.14
+    version: 11.6.16
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-version: 0.17.12
+version: 0.17.13
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated postgresql to 11.6.14
+      description: updated postgresql sub-chart to v11.6.16
     - kind: changed
-      description: use immutable git commit sha tag for achilles image
+      description: updated securityContext to set RuntimeDefault seccomp profile type
     - kind: changed
-      description: pinned all image tags to their digest
-    - kind: changed
-      description: no longer set or depend on Chart.appVersion
+      description: updated securityContext to set runAsGroup

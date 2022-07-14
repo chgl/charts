@@ -19,15 +19,18 @@ spec:
           drop:
             - ALL
         readOnlyRootFilesystem: true
-        runAsUser: 22222
+        runAsUser: 65534
+        runAsGroup: 65534
         runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
       resources:
         limits:
           cpu: 100m
-          memory: 128Mi
+          memory: 64Mi
         requests:
           cpu: 100m
-          memory: 128Mi
+          memory: 64Mi
       livenessProbe:
         exec:
           command: ["true"]
