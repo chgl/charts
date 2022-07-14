@@ -6,6 +6,31 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: updated securityContext to set RuntimeDefault seccomp profile type
+        - kind: changed
+          description: updated securityContext to set runAsGroup
+    apiVersion: v2
+    created: "2022-07-14T16:23:29.744446064Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 7c3fb818646264716fc9a09bbe4c3d750acbcdea90400306a5796b3d72df42dc
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.7.2/fhir-server-0.7.2.tgz
+    version: 0.7.2
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: added digest to image tag
     apiVersion: v2
     created: "2022-07-06T17:01:11.939063627Z"
@@ -883,6 +908,28 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated securityContext to set RuntimeDefault seccomp profile type
+        - kind: changed
+          description: updated securityContext to set runAsGroup
+    apiVersion: v2
+    created: "2022-07-14T16:23:30.015933955Z"
+    description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+    digest: 61bd21c64dacc83de0ab4d6643b02c96264d78f18096f1ff7deaa3660b2fc3fa
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.0.4/fhir-server-exporter-1.0.4.tgz
+    version: 1.0.4
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -2020,6 +2067,43 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: updated postgresql sub-chart to v11.6.16
+        - kind: changed
+          description: updated securityContext to set RuntimeDefault seccomp profile type
+        - kind: changed
+          description: updated securityContext to set runAsGroup
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-07-14T16:23:30.298470455Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.16
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 88c773f6019c9398c49fc7ccebb25efdcfff957967559107d865a5a9f19dbd98
+    home: https://github.com/OHDSI
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.13/ohdsi-0.17.13.tgz
+    version: 0.17.13
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -4561,4 +4645,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-07-06T17:01:11.940138942Z"
+generated: "2022-07-14T16:23:30.300150363Z"
