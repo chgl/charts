@@ -7,10 +7,12 @@ sources:
   - https://github.com/chgl/fhir-server-exporter
 maintainers:
   - name: chgl
-version: 1.0.3
+version: 1.0.4
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: added digest to image tag
+      description: updated securityContext to set RuntimeDefault seccomp profile type
+    - kind: changed
+      description: updated securityContext to set runAsGroup

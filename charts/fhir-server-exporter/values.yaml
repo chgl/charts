@@ -52,6 +52,9 @@ securityContext: # +doc-gen:ignore
   readOnlyRootFilesystem: true
   runAsNonRoot: true
   runAsUser: 65532
+  runAsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault
 
 service:
   type: ClusterIP

@@ -10,10 +10,12 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.7.1
+version: 0.7.2
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: added digest to image tag
+      description: updated securityContext to set RuntimeDefault seccomp profile type
+    - kind: changed
+      description: updated securityContext to set runAsGroup

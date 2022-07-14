@@ -10,5 +10,16 @@
     "digest": {
       "enabled": true
     }
-  }
+  },
+  "regexManagers": [
+    {
+      "description": "Update kube.powertools references in README.md",
+      "fileMatch": ["README.md$"],
+      "matchStrings": [
+        "(?<depName>ghcr.io\\/chgl\\/kube-powertools):(?<currentValue>[a-z0-9.-]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    }
+  ]
 }
