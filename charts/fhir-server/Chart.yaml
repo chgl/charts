@@ -10,12 +10,10 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.7.2
+version: 0.7.3
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated securityContext to set RuntimeDefault seccomp profile type
-    - kind: changed
-      description: updated securityContext to set runAsGroup
+      description: update helm values mcr.microsoft.com/healthcareapis/r4-fhir-server to v3.0.24
