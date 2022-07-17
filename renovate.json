@@ -13,8 +13,12 @@
   },
   "regexManagers": [
     {
-      "description": "Update kube.powertools references in README.md",
-      "fileMatch": ["README.md$"],
+      "description": "Update kube-powertools container image",
+      "fileMatch": [
+        "README.md$",
+        ".github/workflows/ci.yaml",
+        ".github/workflows/release.yaml"
+      ],
       "matchStrings": [
         "(?<depName>ghcr.io\\/chgl\\/kube-powertools):(?<currentValue>[a-z0-9.-]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
       ],
