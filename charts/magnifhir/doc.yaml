@@ -1,0 +1,19 @@
+project:
+  name: magniFHIR
+  shortName: magniFHIR
+  url: https://github.com/chgl/magniFHIR
+  description: Helm chart for deploying the magniFHIR app
+  app: the magniFHIR app.
+repository:
+  url: https://chgl.github.io/charts
+  name: chgl
+chart:
+  name: magnifhir
+  values: "-- generate from values file --"
+  valuesExample: "-- generate from values file --"
+prerequisites:
+  - "Kubernetes v1.18+"
+  - "Helm v3"
+release:
+  name: magnifhir
+  namespace: magnifhir

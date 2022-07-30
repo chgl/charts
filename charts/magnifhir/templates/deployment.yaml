@@ -1,0 +1,108 @@
+{{- with .Values }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "magnifhir.fullname" $ }}
+  labels:
+    {{- include "magnifhir.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: server
+  {{- with .deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+spec:
+  replicas: {{ .replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "magnifhir.selectorLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: server
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/appsettings-cm.yaml") $ | sha256sum | quote }}
+        {{- with .podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "magnifhir.selectorLabels" $ | nindent 8 }}
+        app.kubernetes.io/component: server
+    spec:
+      {{- with .imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+        - name: magnifhir
+          securityContext:
+            {{- toYaml .securityContext | nindent 12 }}
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: http-metrics
+              containerPort: 8081
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+          {{- with .livenessProbe }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          readinessProbe:
+            httpGet:
+              path: /livez
+              port: http
+          {{- with .readinessProbe }}
+            initialDelaySeconds: {{ .initialDelaySeconds }}
+            periodSeconds: {{ .periodSeconds }}
+            timeoutSeconds: {{ .timeoutSeconds }}
+            successThreshold: {{ .successThreshold }}
+            failureThreshold: {{ .failureThreshold }}
+          {{- end }}
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+          env:
+            - name: COMPlus_EnableDiagnostics
+              value: "0"
+          {{- if .extraEnv }}
+          {{- toYaml .extraEnv | nindent 12 }}
+          {{- end }}
+          {{- if .appsettings }}
+          volumeMounts:
+            - name: magnifhir-appsettings
+              mountPath: /app/appsettings.Production.json
+              readOnly: true
+              subPath: appsettings.Production.json
+          {{- end }}
+      {{- with .nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .appsettings }}
+      volumes:
+        - name: magnifhir-appsettings
+          configMap:
+            name: {{ include "magnifhir.fullname" $ }}-appsettings
+      {{- end }}
+{{- end }}

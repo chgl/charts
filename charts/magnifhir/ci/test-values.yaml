@@ -1,0 +1,9 @@
+appsettings: |-
+  {
+    "FhirServers": [
+      {
+        "Name": "HAPI FHIR JPA Server",
+        "BaseUrl": "http://hapi-fhir-server.svc/fhir"
+      }
+    ]
+  }

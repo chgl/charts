@@ -1,0 +1,141 @@
+serviceMonitor:
+  # if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
+  enabled: false
+  # additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`
+  additionalLabels: {}
+  # namespace: monitoring
+  # interval: 30s
+  # scrapeTimeout: 10s
+
+# number of replicas
+replicaCount: 1
+
+# the exporter image
+image: # +doc-gen:ignore
+  registry: ghcr.io
+  repository: chgl/magnifhir
+  tag: v1.1.1@sha256:48539f7b8a09cbf753a230996f2a3ebbd3df6243a13fc742d3d0a8a8e142d1cc
+  pullPolicy: IfNotPresent
+
+# image pull secrets used by all pods
+imagePullSecrets: []
+# partially override the release name
+nameOverride: ""
+# fully override the release name
+fullnameOverride: ""
+
+# annotations applied to the server deployment
+deploymentAnnotations: {}
+
+# annotations applied to the server pod
+podAnnotations: {}
+
+# security context applied at the Pod level
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext: # +doc-gen:ignore
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault
+
+# service to expose the server at
+service:
+  # type of service
+  type: ClusterIP
+  # port for the web interface
+  port: 8080
+  metrics:
+    # port for the metrics endpoint
+    port: 8081
+
+# specify resource requests and limits
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# node labels for pods assignment
+# see: <https://kubernetes.io/docs/user-guide/node-selection/>
+nodeSelector: {}
+
+# tolerations for pods assignment
+# see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>
+tolerations: []
+
+# affinity for pods assignment
+# see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>
+affinity: {}
+
+# pod topology spread configuration
+# see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
+topologySpreadConstraints:
+  []
+  # - maxSkew: 1
+  #   topologyKey: topology.kubernetes.io/zone
+  #   whenUnsatisfiable: ScheduleAnyway
+  #   labelSelector:
+  #     matchLabels:
+  #       app.kubernetes.io/component: magnifhir
+  #       app.kubernetes.io/instance: magnifhir
+
+# readiness probe
+readinessProbe: # +doc-gen:ignore
+  failureThreshold: 5
+  initialDelaySeconds: 30
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 20
+
+# readiness probe
+livenessProbe: # +doc-gen:ignore
+  failureThreshold: 5
+  initialDelaySeconds: 30
+  periodSeconds: 20
+  successThreshold: 1
+  timeoutSeconds: 20
+
+# extra env vars to set on the magnifhir container
+extraEnv: []
+# - name: "FOO"
+#   value: "BAR"
+
+# provide an `appsettings` object to configure the `FhirServers` and other settings via JSON
+# see <https://github.com/chgl/magniFHIR#configuration> for details.
+appsettings:
+  ""
+  # |
+  #  {
+  #   "FhirServers": [
+  #     {
+  #       "Name": "HAPI FHIR JPA Server",
+  #       "BaseUrl": "http://hapi-fhir-server.127.0.0.1.nip.io/fhir"
+  #     },
+  #     {
+  #       "Name": "Linux4Health FHIR Server (empty)",
+  #       "BaseUrl": "http://l4h-fhir-server.127.0.0.1.nip.io/fhir-server/api/v4",
+  #       "Auth": {
+  #         "Basic": {
+  #           "Username": "fhiruser",
+  #           "Password": "change-user-password"
+  #         }
+  #       }
+  #     }
+  #   ]
+  # }
