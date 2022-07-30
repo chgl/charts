@@ -1,19 +1,19 @@
 # fhir-server-exporter
 
-[FHIR© Server Exporter](https://github.com/chgl/fhir-server-exporter) - Helm chart for deploying the Prometheus FHIR© server exporter
+[FHIR® Server Exporter](https://github.com/chgl/fhir-server-exporter) - Helm chart for deploying the Prometheus FHIR® server exporter
 
 ## TL;DR;
 
 ```bash
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm search repo chgl/fhir-server-exporter --version=1.0.4
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.4
+$ helm search repo chgl/fhir-server-exporter --version=1.0.5
+$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.5
 ```
 
 ## Introduction
 
-This chart deploys the FHIR© server exporter. on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart deploys the FHIR® server exporter. on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
@@ -25,10 +25,10 @@ This chart deploys the FHIR© server exporter. on a [Kubernetes](http://kubernet
 To install/upgrade the chart with the release name `fhir-server-exporter`:
 
 ```bash
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.4
+$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.5
 ```
 
-The command deploys the FHIR© server exporter. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+The command deploys the FHIR® server exporter. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
@@ -72,12 +72,12 @@ The following table lists the configurable parameters of the `fhir-server-export
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.4 --set fetchIntervalSeconds=300
+$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.5 --set fetchIntervalSeconds=300
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.4 --values values.yaml
+$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.5 --values values.yaml
 ```
