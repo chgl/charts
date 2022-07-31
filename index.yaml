@@ -2115,6 +2115,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: added Ingress resource
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.x
+    created: "2022-07-31T00:28:49.767335286Z"
+    description: A Helm chart for deploying the magniFHIR app on Kubernetes.
+    digest: 1291501afb3d89ac3faa7e3fadee433e36bfc385b1a1b1697242b35761a8b853
+    home: https://github.com/chgl/magniFHIR
+    maintainers:
+    - name: chgl
+    name: magnifhir
+    sources:
+    - https://github.com/chgl/magniFHIR
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/magnifhir-1.0.1/magnifhir-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: initial release
       artifacthub.io/license: Apache-2.0
       artifacthub.io/prerelease: "false"
@@ -4712,4 +4735,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-07-31T00:10:15.145757031Z"
+generated: "2022-07-31T00:28:49.768878918Z"
