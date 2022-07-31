@@ -139,3 +139,23 @@ appsettings:
   #     }
   #   ]
   # }
+
+ingress:
+  # if enabled, create an ingress resource to access the web ui
+  enabled: false
+  # name of the IngressClass resource to use for this ingress
+  ingressClassName: ""
+  # additional annotations for the Ingress resource
+  annotations:
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: magnifhir.127.0.0.1.nip.io
+      paths:
+        - "/"
+  # TLS configuration
+  tls: []
+  #  - secretName: magnifhir-example-tls
+  #    hosts:
+  #      - magnifhir.127.0.0.1.nip.io
