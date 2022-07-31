@@ -7,13 +7,26 @@ sources:
   - https://github.com/chgl/magniFHIR
 maintainers:
   - name: chgl
-version: 1.0.1
+keywords:
+  - "fhir"
+  - "healthcare"
+  - "electronic health record"
+  - "blazor"
+kubeVersion: ">= 1.19.0"
+deprecated: false
+version: 1.0.2
 appVersion: 1.x
 annotations:
   artifacthub.io/license: Apache-2.0
-  artifacthub.io/prerelease: "false"
+  artifacthub.io/screenshots: |
+    - title: Configure multiple FHIR servers to connect to
+      url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/server-selection.png
+    - title: List all Patient resources stored in the server
+      url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-browser.png
+    - title: See a Patient's conditions, observations, and medications
+      url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-record-conditions.png
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: added Ingress resource
+      description: updated Chart.yaml metadata

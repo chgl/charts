@@ -7,17 +7,17 @@
 ```bash
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm search repo chgl/magnifhir --version=1.0.1
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.1
+$ helm search repo chgl/magnifhir --version=1.0.2
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.2
 ```
 
 ## Introduction
 
-This chart deploys the magniFHIR app. on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart deploys the magniFHIR app on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
-- Kubernetes v1.18+
+- Kubernetes v1.19+
 - Helm v3
 
 ## Installing the Chart
@@ -25,10 +25,10 @@ This chart deploys the magniFHIR app. on a [Kubernetes](http://kubernetes.io) cl
 To install/upgrade the chart with the release name `magnifhir`:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.1
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.2
 ```
 
-The command deploys the magniFHIR app. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+The command deploys the magniFHIR app on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
@@ -75,12 +75,12 @@ The following table lists the configurable parameters of the `magnifhir` chart a
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.1 --set replicaCount=1
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.2 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.1 --values values.yaml
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.2 --values values.yaml
 ```
