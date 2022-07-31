@@ -1,0 +1,22 @@
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: kube-prometheus-stack
+
+appsettings: |-
+  {
+    "FhirServers": [
+      {
+        "Name": "HAPI FHIR JPA Server",
+        "BaseUrl": "http://hapi-fhir-server.svc/fhir"
+      }
+    ]
+  }
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi

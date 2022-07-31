@@ -1,18 +1,16 @@
 apiVersion: v2
 name: fhir-server-exporter
-description: A Helm chart for deploying the FHIR© server exporter on Kubernetes.
+description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
 type: application
 home: https://github.com/chgl/fhir-server-exporter
 sources:
   - https://github.com/chgl/fhir-server-exporter
 maintainers:
   - name: chgl
-version: 1.0.4
+version: 1.0.5
 annotations:
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated securityContext to set RuntimeDefault seccomp profile type
-    - kind: changed
-      description: updated securityContext to set runAsGroup
+      description: changed (c) to ® in metadata
