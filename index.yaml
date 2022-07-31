@@ -936,6 +936,26 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: changed (c) to ® in metadata
+    apiVersion: v2
+    created: "2022-07-31T00:10:15.037699438Z"
+    description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
+    digest: 79f5078af87e9e9021867acfc3da4d027b9446828117c6d3242dfb0f0fd6c3d1
+    home: https://github.com/chgl/fhir-server-exporter
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.0.5/fhir-server-exporter-1.0.5.tgz
+    version: 1.0.5
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: updated securityContext to set RuntimeDefault seccomp profile type
         - kind: changed
           description: updated securityContext to set runAsGroup
@@ -2089,6 +2109,30 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
+  magnifhir:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: initial release
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 1.x
+    created: "2022-07-31T00:10:15.144165117Z"
+    description: A Helm chart for deploying the magniFHIR app on Kubernetes.
+    digest: d91f3bd7816a0be43e21eb480a7ccaaa0102e749a9c10f859beb4bcb9fec3980
+    home: https://github.com/chgl/magniFHIR
+    maintainers:
+    - name: chgl
+    name: magnifhir
+    sources:
+    - https://github.com/chgl/magniFHIR
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/magnifhir-1.0.0/magnifhir-1.0.0.tgz
+    version: 1.0.0
   ohdsi:
   - annotations:
       artifacthub.io/changes: |
@@ -4668,4 +4712,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-07-14T17:26:05.067758903Z"
+generated: "2022-07-31T00:10:15.145757031Z"
