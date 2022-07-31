@@ -7,10 +7,19 @@ sources:
   - https://github.com/chgl/fhir-server-exporter
 maintainers:
   - name: chgl
-version: 1.0.5
+keywords:
+  - "fhir"
+  - "metrics"
+  - "telemetry"
+  - "prometheus exporter"
+kubeVersion: ">= 1.19.0"
+version: 1.0.6
 annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/recommendations: |
+    - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: changed (c) to ® in metadata
+      description: updated Chart.yaml metadata

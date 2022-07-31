@@ -15,18 +15,16 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.6.16
+    version: 11.6.20
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-version: 0.17.13
+deprecated: false
+kubeVersion: ">= 1.19.0"
+version: 0.17.14
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated postgresql sub-chart to v11.6.16
-    - kind: changed
-      description: updated securityContext to set RuntimeDefault seccomp profile type
-    - kind: changed
-      description: updated securityContext to set runAsGroup
+      description: updated Chart.yaml metadata
