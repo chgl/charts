@@ -88,3 +88,48 @@ jobs:
 
       - name: Run chart-testing (install)
         run: ct install --config .github/ct/install.yaml
+
+  generate-renovate-chart-changelogs:
+    runs-on: ubuntu-22.04
+    # run only on PRs created by renovate
+    if: ${{ startsWith(github.head_ref, 'renovate/') }}
+    needs:
+      - test
+    container: ghcr.io/chgl/kube-powertools:v1.19.5@sha256:8e0b9a84d2dc33e106de9bac3a1efd62cacf2e49b2b0de160f41cc451986b557
+    steps:
+      - name: Add workspace as safe directory
+        run: |
+          git config --global --add safe.directory /__w/charts/charts
+
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Generate Chart.yaml changelog for renovate PRs
+        run: |
+          HEAD_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+
+          CHANGELOG_ENTRY=$(cat << EOF
+          # When using the list of objects option the valid supported kinds are
+          # added, changed, deprecated, removed, fixed and security.
+          - kind: changed
+            description: ${HEAD_COMMIT_MESSAGE}
+          EOF
+          )
+
+          export CHANGELOG_ENTRY
+
+          CHANGED_CHARTS=$(ct list-changed)
+
+          for CHART in $CHANGED_CHARTS
+          do
+              echo "$CHART: updating Chart.yaml with auto-generated changelog annotation"
+              yq -i '.annotations."artifacthub.io/changes" = strenv(CHANGELOG_ENTRY)' "$CHART/Chart.yaml"
+          done
+
+      - name: Add and commit updated Chart.yaml changelogs
+        uses: EndBug/add-and-commit@050a66787244b10a4874a2a5f682130263edc192 # tag=v9.0.0
+        with:
+          message: "docs: auto-generated Chart.yaml changelog annotations"
