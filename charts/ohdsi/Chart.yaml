@@ -27,4 +27,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: chore(deps): update helm release postgresql to v11.6.25
+      description: "chore(deps): update helm release postgresql to v11.6.25"
