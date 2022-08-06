@@ -23,8 +23,8 @@ kubeVersion: ">= 1.19.0"
 version: 0.17.15
 annotations:
   artifacthub.io/license: Apache-2.0
-  artifacthub.io/changes: |
+  artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated Chart.yaml metadata
+      description: chore(deps): update helm release postgresql to v11.6.25
