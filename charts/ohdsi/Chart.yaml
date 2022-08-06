@@ -15,16 +15,16 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.6.20
+    version: 11.6.25
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.17.14
+version: 0.17.15
 annotations:
   artifacthub.io/license: Apache-2.0
-  artifacthub.io/changes: |
+  artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated Chart.yaml metadata
+      description: chore(deps): update helm release postgresql to v11.6.25
