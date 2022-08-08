@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: update helm values mcr.microsoft.com/healthcareapis/r4-fhir-server to v3.0.40
+    apiVersion: v2
+    created: "2022-08-08T21:47:13.906290996Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 8016db2749d8e7f0e433ff872b4d1cb37c28a0d242b66900175c76d888f507d9
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.7.5/fhir-server-0.7.5.tgz
+    version: 0.7.5
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: update helm values mcr.microsoft.com/healthcareapis/r4-fhir-server to v3.0.36
     apiVersion: v2
     created: "2022-07-31T17:22:28.339340988Z"
@@ -2162,6 +2185,41 @@ entries:
     - https://github.com/chgl/charts/releases/download/hapi-fhir-jpaserver-0.1.0/hapi-fhir-jpaserver-0.1.0.tgz
     version: 0.1.0
   magnifhir:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: update helm values ghcr.io/chgl/magnifhir to v1.1.4
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/screenshots: |
+        - title: Configure multiple FHIR servers to connect to
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/server-selection.png
+        - title: List all Patient resources stored in the server
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-browser.png
+        - title: See a Patient's conditions, observations, and medications
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-record-conditions.png
+    apiVersion: v2
+    appVersion: 1.x
+    created: "2022-08-08T21:47:14.080127859Z"
+    description: A Helm chart for deploying the magniFHIR app on Kubernetes.
+    digest: 7e35d705cda00c4c7615e93702746dc800b279a9ece77088830e3576868bc256
+    home: https://github.com/chgl/magniFHIR
+    keywords:
+    - fhir
+    - healthcare
+    - electronic health record
+    - blazor
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: magnifhir
+    sources:
+    - https://github.com/chgl/magniFHIR
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/magnifhir-1.0.4/magnifhir-1.0.4.tgz
+    version: 1.0.4
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -4925,4 +4983,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-08-06T00:25:42.59654399Z"
+generated: "2022-08-08T21:47:14.08170747Z"
