@@ -14,7 +14,7 @@ keywords:
   - "blazor"
 kubeVersion: ">= 1.19.0"
 deprecated: false
-version: 1.0.3
+version: 1.0.4
 appVersion: 1.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -29,4 +29,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated magnifhir image to v1.1.3
+      description: update helm values ghcr.io/chgl/magnifhir to v1.1.4
