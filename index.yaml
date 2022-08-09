@@ -2342,6 +2342,45 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "updated achilles image to v1.7"
+        - kind: changed
+          description: set webapi user and group id to 65543
+        - kind: changed
+          description: added chart icon
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-08-09T18:22:31.700747953Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.25
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 89a8126a7f9397fb3caa25e58892f8bc309de269597e7af85a3b6360c2e746a0
+    home: https://github.com/OHDSI
+    icon: https://avatars.githubusercontent.com/u/6570077
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.16/ohdsi-0.17.16.tgz
+    version: 0.17.16
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "chore(deps): update helm release postgresql to v11.6.25"
       artifacthub.io/license: Apache-2.0
     apiVersion: v2
@@ -4983,4 +5022,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-08-08T21:47:14.08170747Z"
+generated: "2022-08-09T18:22:31.702048473Z"
