@@ -173,8 +173,8 @@ webApi:
         - ALL
     readOnlyRootFilesystem: true
     runAsNonRoot: true
-    runAsUser: 101
-    runAsGroup: 101
+    runAsUser: 65534
+    runAsGroup: 65534
     seccompProfile:
       type: RuntimeDefault
 
@@ -419,9 +419,8 @@ achilles:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/broadsea-achilles
-    tag: sha-244c395@sha256:fa9626296a9e60d9de7cab14301331ad8ba19abbc641e2d4473d921b3d48b10a
-    # the policy is set to `Always` by default until an immutable image tag for the broadsea-achilles image is available
-    pullPolicy: Always
+    tag: sha-bccd396@sha256:a881063aff6200d0d368ec30eb633381465fb8aa15e7d7138b7d48b6256a6feb
+    pullPolicy: IfNotPresent
   schemas:
     # name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.
     cdm: "synpuf_cdm"

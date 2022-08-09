@@ -18,13 +18,18 @@ dependencies:
     version: 11.6.25
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
+icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.17.15
+version: 0.17.16
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "chore(deps): update helm release postgresql to v11.6.25"
+      description: "updated achilles image to v1.7"
+    - kind: changed
+      description: set webapi user and group id to 65543
+    - kind: changed
+      description: added chart icon
