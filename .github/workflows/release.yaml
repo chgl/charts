@@ -10,7 +10,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-20.04
-    container: ghcr.io/chgl/kube-powertools:v1.19.6@sha256:bc8a69ed974635da0da73dbfd0097c40b104ccc1d4787597a7ff3eb589eb9816
+    container: ghcr.io/chgl/kube-powertools:v1.19.7@sha256:3909ffd0fc22f11c90a708a3b139d3c8c00a70647c1c3135feed886e07496da9
     steps:
       - name: Add workspace as safe directory
         run: |
