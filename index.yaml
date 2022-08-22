@@ -2,6 +2,29 @@ apiVersion: v1
 entries:
   fhir-server:
   - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "updated mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v3.0.47"
+    apiVersion: v2
+    created: "2022-08-22T22:33:31.846570947Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 343034093cef7ee42afc6dbaa8a521508847a7918aede179c05502fcaf4076cc
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.7.6/fhir-server-0.7.6.tgz
+    version: 0.7.6
+  - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
@@ -977,6 +1000,35 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: update ghcr.io/chgl/fhir-server-exporter docker tag to v2.1.0
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    created: "2022-08-22T22:33:31.9873343Z"
+    description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
+    digest: 264d9866ac05cdd95a421f07477a26f37eebe370f57014871ba170277923987e
+    home: https://github.com/chgl/fhir-server-exporter
+    keywords:
+    - fhir
+    - metrics
+    - telemetry
+    - prometheus exporter
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.0.7/fhir-server-exporter-1.0.7.tgz
+    version: 1.0.7
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -2337,6 +2389,45 @@ entries:
     - https://github.com/chgl/charts/releases/download/magnifhir-1.0.0/magnifhir-1.0.0.tgz
     version: 1.0.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "updated achilles image to v1.7"
+        - kind: changed
+          description: set webapi user and group id to 65543
+        - kind: changed
+          description: added chart icon
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-08-22T22:33:32.175972753Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.6.25
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 0be17a38be00604b86103b3e2a2ca3e6e0be4ba1ab003bdcd600a0f8d45d3949
+    home: https://github.com/OHDSI
+    icon: https://avatars.githubusercontent.com/u/6570077
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.17/ohdsi-0.17.17.tgz
+    version: 0.17.17
   - annotations:
       artifacthub.io/changes: |-
         # When using the list of objects option the valid supported kinds are
@@ -5022,4 +5113,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-08-09T18:22:31.702048473Z"
+generated: "2022-08-22T22:33:32.177714182Z"
