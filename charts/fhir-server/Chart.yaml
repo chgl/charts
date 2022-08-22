@@ -12,8 +12,8 @@ sources:
 type: application
 version: 0.7.5
 annotations:
-  artifacthub.io/changes: |
+  artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update helm values mcr.microsoft.com/healthcareapis/r4-fhir-server to v3.0.40
+      description: "chore(deps): update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v3.0.42"
