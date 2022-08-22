@@ -28,7 +28,7 @@
       "extends": ["schedule:monthly"]
     },
     {
-      "matchPackageNames": ["postgresql"],
+      "matchPackageNames": ["postgresql", "docker.io/bitnami/postgresql"],
       "extends": ["schedule:monthly"]
     }
   ]

@@ -92,7 +92,7 @@ jobs:
   generate-renovate-chart-changelogs:
     runs-on: ubuntu-22.04
     # run only on PRs created by renovate
-    if: ${{ startsWith(github.head_ref, 'renovate/') }}
+    if: ${{ success() && startsWith(github.head_ref, 'renovate/') }}
     needs:
       - test
     container: ghcr.io/chgl/kube-powertools:v1.19.9@sha256:fc4b08f878d9aab5bcbffd45e7e7bcfcb6cb9f63e71c4cfe7e3d7a4d6a20bb2e

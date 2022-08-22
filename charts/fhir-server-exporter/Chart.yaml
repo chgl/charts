@@ -13,7 +13,7 @@ keywords:
   - "telemetry"
   - "prometheus exporter"
 kubeVersion: ">= 1.19.0"
-version: 1.0.6
+version: 1.0.7
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/recommendations: |
@@ -22,4 +22,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated Chart.yaml metadata
+      description: update ghcr.io/chgl/fhir-server-exporter docker tag to v2.1.0

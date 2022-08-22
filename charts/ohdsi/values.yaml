@@ -76,7 +76,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 14.4.0-debian-11-r4@sha256:58744ac056007ba278d80090d41722e30c49b20d85c56653f337e7e0a7b2f312
+      tag: 14.5.0@sha256:4355265e33e9c2a786aa145884d4b36ffd4c41c516b35d60df0b7495141ec738
       pullPolicy: IfNotPresent
 
   podDisruptionBudget:
@@ -88,7 +88,7 @@ webApi:
     maxUnavailable: ""
 
   db:
-    # database hostname
+    # database hostname of an external database. Only used if `postgresql.enabled` is set to `false`.
     host: "host.example.com"
     # port used to connect to the postgres DB
     port: 5432
