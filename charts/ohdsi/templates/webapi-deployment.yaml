@@ -37,16 +37,10 @@ spec:
         - name: wait-for-db
           image: {{ include "ohdsi.webapi.waitForDatabaseInitContainerImage" $ }}
           imagePullPolicy: {{ .waitForDatabaseInitContainer.image.pullPolicy }}
+          {{- with $.Values.restrictedContainerSecurityContext }}
           securityContext:
-            allowPrivilegeEscalation: false
-            readOnlyRootFilesystem: true
-            privileged: false
-            capabilities:
-              drop:
-                - ALL
-            runAsNonRoot: true
-            runAsUser: 65532
-            runAsGroup: 65532
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           env:
             - name: PGHOST
               value: {{ include "ohdsi.database.host" $ }}
