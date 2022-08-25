@@ -2394,6 +2394,46 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: updated postgresql subchart to 11.8.1
+        - kind: changed
+          description: |
+            set `securityContext.seccompProfile.type=RuntimeDefault` for included
+            PostgreSQL as well as all `initContainer` and Helm test pods to comply
+            with the "restricted" Pod Security Standard: <https://kubernetes.io/docs/concepts/security/pod-security-standards/>
+      artifacthub.io/license: Apache-2.0
+    apiVersion: v2
+    created: "2022-08-25T00:03:05.647800699Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.8.1
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: d8763e99d2954772540be3afc892913396f81a5c07ca6c4d4cb2ed6842686c1c
+    home: https://github.com/OHDSI
+    icon: https://avatars.githubusercontent.com/u/6570077
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.17.18/ohdsi-0.17.18.tgz
+    version: 0.17.18
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "updated achilles image to v1.7"
         - kind: changed
           description: set webapi user and group id to 65543
@@ -5113,4 +5153,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
-generated: "2022-08-22T22:33:32.177714182Z"
+generated: "2022-08-25T00:03:05.651202049Z"
