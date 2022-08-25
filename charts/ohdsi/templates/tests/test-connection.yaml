@@ -16,17 +16,10 @@ spec:
       imagePullPolicy: IfNotPresent
       command: ["curl", "--fail-with-body"]
       args: ["http://{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/WebAPI/info"]
+      {{- with $.Values.restrictedContainerSecurityContext }}
       securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        seccompProfile:
-          type: RuntimeDefault
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       resources:
         limits:
           cpu: 100m
@@ -47,17 +40,10 @@ spec:
       imagePullPolicy: IfNotPresent
       command: ["curl", "--fail-with-body"]
       args: ["http://{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/atlas/"]
+      {{- with $.Values.restrictedContainerSecurityContext }}
       securityContext:
-        allowPrivilegeEscalation: false
-        capabilities:
-          drop:
-            - ALL
-        readOnlyRootFilesystem: true
-        runAsNonRoot: true
-        runAsUser: 65534
-        runAsGroup: 65534
-        seccompProfile:
-          type: RuntimeDefault
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       resources:
         limits:
           cpu: 100m
