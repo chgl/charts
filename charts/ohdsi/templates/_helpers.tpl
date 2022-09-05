@@ -185,3 +185,16 @@ Return the appropriate apiVersion for CronJob
 {{- print "batch/v1beta1" -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the URL to access the WebAPI service at. This is the cluster-internal service URL,
+not the one used by ATLAS which needs to be accessible from the user's browser.
+*/}}
+{{- define "ohdsi.webApi.url" -}}
+{{- if .Values.atlas.webApiUrl }}
+    {{ .Values.atlas.webApiUrl }}
+{{- else }}
+    {{- $webApiServiceName := printf "%s-webapi" (include "ohdsi.fullname" .) -}}
+    {{ printf "http://%s:%d/WebAPI" $webApiServiceName (int .Values.webApi.service.port) }}
+{{- end }}
+{{- end -}}

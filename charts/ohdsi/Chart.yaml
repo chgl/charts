@@ -21,16 +21,19 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.17.18
+version: 0.18.0
 annotations:
   artifacthub.io/license: Apache-2.0
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/operator: "false"
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/recommendations: |
+    - https://artifacthub.io/packages/helm/bitnami/postgresql
+  artifacthub.io/links: |
+    - name: OHDSI homepage
+      url: https://www.ohdsi.org/
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated postgresql subchart to 11.8.1
-    - kind: changed
-      description: |
-        set `securityContext.seccompProfile.type=RuntimeDefault` for included
-        PostgreSQL as well as all `initContainer` and Helm test pods to comply
-        with the "restricted" Pod Security Standard: <https://kubernetes.io/docs/concepts/security/pod-security-standards/>
+      description: added optional job to load cohort definitions when installing the chart

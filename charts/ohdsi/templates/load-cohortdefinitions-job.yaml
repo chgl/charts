@@ -1,0 +1,83 @@
+{{- with .Values.loadCohortDefinitionsJob }}
+{{- if .enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-load-cohortdefinitions
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: load-cohortdefinitions
+  {{- with .annotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with $.Values.commonAnnotations }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  backoffLimit: {{ .backoffLimit }}
+  {{- with .ttlSecondsAfterFinished }}
+  ttlSecondsAfterFinished: {{ . }}
+  {{- end }}
+  template:
+    metadata:
+    {{- with .podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      labels:
+        {{- include "ohdsi.labels" $ | nindent 8 }}
+        app.kubernetes.io/component: load-cohortdefinitions
+    spec:
+      restartPolicy: {{ .restartPolicy }}
+      {{- with $.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+        - name: wait-for-webapi
+          image: docker.io/curlimages/curl:7.85.0@sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
+          {{- with $.Values.restrictedContainerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until [ "$(curl -s -o /dev/null -L -w '%{http_code}' "${WEBAPI_URL}/info")" == "200" ]; do
+                echo "$(date): Waiting for WebAPI @ ${WEBAPI_URL}/info to be up";
+                sleep 30;
+              done;
+          env:
+            - name: WEBAPI_URL
+              value: {{ include "ohdsi.webApi.url" $ }}
+      containers:
+        - name: load-cohortdefinitions
+          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
+          imagePullPolicy: {{ .image.pullPolicy }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              for cohort_definition_file in /cohorts/*.json; do
+                echo "Sending cohort definition ${cohort_definition_file} to WebAPI @ ${WEBAPI_URL}/cohortdefinition"
+                curl --fail-with-body --request POST --header 'Content-Type: application/json' --data "@${cohort_definition_file}" "${WEBAPI_URL}/cohortdefinition"
+              done;
+          {{- with $.Values.restrictedContainerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env:
+            - name: WEBAPI_URL
+              value: {{ include "ohdsi.webApi.url" $ }}
+          volumeMounts:
+            - name: cohort-definitions
+              mountPath: /cohorts
+      volumes:
+        - name: cohort-definitions
+          configMap:
+            name: {{ include "ohdsi.fullname" $ }}-load-cohortdefinitions
+{{- end }}
+{{- end }}

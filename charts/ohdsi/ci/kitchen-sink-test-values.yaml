@@ -112,3 +112,141 @@ atlas:
 
         return configLocal;
       });
+
+loadCohortDefinitionsJob:
+  enabled: true
+  cohortDefinitions:
+    - |
+      {
+        "name": "A sample cohort",
+        "description": "[acronym=SAMPLE-F] Sample Cohort containing only female patients older than 18 years.",
+        "expressionType": "SIMPLE_EXPRESSION",
+        "expression": {
+          "ConceptSets": [],
+          "PrimaryCriteria": {
+            "CriteriaList": [
+              {
+                "ObservationPeriod": {
+                  "First": true
+                }
+              }
+            ],
+            "ObservationWindow": {
+              "PriorDays": 0,
+              "PostDays": 0
+            },
+            "PrimaryCriteriaLimit": {
+              "Type": "First"
+            }
+          },
+          "QualifiedLimit": {
+            "Type": "First"
+          },
+          "ExpressionLimit": {
+            "Type": "First"
+          },
+          "InclusionRules": [
+            {
+              "name": "Older than 18",
+              "expression": {
+                "Type": "ALL",
+                "CriteriaList": [],
+                "DemographicCriteriaList": [
+                  {
+                    "Age": {
+                      "Value": 18,
+                      "Op": "gt"
+                    },
+                    "Gender": [
+                      {
+                        "CONCEPT_CODE": "F",
+                        "CONCEPT_ID": 8532,
+                        "CONCEPT_NAME": "FEMALE",
+                        "DOMAIN_ID": "Gender",
+                        "INVALID_REASON_CAPTION": "Unknown",
+                        "STANDARD_CONCEPT_CAPTION": "Unknown",
+                        "VOCABULARY_ID": "Gender"
+                      }
+                    ]
+                  }
+                ],
+                "Groups": []
+              }
+            }
+          ],
+          "CensoringCriteria": [],
+          "CollapseSettings": {
+            "CollapseType": "ERA",
+            "EraPad": 0
+          },
+          "CensorWindow": {},
+          "cdmVersionRange": ">=5.0.0"
+        }
+      }
+    - |
+      {
+        "name": "A second sample cohort",
+        "description": "[acronym=SAMPLE-M] Sample Cohort containing only male patients younger than 18 years.",
+        "expressionType": "SIMPLE_EXPRESSION",
+        "expression": {
+          "ConceptSets": [],
+          "PrimaryCriteria": {
+            "CriteriaList": [
+              {
+                "ObservationPeriod": {
+                  "First": true
+                }
+              }
+            ],
+            "ObservationWindow": {
+              "PriorDays": 0,
+              "PostDays": 0
+            },
+            "PrimaryCriteriaLimit": {
+              "Type": "First"
+            }
+          },
+          "QualifiedLimit": {
+            "Type": "First"
+          },
+          "ExpressionLimit": {
+            "Type": "First"
+          },
+          "InclusionRules": [
+            {
+              "name": "Younger than 18",
+              "expression": {
+                "Type": "ALL",
+                "CriteriaList": [],
+                "DemographicCriteriaList": [
+                  {
+                    "Age": {
+                      "Value": 18,
+                      "Op": "lt"
+                    },
+                    "Gender": [
+                      {
+                        "CONCEPT_CODE": "M",
+                        "CONCEPT_ID": 8507,
+                        "CONCEPT_NAME": "MALE",
+                        "DOMAIN_ID": "Gender",
+                        "INVALID_REASON_CAPTION": "Unknown",
+                        "STANDARD_CONCEPT_CAPTION": "Unknown",
+                        "VOCABULARY_ID": "Gender"
+                      }
+                    ]
+                  }
+                ],
+                "Groups": []
+              }
+            }
+          ],
+          "CensoringCriteria": [],
+          "CollapseSettings": {
+            "CollapseType": "ERA",
+            "EraPad": 0
+          },
+          "CensorWindow": {},
+          "cdmVersionRange": ">=5.0.0"
+        }
+      }
