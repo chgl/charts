@@ -1,0 +1,14 @@
+{{- if .Values.loadCohortDefinitionsJob.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ohdsi.fullname" . }}-load-cohortdefinitions
+  labels:
+    {{- include "ohdsi.labels" . | nindent 4 }}
+    app.kubernetes.io/component: load-cohortdefinitions
+data:
+  {{- range $i, $val := .Values.loadCohortDefinitionsJob.cohortDefinitions }}
+  cohort-{{ $i }}.json: |
+{{ $val | indent 4}}
+  {{ end -}}
+{{- end }}

@@ -28,7 +28,7 @@ spec:
         {{- include "ohdsi.labels" $ | nindent 8 }}
         app.kubernetes.io/component: cdm-init
     spec:
-      restartPolicy: Never
+      restartPolicy: {{ .restartPolicy }}
       {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -60,11 +60,7 @@ spec:
             - name: PGDATABASE
               value: {{ include "ohdsi.database.name" $ | quote }}
             - name: WEBAPI_URL
-            {{- if $.Values.atlas.webApiUrl }}
-              value: {{ $.Values.atlas.webApiUrl }}
-            {{- else }}
-              value: "http://{{ include "ohdsi.fullname" $ }}-webapi:{{ $.Values.webApi.service.port }}/WebAPI"
-            {{- end }}
+              value: {{ include "ohdsi.webApi.url" $ }}
             {{- if .extraEnv }}
             {{- toYaml .extraEnv | nindent 12 }}
             {{- end }}

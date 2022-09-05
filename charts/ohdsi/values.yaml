@@ -404,6 +404,9 @@ cdmInitJob:
   # the number of retries before considering the Job as failed
   backoffLimit: 6
 
+  # restartPolicy of the job <https://kubernetes.io/docs/concepts/workloads/controllers/job/#handling-pod-and-container-failures>
+  restartPolicy: Never
+
   # clean up Job and dependent objects after job completion <https://kubernetes.io/docs/concepts/workloads/controllers/job/#ttl-mechanism-for-finished-jobs>
   ttlSecondsAfterFinished: 120
 
@@ -502,3 +505,44 @@ ingress:
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
+
+# custom job to load cohort definitions into the WebAPI
+loadCohortDefinitionsJob:
+  # whether to enable a job for loading custom cohort definitions in JSON format <br>
+  # WARNING: the job doesn't load the cohort definitions idempotently, so it is likely for definitions to appear multiple times
+  # if the job is run multiple times
+  enabled: false
+
+  # the container image used to create the CDM initialization job
+  image: # +doc-gen:break
+    registry: docker.io
+    repository: curlimages/curl
+    tag: 7.85.0@sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
+    pullPolicy: IfNotPresent
+
+  # restartPolicy of the job <https://kubernetes.io/docs/concepts/workloads/controllers/job/#handling-pod-and-container-failures>
+  restartPolicy: Never
+
+  # the number of retries before considering the Job as failed
+  backoffLimit: 1
+
+  # clean up Job and dependent objects after job completion <https://kubernetes.io/docs/concepts/workloads/controllers/job/#ttl-mechanism-for-finished-jobs>
+  ttlSecondsAfterFinished: 120
+
+  # annotations set on the job's pod
+  podAnnotations: {}
+
+  # PodSecurityContext for the job's pod
+  podSecurityContext:
+    {}
+    # fsGroup: 2000
+
+  # extra environment variables to set
+  extraEnv:
+    []
+    # - name: "TEST"
+    #   value: "TEST"
+
+  # the cohort defintions to send to the WebAPI as a list of JSON objects.
+  # See the [ci/kitchen-sink-test-values.yaml](ci/kitchen-sink-test-values.yaml) file for an example of the expected format.
+  cohortDefinitions: []
