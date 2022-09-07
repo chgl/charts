@@ -98,7 +98,7 @@ jobs:
     if: ${{ success() && startsWith(github.head_ref, 'renovate/') }}
     needs:
       - test
-    container: ghcr.io/chgl/kube-powertools:v1.20.1@sha256:74d1fe1f3b14ddb3b7742a4d89c290829c906763e9313df47911ee922a40919e
+    container: ghcr.io/chgl/kube-powertools:v1.21.0@sha256:43587e50e87b804db7a45b2ff8d1a1e8cf9aa35413dcf238afeb1008d159e626
     steps:
       - name: Add workspace as safe directory
         run: |
