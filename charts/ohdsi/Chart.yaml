@@ -21,19 +21,24 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.18.0
+version: 0.18.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
   artifacthub.io/operator: "false"
   artifacthub.io/prerelease: "false"
   artifacthub.io/recommendations: |
-    - https://artifacthub.io/packages/helm/bitnami/postgresql
+    - url: https://artifacthub.io/packages/helm/bitnami/postgresql
   artifacthub.io/links: |
-    - name: OHDSI homepage
+    - name: OHDSI Homepage
       url: https://www.ohdsi.org/
+  artifacthub.io/screenshots: |
+    - title: Defining a cohort in OHDSI ATLAS
+      url: https://www.ohdsi.org/wp-content/uploads/2020/06/ATLAS.png
+    - title: OHDSI ACHILLES Dashboard
+      url: https://www.ohdsi.org/wp-content/uploads/2020/06/Screen-Shot-2020-06-01-at-3.31.29-PM.png
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: added optional job to load cohort definitions when installing the chart
+      description: fixed chart.yaml `artifacthub.io/recommendations` annotation
