@@ -10,7 +10,7 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.7.7
+version: 0.7.8
 annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
