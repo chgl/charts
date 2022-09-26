@@ -7,7 +7,7 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-22.04
-    container: ghcr.io/chgl/kube-powertools:v1.21.1@sha256:b268e5690755019da1b8aa04e3f08e83f13420cb4d19ccb10856abd34a884697
+    container: ghcr.io/chgl/kube-powertools:v1.21.2@sha256:12943263d217a15a8c218c848755764ce49eddea577385a15ba84ca3fde930d8
     steps:
       - name: Add workspace as safe directory
         run: |
@@ -98,7 +98,7 @@ jobs:
     if: ${{ success() && startsWith(github.head_ref, 'renovate/') }}
     needs:
       - test
-    container: ghcr.io/chgl/kube-powertools:v1.21.1@sha256:b268e5690755019da1b8aa04e3f08e83f13420cb4d19ccb10856abd34a884697
+    container: ghcr.io/chgl/kube-powertools:v1.21.2@sha256:12943263d217a15a8c218c848755764ce49eddea577385a15ba84ca3fde930d8
     steps:
       - name: Add workspace as safe directory
         run: |
