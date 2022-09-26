@@ -1,0 +1,21 @@
+postgresql:
+  auth:
+    postgresPassword: "postgres"
+    database: "vfps"
+
+replicaCount: 3
+
+serviceMonitor:
+  enabled: false
+
+resources:
+  limits:
+    memory: 256Mi
+  requests:
+    memory: 256Mi
+
+database:
+  additionalConnectionStringParameters: "Timeout=60;Max Auto Prepare=5;Maximum Pool Size=50;"
+
+ingress:
+  enabled: true

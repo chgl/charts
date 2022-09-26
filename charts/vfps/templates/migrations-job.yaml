@@ -1,0 +1,67 @@
+{{- if .Values.migrationsJob.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "vfps.migrationsJob.resourceName" . }}
+  labels:
+    {{- include "vfps.labels" . | nindent 4 }}
+    app.kubernetes.io/component: migrations
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        {{- include "vfps.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: migrations
+    spec:
+      restartPolicy: {{ .Values.migrationsJob.restartPolicy }}
+      initContainers:
+        - name: wait-for-db
+          image: {{ include "vfps.waitForDatabaseInitContainerImage" . }}
+          imagePullPolicy: {{ .Values.waitForDatabaseInitContainer.image.pullPolicy }}
+          {{- with .Values.restrictedContainerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env:
+            - name: PGHOST
+              value: {{ include "vfps.database.host" $ }}
+            - name: PGPORT
+              value: {{ include "vfps.database.port" $ | quote }}
+            - name: PGUSER
+              value: {{ include "vfps.database.user" $ }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until pg_isready; do
+                echo "Waiting for DB ${PGUSER}@${PGHOST}:${PGPORT} to be up";
+                sleep 15;
+              done;
+      containers:
+        - name: {{ include "vfps.fullname" . }}-migrations
+          image: "{{ .Values.migrationsJob.image.registry }}/{{ .Values.migrationsJob.image.repository }}:{{ .Values.migrationsJob.image.tag }}"
+          imagePullPolicy: {{ .Values.migrationsJob.image.pullPolicy }}
+          args: ["--verbose"]
+          {{- with .Values.restrictedContainerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env:
+            - name: COMPlus_EnableDiagnostics
+              value: "0"
+            - name: ConnectionStrings__PostgreSQL
+              value: {{ include "vfps.database.connection-string" . }}
+            - name: PGUSER
+              value: {{ include "vfps.database.user" . }}
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "vfps.database.db-secret-name" . }}
+                  key: {{ include "vfps.database.db-secret-key" . }}
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp-volume
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}
+{{- end }}
