@@ -16,4 +16,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "updated mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to 3.0.86"
+      description: "bumped Chart.yaml"
