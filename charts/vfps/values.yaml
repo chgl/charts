@@ -1,0 +1,193 @@
+# -- number of replicas
+replicaCount: 1
+
+# @ignored
+image:
+  registry: ghcr.io
+  repository: chgl/vfps
+  tag: v0.2.1@sha256:c50e98568af43be3229e9b1e6689275967499336df2eafbe94ab95fe91f73796
+  pullPolicy: IfNotPresent
+
+# -- image pull secrets used by the main deployment container
+imagePullSecrets: []
+
+# -- override the release name
+nameOverride: ""
+
+# -- override the full release name
+fullnameOverride: ""
+
+serviceAccount:
+  # -- Specifies whether a service account should be created.
+  create: false
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+# -- the pod security context
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+# @ignored
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: vfps.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+podDisruptionBudget:
+  # -- create a PodDisruptionBudget resource
+  enabled: false
+  # -- Minimum available instances; ignored if there is no PodDisruptionBudget
+  minAvailable: 1
+  # -- Maximum unavailable instances; ignored if there is no PodDisruptionBudget
+  maxUnavailable: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# -- pod topology spread configuration
+# see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
+topologySpreadConstraints:
+  []
+  # - maxSkew: 1
+  #   topologyKey: topology.kubernetes.io/zone
+  #   whenUnsatisfiable: ScheduleAnyway
+  #   labelSelector:
+  #     matchLabels:
+  #       app.kubernetes.io/instance: vfps
+
+# @ignored
+waitForDatabaseInitContainer:
+  image:
+    registry: docker.io
+    repository: bitnami/postgresql
+    tag: 14.5.0@sha256:4355265e33e9c2a786aa145884d4b36ffd4c41c516b35d60df0b7495141ec738
+    pullPolicy: IfNotPresent
+
+# -- container security context applied to init containers and the Helm test pods
+# @ignored
+restrictedContainerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+  seccompProfile:
+    type: RuntimeDefault
+
+database:
+  # -- database hostname of an external database. Only used if `postgresql.enabled` is set to `false`.
+  host: "host.example.com"
+  # -- port used to connect to the postgres DB
+  port: 5432
+  # -- name of the database inside. If postgresql.enabled=true, then postgresql.postgresqlDatabase is used
+  database: "vfps"
+  # -- username used to connect to the DB. Note that this name is currently used even if postgresql.enabled=true
+  username: "postgres"
+  # -- the database password. Only used if postgresql.enabled=false, otherwise the secret created by the postgresql chart is used
+  password: "postgres"
+  # -- name of an existing secret containing the password to the DB.
+  existingSecret: ""
+  # -- name of the key in `webApi.db.existingSecret` to use as the password to the DB.
+  existingSecretKey: "postgresql-postgres-password"
+  # -- schema used for the tables.
+  schema: "vfps"
+  # -- additional parameters appended to the connection string
+  additionalConnectionStringParameters: "Timeout=60;Max Auto Prepare=5;"
+
+# @ignored
+postgresql:
+  enabled: true
+  auth:
+    database: vfps
+  primary:
+    containerSecurityContext:
+      runAsNonRoot: true
+      seccompProfile:
+        type: RuntimeDefault
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+
+migrationsJob:
+  # @ignored
+  image:
+    registry: ghcr.io
+    repository: chgl/vfps-migrations
+    tag: v0.2.1@sha256:4967f34aec6103c3d194f0c9e0f3bdf16506625a4039bce9d015a54e3e48dbc1
+    pullPolicy: IfNotPresent
+  # -- whether to enable the database migration job. If enabled, a `ServiceAccount`, `Role`, and `RoleBinding` resources are created
+  # which are used by an init container of the main application to wait for the migrations to complete.
+  enabled: true
+  # -- restart policy for the migration job
+  restartPolicy: Never
+
+serviceMonitor:
+  # -- if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
+  enabled: false
+  # -- additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`
+  additionalLabels: {}
+  # namespace: monitoring
+  # interval: 30s
+  # scrapeTimeout: 10s

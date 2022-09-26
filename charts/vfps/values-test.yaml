@@ -1,0 +1,23 @@
+postgresql:
+  auth:
+    postgresPassword: "postgres"
+    database: "vfps"
+
+podDisruptionBudget:
+  enabled: true
+
+replicaCount: 3
+
+serviceMonitor:
+  enabled: false
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 128Mi
+  requests:
+    cpu: 1000m
+    memory: 128Mi
+
+ingress:
+  enabled: true
