@@ -5295,6 +5295,44 @@ entries:
       artifacthub.io/changes: |-
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: expose a dedicated port for gRPC which only supports HTTP2
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "true"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+    apiVersion: v2
+    created: "2022-09-27T22:11:45.640060582Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.9.1
+    description: A Helm chart for deploying VFPS, a very fast and resource-efficient
+      pseudonym service.
+    digest: 7f920605432730f51af3e36684ab4de91bcbfc5184f2d0b3175734032b313ccb
+    home: https://github.com/chgl/vfps
+    keywords:
+    - grpc
+    - pseudonymization
+    - research
+    - data protection
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: vfps
+    sources:
+    - https://github.com/chgl/vfps
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/vfps-0.2.0/vfps-0.2.0.tgz
+    version: 0.2.0
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
         - kind: added
           description: first version of the chart
       artifacthub.io/containsSecurityUpdates: "false"
@@ -5329,4 +5367,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.1.0/vfps-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-26T18:23:58.801399432Z"
+generated: "2022-09-27T22:11:45.642420599Z"
