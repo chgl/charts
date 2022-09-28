@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   registry: ghcr.io
   repository: chgl/vfps
-  tag: v0.2.2@sha256:c081283d96d8b632517339be56ef858ebc40800d4da5dd24d9c3469231f0a69e
+  tag: v0.3.0@sha256:e7c85fe5da96737d2c44946bfce0690fa2ead81f54bbfa062fdca5d989fe8a08
   pullPolicy: IfNotPresent
 
 # -- image pull secrets used by the main deployment container
@@ -164,6 +164,16 @@ database:
   # -- additional parameters appended to the connection string
   additionalConnectionStringParameters: "Timeout=60;Max Auto Prepare=5;"
 
+# -- extra environment variables to set on the vfps api container
+extraEnv:
+  []
+  # - name: "Pseudonymization__Caching__Namespaces__IsEnabled"
+  #   value: "true"
+  # - name: "Pseudonymization__Caching__Namespaces__SizeLimit"
+  #   value: "64"
+  # - name: "Pseudonymization__Caching__Namespaces__AbsoluteExpiration"
+  #   value: "0.01:23:00"
+
 # @ignored
 postgresql:
   enabled: true
@@ -184,13 +194,15 @@ migrationsJob:
   image:
     registry: ghcr.io
     repository: chgl/vfps-migrations
-    tag: v0.2.2@sha256:be741f78a9628111e6766a1668e3b17c6369f130c03c3599137c7ea8209d2d52
+    tag: v0.3.0@sha256:9b3cc7282f01138be9eddb5f993d65901dbdbee8df944c8abbd68957e94e6f86
     pullPolicy: IfNotPresent
   # -- whether to enable the database migration job. If enabled, a `ServiceAccount`, `Role`, and `RoleBinding` resources are created
   # which are used by an init container of the main application to wait for the migrations to complete.
   enabled: true
   # -- restart policy for the migration job
   restartPolicy: Never
+  # -- extra environment variables to set on the migrations job container
+  extraEnv: []
 
 serviceMonitor:
   # -- if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring

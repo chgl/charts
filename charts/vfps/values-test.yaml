@@ -21,3 +21,11 @@ resources:
 
 ingress:
   enabled: true
+
+extraEnv:
+  - name: "Pseudonymization__Caching__Namespaces__IsEnabled"
+    value: "true"
+  - name: "Pseudonymization__Caching__Namespaces__SizeLimit"
+    value: "64"
+  - name: "Pseudonymization__Caching__Namespaces__AbsoluteExpiration"
+    value: "0.01:23:00"

@@ -58,6 +58,9 @@ spec:
                 secretKeyRef:
                   name: {{ include "vfps.database.db-secret-name" . }}
                   key: {{ include "vfps.database.db-secret-key" . }}
+            {{- if .Values.migrationsJob.extraEnv }}
+            {{- toYaml .Values.migrationsJob.extraEnv | nindent 12 }}
+            {{- end }}
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
