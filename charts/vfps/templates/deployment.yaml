@@ -96,6 +96,9 @@ spec:
                 secretKeyRef:
                   name: {{ include "vfps.database.db-secret-name" . }}
                   key: {{ include "vfps.database.db-secret-key" . }}
+            {{- if .Values.extraEnv }}
+            {{- toYaml .Values.extraEnv | nindent 12 }}
+            {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
