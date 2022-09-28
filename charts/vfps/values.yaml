@@ -184,7 +184,7 @@ migrationsJob:
   image:
     registry: ghcr.io
     repository: chgl/vfps-migrations
-    tag: v0.2.2@sha256:be741f78a9628111e6766a1668e3b17c6369f130c03c3599137c7ea8209d2d52
+    tag: v0.3.0@sha256:9b3cc7282f01138be9eddb5f993d65901dbdbee8df944c8abbd68957e94e6f86
     pullPolicy: IfNotPresent
   # -- whether to enable the database migration job. If enabled, a `ServiceAccount`, `Role`, and `RoleBinding` resources are created
   # which are used by an init container of the main application to wait for the migrations to complete.
