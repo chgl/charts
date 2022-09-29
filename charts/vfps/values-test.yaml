@@ -6,7 +6,7 @@ postgresql:
 podDisruptionBudget:
   enabled: true
 
-replicaCount: 3
+replicaCount: 1
 
 serviceMonitor:
   enabled: false
@@ -21,6 +21,16 @@ resources:
 
 ingress:
   enabled: true
+  hosts:
+    - host: vfps.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+    - host: vfps-grpc.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          portName: grpc
 
 extraEnv:
   - name: "Pseudonymization__Caching__Namespaces__IsEnabled"
@@ -29,3 +39,10 @@ extraEnv:
     value: "64"
   - name: "Pseudonymization__Caching__Namespaces__AbsoluteExpiration"
     value: "0.01:23:00"
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 50
+  # targetMemoryUtilizationPercentage: 80

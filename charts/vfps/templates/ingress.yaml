@@ -31,12 +31,12 @@ spec:
         paths:
         {{- range .paths }}
           - path: {{ .path }}
-            pathType: {{ .pathType }}
+            pathType: {{ default "ImplementationSpecific" .pathType }}
             backend:
               service:
                 name: {{ $fullName }}
                 port:
-                  name: http
+                  name: {{ default "http" .portName }}
         {{- end }}
   {{- end }}
 {{- end }}
