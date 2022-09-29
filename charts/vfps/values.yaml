@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   registry: ghcr.io
   repository: chgl/vfps
-  tag: v0.3.0@sha256:e7c85fe5da96737d2c44946bfce0690fa2ead81f54bbfa062fdca5d989fe8a08
+  tag: v0.3.2@sha256:2ec147645159460e0e511f33fad8f4b546e15747dfa98ec1815329d3907abade
   pullPolicy: IfNotPresent
 
 # -- image pull secrets used by the main deployment container
@@ -69,6 +69,7 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
+          portName: http
   # -- TLS configuration
   tls: []
   #  - secretName: chart-example-tls
@@ -194,7 +195,7 @@ migrationsJob:
   image:
     registry: ghcr.io
     repository: chgl/vfps-migrations
-    tag: v0.3.0@sha256:9b3cc7282f01138be9eddb5f993d65901dbdbee8df944c8abbd68957e94e6f86
+    tag: v0.3.2@sha256:3bac9584847b66b2cccd566cc73953c6c74b4b1f7143cbe79d2c98f29b33b7b3
     pullPolicy: IfNotPresent
   # -- whether to enable the database migration job. If enabled, a `ServiceAccount`, `Role`, and `RoleBinding` resources are created
   # which are used by an init container of the main application to wait for the migrations to complete.
