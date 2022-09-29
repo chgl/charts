@@ -5296,6 +5296,46 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "updated vfps images to v0.3.2"
+        - kind: added
+          description: "updated HPA to `autoscaling/v2`"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "true"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+    apiVersion: v2
+    created: "2022-09-29T15:15:02.123220858Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.9.1
+    description: A Helm chart for deploying VFPS, a very fast and resource-efficient
+      pseudonym service.
+    digest: 9c6862a450d59b196a67282c74154749f9954351059dd4bd5a9182f3d801a803
+    home: https://github.com/chgl/vfps
+    keywords:
+    - grpc
+    - pseudonymization
+    - research
+    - data protection
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: vfps
+    sources:
+    - https://github.com/chgl/vfps
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/vfps-0.4.0/vfps-0.4.0.tgz
+    version: 0.4.0
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "updated vfps images to v0.3.0"
         - kind: added
           description: "`extraEnv` config to set extra environment variables"
@@ -5407,4 +5447,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.1.0/vfps-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-28T16:30:53.351010248Z"
+generated: "2022-09-29T15:15:02.125218579Z"
