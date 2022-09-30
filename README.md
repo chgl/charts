@@ -25,6 +25,9 @@ helm repo update
    kind create cluster --config=hack/kind-config.yaml
    # setup NGINX Ingress controller
    kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
+   # (optional) install metrics-server to test VPA & HPA
+   helm repo add metrics-server -n kube-system https://kubernetes-sigs.github.io/metrics-server/
+   helm upgrade --install --set="args[0]=--kubelet-insecure-tls" metrics-server metrics-server/metrics-server
    ```
 
 1. Make changes to the charts

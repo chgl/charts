@@ -13,13 +13,17 @@ keywords:
   - "telemetry"
   - "prometheus exporter"
 kubeVersion: ">= 1.19.0"
-version: 1.0.7
+version: 1.0.8
 annotations:
   artifacthub.io/license: Apache-2.0
+  artifacthub.io/containsSecurityUpdates: "true"
+  artifacthub.io/operator: "false"
+  artifacthub.io/prerelease: "false"
   artifacthub.io/recommendations: |
     - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
   artifacthub.io/changes: |
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: update ghcr.io/chgl/fhir-server-exporter docker tag to v2.1.0
+      description: |
+        "update ghcr.io/chgl/fhir-server-exporter docker tag to v2.1.1. Fixes `CVE-2022-38013`"
