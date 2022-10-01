@@ -5,8 +5,32 @@ replicaCount: 1
 image:
   registry: ghcr.io
   repository: chgl/vfps
-  tag: v0.3.2@sha256:2ec147645159460e0e511f33fad8f4b546e15747dfa98ec1815329d3907abade
+  tag: v0.3.3@sha256:6f9c0cbaeee359269aefba3bd497d84eac83251ec8463e0e27eb7299bdb49791
   pullPolicy: IfNotPresent
+
+migrationsJob:
+  # @ignored
+  image:
+    registry: ghcr.io
+    repository: chgl/vfps-migrations
+    tag: v0.3.3@sha256:94dcf10e91fc618becacf324bbb70456c918deef1526a8bc946796301714bc88
+    pullPolicy: IfNotPresent
+  # -- whether to enable the database migration job. If enabled, a `ServiceAccount`, `Role`, and `RoleBinding` resources are created
+  # which are used by an init container of the main application to wait for the migrations to complete.
+  enabled: true
+  # -- restart policy for the migration job
+  restartPolicy: Never
+  # -- extra environment variables to set on the migrations job container
+  extraEnv: []
+
+serviceMonitor:
+  # -- if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
+  enabled: false
+  # -- additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`
+  additionalLabels: {}
+  # namespace: monitoring
+  # interval: 30s
+  # scrapeTimeout: 10s
 
 # -- image pull secrets used by the main deployment container
 imagePullSecrets: []
@@ -189,27 +213,3 @@ postgresql:
       capabilities:
         drop:
           - ALL
-
-migrationsJob:
-  # @ignored
-  image:
-    registry: ghcr.io
-    repository: chgl/vfps-migrations
-    tag: v0.3.2@sha256:3bac9584847b66b2cccd566cc73953c6c74b4b1f7143cbe79d2c98f29b33b7b3
-    pullPolicy: IfNotPresent
-  # -- whether to enable the database migration job. If enabled, a `ServiceAccount`, `Role`, and `RoleBinding` resources are created
-  # which are used by an init container of the main application to wait for the migrations to complete.
-  enabled: true
-  # -- restart policy for the migration job
-  restartPolicy: Never
-  # -- extra environment variables to set on the migrations job container
-  extraEnv: []
-
-serviceMonitor:
-  # -- if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
-  enabled: false
-  # -- additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`
-  additionalLabels: {}
-  # namespace: monitoring
-  # interval: 30s
-  # scrapeTimeout: 10s
