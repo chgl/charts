@@ -19,7 +19,7 @@ dependencies:
     condition: postgresql.enabled
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.4.0
+version: 0.4.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -31,6 +31,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "updated vfps images to v0.3.2"
-    - kind: added
-      description: "updated HPA to `autoscaling/v2`"
+      description: "updated vfps images to v0.3.3"
