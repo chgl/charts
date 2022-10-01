@@ -5329,6 +5329,44 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "updated vfps images to v0.3.3"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "true"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+    apiVersion: v2
+    created: "2022-10-01T15:19:13.509912728Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.9.1
+    description: A Helm chart for deploying VFPS, a very fast and resource-efficient
+      pseudonym service.
+    digest: 6989d56e9da3c56c5b0147bdc638d3e57b1998273d7308928d346e48966ab643
+    home: https://github.com/chgl/vfps
+    keywords:
+    - grpc
+    - pseudonymization
+    - research
+    - data protection
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: vfps
+    sources:
+    - https://github.com/chgl/vfps
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/vfps-0.4.1/vfps-0.4.1.tgz
+    version: 0.4.1
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "updated vfps images to v0.3.2"
         - kind: added
           description: "updated HPA to `autoscaling/v2`"
@@ -5480,4 +5518,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.1.0/vfps-0.1.0.tgz
     version: 0.1.0
-generated: "2022-09-30T15:03:29.093885384Z"
+generated: "2022-10-01T15:19:13.511661647Z"
