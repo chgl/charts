@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   registry: ghcr.io
   repository: chgl/vfps
-  tag: v0.4.0@sha256:23e7ce455b83c0f40b69391d9b0545c72c0510e3d64bbebd8430b5c8dba9b582
+  tag: v0.4.0@sha256:04d728223017504b97910e01712a1e8c142cc70efdb56c22474563e227bf7045
   pullPolicy: IfNotPresent
 
 migrationsJob:
