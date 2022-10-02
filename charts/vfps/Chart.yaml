@@ -31,4 +31,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "updated vfps image digests"
+      description: "updated image digests"
