@@ -39,8 +39,9 @@ spec:
               done;
       containers:
         - name: {{ include "vfps.fullname" . }}-migrations
-          image: "{{ .Values.migrationsJob.image.registry }}/{{ .Values.migrationsJob.image.repository }}:{{ .Values.migrationsJob.image.tag }}"
-          imagePullPolicy: {{ .Values.migrationsJob.image.pullPolicy }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["/opt/vfps/efbundle"]
           args: ["--verbose"]
           {{- with .Values.restrictedContainerSecurityContext }}
           securityContext:

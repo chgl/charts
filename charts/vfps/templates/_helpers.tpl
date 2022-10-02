@@ -169,7 +169,7 @@ Create the connection string from the host, port and database name.
 get the version of the image tag to use as an identifier. Default to .Chart.Version to handle things like tags used for testing.
 */}}
 {{- define "vfps.migrationsJob.versionIdentifier" -}}
-{{- $imageTagVersion := (default .Chart.Version (first (splitList "@" .Values.migrationsJob.image.tag))) -}}
+{{- $imageTagVersion := (default .Chart.Version (first (splitList "@" .Values.image.tag))) -}}
 {{- $imageTagVersion }}
 {{- end -}}
 
