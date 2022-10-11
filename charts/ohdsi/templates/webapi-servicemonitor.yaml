@@ -1,0 +1,34 @@
+{{- with .Values.webApi }}
+{{- if .serviceMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "ohdsi.fullname" $ }}-webapi
+  {{- if .serviceMonitor.namespace }}
+  namespace: {{ .serviceMonitor.namespace }}
+  {{- end }}
+  labels:
+    {{- include "ohdsi.labels" $ | nindent 4 }}
+    app.kubernetes.io/component: webapi
+    {{- if .serviceMonitor.additionalLabels }}
+    {{- toYaml .serviceMonitor.additionalLabels | nindent 4 }}
+    {{- end }}
+spec:
+  endpoints:
+    - port: http-metrics
+      path: /
+      {{- if .serviceMonitor.interval }}
+      interval: {{ .serviceMonitor.interval }}
+      {{- end }}
+      {{- if .serviceMonitor.scrapeTimeout }}
+      scrapeTimeout: {{ .serviceMonitor.scrapeTimeout }}
+      {{- end }}
+  namespaceSelector:
+    matchNames:
+      - {{ $.Release.Namespace }}
+  selector:
+    matchLabels:
+      {{- include "ohdsi.matchLabels" $ | nindent 6 }}
+      app.kubernetes.io/component: webapi
+{{- end }}
+{{- end }}

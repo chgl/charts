@@ -15,13 +15,13 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.8.1
+    version: 11.9.8
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.18.1
+version: 0.19.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -41,4 +41,16 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: fixed chart.yaml `artifacthub.io/recommendations` annotation
+      description: "updated postgresql chart to 11.9.8"
+    - kind: changed
+      description: updated WebAPI and ATLAS to v2.12.0
+    - kind: added
+      description: support for scraping prometheus metrics exposed by the OpenTelemetry Java Agent
+      links:
+        - name: GitHub PR
+          url: https://github.com/OHDSI/WebAPI/pull/2082
+    - kind: added
+      description: support for distributed tracing via the OpenTelemetry Java Agent
+      links:
+        - name: GitHub PR
+          url: https://github.com/OHDSI/WebAPI/pull/2082

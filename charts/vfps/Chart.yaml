@@ -14,12 +14,12 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.9.1
+    version: 11.9.8
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.4.4
+version: 0.4.5
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -27,8 +27,13 @@ annotations:
   artifacthub.io/prerelease: "true"
   artifacthub.io/recommendations: |
     - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+  artifacthub.io/screenshots: |
+    - title: Screenshot of the OpenAPI/Swagger UI for the REST API
+      url: https://raw.githubusercontent.com/chgl/vfps/master/docs/img/openapi.png
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
+    - kind: added
+      description: "added screenshot to Chart.yaml metadata"
     - kind: changed
-      description: "updated image tags to v0.5.0"
+      description: "updated postgresql chart to 11.9.8"

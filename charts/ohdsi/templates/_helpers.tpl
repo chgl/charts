@@ -198,3 +198,34 @@ not the one used by ATLAS which needs to be accessible from the user's browser.
     {{ printf "http://%s:%d/WebAPI" $webApiServiceName (int .Values.webApi.service.port) }}
 {{- end }}
 {{- end -}}
+
+{{/*
+env vars set on the webapi container for otel tracing and metrics
+*/}}
+{{- define "ohdsi.webApi.otel.envVars" -}}
+{{- if (or .Values.webApi.serviceMonitor.enabled .Values.webApi.tracing.enabled) }}
+{{- $webApiServiceName := printf "%s-webapi" (include "ohdsi.fullname" .) -}}
+{{- $metricsExporter := (ternary "prometheus" "none" .Values.webApi.serviceMonitor.enabled) -}}
+{{- $tracesExporter := (ternary "jaeger" "none" .Values.webApi.tracing.enabled) -}}
+- name: JAVA_OPTS
+  value: "-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"
+- name: OTEL_LOGS_EXPORTER
+  value: "none"
+- name: OTEL_METRICS_EXPORTER
+  value: "{{ $metricsExporter }}"
+- name: OTEL_TRACES_EXPORTER
+  value: "{{ $tracesExporter }}"
+{{- if .Values.webApi.tracing.enabled }}
+- name: OTEL_SERVICE_NAME
+  value: "{{ $webApiServiceName }}"
+- name: OTEL_EXPORTER_JAEGER_ENDPOINT
+  value: "{{ .Values.webApi.tracing.jaeger.endpoint }}"
+- name: OTEL_EXPORTER_JAEGER_PROTOCOL
+  value: "{{ .Values.webApi.tracing.jaeger.protocol }}"
+- name: OTEL_EXPORTER_JAEGER_AGENT_HOST
+  value: "{{ .Values.webApi.tracing.jaeger.agentHost }}"
+- name: OTEL_EXPORTER_JAEGER_AGENT_PORT
+  value: "{{ .Values.webApi.tracing.jaeger.agentPort }}"
+{{- end }}
+{{- end }}
+{{- end -}}

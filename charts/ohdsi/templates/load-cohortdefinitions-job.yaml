@@ -63,7 +63,12 @@ spec:
             - |
               for cohort_definition_file in /cohorts/*.json; do
                 echo "Sending cohort definition ${cohort_definition_file} to WebAPI @ ${WEBAPI_URL}/cohortdefinition"
-                curl --fail-with-body --request POST --header 'Content-Type: application/json' --data "@${cohort_definition_file}" "${WEBAPI_URL}/cohortdefinition"
+                curl --fail-with-body \
+                     --retry 5 \
+                     --retry-connrefused \
+                     --request POST \
+                     --header 'Content-Type: application/json' \
+                     --data "@${cohort_definition_file}" "${WEBAPI_URL}/cohortdefinition"
               done;
           {{- with $.Values.restrictedContainerSecurityContext }}
           securityContext:
