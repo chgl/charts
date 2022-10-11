@@ -51,3 +51,6 @@ annotations:
           url: https://github.com/OHDSI/WebAPI/pull/2082
     - kind: added
       description: support for distributed tracing via the OpenTelemetry Java Agent
+      links:
+        - name: GitHub PR
+          url: https://github.com/OHDSI/WebAPI/pull/2082

@@ -273,7 +273,7 @@ webApi:
 
   serviceMonitor:
     # if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
-    # this also implicitely enables the OpenTelemetry Java agent and exposes its metrics port
+    # this also implicitly enables the OpenTelemetry Java agent and exposes its metrics port
     # note that this overrides the `JAVA_OPTS` environment variable with `"-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"`
     enabled: false
     # additional labels to apply to the ServiceMonitor object, e.g. `release: kube-prometheus-stack`
@@ -284,7 +284,7 @@ webApi:
 
   tracing:
     # if enabled, export traces to the specified endpoint.
-    # this also implicitely enables the OpenTelemetry Java agent by setting the
+    # this also implicitly enables the OpenTelemetry Java agent by setting the
     # `JAVA_OPTS` environment variable to `"-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"`
     enabled: false
     jaeger:
