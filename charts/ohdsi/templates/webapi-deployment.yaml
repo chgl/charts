@@ -149,6 +149,7 @@ spec:
               value: {{ tpl .auth.basic.query $ }}
             {{- end }}
             {{- end }}
+            {{- include "ohdsi.webApi.otel.envVars" $ | nindent 12 }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
           {{- end }}
@@ -156,6 +157,11 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+          {{- if .serviceMonitor.enabled }}
+            - name: http-metrics
+              containerPort: 9464
+              protocol: TCP
+          {{- end }}
           {{- with .readinessProbe }}
           readinessProbe:
             httpGet:

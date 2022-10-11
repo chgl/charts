@@ -84,7 +84,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/webapi
-    tag: 2.11.1@sha256:9bcb5003e6504669b53c94f3e0b4aa6ad9b5c78741f772ca402579632ce64fb3
+    tag: 2.12.0@sha256:4d951a05245cedad4d666874fb71f182bd2140aab5ece4f1621d028cf10d0823
     pullPolicy: IfNotPresent
 
   waitForDatabaseInitContainer:
@@ -93,7 +93,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 14.5.0@sha256:4355265e33e9c2a786aa145884d4b36ffd4c41c516b35d60df0b7495141ec738
+      tag: 14.5.0@sha256:8e817c96948442cb2baaff63bf88541f8672e40f34df1909c11996ba599797e0
       pullPolicy: IfNotPresent
 
   podDisruptionBudget:
@@ -271,6 +271,32 @@ webApi:
     # - name: "TEST"
     #   value: "TEST"
 
+  serviceMonitor:
+    # if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
+    # this also implicitely enables the OpenTelemetry Java agent and exposes its metrics port
+    # note that this overrides the `JAVA_OPTS` environment variable with `"-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"`
+    enabled: false
+    # additional labels to apply to the ServiceMonitor object, e.g. `release: kube-prometheus-stack`
+    additionalLabels: {}
+    # namespace: monitoring
+    # interval: 30s
+    # scrapeTimeout: 10s
+
+  tracing:
+    # if enabled, export traces to the specified endpoint.
+    # this also implicitely enables the OpenTelemetry Java agent by setting the
+    # `JAVA_OPTS` environment variable to `"-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"`
+    enabled: false
+    jaeger:
+      # specify the transport protocol. Sets the `OTEL_EXPORTER_JAEGER_PROTOCOL` env var
+      protocol: "grpc"
+      # full URL of the Jaeger HTTP endpoint. Sets the `OTEL_EXPORTER_JAEGER_ENDPOINT` env var
+      endpoint: http://simplest-collector.observability.svc:14250 # http://localhost:14250
+      # hostname of the Jaeger agenr. Sets the `OTEL_EXPORTER_JAEGER_AGENT_HOST` env var
+      agentHost: localhost
+      # udp/thrift.compact port of the Jaeger agent. Sets the `OTEL_EXPORTER_JAEGER_AGENT_PORT` env var
+      agentPort: 6831
+
 atlas:
   # enable the OHDSI Atlas deployment
   enabled: true
@@ -280,7 +306,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/atlas
-    tag: 2.11.1@sha256:36df31ecd1c92f2f2d66535ff759e7626545179696a3f291f35dc75c14017564
+    tag: 2.12.0@sha256:96431e12cba41643117a904f14c3c6d50a0af63a9a293ed61cd56d5bcffb723a
     pullPolicy: IfNotPresent
 
   podDisruptionBudget:
