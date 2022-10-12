@@ -14,7 +14,7 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-    {{- if .serviceMonitor.enabled }}
+    {{- if .metrics.serviceMonitor.enabled }}
     - port: 9464
       targetPort: http-metrics
       protocol: TCP

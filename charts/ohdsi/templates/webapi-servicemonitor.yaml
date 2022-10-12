@@ -1,4 +1,4 @@
-{{- with .Values.webApi }}
+{{- with .Values.webApi.metrics }}
 {{- if .serviceMonitor.enabled }}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
