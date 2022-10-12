@@ -5443,6 +5443,49 @@ entries:
       artifacthub.io/changes: |-
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: added headless service for the grpc endpoint to support DNS-based client-side load-balancing
+        - kind: changed
+          description: updated image to v0.5.1
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "true"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+      artifacthub.io/screenshots: |
+        - title: Screenshot of the OpenAPI/Swagger UI for the REST API
+          url: https://raw.githubusercontent.com/chgl/vfps/master/docs/img/openapi.png
+    apiVersion: v2
+    created: "2022-10-12T11:16:38.303220578Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.9.8
+    description: A Helm chart for deploying VFPS, a very fast and resource-efficient
+      pseudonym service.
+    digest: f01bb33a566bbb34caaa19c04d151f8729712543d2b41ad07c34b1a9e9c6a248
+    home: https://github.com/chgl/vfps
+    keywords:
+    - grpc
+    - pseudonymization
+    - research
+    - data protection
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: vfps
+    sources:
+    - https://github.com/chgl/vfps
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/vfps-0.4.6/vfps-0.4.6.tgz
+    version: 0.4.6
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
         - kind: added
           description: "added screenshot to Chart.yaml metadata"
         - kind: changed
@@ -5792,4 +5835,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.1.0/vfps-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-11T22:40:43.964421589Z"
+generated: "2022-10-12T11:16:38.304670911Z"
