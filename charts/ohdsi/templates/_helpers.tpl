@@ -203,9 +203,9 @@ not the one used by ATLAS which needs to be accessible from the user's browser.
 env vars set on the webapi container for otel tracing and metrics
 */}}
 {{- define "ohdsi.webApi.otel.envVars" -}}
-{{- if (or .Values.webApi.serviceMonitor.enabled .Values.webApi.tracing.enabled) }}
+{{- if (or .Values.webApi.metrics.serviceMonitor.enabled .Values.webApi.tracing.enabled) }}
 {{- $webApiServiceName := printf "%s-webapi" (include "ohdsi.fullname" .) -}}
-{{- $metricsExporter := (ternary "prometheus" "none" .Values.webApi.serviceMonitor.enabled) -}}
+{{- $metricsExporter := (ternary "prometheus" "none" .Values.webApi.metrics.serviceMonitor.enabled) -}}
 {{- $tracesExporter := (ternary "jaeger" "none" .Values.webApi.tracing.enabled) -}}
 - name: JAVA_OPTS
   value: "-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"
