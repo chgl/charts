@@ -6,7 +6,7 @@ postgresql:
 podDisruptionBudget:
   enabled: true
 
-replicaCount: 1
+replicaCount: 3
 
 serviceMonitor:
   enabled: false
@@ -32,6 +32,9 @@ ingress:
           pathType: ImplementationSpecific
           portName: grpc
 
+database:
+  additionalConnectionStringParameters: "Timeout=60;Max Auto Prepare=5;Maximum Pool Size=25;"
+
 extraEnv:
   - name: "Pseudonymization__Caching__Namespaces__IsEnabled"
     value: "true"
@@ -41,7 +44,7 @@ extraEnv:
     value: "0.01:23:00"
 
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 50

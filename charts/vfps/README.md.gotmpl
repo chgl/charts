@@ -20,6 +20,32 @@ helm install --create-namespace vfps chgl/vfps -n vfps
 > By default, the included [PostgreSQL Helm chart](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#upgrading)
 > auto-generates a random password for the database which may cause problems when upgrading the chart (see [here for details](https://github.com/bitnami/charts/tree/master/bitnami/postgresql#upgrading)).
 
+## Usage
+
+```sh
+kubectl run -i --tty --rm debug --image=ghcr.io/chgl/vfps-grpc-utils:latest --restart=Never -- bash
+
+nobody@debug:/$ grpcurl \
+  -plaintext \
+  -import-path=/tmp/protos/ \
+  -proto=Protos/vfps/api/v1/namespaces.proto \
+  -d '{"name": "test", "pseudonymGenerationMethod": "PSEUDONYM_GENERATION_METHOD_SECURE_RANDOM_BASE64URL_ENCODED", "pseudonymLength": 32}' \
+  vfps-headless:8081 \
+  vfps.api.v1.NamespaceService/Create
+
+nobody@debug:/$ ghz --duration=1m \
+  --connections=3 \
+  --lb-strategy=round_robin \
+  --cpus=3 \
+  --insecure \
+  --import-paths=/tmp/protos/ \
+  --proto=Protos/vfps/api/v1/pseudonyms.proto \
+  --call=vfps.api.v1.PseudonymService/Create \
+  -d '{"originalValue": "{{ `{{ randomString 32 }}` }}", "namespace": "test"}' \
+  dns:///vfps-headless:8081
+```
+
+
 {{ template "chart.valuesSection" . }}
 
 {{ template "helm-docs.versionFooter" . }}
