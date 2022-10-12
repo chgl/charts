@@ -2528,6 +2528,54 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "⚠️ BREAKING CHANGE: moved `serviceMonitor` (introduced in 0.19.0) inside a `metrics` key for consistency with other implementations, most notably recruIT."
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: OHDSI Homepage
+          url: https://www.ohdsi.org/
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+      artifacthub.io/screenshots: |
+        - title: Defining a cohort in OHDSI ATLAS
+          url: https://www.ohdsi.org/wp-content/uploads/2020/06/ATLAS.png
+        - title: OHDSI ACHILLES Dashboard
+          url: https://www.ohdsi.org/wp-content/uploads/2020/06/Screen-Shot-2020-06-01-at-3.31.29-PM.png
+    apiVersion: v2
+    created: "2022-10-12T11:50:42.089001377Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.9.8
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: b33e3f4380c2fd94069f0401791177f9f8a3c5c91e1df08a42949e4e92de7ea4
+    home: https://github.com/OHDSI
+    icon: https://avatars.githubusercontent.com/u/6570077
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.19.1/ohdsi-0.19.1.tgz
+    version: 0.19.1
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "updated postgresql chart to 11.9.8"
         - kind: changed
           description: updated WebAPI and ATLAS to v2.12.0
@@ -5835,4 +5883,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.1.0/vfps-0.1.0.tgz
     version: 0.1.0
-generated: "2022-10-12T11:16:38.304670911Z"
+generated: "2022-10-12T11:50:42.092609414Z"
