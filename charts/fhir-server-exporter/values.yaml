@@ -109,3 +109,10 @@ customQueries:
   #   description: Male patients
   # - name: fhir_female_patient_count
   #   query: Patient?gender=female
+
+# @ignored
+curl: # +doc-gen:ignore
+  image:
+    registry: index.docker.io
+    repository: curlimages/curl
+    tag: 7.86.0@sha256:cfdeba7f88bb85f6c87f2ec9135115b523a1c24943976a61fbf59c4f2eafd78e

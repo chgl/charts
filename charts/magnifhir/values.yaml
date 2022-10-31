@@ -159,3 +159,10 @@ ingress:
   #  - secretName: magnifhir-example-tls
   #    hosts:
   #      - magnifhir.127.0.0.1.nip.io
+
+# @ignored
+curl: # +doc-gen:ignore
+  image:
+    registry: index.docker.io
+    repository: curlimages/curl
+    tag: 7.86.0@sha256:cfdeba7f88bb85f6c87f2ec9135115b523a1c24943976a61fbf59c4f2eafd78e
