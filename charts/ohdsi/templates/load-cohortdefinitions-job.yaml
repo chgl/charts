@@ -56,8 +56,7 @@ spec:
               value: {{ include "ohdsi.webApi.url" $ }}
       containers:
         - name: load-cohortdefinitions
-          image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
-          imagePullPolicy: {{ .image.pullPolicy }}
+          image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
           command: ["/bin/sh", "-c"]
           args:
             - |
