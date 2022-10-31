@@ -11,7 +11,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: probe-healthz-endpoint
-      image: docker.io/curlimages/curl:7.85.0@sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
+      image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
       command: ["curl", "--fail-with-body"]
       args: ["http://{{ include "vfps.fullname" . }}:{{ .Values.service.port }}/healthz"]
       {{- with .Values.restrictedContainerSecurityContext }}
@@ -32,7 +32,7 @@ spec:
         exec:
           command: ["true"]
     - name: probe-metrics-endpoint
-      image: docker.io/curlimages/curl:7.85.0@sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
+      image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
       command: ["curl", "--fail-with-body"]
       args: ["http://{{ include "vfps.fullname" . }}:{{ .Values.service.port }}/metrics"]
       {{- with .Values.restrictedContainerSecurityContext }}

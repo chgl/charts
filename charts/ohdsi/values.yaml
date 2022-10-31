@@ -573,3 +573,10 @@ loadCohortDefinitionsJob:
   # the cohort defintions to send to the WebAPI as a list of JSON objects.
   # See the [ci/kitchen-sink-test-values.yaml](ci/kitchen-sink-test-values.yaml) file for an example of the expected format.
   cohortDefinitions: []
+
+# @ignored
+curl:
+  image:
+    registry: index.docker.io
+    repository: curlimages/curl
+    tag: 7.86.0@sha256:cfdeba7f88bb85f6c87f2ec9135115b523a1c24943976a61fbf59c4f2eafd78e

@@ -39,7 +39,7 @@ spec:
       {{- end }}
       initContainers:
         - name: wait-for-webapi
-          image: docker.io/curlimages/curl:7.85.0@sha256:9fab1b73f45e06df9506d947616062d7e8319009257d3a05d970b0de80a41ec5
+          image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
           {{- with $.Values.restrictedContainerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}

@@ -11,7 +11,7 @@ spec:
   restartPolicy: Never
   containers:
     - name: probe-metrics-endpoint
-      image: docker.io/curlimages/curl:7.84.0@sha256:5a2a25d96aa941ea2fc47acc50122f7c3d007399a075df61a82d6d2c3a567a2b
+      image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
       imagePullPolicy: IfNotPresent
       command: ["curl", "--fail-with-body"]
       args: ['http://{{ include "fhir-server-exporter.fullname" . }}:{{ .Values.service.port }}/metrics']

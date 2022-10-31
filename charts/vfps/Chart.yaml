@@ -19,7 +19,7 @@ dependencies:
     condition: postgresql.enabled
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.4.6
+version: 0.5.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -34,6 +34,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: added headless service for the grpc endpoint to support DNS-based client-side load-balancing
-    - kind: changed
-      description: updated image to v0.5.1
+      description: updated image to v0.6.0
