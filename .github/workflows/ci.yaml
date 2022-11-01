@@ -43,7 +43,7 @@ jobs:
 
       - name: Cache kubeconform schemas
         id: cache-powerlint-kubeconform
-        uses: actions/cache@ac8075791e805656e71b4ba23325ace9e3421120 # tag=v3.0.9
+        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7 # tag=v3.0.11
         with:
           path: /tmp
           key: ${{ runner.os }}-powerlint-kubeconform
