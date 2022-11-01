@@ -10,12 +10,10 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.8.1
+version: 0.8.2
 annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: changed
-      description: "updated mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v3.3.7"
-    - kind: changed
-      description: "standardized curl image used"
+    - kind: fixed
+      description: "image digest fixed"
