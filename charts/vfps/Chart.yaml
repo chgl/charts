@@ -34,6 +34,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: added headless service for the grpc endpoint to support DNS-based client-side load-balancing
-    - kind: changed
-      description: updated image to v0.5.1
+      description: "chore(deps): update docker.io/bitnami/postgresql:14.5.0 docker digest to 43b25fe"
