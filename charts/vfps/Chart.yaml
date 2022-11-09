@@ -14,12 +14,13 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 11.9.8
+    version: 12.1.0
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.5.1
+version: 1.0.0
+appVersion: "1.0.0"
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -34,4 +35,6 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated postgresql helper image digests
+      description: updated vfps image to v1.0.0
+    - kind: changed
+      description: "⚠️ BREAKING CHANGE: updated PostgreSQL sub-chart to v12"
