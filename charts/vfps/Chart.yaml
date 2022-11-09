@@ -17,9 +17,9 @@ dependencies:
     version: 12.1.0
     repository: https://charts.bitnami.com/bitnami
     condition: postgresql.enabled
-deprecated: false
+deprecated: true
 kubeVersion: ">= 1.19.0"
-version: 1.0.0
+version: 2.0.0
 appVersion: "1.0.0"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -35,6 +35,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: updated vfps image to v1.0.0
-    - kind: changed
-      description: "⚠️ BREAKING CHANGE: updated PostgreSQL sub-chart to v12"
+      description: ⚠️ Moved to <https://github.com/miracum/charts>.

@@ -2,6 +2,8 @@
 
 ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
+> **:exclamation: This Helm Chart is deprecated!**
+
 A Helm chart for deploying VFPS, a very fast and resource-efficient pseudonym service.
 
 **Homepage:** <https://github.com/chgl/vfps>
