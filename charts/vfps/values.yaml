@@ -5,7 +5,7 @@ replicaCount: 1
 image:
   registry: ghcr.io
   repository: chgl/vfps
-  tag: v0.6.0@sha256:d43bd4e60d1972b8fc81e6d219c584c50283df20280ba08e5e332cf655a8078e
+  tag: v1.0.0@sha256:3a6cf7c3140213dc2d6351693fb8306dc00503f57d51c2b2dc31bfeee99db5a7
   pullPolicy: IfNotPresent
 
 migrationsJob:
@@ -154,7 +154,7 @@ waitForDatabaseInitContainer:
   image:
     registry: docker.io
     repository: bitnami/postgresql
-    tag: 14.5.0@sha256:7ec21d561bc051fa6545461d471e26d8de7c8b41670d0fa02a5373fd3081a408
+    tag: 15.0.0-debian-11-r3@sha256:6ebd4468a91c35300c992c4c0ee10e13dfcccd928a5a3de5cd089d3a3bf19c1c
     pullPolicy: IfNotPresent
 
 # -- container security context applied to init containers and the Helm test pods
