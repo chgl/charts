@@ -14,7 +14,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/magnifhir
-  tag: v1.1.4@sha256:6c9fc0325ce8eab0d4801bed4a677b73fecc53ac9d3bf5c2368f3e34f5b1a0db
+  tag: v1.1.5@sha256:6d48d243328e26315ebb593f1a2b7c07e97c763387a6cf5e48462c3dd231af36
   pullPolicy: IfNotPresent
 
 # image pull secrets used by all pods
