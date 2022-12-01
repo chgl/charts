@@ -12,7 +12,7 @@ permissions: read-all
 jobs:
   release:
     runs-on: ubuntu-22.04
-    container: ghcr.io/chgl/kube-powertools:v1.21.13@sha256:cb7a4802d34588b4eeab48cac0476741c327745ffd4e1d407d57f86b53750b40
+    container: ghcr.io/chgl/kube-powertools:v1.21.15@sha256:1e03ae35e7ca2f73686b1a74aed5720214d08e94eb039c7c62e9cbf286a47a38
     permissions:
       contents: write
     steps:
