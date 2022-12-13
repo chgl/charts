@@ -16,4 +16,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated image mcr.microsoft.com/healthcareapis/r4-fhir-server to 3.3.38"
+      description: "Updated image mcr.microsoft.com/healthcareapis/r4-fhir-server to 3.3.53"
