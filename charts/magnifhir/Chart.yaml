@@ -14,7 +14,7 @@ keywords:
   - "blazor"
 kubeVersion: ">= 1.19.0"
 deprecated: false
-version: 1.0.6
+version: 1.0.7
 appVersion: 1.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -29,4 +29,6 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated app image to v1.1.5"
+      description: "Updated app image to v1.1.7"
+    - kind: changed
+      description: updated curl to version to v7.87.0

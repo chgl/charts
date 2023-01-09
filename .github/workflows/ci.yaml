@@ -52,7 +52,7 @@ jobs:
 
       - name: Run Powerlint
         env:
-          KUBERNETES_VERSIONS: "1.23.0 1.24.0 1.25.0"
+          KUBERNETES_VERSIONS: "1.24.0 1.25.0 1.26.0"
         run: chart-powerlint.sh
 
       # used to test whether the changelog generation process works
@@ -65,7 +65,7 @@ jobs:
       - lint
     strategy:
       matrix:
-        k8s-version: [1.23.13, 1.24.7, 1.25.3]
+        k8s-version: [1.24.7, 1.25.3, 1.26.0]
     steps:
       - name: Checkout
         uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # renovate: tag=v3.0.2
@@ -97,7 +97,8 @@ jobs:
   generate-renovate-chart-changelogs:
     runs-on: ubuntu-22.04
     # run only on PRs created by renovate
-    if: ${{ success() && startsWith(github.head_ref, 'renovate/') }}
+    # disabled temporarily
+    if: ${{ false }} # success() && startsWith(github.head_ref, 'renovate/') }}
     permissions:
       contents: write
     needs:

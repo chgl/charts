@@ -30,8 +30,7 @@
     {
       "matchPackageNames": [
         "postgresql",
-        "docker.io/bitnami/postgresql",
-        "index.docker.io/bitnami/postgresql"
+        "docker.io/bitnami/postgresql"
       ],
       "extends": ["schedule:monthly"]
     }
