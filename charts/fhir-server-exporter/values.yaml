@@ -27,7 +27,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/fhir-server-exporter
-  tag: v2.1.4@sha256:fcf931a05d8c3e58d17a7f14962af81c52dc39a6dfd05e722e7c9446002b5b68
+  tag: v2.1.6@sha256:e688227589346b0af0f41ff147acbab9130adfed706ed778d987577fedc61cba
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -113,6 +113,6 @@ customQueries:
 # @ignored
 curl: # +doc-gen:ignore
   image:
-    registry: index.docker.io
+    registry: docker.io
     repository: curlimages/curl
-    tag: 7.86.0@sha256:cfdeba7f88bb85f6c87f2ec9135115b523a1c24943976a61fbf59c4f2eafd78e
+    tag: 7.87.0@sha256:f7f265d5c64eb4463a43a99b6bf773f9e61a50aaa7cefaf564f43e42549a01dd

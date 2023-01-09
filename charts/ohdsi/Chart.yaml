@@ -21,7 +21,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.20.0
+version: 0.20.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -42,3 +42,5 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: "⚠️ BREAKING CHANGE: updated postgresql sub-chart to latest major version"
+    - kind: changed
+      description: updated curl to version to v7.87.0
