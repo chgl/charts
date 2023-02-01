@@ -307,7 +307,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/atlas
-    tag: 2.12.0@sha256:96431e12cba41643117a904f14c3c6d50a0af63a9a293ed61cd56d5bcffb723a
+    tag: 2.12.1@sha256:2e510a1a6c6ec881db9144771988a463ee8c113a87c5934fa35f5253129e28f3
     pullPolicy: IfNotPresent
 
   podDisruptionBudget:
