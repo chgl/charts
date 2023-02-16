@@ -15,7 +15,7 @@ postgresql:
   enabled: true
   auth:
     # name of the database to create
-    # see: <https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run>
+    # see: <https://github.com/bitnami/containers/tree/main/bitnami/postgresql#creating-a-database-on-first-run>
     database: "ohdsi"
     #  Name of existing secret to use for PostgreSQL credentials
     # `auth.postgresPassword`, `auth.password`, and `auth.replicationPassword` will be ignored and picked up from this secret
@@ -159,7 +159,7 @@ webApi:
       # security users. If unset, defaults to `.Values.webApi.db.schema`.
       schema: ""
       # SQL query used to fetch entries in the basic security table by their username. Requires a table called `basic_security_users`
-      # to exist within the above schema, see [webapi-enable-auth-values.yaml](ci/webapi-enable-auth-values.yaml)
+      # to exist within the above schema, see [kitchen-sink-test-values.yamll](ci/kitchen-sink-test-values.yaml)
       # for an example DB setup. Evaluated as a template.
       query: >-
         SELECT password, first_name AS firstname, middle_name AS middlename, last_name AS lastname, username
