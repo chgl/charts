@@ -21,7 +21,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.20.1
+version: 0.20.2
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -34,13 +34,13 @@ annotations:
       url: https://www.ohdsi.org/
   artifacthub.io/screenshots: |
     - title: Defining a cohort in OHDSI ATLAS
-      url: https://www.ohdsi.org/wp-content/uploads/2020/06/ATLAS.png
+      url: https://ohdsi.github.io/TheBookOfOhdsi/images/OhdsiAnalyticsTools/atlas.png
     - title: OHDSI ACHILLES Dashboard
       url: https://www.ohdsi.org/wp-content/uploads/2020/06/Screen-Shot-2020-06-01-at-3.31.29-PM.png
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "⚠️ BREAKING CHANGE: updated postgresql sub-chart to latest major version"
+      description: update docker.io/ohdsi/atlas docker tag to v2.12.1
     - kind: changed
-      description: updated curl to version to v7.87.0
+      description: update docker.io/ohdsi/webapi docker tag to v2.12.1

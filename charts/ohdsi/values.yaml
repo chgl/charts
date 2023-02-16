@@ -15,7 +15,7 @@ postgresql:
   enabled: true
   auth:
     # name of the database to create
-    # see: <https://github.com/bitnami/bitnami-docker-postgresql/blob/master/README.md#creating-a-database-on-first-run>
+    # see: <https://github.com/bitnami/containers/tree/main/bitnami/postgresql#creating-a-database-on-first-run>
     database: "ohdsi"
     #  Name of existing secret to use for PostgreSQL credentials
     # `auth.postgresPassword`, `auth.password`, and `auth.replicationPassword` will be ignored and picked up from this secret
@@ -84,7 +84,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/webapi
-    tag: 2.12.0@sha256:4d951a05245cedad4d666874fb71f182bd2140aab5ece4f1621d028cf10d0823
+    tag: 2.12.1@sha256:55e6316b9bdddcf8420d03c437a579ee29a478a8ca420a8c6488140d5f84aa87
     pullPolicy: IfNotPresent
 
   waitForDatabaseInitContainer:
@@ -159,7 +159,7 @@ webApi:
       # security users. If unset, defaults to `.Values.webApi.db.schema`.
       schema: ""
       # SQL query used to fetch entries in the basic security table by their username. Requires a table called `basic_security_users`
-      # to exist within the above schema, see [webapi-enable-auth-values.yaml](ci/webapi-enable-auth-values.yaml)
+      # to exist within the above schema, see [kitchen-sink-test-values.yamll](ci/kitchen-sink-test-values.yaml)
       # for an example DB setup. Evaluated as a template.
       query: >-
         SELECT password, first_name AS firstname, middle_name AS middlename, last_name AS lastname, username
@@ -307,7 +307,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/atlas
-    tag: 2.12.0@sha256:96431e12cba41643117a904f14c3c6d50a0af63a9a293ed61cd56d5bcffb723a
+    tag: 2.12.1@sha256:2e510a1a6c6ec881db9144771988a463ee8c113a87c5934fa35f5253129e28f3
     pullPolicy: IfNotPresent
 
   podDisruptionBudget:
