@@ -72,7 +72,7 @@ resources:
   #   memory: 128Mi
 
 # node labels for pods assignment
-# see: <https://kubernetes.io/docs/user-guide/node-selection/>
+# see: <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/>
 nodeSelector: {}
 
 # tolerations for pods assignment
