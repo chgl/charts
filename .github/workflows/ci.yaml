@@ -9,7 +9,7 @@ permissions: read-all
 jobs:
   lint:
     runs-on: ubuntu-22.04
-    container: ghcr.io/chgl/kube-powertools:v1.22.11@sha256:b177a04075a1c2d128d7502047c4b5e3bd560f189b3ad2d0f1c8082a4ba9aaf1
+    container: ghcr.io/chgl/kube-powertools:v1.22.17@sha256:fd0257d7fe744371dcbede5372d21ebd9da94021da2dace179203c10049d0a13
     steps:
       - name: Add workspace as safe directory
         run: |
@@ -45,7 +45,7 @@ jobs:
 
       - name: Cache kubeconform schemas
         id: cache-powerlint-kubeconform
-        uses: actions/cache@9b0c1fce7a93df8e3bb8926b0d6e9d89e92f20a7 # tag=v3.0.11
+        uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
         with:
           path: /tmp
           key: ${{ runner.os }}-powerlint-kubeconform
@@ -73,7 +73,7 @@ jobs:
           fetch-depth: 0
 
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@09ed88797198755e5031f25be13da255e7e33aad # tag=v2.3.0
+        uses: helm/chart-testing-action@afea100a513515fbd68b0e72a7bb0ae34cb62aec # v2.3.1
 
       - name: Run chart-testing (list-changed)
         id: list-changed
@@ -103,7 +103,7 @@ jobs:
       contents: write
     needs:
       - test
-    container: ghcr.io/chgl/kube-powertools:v1.22.11@sha256:b177a04075a1c2d128d7502047c4b5e3bd560f189b3ad2d0f1c8082a4ba9aaf1
+    container: ghcr.io/chgl/kube-powertools:v1.22.17@sha256:fd0257d7fe744371dcbede5372d21ebd9da94021da2dace179203c10049d0a13
     steps:
       - name: Add workspace as safe directory
         run: |

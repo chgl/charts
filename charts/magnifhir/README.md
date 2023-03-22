@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm search repo chgl/magnifhir --version=1.0.7
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.7
+$ helm search repo chgl/magnifhir --version=1.0.8
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.8
 ```
 
 ## Introduction
@@ -25,7 +25,7 @@ This chart deploys the magniFHIR app on a [Kubernetes](http://kubernetes.io) clu
 To install/upgrade the chart with the release name `magnifhir`:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.7
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.8
 ```
 
 The command deploys the magniFHIR app on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -61,7 +61,7 @@ The following table lists the configurable parameters of the `magnifhir` chart a
 | service.port                    | port for the web interface                                                                                                                                    | <code>8080</code>      |
 | service.metrics.port            | port for the metrics endpoint                                                                                                                                 | <code>8081</code>      |
 | resources                       | specify resource requests and limits                                                                                                                          | <code>{}</code>        |
-| nodeSelector                    | node labels for pods assignment see: <https://kubernetes.io/docs/user-guide/node-selection/>                                                                  | <code>{}</code>        |
+| nodeSelector                    | node labels for pods assignment see: <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/>                                               | <code>{}</code>        |
 | tolerations                     | tolerations for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>                                                | <code>[]</code>        |
 | affinity                        | affinity for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>                             | <code>{}</code>        |
 | topologySpreadConstraints       | pod topology spread configuration see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>                              | <code>[]</code>        |
@@ -75,12 +75,12 @@ The following table lists the configurable parameters of the `magnifhir` chart a
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.7 --set replicaCount=1
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.8 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.7 --values values.yaml
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.8 --values values.yaml
 ```
