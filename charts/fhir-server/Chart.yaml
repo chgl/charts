@@ -17,6 +17,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v3.4.75"
-    - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8"
+      description: "update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v3.4.94"

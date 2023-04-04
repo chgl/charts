@@ -13,6 +13,8 @@ permissions: read-all
 jobs:
   check-links:
     runs-on: ubuntu-22.04
+    permissions:
+      issues: write
     steps:
       - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3.0.2
 
@@ -24,3 +26,11 @@ jobs:
           args: "--config=.lychee.toml ."
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: create issue
+        if: ${{ env.lychee_exit_code != 0}}
+        uses: peter-evans/create-issue-from-file@433e51abf769039ee20ba1293a088ca19d573b7f #tag=v4.0.1
+        with:
+          title: Link Checker Report
+          content-filepath: ./lychee/out.md
+          labels: report, automated issue
