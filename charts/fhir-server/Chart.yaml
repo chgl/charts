@@ -10,7 +10,7 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.9.3
+version: 0.9.4
 deprecated: false
 annotations:
   artifacthub.io/changes: |-
