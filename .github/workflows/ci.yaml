@@ -9,7 +9,7 @@ permissions: read-all
 jobs:
   lint:
     runs-on: ubuntu-22.04
-    container: ghcr.io/chgl/kube-powertools:v1.22.20@sha256:bf3fbb7a48d9fe412e96a75bd3656046699eee5d076bc1f8a02a3f87c365b316
+    container: ghcr.io/chgl/kube-powertools:v1.22.21@sha256:3e45248e0a88a26978341c7dc2b495020ad0cd75988ce19591f5d6f6d47685ac
     steps:
       - name: Add workspace as safe directory
         run: |
@@ -103,7 +103,7 @@ jobs:
       contents: write
     needs:
       - test
-    container: ghcr.io/chgl/kube-powertools:v1.22.20@sha256:bf3fbb7a48d9fe412e96a75bd3656046699eee5d076bc1f8a02a3f87c365b316
+    container: ghcr.io/chgl/kube-powertools:v1.22.21@sha256:3e45248e0a88a26978341c7dc2b495020ad0cd75988ce19591f5d6f6d47685ac
     steps:
       - name: Add workspace as safe directory
         run: |
