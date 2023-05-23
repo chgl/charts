@@ -15,6 +15,7 @@ jobs:
     container: ghcr.io/chgl/kube-powertools:v1.23.4@sha256:8567a3fda075e171c2f886eab141103747852558d090aa5ea61e87eb48887150
     permissions:
       contents: write
+      packages: write
     steps:
       - name: Add workspace as safe directory
         run: |
@@ -45,3 +46,20 @@ jobs:
           config: .github/ct/ct.yaml
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a # v2
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Charts to ghcr.io
+        run: |
+          for pkg in .cr-release-packages/*; do
+            if [ -z "${pkg:-}" ]; then
+              break
+            fi
+            helm push "${pkg}" oci://ghcr.io/${{ github.repository }}
+          done
