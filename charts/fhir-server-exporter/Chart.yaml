@@ -13,7 +13,7 @@ keywords:
   - "telemetry"
   - "prometheus exporter"
 kubeVersion: ">= 1.19.0"
-version: 1.0.13
+version: 1.0.14
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -26,4 +26,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8"
+      description: "update docker.io/curlimages/curl docker tag to v8.1.1"
