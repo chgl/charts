@@ -138,6 +138,6 @@ jobs:
           done
 
       - name: Add and commit updated Chart.yaml changelogs
-        uses: EndBug/add-and-commit@050a66787244b10a4874a2a5f682130263edc192 # tag=v9.0.0
+        uses: EndBug/add-and-commit@1bad3abcf0d6ec49a5857d124b0bfb52dc7bb081 # v9.1.3
         with:
           message: "docs: auto-generated Chart.yaml changelog annotations"
