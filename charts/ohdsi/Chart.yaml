@@ -16,12 +16,12 @@ maintainers:
 dependencies:
   - name: postgresql
     version: 12.5.6
-    repository: https://charts.bitnami.com/bitnami
+    repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.21.3
+version: 0.21.4
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -41,4 +41,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "updated postgresql sub-chart to v12.5.6"
+      description: "switched to OCI-registry based postgresql sub-chart"
