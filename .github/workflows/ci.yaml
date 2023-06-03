@@ -9,9 +9,7 @@ permissions: read-all
 jobs:
   lint:
     runs-on: ubuntu-22.04
-    container:
-      image: ghcr.io/chgl/kube-powertools:v2.0.0@sha256:9cebbd042bfd704a0a99ce7a8785254423f23e99641eb66966728e41a77dffa3
-      options: --user root
+    container: ghcr.io/chgl/kube-powertools:v2.0.1@sha256:26d150eb3676ad5d237b5b72ddd027758bd783f4051c72459431a71410e0d98f
     steps:
       - name: Add workspace as safe directory
         run: |
@@ -89,7 +87,6 @@ jobs:
         uses: helm/kind-action@fa81e57adff234b2908110485695db0f181f3c67 # v1.7.0
         if: steps.list-changed.outputs.changed == 'true'
         with:
-          version: v0.17.0
           cluster_name: kind-cluster-k8s-${{ matrix.k8s-version }}
           node_image: kindest/node:v${{ matrix.k8s-version }}
 
@@ -105,7 +102,7 @@ jobs:
       contents: write
     needs:
       - test
-    container: ghcr.io/chgl/kube-powertools:v2.0.0@sha256:9cebbd042bfd704a0a99ce7a8785254423f23e99641eb66966728e41a77dffa3
+    container: ghcr.io/chgl/kube-powertools:v2.0.1@sha256:26d150eb3676ad5d237b5b72ddd027758bd783f4051c72459431a71410e0d98f
     steps:
       - name: Add workspace as safe directory
         run: |

@@ -46,6 +46,6 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "fhir-server-exporter.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "fhir-server-exporter.name" . }}
+app.kubernetes.io/name: {{ include "fhir-server-exporter.fullname" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}

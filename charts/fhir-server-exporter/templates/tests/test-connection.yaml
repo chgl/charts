@@ -3,8 +3,7 @@ kind: Pod
 metadata:
   name: "{{ include "fhir-server-exporter.fullname" . }}-test-metrics-endpoint"
   labels:
-    {{- include "fhir-server-exporter.labels" . | nindent 4 }}
-    app.kubernetes.io/component: test-connection
+    app.kubernetes.io/name: "{{ include "fhir-server-exporter.fullname" . }}-test-metrics-endpoint"
   annotations:
     "helm.sh/hook": test
 spec:

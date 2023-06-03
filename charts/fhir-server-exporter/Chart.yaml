@@ -27,3 +27,7 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: "update fhir-server-exporter image tag to v2.1.7"
+    - kind: added
+      description: "values to configure PDB"
+    - kind: added
+      description: "values to configure topologySpreadConstraints"

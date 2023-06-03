@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "fhir-server-exporter.fullname" $ }}-exporter
+  name: {{ include "fhir-server-exporter.fullname" $ }}
   labels:
     {{- include "fhir-server-exporter.labels" $ | nindent 4 }}
     app.kubernetes.io/component: fhir-server-exporter
@@ -69,11 +69,11 @@ spec:
           env:
             - name: COMPlus_EnableDiagnostics
               value: "0"
-            - name: FHIRSERVERURL
+            - name: FhirServerUrl
               value: {{ tpl .fhirServerUrl $ }}
-            - name: FHIRSERVERNAME
+            - name: FhirServerName
               value: {{ tpl .fhirServerName $ }}
-            - name: FETCHINTERVALSECONDS
+            - name: FetchIntervalSeconds
               value: {{ .fetchIntervalSeconds | quote }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
@@ -95,6 +95,10 @@ spec:
       {{- end }}
       {{- with .tolerations }}
       tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .topologySpreadConstraints }}
+      topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if .customQueries }}

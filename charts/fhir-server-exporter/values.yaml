@@ -116,3 +116,23 @@ curl: # +doc-gen:ignore
     registry: docker.io
     repository: curlimages/curl
     tag: 8.1.1@sha256:5af13420d29b7aa7007419347519984ce44778aaf89c475c25edc9b48ca125b2
+
+podDisruptionBudget:
+  # create a PodDisruptionBudget resource for the pods
+  enabled: false
+  # Minimum available instances; ignored if there is no PodDisruptionBudget
+  minAvailable: 1
+  # Maximum unavailable instances; ignored if there is no PodDisruptionBudget
+  maxUnavailable: ""
+
+# pod topology spread configuration
+# see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
+topologySpreadConstraints:
+  []
+  # - maxSkew: 1
+  #   topologyKey: topology.kubernetes.io/zone
+  #   whenUnsatisfiable: ScheduleAnyway
+  #   labelSelector:
+  #     matchLabels:
+  #       app.kubernetes.io/instance: my-fhir-server-exporter
+  #       app.kubernetes.io/name: fhir-server-exporter
