@@ -7,8 +7,8 @@
 ```bash
 $ helm repo add chgl https://chgl.github.io/charts
 $ helm repo update
-$ helm search repo chgl/magnifhir --version=1.0.9
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.9
+$ helm search repo chgl/magnifhir --version=1.0.10
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.10
 ```
 
 ## Introduction
@@ -25,7 +25,7 @@ This chart deploys the magniFHIR app on a [Kubernetes](http://kubernetes.io) clu
 To install/upgrade the chart with the release name `magnifhir`:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.9
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.10
 ```
 
 The command deploys the magniFHIR app on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -75,12 +75,12 @@ The following table lists the configurable parameters of the `magnifhir` chart a
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.9 --set replicaCount=1
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.10 --set replicaCount=1
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.9 --values values.yaml
+$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.10 --values values.yaml
 ```
