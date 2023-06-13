@@ -56,5 +56,8 @@ jobs:
             if [ -z "${pkg:-}" ]; then
               break
             fi
-            helm push "${pkg}" oci://ghcr.io/${{ github.repository }}
+            helm push "${pkg}" oci://ghcr.io/${{ github.repository }} 2> .digest
+            OCI_ARTIFACT_PATH="$(awk -F "[, ]+" '/Pushed/{print $NF}' < .digest)"
+            OCI_ARTIFACT_DIGEST="$(awk -F "[, ]+" '/Digest/{print $NF}' < .digest)"
+            cosign sign --yes "${OCI_ARTIFACT_PATH}@${OCI_ARTIFACT_DIGEST}"
           done
