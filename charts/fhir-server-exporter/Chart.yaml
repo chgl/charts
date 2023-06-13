@@ -13,7 +13,7 @@ keywords:
   - "telemetry"
   - "prometheus exporter"
 kubeVersion: ">= 1.19.0"
-version: 1.0.20
+version: 1.0.21
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
