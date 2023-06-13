@@ -1346,6 +1346,39 @@ entries:
         - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
     apiVersion: v2
     appVersion: 2.x
+    created: "2023-06-13T23:02:30.092549616Z"
+    description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
+    digest: 6e390f908d5fc8221995be2d9e24c6dec9f9d81aed32f88800008aa12769528f
+    home: https://github.com/chgl/fhir-server-exporter
+    keywords:
+    - fhir
+    - metrics
+    - telemetry
+    - prometheus exporter
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.0.18/fhir-server-exporter-1.0.18.tgz
+    version: 1.0.18
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "noop release to test chart signing"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 2.x
     created: "2023-06-13T22:54:52.285818367Z"
     description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
     digest: 0d3b1d6a8a30e8b9129ea64fc69146eaf3f294615b9aae9794dbf147589674b0
@@ -7134,4 +7167,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-06-13T22:54:52.286764068Z"
+generated: "2023-06-13T23:02:30.09322652Z"
