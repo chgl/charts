@@ -168,4 +168,4 @@ curl: # +doc-gen:ignore
   image:
     registry: docker.io
     repository: curlimages/curl
-    tag: 8.1.2@sha256:ef501f5efa67be41da985b441bd63130ef39d4d6a4f9c035d737884357438b6c
+    tag: 8.1.2@sha256:fcf8b68aa7af25898d21b47096ceb05678665ae182052283bd0d7128149db55f
