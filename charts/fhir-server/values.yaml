@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: mcr.microsoft.com
   repository: healthcareapis/r4-fhir-server
-  tag: 3.4.190@sha256:a4ea51d7e4646743b993b08a559ba85b0be314461a9089ee38954dae8cf7f4fe
+  tag: 3.4.205@sha256:a95c66613a870e2b0c851859b5fb5ea3f0a22f7a921323776c3270e0fd02ef5b
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -168,4 +168,4 @@ curl: # +doc-gen:ignore
   image:
     registry: docker.io
     repository: curlimages/curl
-    tag: 8.1.2@sha256:ef501f5efa67be41da985b441bd63130ef39d4d6a4f9c035d737884357438b6c
+    tag: 8.1.2@sha256:fcf8b68aa7af25898d21b47096ceb05678665ae182052283bd0d7128149db55f
