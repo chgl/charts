@@ -1,86 +1,50 @@
-# magniFHIR
+# magniFHIR Helm Chart
 
-[magniFHIR](https://github.com/chgl/magniFHIR) - Helm chart for deploying the magniFHIR app
+![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
-## TL;DR;
-
-```bash
-$ helm repo add chgl https://chgl.github.io/charts
-$ helm repo update
-$ helm search repo chgl/magnifhir --version=1.0.11
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.11
-```
-
-## Introduction
-
-This chart deploys the magniFHIR app on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart deploys the magniFHIR FHIR resource browser on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
 
-- Kubernetes v1.19+
-- Helm v3
+- Kubernetes v1.21+
+- Helm v3.8+
 
-## Installing the Chart
+## Sample usage
 
-To install/upgrade the chart with the release name `magnifhir`:
-
-```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.11
+```sh
+helm install recruit oci://ghcr.io/chgl/charts/magnifhir -n magnifhir --create-namespace
 ```
 
-The command deploys the magniFHIR app on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+## Values
 
-> **Tip**: List all releases using `helm list`
+| Key                             | Type   | Default                        | Description                                                                                                                                                   |
+| ------------------------------- | ------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| affinity                        | object | `{}`                           | affinity for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>                             |
+| appsettings                     | string | `""`                           | provide an `appsettings` object to configure the `FhirServers` and other settings via JSON see <https://github.com/chgl/magniFHIR#configuration> for details. |
+| deploymentAnnotations           | object | `{}`                           | annotations applied to the server deployment                                                                                                                  |
+| extraEnv                        | list   | `[]`                           | extra env vars to set on the magnifhir container                                                                                                              |
+| fullnameOverride                | string | `""`                           | fully override the release name                                                                                                                               |
+| imagePullSecrets                | list   | `[]`                           | image pull secrets used by all pods                                                                                                                           |
+| ingress.annotations             | object | `{}`                           | additional annotations for the Ingress resource                                                                                                               |
+| ingress.enabled                 | bool   | `false`                        | if enabled, create an ingress resource to access the web ui                                                                                                   |
+| ingress.hosts[0].host           | string | `"magnifhir.127.0.0.1.nip.io"` |                                                                                                                                                               |
+| ingress.hosts[0].paths[0]       | string | `"/"`                          |                                                                                                                                                               |
+| ingress.ingressClassName        | string | `""`                           | name of the IngressClass resource to use for this ingress                                                                                                     |
+| ingress.tls                     | list   | `[]`                           | TLS configuration                                                                                                                                             |
+| nameOverride                    | string | `""`                           | partially override the release name                                                                                                                           |
+| nodeSelector                    | object | `{}`                           | node labels for pods assignment see: <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/>                                               |
+| podAnnotations                  | object | `{}`                           | annotations applied to the server pod                                                                                                                         |
+| podSecurityContext              | object | `{}`                           | security context applied at the Pod level                                                                                                                     |
+| replicaCount                    | int    | `1`                            | number of replicas                                                                                                                                            |
+| resources                       | object | `{}`                           | specify resource requests and limits                                                                                                                          |
+| service.metrics.port            | int    | `8081`                         | port for the metrics endpoint                                                                                                                                 |
+| service.port                    | int    | `8080`                         | port for the web interface                                                                                                                                    |
+| service.type                    | string | `"ClusterIP"`                  | type of service                                                                                                                                               |
+| serviceMonitor.additionalLabels | object | `{}`                           | additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`                                                                           |
+| serviceMonitor.enabled          | bool   | `false`                        | if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring                                                                        |
+| tolerations                     | list   | `[]`                           | tolerations for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>                                                |
+| topologySpreadConstraints       | list   | `[]`                           | pod topology spread configuration see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>                              |
 
-## Uninstalling the Chart
+---
 
-To uninstall the `magnifhir`:
-
-```bash
-$ helm uninstall magnifhir -n magnifhir
-```
-
-The command removes all the Kubernetes components associated with the chart and deletes the release.
-
-## Configuration
-
-The following table lists the configurable parameters of the `magnifhir` chart and their default values.
-
-| Parameter                       | Description                                                                                                                                                   | Default                |
-| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| serviceMonitor.enabled          | if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring                                                                        | <code>false</code>     |
-| serviceMonitor.additionalLabels | additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`                                                                           | <code>{}</code>        |
-| replicaCount                    | number of replicas                                                                                                                                            | <code>1</code>         |
-| imagePullSecrets                | image pull secrets used by all pods                                                                                                                           | <code>[]</code>        |
-| nameOverride                    | partially override the release name                                                                                                                           | <code>""</code>        |
-| fullnameOverride                | fully override the release name                                                                                                                               | <code>""</code>        |
-| deploymentAnnotations           | annotations applied to the server deployment                                                                                                                  | <code>{}</code>        |
-| podAnnotations                  | annotations applied to the server pod                                                                                                                         | <code>{}</code>        |
-| podSecurityContext              | security context applied at the Pod level                                                                                                                     | <code>{}</code>        |
-| service.type                    | type of service                                                                                                                                               | <code>ClusterIP</code> |
-| service.port                    | port for the web interface                                                                                                                                    | <code>8080</code>      |
-| service.metrics.port            | port for the metrics endpoint                                                                                                                                 | <code>8081</code>      |
-| resources                       | specify resource requests and limits                                                                                                                          | <code>{}</code>        |
-| nodeSelector                    | node labels for pods assignment see: <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/>                                               | <code>{}</code>        |
-| tolerations                     | tolerations for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>                                                | <code>[]</code>        |
-| affinity                        | affinity for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>                             | <code>{}</code>        |
-| topologySpreadConstraints       | pod topology spread configuration see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>                              | <code>[]</code>        |
-| extraEnv                        | extra env vars to set on the magnifhir container                                                                                                              | <code>[]</code>        |
-| appsettings                     | provide an `appsettings` object to configure the `FhirServers` and other settings via JSON see <https://github.com/chgl/magniFHIR#configuration> for details. | <code>""</code>        |
-| ingress.enabled                 | if enabled, create an ingress resource to access the web ui                                                                                                   | <code>false</code>     |
-| ingress.ingressClassName        | name of the IngressClass resource to use for this ingress                                                                                                     | <code>""</code>        |
-| ingress.annotations             | additional annotations for the Ingress resource                                                                                                               | <code>{}</code>        |
-| ingress.tls                     | TLS configuration                                                                                                                                             | <code>[]</code>        |
-
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
-
-```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.11 --set replicaCount=1
-```
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while
-installing the chart. For example:
-
-```bash
-$ helm upgrade -i magnifhir chgl/magnifhir -n magnifhir --create-namespace --version=1.0.11 --values values.yaml
-```
+Autogenerated from chart metadata using [helm-docs v1.11.0](https://github.com/norwoodj/helm-docs/releases/v1.11.0)

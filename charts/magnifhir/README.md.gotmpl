@@ -1,0 +1,20 @@
+# magniFHIR Helm Chart
+
+{{ template "chart.typeBadge" . }}
+
+This chart deploys the magniFHIR FHIR resource browser on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+
+## Prerequisites
+
+- Kubernetes v1.21+
+- Helm v3.8+
+
+## Sample usage
+
+```sh
+helm install recruit oci://ghcr.io/chgl/charts/magnifhir -n magnifhir --create-namespace
+```
+
+{{ template "chart.valuesSection" . }}
+
+{{ template "helm-docs.versionFooter" . }}
