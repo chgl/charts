@@ -1,41 +1,43 @@
 serviceMonitor:
-  # if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
+  # -- if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
   enabled: false
-  # additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`
+  # -- additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`
   additionalLabels: {}
   # namespace: monitoring
   # interval: 30s
   # scrapeTimeout: 10s
 
-# number of replicas
+# -- number of replicas
 replicaCount: 1
 
-# the exporter image
-image: # +doc-gen:ignore
+# -- the application image
+# @ignored
+image:
   registry: ghcr.io
   repository: chgl/magnifhir
-  tag: v1.1.7@sha256:8b87ccd792f492c31ba751f63b1d88251b029492b0b6862a60713f1e7b787060
+  tag: v1.3.0@sha256:c03bb8be0705bf5b6b997601d74f7930ec1dea973dc16de6a7a577bf81b8e072
   pullPolicy: IfNotPresent
 
-# image pull secrets used by all pods
+# -- image pull secrets used by all pods
 imagePullSecrets: []
-# partially override the release name
+# -- partially override the release name
 nameOverride: ""
-# fully override the release name
+# -- fully override the release name
 fullnameOverride: ""
 
-# annotations applied to the server deployment
+# -- annotations applied to the server deployment
 deploymentAnnotations: {}
 
-# annotations applied to the server pod
+# -- annotations applied to the server pod
 podAnnotations: {}
 
-# security context applied at the Pod level
+# -- security context applied at the Pod level
 podSecurityContext:
   {}
   # fsGroup: 2000
 
-securityContext: # +doc-gen:ignore
+# @ignored
+securityContext:
   allowPrivilegeEscalation: false
   capabilities:
     drop:
@@ -47,17 +49,16 @@ securityContext: # +doc-gen:ignore
   seccompProfile:
     type: RuntimeDefault
 
-# service to expose the server at
 service:
-  # type of service
+  # -- type of service
   type: ClusterIP
-  # port for the web interface
+  # -- port for the web interface
   port: 8080
   metrics:
-    # port for the metrics endpoint
+    # -- port for the metrics endpoint
     port: 8081
 
-# specify resource requests and limits
+# -- specify resource requests and limits
 resources:
   {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -71,19 +72,19 @@ resources:
   #   cpu: 100m
   #   memory: 128Mi
 
-# node labels for pods assignment
+# -- node labels for pods assignment
 # see: <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/>
 nodeSelector: {}
 
-# tolerations for pods assignment
+# -- tolerations for pods assignment
 # see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>
 tolerations: []
 
-# affinity for pods assignment
+# -- affinity for pods assignment
 # see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>
 affinity: {}
 
-# pod topology spread configuration
+# -- pod topology spread configuration
 # see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
 topologySpreadConstraints:
   []
@@ -95,28 +96,30 @@ topologySpreadConstraints:
   #       app.kubernetes.io/component: magnifhir
   #       app.kubernetes.io/instance: magnifhir
 
-# readiness probe
-readinessProbe: # +doc-gen:ignore
+# -- readiness probe
+# @ignored
+readinessProbe:
   failureThreshold: 5
   initialDelaySeconds: 30
   periodSeconds: 20
   successThreshold: 1
   timeoutSeconds: 20
 
-# readiness probe
-livenessProbe: # +doc-gen:ignore
+# -- readiness probe
+# @ignored
+livenessProbe:
   failureThreshold: 5
   initialDelaySeconds: 30
   periodSeconds: 20
   successThreshold: 1
   timeoutSeconds: 20
 
-# extra env vars to set on the magnifhir container
+# -- extra env vars to set on the magnifhir container
 extraEnv: []
 # - name: "FOO"
 #   value: "BAR"
 
-# provide an `appsettings` object to configure the `FhirServers` and other settings via JSON
+# -- provide an `appsettings` object to configure the `FhirServers` and other settings via JSON
 # see <https://github.com/chgl/magniFHIR#configuration> for details.
 appsettings:
   ""
@@ -141,11 +144,11 @@ appsettings:
   # }
 
 ingress:
-  # if enabled, create an ingress resource to access the web ui
+  # -- if enabled, create an ingress resource to access the web ui
   enabled: false
-  # name of the IngressClass resource to use for this ingress
+  # -- name of the IngressClass resource to use for this ingress
   ingressClassName: ""
-  # additional annotations for the Ingress resource
+  # -- additional annotations for the Ingress resource
   annotations:
     {}
     # kubernetes.io/ingress.class: nginx
@@ -154,7 +157,7 @@ ingress:
     - host: magnifhir.127.0.0.1.nip.io
       paths:
         - "/"
-  # TLS configuration
+  # -- TLS configuration
   tls: []
   #  - secretName: magnifhir-example-tls
   #    hosts:
