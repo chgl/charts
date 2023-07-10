@@ -3098,6 +3098,41 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "updated ghcr.io/chgl/magnifhir to v1.3.0"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/screenshots: |
+        - title: Configure multiple FHIR servers to connect to
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/server-selection.png
+        - title: List all Patient resources stored in the server
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-browser.png
+        - title: See a Patient's conditions, observations, and medications
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-record-conditions.png
+    apiVersion: v2
+    appVersion: 1.x
+    created: "2023-07-10T21:03:15.234869443Z"
+    description: A Helm chart for deploying the magniFHIR app on Kubernetes.
+    digest: dac0364cc92229a943a631274193ea27cf152930b92320bf199111e9009b53b4
+    home: https://github.com/chgl/magniFHIR
+    keywords:
+    - fhir
+    - healthcare
+    - electronic health record
+    - blazor
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: magnifhir
+    sources:
+    - https://github.com/chgl/magniFHIR
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/magnifhir-1.1.0/magnifhir-1.1.0.tgz
+    version: 1.1.0
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "update docker.io/curlimages/curl:8.1.2 docker digest to fcf8b68"
       artifacthub.io/license: Apache-2.0
       artifacthub.io/screenshots: |
@@ -7407,4 +7442,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-06-25T16:52:08.957668554Z"
+generated: "2023-07-10T21:03:15.235489443Z"
