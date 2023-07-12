@@ -46,27 +46,13 @@ spec:
             - name: http-metrics
               containerPort: 8081
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /readyz
-              port: http
           {{- with .livenessProbe }}
-            initialDelaySeconds: {{ .initialDelaySeconds }}
-            periodSeconds: {{ .periodSeconds }}
-            timeoutSeconds: {{ .timeoutSeconds }}
-            successThreshold: {{ .successThreshold }}
-            failureThreshold: {{ .failureThreshold }}
+          livenessProbe:
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-          readinessProbe:
-            httpGet:
-              path: /livez
-              port: http
           {{- with .readinessProbe }}
-            initialDelaySeconds: {{ .initialDelaySeconds }}
-            periodSeconds: {{ .periodSeconds }}
-            timeoutSeconds: {{ .timeoutSeconds }}
-            successThreshold: {{ .successThreshold }}
-            failureThreshold: {{ .failureThreshold }}
+          readinessProbe:
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           resources:
             {{- toYaml .resources | nindent 12 }}

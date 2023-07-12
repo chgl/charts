@@ -99,15 +99,21 @@ topologySpreadConstraints:
 # -- readiness probe
 # @ignored
 readinessProbe:
+  httpGet:
+    path: /readyz
+    port: http
   failureThreshold: 5
   initialDelaySeconds: 30
   periodSeconds: 20
   successThreshold: 1
   timeoutSeconds: 20
 
-# -- readiness probe
+# -- liveness probe
 # @ignored
 livenessProbe:
+  httpGet:
+    path: /livez
+    port: http
   failureThreshold: 5
   initialDelaySeconds: 30
   periodSeconds: 20
@@ -116,8 +122,11 @@ livenessProbe:
 
 # -- extra env vars to set on the magnifhir container
 extraEnv: []
-# - name: "FOO"
-#   value: "BAR"
+# - name: "FhirServers__0__Auth__Basic__Password"
+#     valueFrom:
+#       secretKeyRef:
+#         name: "fhir-basic-auth-secret"
+#         key: "password"
 
 # -- provide an `appsettings` object to configure the `FhirServers` and other settings via JSON
 # see <https://github.com/chgl/magniFHIR#configuration> for details.

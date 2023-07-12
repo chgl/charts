@@ -26,13 +26,6 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
-      resources:
-        limits:
-          cpu: 100m
-          memory: 64Mi
-        requests:
-          cpu: 100m
-          memory: 64Mi
       livenessProbe:
         exec:
           command: ["true"]
@@ -55,13 +48,6 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
-      resources:
-        limits:
-          cpu: 100m
-          memory: 64Mi
-        requests:
-          cpu: 100m
-          memory: 64Mi
       livenessProbe:
         exec:
           command: ["true"]
