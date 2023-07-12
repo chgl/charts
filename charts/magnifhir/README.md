@@ -12,7 +12,7 @@ This chart deploys the magniFHIR FHIR resource browser on a [Kubernetes](http://
 ## Sample usage
 
 ```sh
-helm install recruit oci://ghcr.io/chgl/charts/magnifhir -n magnifhir --create-namespace
+helm install magnifhir oci://ghcr.io/chgl/charts/magnifhir -n magnifhir --create-namespace
 ```
 
 ## Values
