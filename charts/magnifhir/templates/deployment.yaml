@@ -79,7 +79,7 @@ spec:
           {{- if .appsettings }}
           volumeMounts:
             - name: magnifhir-appsettings
-              mountPath: /app/appsettings.Production.json
+              mountPath: /opt/magnifhir/appsettings.Production.json
               readOnly: true
               subPath: appsettings.Production.json
           {{- end }}
