@@ -20,6 +20,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      # via <https://github.com/helm/chart-testing/issues/577>
+      - run: |
+          git branch "master" "origin/master"
+
       - name: Check if documentation is up-to-date
         run: |
           generate-docs.sh
@@ -71,6 +75,10 @@ jobs:
         uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         with:
           fetch-depth: 0
+
+      # via <https://github.com/helm/chart-testing/issues/577>
+      - run: |
+          git branch "master" "origin/master"
 
       - name: Set up chart-testing
         uses: helm/chart-testing-action@e8788873172cb653a90ca2e819d79d65a66d4e76 # v2.4.0
