@@ -7351,6 +7351,37 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/ohdsi-0.1.4/ohdsi-0.1.4.tgz
     version: 0.1.4
+  pathling-server:
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
+          description: first release
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+    apiVersion: v2
+    created: "2023-09-03T15:43:26.890932915Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.8.1
+    description: A Helm chart for deploying the Pathling server
+    digest: bbfebbbe5bece476337dee379d261f12e7fea3c76ccef010e789a0de167a567c
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.1.0/pathling-server-0.1.0.tgz
+    version: 0.1.0
   vfps:
   - annotations:
       artifacthub.io/changes: |-
@@ -7723,4 +7754,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-08-11T12:08:42.53252632Z"
+generated: "2023-09-03T15:43:26.891600011Z"
