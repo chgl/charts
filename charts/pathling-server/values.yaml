@@ -49,6 +49,10 @@ service:
   type: ClusterIP
   # -- service port
   port: 8080
+  spark:
+    ui:
+      # -- service port for the Spark UI
+      port: 4040
 
 # resource requests and limits
 resources:

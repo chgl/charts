@@ -68,6 +68,9 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
+            - name: spark-ui-http
+              containerPort: 4040
+              protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:

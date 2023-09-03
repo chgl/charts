@@ -13,7 +13,7 @@ dependencies:
     version: 12.8.1
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.1.0
+version: 0.2.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -25,4 +25,4 @@ annotations:
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: added
-      description: first release
+      description: expose Spark UI at port 4040

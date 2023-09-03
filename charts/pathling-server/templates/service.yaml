@@ -11,5 +11,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: {{ .Values.service.spark.ui.port }}
+      targetPort: spark-ui-http
+      protocol: TCP
+      name: spark-ui-http
   selector:
     {{- include "pathling-server.matchLabels" . | nindent 4 }}
