@@ -1,0 +1,256 @@
+# -- metadata.annotations to apply to the deployment
+deploymentAnnotations: {}
+
+# -- String to partially override fullname template (will maintain the release name)
+nameOverride: ""
+
+# -- String to fully override fullname template
+fullnameOverride: ""
+
+# -- image pull secrets
+imagePullSecrets: []
+
+# @ignored
+image:
+  registry: docker.io
+  repository: aehrc/pathling
+  tag: 6.3.1@sha256:2e5c1692592575c2f8320afdef83322ea346a82d6a92e56544679bb02185d02d
+  pullPolicy: IfNotPresent
+
+# -- number of replicas. This components can also be easily scaled horizontally if necessary.
+replicaCount: 1
+
+# -- pod annotations
+podAnnotations: {}
+
+# -- the pod security context
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+# -- the container security context
+# @ignored
+securityContext:
+  allowPrivilegeEscalation: false
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 99
+  runAsGroup: 99
+  seccompProfile:
+    type: RuntimeDefault
+
+# -- service used to expose the API
+service:
+  # -- type of service
+  type: ClusterIP
+  # -- service port
+  port: 8080
+
+# resource requests and limits
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+# -- extra environment variables to apply to the container
+extraEnv: []
+# - name: pathling.spark.appName
+#   value: "aDifferentName"
+
+ingress:
+  # create an Ingress for the application
+  enabled: false
+  # ingressClassName to use
+  className: ""
+  # extra annotations to apply to the Ingress resource
+  annotations:
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  # list of ingress hosts
+  hosts:
+    - host: pathling-server.127.0.0.1.nip.io
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+          portName: http
+  # TLS configuration
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+# -- node labels for pods assignment
+# see: <https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/>
+nodeSelector: {}
+
+# -- tolerations for pods assignment
+# see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>
+tolerations: []
+
+# -- affinity for pods assignment
+# see: <https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity>
+affinity: {}
+
+# @ignored
+readinessProbe:
+  httpGet:
+    path: /fhir/metadata?_summary=true
+    port: http
+  failureThreshold: 5
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+
+# @ignored
+livenessProbe:
+  httpGet:
+    path: /fhir/metadata?_summary=true
+    port: http
+  failureThreshold: 10
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 10
+
+# -- pod topology spread configuration
+# see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
+topologySpreadConstraints:
+  []
+  # - maxSkew: 1
+  #   topologyKey: topology.kubernetes.io/zone
+  #   whenUnsatisfiable: ScheduleAnyway
+  #   labelSelector:
+  #     matchLabels:
+  #       app.kubernetes.io/name: pathling-server
+  #       app.kubernetes.io/instance: pathling-server
+
+podDisruptionBudget:
+  # -- create a PodDisruptionBudget resource
+  enabled: false
+  # -- Minimum available instances; ignored if there is no PodDisruptionBudget
+  minAvailable: 1
+  # -- Maximum unavailable instances; ignored if there is no PodDisruptionBudget
+  maxUnavailable: ""
+
+autoscaling:
+  # -- enable horizontal pod autoscaling
+  enabled: false
+  # -- minReplicas is the lower limit for the number of replicas to which the autoscaler can scale down.
+  # It defaults to 1 pod. minReplicas is allowed to be 0 if the alpha feature gate HPAScaleToZero is
+  # enabled and at least one Object or External metric is configured.
+  # Scaling is active as long as at least one metric value is available.
+  minReplicas: 1
+  # -- upper limit for the number of pods that can be set by the autoscaler; cannot be smaller than `minReplicas`.
+  maxReplicas: 5
+  # -- target average CPU utilization (represented as a percentage of requested CPU)
+  # over all the pods; if not specified the default autoscaling policy will be used.
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+serviceAccount:
+  # -- Specifies whether a service account should be created
+  create: false
+  # -- Annotations to add to the service account
+  annotations: {}
+  # -- The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  # -- whether to automount the SA token
+  automountServiceAccountToken: true
+
+spark:
+  rbac:
+    # -- specifies whether an RBAC config should be created that allows the server's service account
+    # to create required resources in Kubernetes
+    create: false
+
+# @ignored
+curl: # +doc-gen:ignore
+  image:
+    registry: docker.io
+    repository: curlimages/curl
+    tag: 8.2.1@sha256:bb0843a1307b1aa73f65f24379d11dde881c16db62ba50810de0c64d48e740ed
+
+# -- container security context applied to init containers and the Helm test pods
+# @ignored
+restrictedContainerSecurityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  privileged: false
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 65534
+  runAsGroup: 65534
+  seccompProfile:
+    type: RuntimeDefault
+
+warehouse:
+  # -- base URL at which Pathling will look for data files (`pathling.storage.warehouseUrl`).
+  url: s3://pathling-warehouse
+  s3:
+    # -- S3 endpoint (`fs.s3a.endpoint`)
+    endpoint: ""
+    credentials:
+      # -- access key for S3 (`fs.s3a.access.key`)
+      accessKey: ""
+      # -- secret key for S3 (`fs.s3a.secret.key`)
+      secretKey: ""
+      existingSecret:
+        # -- name of an existing secret containing the access- and secret-key.
+        name: ""
+        # -- name of the key inside the secret that refers to the access key
+        accessKeyKey: "s3-access-key"
+        # -- name of the key inside the secret that refers to the secret key
+        secretKeyKey: "s3-secret-key"
+
+minio:
+  # -- set to `true` to enable the included minio sub-chart and auto-configure
+  # the server to use it for storage
+  enabled: true
+
+  # -- create a bucket used for the pathling server warehouse by default.
+  # See `warehouse.url`.
+  defaultBuckets: "pathling-warehouse"
+
+  # @ignored
+  service:
+    ports:
+      api: 9000
+
+  # @ignored
+  containerSecurityContext:
+    enabled: true
+    allowPrivilegeEscalation: false
+    runAsUser: 1001
+    runAsNonRoot: true
+    capabilities:
+      drop:
+        - ALL
+    seccompProfile:
+      type: RuntimeDefault
+
+tests:
+  # -- configure the test pods resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi

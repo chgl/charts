@@ -1,0 +1,94 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "pathling-server.fullname" . }}
+  labels:
+    {{- include "pathling-server.labels" . | nindent 4 }}
+  {{- with .Values.deploymentAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "pathling-server.matchLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+        {{- with .Values.podAnnotations }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "pathling-server.matchLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "pathling-server.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.serviceAccount.automountServiceAccountToken }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: pathling-server
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          livenessProbe:
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
+          env:
+            - name: pathling.storage.warehouseUrl
+              value: "{{ .Values.warehouse.url }}"
+            - name: fs.s3a.endpoint
+              value: "{{ include "pathling-server.s3Endpoint" . }}"
+            - name: fs.s3a.aws.credentials.provider
+              value: "org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider"
+            - name: fs.s3a.access.key
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "pathling-server.s3CredentialsSecretName" . }}
+                  key: {{ include "pathling-server.s3AccessKeySecretKey" . }}
+            - name: fs.s3a.secret.key
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "pathling-server.s3CredentialsSecretName" . }}
+                  key: {{ include "pathling-server.s3SecretKeySecretKey" . }}
+            - name: fs.s3a.impl
+              value: "org.apache.hadoop.fs.s3a.S3AFileSystem"
+            - name: fs.s3a.path.style.access
+              value: "true"
+            {{- if .Values.extraEnv }}
+            {{- toYaml .Values.extraEnv | nindent 12 }}
+            {{- end }}
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp-volume
+      volumes:
+        - name: tmp-volume
+          emptyDir: {}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

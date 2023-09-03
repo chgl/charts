@@ -1,0 +1,28 @@
+apiVersion: v2
+name: pathling-server
+description: A Helm chart for deploying the Pathling server
+type: application
+sources:
+  - https://github.com/aehrc/pathling
+home: https://pathling.csiro.au/docs/server
+maintainers:
+  - name: chgl
+    url: https://github.com/chgl
+dependencies:
+  - name: minio
+    version: 12.8.1
+    repository: oci://registry-1.docker.io/bitnamicharts
+    condition: minio.enabled
+version: 0.1.0
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/operator: "false"
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/recommendations: |
+    - url: https://artifacthub.io/packages/helm/bitnami/minio
+  # When using the list of objects option the valid supported kinds are
+  # added, changed, deprecated, removed, fixed and security.
+  artifacthub.io/changes: |
+    - kind: added
+      description: first release
