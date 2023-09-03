@@ -7355,6 +7355,36 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: added
+          description: expose Spark UI at port 4040
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+    apiVersion: v2
+    created: "2023-09-03T19:20:29.890555262Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.8.1
+    description: A Helm chart for deploying the Pathling server
+    digest: ca615381d604bce8fd96da051cac4b6e2a759c5eec8fdfeabb13cdfe507b9dc7
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.2.0/pathling-server-0.2.0.tgz
+    version: 0.2.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: added
           description: first release
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -7754,4 +7784,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-09-03T15:43:26.891600011Z"
+generated: "2023-09-03T19:20:29.891151667Z"
