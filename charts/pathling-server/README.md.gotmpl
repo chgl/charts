@@ -1,0 +1,19 @@
+{{ template "chart.header" . }}
+
+{{ template "chart.typeBadge" . }}
+
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
+
+## Installation
+
+```console
+helm install pathling-server oci://ghcr.io/chgl/charts/pathling-server --create-namespace -n pathling-server
+```
+
+{{ template "chart.valuesSection" . }}
+
+{{ template "helm-docs.versionFooter" . }}

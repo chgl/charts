@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "pathling-server.fullname" . }}-test-connection"
+  labels:
+    {{- include "pathling-server.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/hook: test-success
+spec:
+  restartPolicy: Never
+  containers:
+    - name: probe-metadata-endpoint
+      image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
+      imagePullPolicy: IfNotPresent
+      command: ["curl", "--fail-with-body"]
+      args: ["http://{{ include "pathling-server.fullname" . }}:{{ .Values.service.port }}/fhir/metadata"]
+      {{- with $.Values.restrictedContainerSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tests.resources }}
+      resources:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]
+    - name: probe-patient-endpoint
+      image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
+      imagePullPolicy: IfNotPresent
+      command: ["curl", "--fail-with-body"]
+      args: ["http://{{ include "pathling-server.fullname" . }}:{{ .Values.service.port }}/fhir/Patient?_count=1"]
+      {{- with $.Values.restrictedContainerSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tests.resources }}
+      resources:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]

@@ -1,0 +1,30 @@
+{{- if .Values.spark.rbac.create -}}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "pathling-server.fullname" . }}-spark-role
+  labels:
+    {{- include "pathling-server.labels" . | nindent 4 }}
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "pathling-server.fullname" . }}-spark-role-binding
+  labels:
+    {{- include "pathling-server.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: {{ include "pathling-server.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: {{ include "pathling-server.fullname" . }}-spark-role
+{{- end }}
