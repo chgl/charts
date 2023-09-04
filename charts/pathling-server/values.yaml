@@ -233,6 +233,10 @@ minio:
   defaultBuckets: "pathling-warehouse"
 
   # @ignored
+  auth:
+    existingSecret: ""
+
+  # @ignored
   service:
     ports:
       api: 9000
