@@ -7355,6 +7355,36 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
+          description: add configmap permissions to role
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+    apiVersion: v2
+    created: "2023-09-05T16:03:30.023145324Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.8.1
+    description: A Helm chart for deploying the Pathling server
+    digest: 54960e0ac15a9ef4c2847a4705ad42729934a6560bcd9fbc48ec11446573d97e
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.2.2/pathling-server-0.2.2.tgz
+    version: 0.2.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
           description: use minio.auth.existingSecret if set
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -7814,4 +7844,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-09-04T09:11:19.481707622Z"
+generated: "2023-09-05T16:03:30.023678739Z"
