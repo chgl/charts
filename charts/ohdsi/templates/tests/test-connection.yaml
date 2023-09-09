@@ -20,13 +20,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.tests.resources }}
       resources:
-        limits:
-          cpu: 100m
-          memory: 64Mi
-        requests:
-          cpu: 100m
-          memory: 64Mi
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       livenessProbe:
         exec:
           command: ["true"]
@@ -44,13 +41,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .Values.tests.resources }}
       resources:
-        limits:
-          cpu: 100m
-          memory: 64Mi
-        requests:
-          cpu: 100m
-          memory: 64Mi
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       livenessProbe:
         exec:
           command: ["true"]

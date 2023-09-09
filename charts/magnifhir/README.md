@@ -42,6 +42,7 @@ helm install magnifhir oci://ghcr.io/chgl/charts/magnifhir -n magnifhir --create
 | service.type                    | string | `"ClusterIP"`                  | type of service                                                                                                                                               |
 | serviceMonitor.additionalLabels | object | `{}`                           | additional labels to apply to the ServiceMonitor object, e.g. `release: prometheus`                                                                           |
 | serviceMonitor.enabled          | bool   | `false`                        | if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring                                                                        |
+| tests.resources                 | object | `{}`                           | configure the test pods resource requests and limits                                                                                                          |
 | tolerations                     | list   | `[]`                           | tolerations for pods assignment see: <https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/>                                                |
 | topologySpreadConstraints       | list   | `[]`                           | pod topology spread configuration see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>                              |
 
