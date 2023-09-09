@@ -136,3 +136,13 @@ topologySpreadConstraints:
   #     matchLabels:
   #       app.kubernetes.io/instance: my-fhir-server-exporter
   #       app.kubernetes.io/name: fhir-server-exporter
+
+tests:
+  # configure the test pods resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi

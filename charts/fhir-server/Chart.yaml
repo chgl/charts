@@ -10,11 +10,13 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.9.10
+version: 0.9.11
 deprecated: false
 annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update docker.io/curlimages/curl to 8.2.1"
+      description: "made helm test job resource quota configurable - unset by default"
+    - kind: changed
+      description: "update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v3.4.287"
