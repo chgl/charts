@@ -4,11 +4,8 @@
 
 ## TL;DR;
 
-```bash
-$ helm repo add chgl https://chgl.github.io/charts
-$ helm repo update
-$ helm search repo chgl/fhir-server-exporter --version=1.0.24
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.24
+```sh
+helm install fhir-server-exporter oci://ghcr.io/chgl/charts/fhir-server-exporter --create-namespace -n fhir
 ```
 
 ## Introduction
@@ -22,10 +19,10 @@ This chart deploys the FHIR® server exporter. on a [Kubernetes](http://kubernet
 
 ## Installing the Chart
 
-To install/upgrade the chart with the release name `fhir-server-exporter`:
+To install the chart with the release name `fhir-server-exporter`:
 
-```bash
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.24
+```sh
+helm install fhir-server-exporter oci://ghcr.io/chgl/charts/fhir-server-exporter -n fhir
 ```
 
 The command deploys the FHIR® server exporter. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -36,8 +33,8 @@ The command deploys the FHIR® server exporter. on the Kubernetes cluster in the
 
 To uninstall the `fhir-server-exporter`:
 
-```bash
-$ helm uninstall fhir-server-exporter -n fhir
+```sh
+helm uninstall fhir-server-exporter -n fhir
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -74,15 +71,15 @@ The following table lists the configurable parameters of the `fhir-server-export
 | topologySpreadConstraints          | pod topology spread configuration see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>                              | <code>[]</code>        |
 | tests.resources                    | configure the test pods resource requests and limits                                                                                                          | <code>{}</code>        |
 
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm upgrade -i`. For example:
+Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
-```bash
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.24 --set fetchIntervalSeconds=300
+```sh
+helm install fhir-server-exporter oci://ghcr.io/chgl/charts/fhir-server-exporter -n fhir --set fetchIntervalSeconds=300
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
-```bash
-$ helm upgrade -i fhir-server-exporter chgl/fhir-server-exporter -n fhir --create-namespace --version=1.0.24 --values values.yaml
+```sh
+helm install fhir-server-exporter oci://ghcr.io/chgl/charts/fhir-server-exporter -n fhir --values values.yaml
 ```

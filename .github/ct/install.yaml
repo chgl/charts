@@ -1,6 +1,4 @@
 chart-dirs:
   - charts
-chart-repos:
-  - chgl=https://chgl.github.io/charts
 debug: true
 remote: origin
