@@ -5,8 +5,8 @@ project:
   description: Helm chart for deploying OHDSI ATLAS and WebAPI.
   app: the OHDSI WebAPI and ATLAS app.
 repository:
-  url: https://chgl.github.io/charts
-  name: chgl
+  url: oci://ghcr.io/chgl/charts
+  name: oci://ghcr.io/chgl/charts
 chart:
   name: ohdsi
   values: "-- generate from values file --"

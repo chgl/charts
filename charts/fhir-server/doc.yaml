@@ -5,8 +5,8 @@ project:
   description: Helm chart for deploying the Microsoft FHIR Server for Azure.
   app: the Microsoft FHIR Server for Azure.
 repository:
-  url: https://chgl.github.io/charts
-  name: chgl
+  url: oci://ghcr.io/chgl/charts
+  name: oci://ghcr.io/chgl/charts
 chart:
   name: fhir-server
   values: "-- generate from values file --"

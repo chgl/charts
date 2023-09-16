@@ -10,6 +10,9 @@ helm repo add chgl https://chgl.github.io/charts
 helm repo update
 ```
 
+> [!NOTE]
+> Also available as OCI artifacts: <https://github.com/chgl?tab=packages&repo_name=charts>.
+
 ## Development
 
 1. (Optional) Install the [pre-commit](https://pre-commit.com/) hooks

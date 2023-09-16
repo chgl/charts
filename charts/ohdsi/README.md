@@ -2,12 +2,10 @@
 
 [OHDSI](https://github.com/OHDSI) - Helm chart for deploying OHDSI ATLAS and WebAPI.
 
-## TL;DR;
+## TL;DR
 
 ```sh
-helm repo add chgl https://chgl.github.io/charts
-helm repo update
-helm install ohdsi chgl/ohdsi -n ohdsi
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi --create-namespace -n ohdsi
 ```
 
 ## Breaking Changes
@@ -78,8 +76,8 @@ This chart deploys the OHDSI WebAPI and ATLAS app. on a [Kubernetes](http://kube
 
 To install the chart with the release name `ohdsi`:
 
-```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi
+```sh
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi -n ohdsi
 ```
 
 The command deploys the OHDSI WebAPI and ATLAS app. on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
@@ -90,8 +88,8 @@ The command deploys the OHDSI WebAPI and ATLAS app. on the Kubernetes cluster in
 
 To uninstall/delete the `ohdsi`:
 
-```console
-$ helm delete ohdsi -n ohdsi
+```sh
+helm delete ohdsi -n ohdsi
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -212,15 +210,15 @@ The following table lists the configurable parameters of the `ohdsi` chart and t
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
-```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --set postgresql.auth.database="ohdsi"
+```sh
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi -n ohdsi --set postgresql.auth.database="ohdsi"
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
-```console
-$ helm install ohdsi chgl/ohdsi -n ohdsi --values values.yaml
+```sh
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi -n ohdsi --values values.yaml
 ```
 
 ## Initialize the CDM using a custom container
