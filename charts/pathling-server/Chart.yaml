@@ -10,10 +10,10 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 12.8.11
+    version: 12.8.18
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.2.5
+version: 0.2.6
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
