@@ -47,3 +47,22 @@ spec:
       readinessProbe:
         exec:
           command: ["true"]
+    - name: probe-condition-count-endpoint
+      image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
+      imagePullPolicy: IfNotPresent
+      command: ["curl", "--fail-with-body"]
+      args: ["http://{{ include "pathling-server.fullname" . }}:{{ .Values.service.port }}/fhir/Condition?_summary=count"]
+      {{- with $.Values.restrictedContainerSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tests.resources }}
+      resources:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]

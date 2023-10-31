@@ -34,3 +34,28 @@ spec:
       readinessProbe:
         exec:
           command: ["true"]
+    - name: probe-condition-count-endpoint
+      image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
+      command: ["curl", "--fail-with-body"]
+      args: ['http://{{ include "fhir-server.fullname" . }}:{{ .Values.service.port }}/Condition?summary=count']
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      {{- with .Values.tests.resources }}
+      resources:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]
