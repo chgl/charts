@@ -10,10 +10,10 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 12.8.11
+    version: 12.8.18
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.2.5
+version: 0.2.7
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -27,4 +27,6 @@ annotations:
     - kind: changed
       description: "refreshed auto-generated README with latest helm-docs"
     - kind: changed
-      description: "update minio docker tag to v12.8.11"
+      description: "update minio docker tag to v12.8.18"
+    - kind: changed
+      description: "update docker.io/curlimages/curl docker tag to v8.4.0"

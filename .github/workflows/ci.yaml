@@ -9,7 +9,7 @@ permissions: read-all
 jobs:
   lint:
     runs-on: ubuntu-22.04
-    container: ghcr.io/chgl/kube-powertools:v2.2.10@sha256:4059db6e3a06fcb7167894d3439d9cc4955592e96a5bb139fe3c652283432570
+    container: ghcr.io/chgl/kube-powertools:v2.2.15@sha256:d1b10618ecbc73d60c890da4dadd30e4b0b297bf473af8105f4377edceec151c
     steps:
       - name: Add workspace as safe directory
         run: |
@@ -76,12 +76,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      # via <https://github.com/helm/chart-testing/issues/577>
-      - run: |
-          git branch "master" "origin/master"
-
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@e8788873172cb653a90ca2e819d79d65a66d4e76 # v2.4.0
+        uses: helm/chart-testing-action@b43128a8b25298e1e7b043b78ea6613844e079b1 # v2.6.0
 
       - name: Run chart-testing (list-changed)
         id: list-changed
