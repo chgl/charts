@@ -27,7 +27,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/fhir-server-exporter
-  tag: v2.1.11@sha256:19b6159d15c5c499251b51d441e8780f0b28e4e9bb0b922faf1940d93eb3bbb2
+  tag: v2.2.0@sha256:70c443eaf9977845dbfc54b0411db4aa7e193f7b9c5b825483888531c95f7c63
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
