@@ -2,3 +2,5 @@ chart-dirs:
   - charts
 debug: true
 remote: origin
+chart-repos:
+  - aquasecurity=https://aquasecurity.github.io/helm-charts
