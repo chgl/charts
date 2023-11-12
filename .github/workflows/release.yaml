@@ -32,6 +32,10 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      - name: Add Helm chart dependency repos
+        run: |
+          helm repo add aquasecurity https://aquasecurity.github.io/helm-charts
+
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
