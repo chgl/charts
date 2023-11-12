@@ -33,9 +33,9 @@ global:
 ## Curl Values
 curl:
   image:
-    registry: "docker.io"
+    registry: docker.io
     repository: curlimages/curl
-    tag: 7.87.0
+    tag: 8.4.0@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
 ## End of Curl Values
 #######################################################################################
 
@@ -302,7 +302,7 @@ kubeclarity-trivy-server:
   image:
     registry: docker.io
     repository: aquasec/trivy
-    tag: 0.44.1
+    tag: 0.47.0
     pullPolicy: IfNotPresent
 
   ## By default disable requirement for persistent storage

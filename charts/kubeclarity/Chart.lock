@@ -4,6 +4,6 @@ dependencies:
   version: 13.2.5
 - name: trivy
   repository: https://aquasecurity.github.io/helm-charts
-  version: 0.4.17
-digest: sha256:8deb7a236c9cdce86ea839bb1f5c9bfdb3603659e94303bf85b306798070ce45
-generated: "2023-11-12T17:31:30.583991828+01:00"
+  version: 0.7.0
+digest: sha256:850c075292cef47a3c9bfee7cd420b9735ced77e5fbcbf22161192902e6399f8
+generated: "2023-11-12T16:45:28.85018219Z"
