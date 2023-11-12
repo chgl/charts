@@ -2,7 +2,7 @@ apiVersion: v2
 name: kubeclarity
 appVersion: v2.22.0
 description: Charts for KubeClarity deployment.
-version: v0.1.0
+version: v0.1.1
 home: https://github.com/openclarity/kubeclarity
 icon: https://github.com/openclarity/kubeclarity/raw/main/images/kubeclarity-logo.png
 sources:
@@ -18,7 +18,7 @@ dependencies:
     condition: kubeclarity-postgresql.enabled
     alias: kubeclarity-postgresql
   - name: trivy
-    version: "0.4.17"
+    version: "0.7.0"
     repository: https://aquasecurity.github.io/helm-charts
     condition: kubeclarity-trivy-server.enabled
     alias: kubeclarity-trivy-server
