@@ -110,6 +110,7 @@ affinity: {}
 
 # @ignored
 readinessProbe:
+  enabled: true
   httpGet:
     path: /fhir/metadata?_summary=true
     port: http
@@ -121,6 +122,7 @@ readinessProbe:
 
 # @ignored
 livenessProbe:
+  enabled: true
   httpGet:
     path: /fhir/metadata?_summary=true
     port: http
