@@ -7969,6 +7969,36 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: "Added option to disable readiness/liveness probes"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+    apiVersion: v2
+    created: "2023-11-29T13:09:26.860625534Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.8.18
+    description: A Helm chart for deploying the Pathling server
+    digest: dcb72c950300581f90b872fd2073cc146a22b7b099b933927f1dfb31d5d121cf
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.2.8/pathling-server-0.2.8.tgz
+    version: 0.2.8
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: "refreshed auto-generated README with latest helm-docs"
         - kind: changed
           description: "update minio docker tag to v12.8.18"
@@ -8584,4 +8614,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-11-12T16:56:22.537728214Z"
+generated: "2023-11-29T13:09:26.861166183Z"
