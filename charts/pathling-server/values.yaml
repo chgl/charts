@@ -14,7 +14,7 @@ imagePullSecrets: []
 image:
   registry: docker.io
   repository: aehrc/pathling
-  tag: 6.3.1@sha256:2e5c1692592575c2f8320afdef83322ea346a82d6a92e56544679bb02185d02d
+  tag: 6.4.0@sha256:b523a16910caf03d9faf6e2c9a2de02646541bdcd6888ea68006be9d425b5021
   pullPolicy: IfNotPresent
 
 # -- number of replicas. This components can also be easily scaled horizontally if necessary.
@@ -53,6 +53,24 @@ service:
     ui:
       # -- service port for the Spark UI
       port: 4040
+    driver:
+      # -- service port for the Spark driver
+      port: 7077
+    blockManager:
+      # -- service port for the Spark block manager
+      port: 7078
+  metrics:
+    port: 8081
+
+metrics:
+  serviceMonitor:
+    # if enabled, creates a ServiceMonitor instance for Prometheus Operator-based monitoring
+    enabled: false
+    # additional labels for the ServiceMonitor resource, e.g. `release: prometheus`
+    additionalLabels: {}
+    # namespace: monitoring
+    # interval: 30s
+    # scrapeTimeout: 10s
 
 # resource requests and limits
 resources:
@@ -110,9 +128,8 @@ affinity: {}
 
 # @ignored
 readinessProbe:
-  enabled: true
   httpGet:
-    path: /fhir/metadata?_summary=true
+    path: /readyz
     port: http
   failureThreshold: 5
   initialDelaySeconds: 30
@@ -122,9 +139,8 @@ readinessProbe:
 
 # @ignored
 livenessProbe:
-  enabled: true
   httpGet:
-    path: /fhir/metadata?_summary=true
+    path: /livez
     port: http
   failureThreshold: 10
   initialDelaySeconds: 30

@@ -13,7 +13,7 @@ dependencies:
     version: 12.8.18
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.2.8
+version: 0.3.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -25,4 +25,8 @@ annotations:
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: changed
-      description: "Added option to disable readiness/liveness probes"
+      description: "Updated to Pathling 6.4.0"
+    - kind: added
+      description: "Added metrics and ServiceMonitor support"
+    - kind: added
+      description: "Added support for running Spark jobs inside Kubernetes"
