@@ -21,12 +21,15 @@ annotations:
   artifacthub.io/prerelease: "false"
   artifacthub.io/recommendations: |
     - url: https://artifacthub.io/packages/helm/bitnami/minio
+    - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
   # When using the list of objects option the valid supported kinds are
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: changed
       description: "Updated to Pathling 6.4.0"
+    - kind: changed
+      description: "Use dedicated liveness and readiness probes"
     - kind: added
-      description: "Added metrics and ServiceMonitor support"
+      description: "Metrics and ServiceMonitor support"
     - kind: added
-      description: "Added support for running Spark jobs inside Kubernetes"
+      description: "Support for running Spark jobs inside Kubernetes"

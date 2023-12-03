@@ -22,11 +22,12 @@ spec:
       protocol: TCP
   selector:
     {{- include "pathling-server.matchLabels" . | nindent 4 }}
+{{- if .Values.spark.cluster.enabled }}
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: {{ include "pathling-server.fullname" . }}-driver
+  name: {{ include "pathling-server.fullname" . }}-spark-driver
   labels:
     {{- include "pathling-server.labels" . | nindent 4 }}
 spec:
@@ -43,3 +44,4 @@ spec:
       protocol: TCP
   selector:
     {{- include "pathling-server.matchLabels" . | nindent 4 }}
+{{- end }}

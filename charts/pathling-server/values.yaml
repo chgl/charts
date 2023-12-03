@@ -184,8 +184,8 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 serviceAccount:
-  # -- Specifies whether a service account should be created
-  create: false
+  # -- Specifies whether a service account should be created. Used to setup Spark executor pods if `spark.cluster.enabled=true`.
+  create: true
   # -- Annotations to add to the service account
   annotations: {}
   # -- The name of the service account to use.
@@ -195,10 +195,30 @@ serviceAccount:
   automountServiceAccountToken: true
 
 spark:
-  rbac:
-    # -- specifies whether an RBAC config should be created that allows the server's service account
-    # to create required resources in Kubernetes
-    create: false
+  cluster:
+    # -- enable clustered mode for the Spark deployment. The Pathling server acts as the driver.
+    enabled: true
+    # -- the Spark master URL
+    masterUrl: "k8s://https://kubernetes.default.svc"
+    executor:
+      # -- number of executor instances
+      instances: 3
+      # -- Amount of memory to use per executor process, in the same format as JVM memory strings with a size unit suffix ("k", "m", "g" or "t") (e.g. 512m, 2g).
+      memory: "1g"
+      request:
+        # -- Specify the cpu request for each executor pod. Values conform to the Kubernetes convention.
+        # Example values include 0.1, 500m, 1.5, 5, etc., with the definition of cpu units documented in CPU units.
+        # This is distinct from spark.executor.cores: it is only used and takes precedence over spark.executor.cores
+        # for specifying the executor pod cpu request if set. Task parallelism, e.g., number of tasks an executor
+        # can run concurrently is not affected by this.
+        cores: ""
+        # -- executor pod container memory requests
+        memory: ""
+      limit:
+        # -- Specify a hard cpu limit for each executor pod launched for the Spark Application.
+        cores: ""
+        # -- executor pod container memory limits
+        memory: ""
 
 # @ignored
 curl: # +doc-gen:ignore

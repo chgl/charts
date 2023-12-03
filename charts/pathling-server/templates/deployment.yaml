@@ -67,17 +67,18 @@ spec:
               value: "org.apache.hadoop.fs.s3a.S3AFileSystem"
             - name: fs.s3a.path.style.access
               value: "true"
-            # SPARK
+
+            {{- if .Values.spark.cluster.enabled }}
+            - name: spark.master
+              value: {{ .Values.spark.cluster.masterUrl }}
             - name: spark.driver.host
-              value: {{ include "pathling-server.fullname" . }}-driver
+              value: {{ include "pathling-server.fullname" . }}-spark-driver
             - name: spark.driver.port
               value: "7077"
             - name: spark.blockManager.port
               value: "7078"
             - name: spark.driver.bindAddress
               value: "0.0.0.0"
-            - name: spark.master
-              value: "k8s://https://kubernetes.default.svc"
             - name: spark.kubernetes.namespace
               value: {{ .Release.Namespace }}
             - name: spark.kubernetes.executor.container.image
@@ -90,17 +91,29 @@ spec:
             - name: spark.ui.prometheus.enabled
               value: "true"
             - name: spark.executor.instances
-              value: "3"
+              value: {{ .Values.spark.cluster.executor.instances | quote }}
+            {{- with .Values.spark.cluster.executor.memory }}
             - name: spark.executor.memory
-              value: "3G"
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.request.cores }}
             - name: spark.kubernetes.executor.request.cores
-              value: "2"
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.limit.cores }}
             - name: spark.kubernetes.executor.limit.cores
-              value: "2"
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.request.memory }}
             - name: spark.kubernetes.executor.request.memory
-              value: "4G"
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.limit.memory }}
             - name: spark.kubernetes.executor.limit.memory
-              value: "4G"
+              value: {{ . | quote }}
+            {{- end }}
+            {{- end }}
+
             {{- if .Values.extraEnv }}
             {{- toYaml .Values.extraEnv | nindent 12 }}
             {{- end }}
