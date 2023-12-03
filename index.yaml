@@ -7969,6 +7969,43 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: changed
+          description: "Updated to Pathling 6.4.0"
+        - kind: changed
+          description: "Use dedicated liveness and readiness probes"
+        - kind: added
+          description: "Metrics and ServiceMonitor support"
+        - kind: added
+          description: "Support for running Spark jobs inside Kubernetes"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    created: "2023-12-03T22:11:38.461884561Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.8.18
+    description: A Helm chart for deploying the Pathling server
+    digest: 1ef4642c39121643f023f311bc77fbc5df1f4d378904fefd093bcf5e5e2924d7
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.3.0/pathling-server-0.3.0.tgz
+    version: 0.3.0
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: changed
           description: "Added option to disable readiness/liveness probes"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -8614,4 +8651,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-11-29T13:09:26.861166183Z"
+generated: "2023-12-03T22:11:38.462420758Z"
