@@ -36,15 +36,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.livenessProbe.enabled }}
+          {{- with .Values.livenessProbe }}
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if .Values.readinessProbe.enabled }}
+          {{- with .Values.readinessProbe }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
           {{- end }}
           env:
+            - name: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ADD_ADDITIONAL_PATHS
+              value: "true"
             - name: pathling.storage.warehouseUrl
               value: "{{ .Values.warehouse.url }}"
             - name: fs.s3a.endpoint
@@ -65,6 +67,53 @@ spec:
               value: "org.apache.hadoop.fs.s3a.S3AFileSystem"
             - name: fs.s3a.path.style.access
               value: "true"
+
+            {{- if .Values.spark.cluster.enabled }}
+            - name: spark.master
+              value: {{ .Values.spark.cluster.masterUrl }}
+            - name: spark.driver.host
+              value: {{ include "pathling-server.fullname" . }}-spark-driver
+            - name: spark.driver.port
+              value: "7077"
+            - name: spark.blockManager.port
+              value: "7078"
+            - name: spark.driver.bindAddress
+              value: "0.0.0.0"
+            - name: spark.kubernetes.namespace
+              value: {{ .Release.Namespace }}
+            - name: spark.kubernetes.executor.container.image
+              value: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+            # <https://spark.apache.org/docs/latest/running-on-kubernetes.html#client-mode-executor-pod-garbage-collection>
+            - name: spark.kubernetes.driver.pod.name
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: spark.ui.prometheus.enabled
+              value: "true"
+            - name: spark.executor.instances
+              value: {{ .Values.spark.cluster.executor.instances | quote }}
+            {{- with .Values.spark.cluster.executor.memory }}
+            - name: spark.executor.memory
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.request.cores }}
+            - name: spark.kubernetes.executor.request.cores
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.limit.cores }}
+            - name: spark.kubernetes.executor.limit.cores
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.request.memory }}
+            - name: spark.kubernetes.executor.request.memory
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .Values.spark.cluster.executor.limit.memory }}
+            - name: spark.kubernetes.executor.limit.memory
+              value: {{ . | quote }}
+            {{- end }}
+            {{- end }}
+
             {{- if .Values.extraEnv }}
             {{- toYaml .Values.extraEnv | nindent 12 }}
             {{- end }}
@@ -72,8 +121,17 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-            - name: spark-ui-http
+            - name: http-metrics
+              containerPort: 8081
+              protocol: TCP
+            - name: http-spark-ui
               containerPort: 4040
+              protocol: TCP
+            - name: spark-driver
+              containerPort: 7077
+              protocol: TCP
+            - name: spark-blck-mngr
+              containerPort: 7078
               protocol: TCP
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

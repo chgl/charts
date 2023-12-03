@@ -4,16 +4,44 @@ metadata:
   name: {{ include "pathling-server.fullname" . }}
   labels:
     {{- include "pathling-server.labels" . | nindent 4 }}
+    app.kubernetes.io/component: server
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - name: http
+      port: {{ .Values.service.port }}
       targetPort: http
       protocol: TCP
-      name: http
-    - port: {{ .Values.service.spark.ui.port }}
-      targetPort: spark-ui-http
+    - name: http-metrics
+      port: {{ .Values.service.metrics.port }}
+      targetPort: http-metrics
       protocol: TCP
-      name: spark-ui-http
+    - name: http-spark-ui
+      port: {{ .Values.service.spark.ui.port }}
+      targetPort: http-spark-ui
+      protocol: TCP
   selector:
     {{- include "pathling-server.matchLabels" . | nindent 4 }}
+{{- if .Values.spark.cluster.enabled }}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "pathling-server.fullname" . }}-spark-driver
+  labels:
+    {{- include "pathling-server.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  publishNotReadyAddresses: true
+  ports:
+    - name: driver
+      targetPort: spark-driver
+      port: {{ .Values.service.spark.driver.port }}
+      protocol: TCP
+    - name: spark-blck-mngr
+      targetPort: spark-blck-mngr
+      port: {{ .Values.service.spark.blockManager.port }}
+      protocol: TCP
+  selector:
+    {{- include "pathling-server.matchLabels" . | nindent 4 }}
+{{- end }}

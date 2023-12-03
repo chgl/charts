@@ -13,7 +13,7 @@ dependencies:
     version: 12.8.18
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.2.8
+version: 0.3.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -21,8 +21,15 @@ annotations:
   artifacthub.io/prerelease: "false"
   artifacthub.io/recommendations: |
     - url: https://artifacthub.io/packages/helm/bitnami/minio
+    - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
   # When using the list of objects option the valid supported kinds are
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: changed
-      description: "Added option to disable readiness/liveness probes"
+      description: "Updated to Pathling 6.4.0"
+    - kind: changed
+      description: "Use dedicated liveness and readiness probes"
+    - kind: added
+      description: "Metrics and ServiceMonitor support"
+    - kind: added
+      description: "Support for running Spark jobs inside Kubernetes"
