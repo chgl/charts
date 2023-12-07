@@ -10,10 +10,10 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 12.8.18
+    version: 12.10.4
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.3.0
+version: 0.3.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -26,10 +26,6 @@ annotations:
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: changed
-      description: "Updated to Pathling 6.4.0"
+      description: "update docker.io/curlimages/curl docker tag to v8.5.0"
     - kind: changed
-      description: "Use dedicated liveness and readiness probes"
-    - kind: added
-      description: "Metrics and ServiceMonitor support"
-    - kind: added
-      description: "Support for running Spark jobs inside Kubernetes"
+      description: "update minio docker tag to v12.10.4"

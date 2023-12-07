@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: mcr.microsoft.com
   repository: healthcareapis/r4-fhir-server
-  tag: 3.4.323@sha256:af8105812ba48f16377f313c430194f695f55f81f9f4888e197e6f33657dfd13
+  tag: 3.4.349@sha256:ea89acccea493c1f2c755f7d2c48eda54eb57e2c4cd13761caf42f54406e6e41
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -168,7 +168,7 @@ curl: # +doc-gen:ignore
   image:
     registry: docker.io
     repository: curlimages/curl
-    tag: 8.4.0@sha256:4a3396ae573c44932d06ba33f8696db4429c419da87cbdc82965ee96a37dd0af
+    tag: 8.5.0@sha256:4bfa3e2c0164fb103fb9bfd4dc956facce32b6c5d47cc09fcec883ce9535d5ac
 
 tests:
   # configure the test pods resource requests and limits
