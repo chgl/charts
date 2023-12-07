@@ -21,7 +21,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.21.10
+version: 0.21.11
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -41,6 +41,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8.4.0"
-    - kind: changed
-      description: "refreshed auto-generated README with latest helm-docs"
+      description: "update docker.io/curlimages/curl docker tag to v8.5.0"
