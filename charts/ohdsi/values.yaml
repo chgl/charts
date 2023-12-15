@@ -88,7 +88,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/webapi
-    tag: 2.13.0@sha256:04313754fc79a6e362a8116ef462360e3891581a045924f4ec5ed404fbb9b837
+    tag: 2.14.0@sha256:582b59b186fde5936081c1df6e41cba53e45e112d5b4875ddfda1e4dee4b2981
     pullPolicy: IfNotPresent
 
   waitForDatabaseInitContainer:
@@ -97,7 +97,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 15.3.0-debian-11-r7@sha256:cc301eef743685f4f69d1d719853988e8a9650c90fd9521f4742ce400b3fdf6a
+      tag: 15.5.0-debian-11-r7@sha256:f8d04bfb731854e211f331ce8a07af482785c4df5fc5fd9d89cdb4c45930959d
       pullPolicy: IfNotPresent
 
   podDisruptionBudget:
@@ -311,7 +311,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/atlas
-    tag: 2.13.0@sha256:e91501a45c96debc83715631a31b3417a37d0ac3020701f9823413ec86cb5b0e
+    tag: 2.14.1@sha256:bd095ed794a6619f877d72c13ecfc22c8bb8a863937392857866e4bd6015157f
     pullPolicy: IfNotPresent
 
   podDisruptionBudget:

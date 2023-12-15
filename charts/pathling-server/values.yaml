@@ -14,7 +14,7 @@ imagePullSecrets: []
 image:
   registry: docker.io
   repository: aehrc/pathling
-  tag: 6.4.0@sha256:b523a16910caf03d9faf6e2c9a2de02646541bdcd6888ea68006be9d425b5021
+  tag: 6.4.1@sha256:aeae074ca26851d9487b1dcdac3388576874b25a036e6e9a15311e730a64eadb
   pullPolicy: IfNotPresent
 
 # -- number of replicas. This components can also be easily scaled horizontally if necessary.
