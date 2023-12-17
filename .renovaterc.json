@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>chgl/.github//renovate/default"],
+  "extends": ["config:best-practices"],
   "bumpVersion": "patch",
   "customManagers": [
     {
@@ -24,7 +24,11 @@
       "extends": ["schedule:monthly"]
     },
     {
-      "matchPackageNames": ["postgresql", "docker.io/bitnami/postgresql"],
+      "matchPackageNames": [
+        "postgresql",
+        "docker.io/bitnami/postgresql",
+        "minio"
+      ],
       "extends": ["schedule:monthly"]
     }
   ]

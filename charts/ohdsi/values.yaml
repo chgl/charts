@@ -33,10 +33,6 @@ postgresql:
     # Password for the custom user to create
     password: ""
   primary:
-    resources:
-      requests:
-        cpu: 10m
-        memory: 32Mi
     initdb:
       # Dictionary of initdb scripts
       # Specify dictionary of scripts to be run at first boot
@@ -56,14 +52,6 @@ postgresql:
     # extraEnvVars:
     #   - name: OHDSI_ADMIN_PASSWORD
     #     value: admin1
-    containerSecurityContext: # +doc-gen:ignore
-      runAsNonRoot: true
-      seccompProfile:
-        type: RuntimeDefault
-      allowPrivilegeEscalation: false
-      capabilities:
-        drop:
-          - ALL
 
 # container security context applied to init containers and the Helm test pods
 restrictedContainerSecurityContext: # +doc-gen:ignore
@@ -97,7 +85,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 15.5.0-debian-11-r7@sha256:f8d04bfb731854e211f331ce8a07af482785c4df5fc5fd9d89cdb4c45930959d
+      tag: 16.1.0-debian-11-r15@sha256:29e3dd0e7e7a740eabdbae6f82673507d180701a719bbdb6d6308a58cf723e64
       pullPolicy: IfNotPresent
 
   podDisruptionBudget:
