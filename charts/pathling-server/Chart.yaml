@@ -10,10 +10,10 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 12.10.4
+    version: 12.10.10
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.3.1
+version: 0.3.2
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -26,6 +26,4 @@ annotations:
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8.5.0"
-    - kind: changed
-      description: "update minio docker tag to v12.10.4"
+      description: "update docker.io/aehrc/pathling image to 6.4.1"
