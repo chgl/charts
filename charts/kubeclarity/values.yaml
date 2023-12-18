@@ -302,7 +302,7 @@ kubeclarity-trivy-server:
   image:
     registry: docker.io
     repository: aquasec/trivy
-    tag: 0.48.0@sha256:27448497c3ae9cb81bdac3b420226392422b976a921f7461caf97ce5b591dcc0
+    tag: 0.48.1@sha256:85461698df445d7b58796164f3b41a44e9fc0941bab777685c301459b61f68ad
     pullPolicy: IfNotPresent
 
   ## By default disable requirement for persistent storage
