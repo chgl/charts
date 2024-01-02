@@ -15,13 +15,13 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 13.2.24
+    version: 13.2.27
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.22.0
+version: 0.22.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -41,8 +41,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "⚠️ BREAKING CHANGE: updated postgresql sub-chart to v13.2.24"
-    - kind: changed
-      description: "updated ohdsi/atlas image to 2.14.1"
-    - kind: changed
-      description: "updated ohdsi/webapi image to 2.14.0"
+      description: "⚠️ BREAKING CHANGE: updated postgresql sub-chart to v13.2.27"
+
