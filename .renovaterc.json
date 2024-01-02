@@ -30,6 +30,11 @@
         "minio"
       ],
       "extends": ["schedule:monthly"]
+    },
+    {
+      "matchPackageNames": ["ghcr.io/chgl/kube-powertools"],
+      "matchFileNames": ["README.md$"],
+      "pinDigests": false
     }
   ]
 }
