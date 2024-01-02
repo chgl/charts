@@ -24,6 +24,10 @@
       "extends": ["schedule:monthly"]
     },
     {
+      "matchManagers": ["helmv3"],
+      "pinDigests": false
+    },
+    {
       "matchPackageNames": [
         "postgresql",
         "docker.io/bitnami/postgresql",
