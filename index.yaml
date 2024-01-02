@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "digest-pinned mssql image"
+    apiVersion: v2
+    created: "2024-01-02T16:31:02.631134629Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 492470919f49542c916ad49c831def8e3eafe9cdd673191627618151284433ea
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.10.1/fhir-server-0.10.1.tgz
+    version: 0.10.1
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to v4.0.6"
     apiVersion: v2
     created: "2024-01-02T15:59:57.552738197Z"
@@ -4489,6 +4512,54 @@ entries:
     - https://github.com/chgl/charts/releases/download/magnifhir-1.0.0/magnifhir-1.0.0.tgz
     version: 1.0.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "digest-pinned sample whalesay image"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: OHDSI Homepage
+          url: https://www.ohdsi.org/
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+      artifacthub.io/screenshots: |
+        - title: Defining a cohort in OHDSI ATLAS
+          url: https://ohdsi.github.io/TheBookOfOhdsi/images/OhdsiAnalyticsTools/atlas.png
+        - title: OHDSI ACHILLES Dashboard
+          url: https://www.ohdsi.org/wp-content/uploads/2020/06/Screen-Shot-2020-06-01-at-3.31.29-PM.png
+    apiVersion: v2
+    created: "2024-01-02T16:31:02.77030403Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.2.27
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 193e6cfa3a29c6b0a43b4f69533f01a1012a1b83e5e6a40f81c58698146b7af4
+    home: https://github.com/OHDSI
+    icon: https://avatars.githubusercontent.com/u/6570077
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.22.2/ohdsi-0.22.2.tgz
+    version: 0.22.2
   - annotations:
       artifacthub.io/changes: |-
         # When using the list of objects option the valid supported kinds are
@@ -9157,4 +9228,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2024-01-02T16:15:45.660524652Z"
+generated: "2024-01-02T16:31:02.771384365Z"
