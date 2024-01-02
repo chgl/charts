@@ -3505,6 +3505,35 @@ entries:
   kubeclarity:
   - apiVersion: v2
     appVersion: v2.22.0
+    created: "2024-01-02T15:31:31.936826517Z"
+    dependencies:
+    - alias: kubeclarity-postgresql
+      condition: kubeclarity-postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.2.24
+    - alias: kubeclarity-trivy-server
+      condition: kubeclarity-trivy-server.enabled
+      name: trivy
+      repository: https://aquasecurity.github.io/helm-charts
+      version: 0.7.0
+    deprecated: true
+    description: DEPRECATED - Charts for KubeClarity deployment.
+    digest: 2904031e466a66ec236f63befc8f5ed965d08d703138ec54998af1b83ef95a75
+    home: https://github.com/openclarity/kubeclarity
+    icon: https://github.com/openclarity/kubeclarity/raw/main/images/kubeclarity-logo.png
+    maintainers:
+    - name: KubeClarity
+      url: https://github.com/openclarity/kubeclarity
+    name: kubeclarity
+    sources:
+    - https://github.com/openclarity/kubeclarity
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/kubeclarity-1.0.0/kubeclarity-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v2
+    appVersion: v2.22.0
     created: "2023-12-17T23:42:00.06925441Z"
     dependencies:
     - alias: kubeclarity-postgresql
@@ -8991,4 +9020,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2023-12-17T23:42:00.394715172Z"
+generated: "2024-01-02T15:31:31.937332758Z"
