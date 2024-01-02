@@ -41,8 +41,5 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "⚠️ BREAKING CHANGE: updated postgresql sub-chart to v13.2.24"
-    - kind: changed
-      description: "updated ohdsi/atlas image to 2.14.1"
-    - kind: changed
-      description: "updated ohdsi/webapi image to 2.14.0"
+      description: "⚠️ BREAKING CHANGE: updated postgresql sub-chart to v13.2.27"
+
