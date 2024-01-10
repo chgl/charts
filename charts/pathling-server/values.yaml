@@ -219,6 +219,8 @@ spark:
         cores: ""
         # -- executor pod container memory limits
         memory: ""
+      # -- executor pod template. Stored as YAML and mounted as a file specified in `spark.kubernetes.executor.podTemplateFile`.
+      podTemplate: {}
 
 # @ignored
 curl: # +doc-gen:ignore

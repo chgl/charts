@@ -1,0 +1,22 @@
+spark:
+  cluster:
+    executor:
+      instances: 1
+      podTemplate:
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+            - name: spark-kubernetes-executor
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: false
+                privileged: false
+                capabilities:
+                  drop:
+                    - ALL
+                runAsNonRoot: true
+                runAsUser: 99
+                runAsGroup: 99
+                seccompProfile:
+                  type: RuntimeDefault

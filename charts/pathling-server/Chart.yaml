@@ -13,7 +13,7 @@ dependencies:
     version: 12.12.2
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.3.3
+version: 0.4.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -26,4 +26,4 @@ annotations:
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: changed
-      description: "update docker.io/aehrc/pathling image to 6.4.2"
+      description: "support for setting a spark pod template"
