@@ -16,6 +16,9 @@ spec:
   template:
     metadata:
       annotations:
+        {{- if .Values.spark.cluster.executor.podTemplate }}
+        checksum/config: {{ include (print $.Template.BasePath "/spark-pod-templates-cm.yaml") $ | sha256sum | quote }}
+        {{- end }}
         {{- with .Values.podAnnotations }}
           {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -112,6 +115,12 @@ spec:
             - name: spark.kubernetes.executor.limit.memory
               value: {{ . | quote }}
             {{- end }}
+
+            {{- if .Values.spark.cluster.executor.podTemplate }}
+            - name: spark.kubernetes.executor.podTemplateFile
+              value: file:///tmp/spark-templates/executor-pod-template.yaml
+            {{- end }}
+
             {{- end }}
 
             {{- if .Values.extraEnv }}
@@ -138,9 +147,20 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+            {{- if .Values.spark.cluster.executor.podTemplate }}
+            - name: spark-executor-pod-template
+              mountPath: /tmp/spark-templates/executor-pod-template.yaml
+              readOnly: true
+              subPath: executor-pod-template.yaml
+            {{- end }}
       volumes:
         - name: tmp-volume
           emptyDir: {}
+        {{- if .Values.spark.cluster.executor.podTemplate }}
+        - name: spark-executor-pod-template
+          configMap:
+            name: {{ include "pathling-server.fullname" . }}-pod-templates
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
