@@ -13,7 +13,7 @@ dependencies:
     version: 12.12.2
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.4.0
+version: 0.4.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -25,5 +25,5 @@ annotations:
   # When using the list of objects option the valid supported kinds are
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
-    - kind: changed
-      description: "support for setting a spark pod template"
+    - kind: fixed
+      description: "added permissions for deletecollection verb"
