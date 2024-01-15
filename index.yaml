@@ -8451,6 +8451,37 @@ entries:
   - annotations:
       artifacthub.io/changes: |
         - kind: fixed
+          description: "added permissions for persistentvolumeclaims"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    created: "2024-01-15T10:55:31.210743637Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 12.12.2
+    description: A Helm chart for deploying the Pathling server
+    digest: ca445250c01a3adbe5693f183be51c972e6bda549c057a1b1cfbe0005d305317
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.4.2/pathling-server-0.4.2.tgz
+    version: 0.4.2
+  - annotations:
+      artifacthub.io/changes: |
+        - kind: fixed
           description: "added permissions for deletecollection verb"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -9290,4 +9321,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2024-01-12T10:40:25.223977611Z"
+generated: "2024-01-15T10:55:31.21124903Z"
