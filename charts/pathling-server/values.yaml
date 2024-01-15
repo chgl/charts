@@ -148,6 +148,17 @@ livenessProbe:
   successThreshold: 1
   timeoutSeconds: 10
 
+# @ignored
+startupProbe:
+  httpGet:
+    path: /livez
+    port: http
+  failureThreshold: 10
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 10
+
 # -- pod topology spread configuration
 # see: <https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/#api>
 topologySpreadConstraints:
@@ -193,6 +204,11 @@ serviceAccount:
   name: ""
   # -- whether to automount the SA token
   automountServiceAccountToken: true
+
+deployment:
+  # -- Deployment strategy type <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies>
+  updateStrategy:
+    type: Recreate
 
 spark:
   cluster:
