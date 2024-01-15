@@ -13,6 +13,9 @@ spec:
   selector:
     matchLabels:
       {{- include "pathling-server.matchLabels" . | nindent 6 }}
+  {{- if .Values.deployment.updateStrategy }}
+  strategy: {{- toYaml .Values.deployment.updateStrategy | nindent 4 }}
+  {{- end }}
   template:
     metadata:
       annotations:
@@ -45,6 +48,10 @@ spec:
           {{- end }}
           {{- with .Values.readinessProbe }}
           readinessProbe:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.startupProbe }}
+          startupProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           env:
