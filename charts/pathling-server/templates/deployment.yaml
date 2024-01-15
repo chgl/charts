@@ -36,6 +36,26 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.minio.enabled }}
+      initContainers:
+        - name: wait-for-minio
+          image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
+          imagePullPolicy: "IfNotPresent"
+          {{- with .Values.restrictedContainerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env:
+            - name: MINIO_ENDPOINT_URL
+              value: {{ template "pathling-server.s3Endpoint" . }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until [ "$(curl -s -o /dev/null -L -w '%{http_code}' "$MINIO_ENDPOINT_URL/minio/health/live")" == "200" ]; do
+                echo "$(date): Waiting for minio server @ ${MINIO_ENDPOINT_URL} to be up";
+                sleep 15;
+              done;
+      {{- end }}
       containers:
         - name: pathling-server
           securityContext:
