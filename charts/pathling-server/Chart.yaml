@@ -13,7 +13,7 @@ dependencies:
     version: 13.0.2
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.4.3
+version: 0.4.4
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -25,7 +25,5 @@ annotations:
   # When using the list of objects option the valid supported kinds are
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
-    - kind: added
-      description: "added startupProbe"
     - kind: changed
-      description: "updated minio sub-chart to v13"
+      description: "set prefix for executor pods"

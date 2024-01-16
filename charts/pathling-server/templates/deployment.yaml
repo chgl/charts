@@ -122,6 +122,8 @@ spec:
               value: "true"
             - name: spark.executor.instances
               value: {{ .Values.spark.cluster.executor.instances | quote }}
+            - name: spark.kubernetes.executor.podNamePrefix
+              value: {{ include "pathling-server.fullname" . | quote }}
             {{- with .Values.spark.cluster.executor.memory }}
             - name: spark.executor.memory
               value: {{ . | quote }}
