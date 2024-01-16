@@ -8450,6 +8450,37 @@ entries:
   pathling-server:
   - annotations:
       artifacthub.io/changes: |
+        - kind: changed
+          description: "set prefix for executor pods"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    created: "2024-01-16T20:10:35.29530447Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.0.2
+    description: A Helm chart for deploying the Pathling server
+    digest: 724c7866201f41615ef44391e7c94d4b5f192ab743f8c75fda12b21c63919b09
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.4.4/pathling-server-0.4.4.tgz
+    version: 0.4.4
+  - annotations:
+      artifacthub.io/changes: |
         - kind: added
           description: "added startupProbe"
         - kind: changed
@@ -9354,4 +9385,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2024-01-15T19:26:22.598517114Z"
+generated: "2024-01-16T20:10:35.295845701Z"
