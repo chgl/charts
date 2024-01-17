@@ -13,7 +13,7 @@ dependencies:
     version: 13.0.2
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.4.4
+version: 0.4.5
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -26,4 +26,6 @@ annotations:
   # added, changed, deprecated, removed, fixed and security.
   artifacthub.io/changes: |
     - kind: changed
-      description: "set prefix for executor pods"
+      description: "set default instance count for executor pods to 1"
+    - kind: changed
+      description: "removed memory requests for executor pods"

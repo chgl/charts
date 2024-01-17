@@ -218,9 +218,9 @@ spark:
     masterUrl: "k8s://https://kubernetes.default.svc"
     executor:
       # -- number of executor instances
-      instances: 3
+      instances: 1
       # -- Amount of memory to use per executor process, in the same format as JVM memory strings with a size unit suffix ("k", "m", "g" or "t") (e.g. 512m, 2g).
-      memory: "1g"
+      memory: ""
       request:
         # -- Specify the cpu request for each executor pod. Values conform to the Kubernetes convention.
         # Example values include 0.1, 500m, 1.5, 5, etc., with the definition of cpu units documented in CPU units.
