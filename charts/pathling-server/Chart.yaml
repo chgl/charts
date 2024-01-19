@@ -24,8 +24,8 @@ annotations:
     - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
   # When using the list of objects option the valid supported kinds are
   # added, changed, deprecated, removed, fixed and security.
-  artifacthub.io/changes: |
+  artifacthub.io/changes: |-
+    # When using the list of objects option the valid supported kinds are
+    # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "set default instance count for executor pods to 1"
-    - kind: changed
-      description: "removed memory requests for executor pods"
+      description: "chore(deps): update minio docker tag to v13.2.0"
