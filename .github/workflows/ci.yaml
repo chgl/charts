@@ -105,6 +105,9 @@ jobs:
     needs:
       - test
     container: ghcr.io/chgl/kube-powertools:v2.2.32@sha256:f2d27b59839cec4dd73da763e354d6515a7a297aeebffa8f07fac4c977123f26
+    permissions:
+      pull-requests: write
+      contents: write
     steps:
       - name: Add workspace as safe directory
         run: |
