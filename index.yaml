@@ -8449,6 +8449,39 @@ entries:
     version: 0.1.4
   pathling-server:
   - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "chore(deps): update minio docker tag to v13.2.0"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    created: "2024-01-19T20:14:24.570474339Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.2.0
+    description: A Helm chart for deploying the Pathling server
+    digest: 4b0fca66113cc171c98398352af2b2e8a3e6843cf7847a377cf02dfb1a6f5b2e
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.4.6/pathling-server-0.4.6.tgz
+    version: 0.4.6
+  - annotations:
       artifacthub.io/changes: |
         - kind: changed
           description: "set default instance count for executor pods to 1"
@@ -9418,4 +9451,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2024-01-17T11:50:08.516238899Z"
+generated: "2024-01-19T20:14:24.571606485Z"
