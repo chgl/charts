@@ -1,12 +1,10 @@
 name: check links
 
 on:
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
+  repository_dispatch: {}
+  workflow_dispatch: {}
+  schedule:
+    - cron: "00 18 * * *"
 
 permissions: read-all
 
@@ -16,21 +14,36 @@ jobs:
     permissions:
       issues: write
     steps:
-      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Checkout Code
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-      - name: run lychee link checker
-        id: lychee
-        uses: lycheeverse/lychee-action@ec3ed119d4f44ad2673a7232460dc7dff59d2421 # v1.8.0
+      - name: Restore lychee cache
+        uses: actions/cache@13aacd865c20de90d75de3b17ebe84f7a17d57d2 # v4.0.0
         with:
-          fail: true
-          args: "--config=.lychee.toml ."
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
 
-      - name: create issue
-        if: ${{ env.lychee_exit_code != 0}}
-        uses: peter-evans/create-issue-from-file@433e51abf769039ee20ba1293a088ca19d573b7f #tag=v4.0.1
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@c3089c702fbb949e3f7a8122be0c33c017904f9b # v1.9.1
+        with:
+          args: "--cache --max-cache-age 3d ."
+        env:
+          GITHUB_TOKEN: ${{secrets.github-token}}
+
+      - name: Look for an existing issue
+        id: last-issue
+        uses: micalevisk/last-issue-action@0d40124cc99ac8601c2516007f0c98ef3d27537b # v2.3.0
+        with:
+          state: open
+          labels: lychee link check
+
+      - name: Create Issue From File
+        if: ${{ steps.lychee.outputs.exit_code != 0 }}
+        uses: peter-evans/create-issue-from-file@24452a72d85239eacf1468b0f1982a9f3fec4c94 # v5.0.0
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
-          labels: report, automated issue
+          issue-number: ${{ steps.last-issue.outputs.issue-number }}
+          labels: lychee link check

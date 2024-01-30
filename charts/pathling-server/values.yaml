@@ -128,6 +128,7 @@ affinity: {}
 
 # @ignored
 readinessProbe:
+  enabled: true
   httpGet:
     path: /readyz
     port: http
@@ -139,6 +140,7 @@ readinessProbe:
 
 # @ignored
 livenessProbe:
+  enabled: true
   httpGet:
     path: /livez
     port: http
@@ -150,6 +152,7 @@ livenessProbe:
 
 # @ignored
 startupProbe:
+  enabled: true
   httpGet:
     path: /livez
     port: http
