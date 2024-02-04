@@ -27,5 +27,5 @@ annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: added
-      description: "option to disable probes"
+    - kind: changed
+      description: "chore(deps): update minio docker tag to v13.3.3"
