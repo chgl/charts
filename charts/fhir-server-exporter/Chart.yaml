@@ -28,4 +28,4 @@ annotations:
     - kind: changed
       description: "update docker.io/curlimages/curl docker tag to v8.6.0"
     - kind: changed
-      description: "update ghcr.io/chgl/fhir-server-exporter docker tag to v2.2.6"
+      description: "update ghcr.io/chgl/fhir-server-exporter docker tag to v2.2.7"
