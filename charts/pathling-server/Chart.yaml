@@ -29,3 +29,5 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: "chore(deps): update minio docker tag to v13.3.3"
+    - kind: changed
+      description: "update docker.io/curlimages/curl docker tag to v8.6.0"
