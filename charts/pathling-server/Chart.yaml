@@ -10,10 +10,10 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 13.2.0
+    version: 13.3.3
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.4.7
+version: 0.4.8
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -27,5 +27,5 @@ annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: added
-      description: "option to disable probes"
+    - kind: changed
+      description: "chore(deps): update minio docker tag to v13.3.3"
