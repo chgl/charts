@@ -6,6 +6,29 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "chore(deps): update mcr.microsoft.com/healthcareapis/r4-fhir-server docker tag to 4.0.68"
+    apiVersion: v2
+    created: "2024-03-02T15:30:14.686575329Z"
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: eb387b5a918df363404df1e8efee72cabd66866ee24d3eb3d96484e67e1dc17a
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.10.3/fhir-server-0.10.3.tgz
+    version: 0.10.3
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "update docker.io/curlimages/curl docker tag to v8.6.0"
         - kind: changed
           description: "update mcr.microsoft.com/mssql/server:2022-latest docker digest to 136be18"
@@ -1601,6 +1624,39 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "update ghcr.io/chgl/fhir-server-exporter docker tag to v2.2.10"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 2.x
+    created: "2024-03-02T15:30:14.798418186Z"
+    description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
+    digest: 8d73f3d946edf2228cb542f6305d0790460b776f8240b04e4a0121c75a8b7b13
+    home: https://github.com/chgl/fhir-server-exporter
+    keywords:
+    - fhir
+    - metrics
+    - telemetry
+    - prometheus exporter
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.0.31/fhir-server-exporter-1.0.31.tgz
+    version: 1.0.31
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -3753,6 +3809,41 @@ entries:
     - https://github.com/chgl/charts/releases/download/kubeclarity-v0.1.0/kubeclarity-v0.1.0.tgz
     version: v0.1.0
   magnifhir:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "updated docs"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/screenshots: |
+        - title: Configure multiple FHIR servers to connect to
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/server-selection.png
+        - title: List all Patient resources stored in the server
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-browser.png
+        - title: See a Patient's conditions, observations, and medications
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-record-conditions.png
+    apiVersion: v2
+    appVersion: 1.x
+    created: "2024-03-02T15:30:14.897383938Z"
+    description: A Helm chart for deploying the magniFHIR app on Kubernetes.
+    digest: 365950fbed6f0442ae3500e99315d5a10169d85c9ee736dde8b60a5645ee3113
+    home: https://github.com/chgl/magniFHIR
+    keywords:
+    - fhir
+    - healthcare
+    - electronic health record
+    - blazor
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: magnifhir
+    sources:
+    - https://github.com/chgl/magniFHIR
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/magnifhir-1.2.12/magnifhir-1.2.12.tgz
+    version: 1.2.12
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -8598,6 +8689,39 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "chore(deps): update minio docker tag to v13.7.0"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    created: "2024-03-02T15:30:15.003694337Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 13.7.0
+    description: A Helm chart for deploying the Pathling server
+    digest: 9f7ced023b54cb8ed30a9a7d9753e393b9c10c1898bf679da4224519eaa92c75
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.4.9/pathling-server-0.4.9.tgz
+    version: 0.4.9
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "chore(deps): update minio docker tag to v13.3.3"
         - kind: changed
           description: "update docker.io/curlimages/curl docker tag to v8.6.0"
@@ -9664,4 +9788,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2024-02-07T12:55:45.704911761Z"
+generated: "2024-03-02T15:30:15.004400026Z"
