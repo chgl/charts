@@ -101,7 +101,8 @@ jobs:
     runs-on: ubuntu-22.04
     # run only on PRs created by renovate
     # TODO: also check if the author of the last commit was renovate
-    if: ${{ startsWith(github.head_ref, 'renovate/') }}
+    # ${{ startsWith(github.head_ref, 'renovate/') }}
+    if: ${{ false }}
     needs:
       - test
     container: ghcr.io/chgl/kube-powertools:v2.2.44@sha256:a46de70426f4148bc8e5e5d1f01d6aeb6d54fc5756c30c97395bb54e462abdf3
