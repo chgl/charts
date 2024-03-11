@@ -1,0 +1,8 @@
+# https://avd.aquasec.com/misconfig/kubernetes/general/avd-ksv-0014/
+# Use Readonly Filesystem
+# Inline-ignore doesn't work, but this only affects the nginx-based OHDSI Atlas container and minio
+AVD-KSV-0014
+
+# https://avd.aquasec.com/misconfig/kubernetes/general/avd-ksv-0056/
+# No Manage Networking Resources
+AVD-KSV-0056
