@@ -33,6 +33,8 @@ postgresql:
     # Password for the custom user to create
     password: ""
   primary:
+    containerSecurityContext:
+      readOnlyRootFilesystem: true
     initdb:
       # Dictionary of initdb scripts
       # Specify dictionary of scripts to be run at first boot
@@ -85,7 +87,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 16.1.0-debian-11-r15@sha256:29e3dd0e7e7a740eabdbae6f82673507d180701a719bbdb6d6308a58cf723e64
+      tag: 16.2.0-debian-12-r6@sha256:ea55532b6f75afbc97f617d91ec5efae17609c8eb825a31845fa9cb9e4aa13e1
       pullPolicy: IfNotPresent
 
   podDisruptionBudget:
