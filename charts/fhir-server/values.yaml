@@ -73,7 +73,7 @@ database:
     image:
       registry: mcr.microsoft.com
       repository: mssql/server
-      tag: 2022-latest@sha256:136be187bb12c94b150eb3e48fbc26ae62a81d39a2c7c913be2f3d7ebbddfbad
+      tag: 2022-latest@sha256:b94071acd4612bfe60a73e265097c2b6388d14d9d493db8f37cf4479a4337480
       pullPolicy: IfNotPresent
     replicaCount: 1
     port: 1433
