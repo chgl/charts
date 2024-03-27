@@ -1,0 +1,21 @@
+{{- if .Values.warehouse.file.persistence.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ include "pathling-server.fullname" . }}-data"
+  {{- with .Values.warehouse.file.persistence.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "pathling-server.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  {{- range .Values.warehouse.file.persistence.accessModes }}
+      - {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.warehouse.file.persistence.size | quote }}
+  {{- include "pathling-server.storage.class" (dict "persistence" .Values.warehouse.file.persistence "global" $.Values.global) | nindent 8 }}
+{{- end }}

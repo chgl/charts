@@ -182,6 +182,10 @@ spec:
               readOnly: true
               subPath: executor-pod-template.yaml
             {{- end }}
+            {{- if (.Values.warehouse.url | hasPrefix "file://") }}
+            - name: data
+              mountPath: {{ .Values.warehouse.url | trimPrefix "file://" }}
+            {{- end }}
       volumes:
         - name: tmp-volume
           emptyDir: {}
@@ -189,6 +193,16 @@ spec:
         - name: spark-executor-pod-template
           configMap:
             name: {{ include "pathling-server.fullname" . }}-pod-templates
+        {{- end }}
+        {{- if (.Values.warehouse.url | hasPrefix "file://") }}
+        {{- if .Values.warehouse.file.persistence.enabled }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: "{{ include "pathling-server.fullname" . }}-data"
+        {{- else }}
+        - name: data
+          emptyDir: {}
+        {{- end }}
         {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
