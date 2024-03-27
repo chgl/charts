@@ -215,8 +215,8 @@ deployment:
 
 spark:
   cluster:
-    # -- enable clustered mode for the Spark deployment. The Pathling server acts as the driver.
-    enabled: true
+    # -- ⚠️ Experimental: enable clustered mode for the Spark deployment. The Pathling server acts as the driver.
+    enabled: false
     # -- the Spark master URL
     masterUrl: "k8s://https://kubernetes.default.svc"
     executor:
@@ -281,6 +281,19 @@ warehouse:
         accessKeyKey: "s3-access-key"
         # -- name of the key inside the secret that refers to the secret key
         secretKeyKey: "s3-secret-key"
+  file:
+    persistence:
+      # -- Enable file-based data persistence using PVC
+      enabled: false
+      # -- PVC storage class
+      storageClass: ""
+      # -- PVC Access Mode for data volume
+      accessModes:
+        - ReadWriteOnce
+      # -- PVC Storage Request for data volume
+      size: 8Gi
+      # -- annotations for the PVC
+      annotations: {}
 
 minio:
   # -- set to `true` to enable the included minio sub-chart and auto-configure

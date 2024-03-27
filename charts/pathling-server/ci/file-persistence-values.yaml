@@ -1,0 +1,6 @@
+warehouse:
+  url: file:///usr/share/warehouse
+  file:
+    persistence:
+      enabled: true
+      size: 16Gi
