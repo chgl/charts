@@ -188,7 +188,12 @@ spec:
             {{- end }}
       volumes:
         - name: tmp-volume
+        {{- if .Values.tmpVolume.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: "{{ include "pathling-server.fullname" . }}-tmp-data"
+        {{- else }}
           emptyDir: {}
+        {{- end }}
         {{- if .Values.spark.cluster.executor.podTemplate }}
         - name: spark-executor-pod-template
           configMap:

@@ -10,10 +10,10 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 13.7.0
+    version: 14.1.4
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.5.0
+version: 0.6.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -28,6 +28,6 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "⚠️ Breaking change: disabled Spark cluster support by default"
+      description: "⚠️ Breaking change: updated minio sub-chart to version 14.1.4"
     - kind: added
-      description: "support for using local PVC instead of s3/minio"
+      description: "support for using local PVC for the /tmp dir"

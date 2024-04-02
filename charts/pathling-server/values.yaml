@@ -334,3 +334,17 @@ tests:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+
+tmpVolume:
+  persistence:
+    # -- create a volume for the /tmp dir
+    enabled: false
+    # -- PVC storage class
+    storageClass: ""
+    # -- PVC Access Mode for data volume
+    accessModes:
+      - ReadWriteOnce
+    # -- PVC Storage Request for data volume
+    size: 8Gi
+    # -- annotations for the PVC
+    annotations: {}
