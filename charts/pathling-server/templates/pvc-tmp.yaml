@@ -1,0 +1,21 @@
+{{- if .Values.tmpVolume.persistence.enabled -}}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "{{ include "pathling-server.fullname" . }}-tmp-data"
+  {{- with .Values.tmpVolume.persistence.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  labels:
+    {{- include "pathling-server.labels" . | nindent 4 }}
+spec:
+  accessModes:
+  {{- range .Values.tmpVolume.persistence.accessModes }}
+      - {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.tmpVolume.persistence.size | quote }}
+  {{- include "pathling-server.storage.class" (dict "persistence" .Values.tmpVolume.persistence "global" $.Values.global) | nindent 8 }}
+{{- end }}
