@@ -17,5 +17,5 @@ spec:
   resources:
     requests:
       storage: {{ .Values.tmpVolume.persistence.size | quote }}
-  {{- include "pathling-server.storage.class" (dict "persistence" .Values.tmpVolume.persistence "global" $.Values.global) | nindent 8 }}
+  {{- include "pathling-server.storage.class" (dict "persistence" .Values.tmpVolume.persistence "global" $.Values.global) | nindent 2 }}
 {{- end }}
