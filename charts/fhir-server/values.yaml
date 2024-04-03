@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: mcr.microsoft.com
   repository: healthcareapis/r4-fhir-server
-  tag: 4.0.74@sha256:ec4682584adbee124882402dbc717f87cfd27c35ded4927c1a1c990b33234873
+  tag: 4.0.103@sha256:f8d2e1039c7e5ad81ae01d8298d1ae434b25b0a3144a19885410864f158b0f3d
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -73,7 +73,7 @@ database:
     image:
       registry: mcr.microsoft.com
       repository: mssql/server
-      tag: 2022-latest@sha256:136be187bb12c94b150eb3e48fbc26ae62a81d39a2c7c913be2f3d7ebbddfbad
+      tag: 2022-latest@sha256:b94071acd4612bfe60a73e265097c2b6388d14d9d493db8f37cf4479a4337480
       pullPolicy: IfNotPresent
     replicaCount: 1
     port: 1433
@@ -168,7 +168,7 @@ curl: # +doc-gen:ignore
   image:
     registry: docker.io
     repository: curlimages/curl
-    tag: 8.6.0@sha256:c3b8bee303c6c6beed656cfc921218c529d65aa61114eb9e27c62047a1271b9b
+    tag: 8.7.1@sha256:25d29daeb9b14b89e2fa8cc17c70e4b188bca1466086907c2d9a4b56b59d8e21
 
 tests:
   # configure the test pods resource requests and limits
