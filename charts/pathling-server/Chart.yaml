@@ -13,7 +13,8 @@ dependencies:
     version: 14.1.4
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.6.2
+version: 0.7.0
+appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -28,4 +29,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8.7.1"
+      description: "update docker.io/aehrc/pathling tag to 7.0.0"

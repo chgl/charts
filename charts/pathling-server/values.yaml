@@ -87,9 +87,10 @@ resources:
   #   memory: 128Mi
 
 # -- extra environment variables to apply to the container
-extraEnv: []
-# - name: pathling.spark.appName
-#   value: "aDifferentName"
+extraEnv:
+  []
+  # - name: pathling.spark.appName
+  #   value: "aDifferentName"
 
 ingress:
   # create an Ingress for the application
