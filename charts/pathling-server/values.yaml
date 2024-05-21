@@ -14,7 +14,7 @@ imagePullSecrets: []
 image:
   registry: docker.io
   repository: aehrc/pathling
-  tag: 6.4.2@sha256:9b8ee32d4b8bb40192d6bf25814492a616153a0df15d178c286db9ec80c1c85e
+  tag: 7.0.0@sha256:fca5c006045a7e990c1816df1e98ce578c841d7eab62f137545a014a2954a549
   pullPolicy: IfNotPresent
 
 # -- number of replicas. This components can also be easily scaled horizontally if necessary.
@@ -87,9 +87,10 @@ resources:
   #   memory: 128Mi
 
 # -- extra environment variables to apply to the container
-extraEnv: []
-# - name: pathling.spark.appName
-#   value: "aDifferentName"
+extraEnv:
+  []
+  # - name: pathling.spark.appName
+  #   value: "aDifferentName"
 
 ingress:
   # create an Ingress for the application
