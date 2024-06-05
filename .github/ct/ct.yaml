@@ -13,3 +13,4 @@ release-label: release
 release-notes-file: CHANGELOG.md
 chart-repos:
   - aquasecurity=https://aquasecurity.github.io/helm-charts
+target-branch: master

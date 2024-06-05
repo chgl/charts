@@ -29,7 +29,7 @@
       "pinDigests": false
     },
     {
-      "matchPackageNames": [
+      "matchDepNames ": [
         "postgresql",
         "docker.io/bitnami/postgresql",
         "minio"
