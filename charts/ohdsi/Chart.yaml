@@ -15,13 +15,13 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 15.5.2
+    version: 15.5.14
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.23.2
+version: 0.23.3
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
