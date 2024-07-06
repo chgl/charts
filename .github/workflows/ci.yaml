@@ -61,7 +61,7 @@ jobs:
 
       - name: Run Powerlint
         env:
-          KUBERNETES_VERSIONS: "1.26.0 1.27.0 1.28.0 1.29.0"
+          KUBERNETES_VERSIONS: "1.28.0 1.29.0 1.30.0"
         run: chart-powerlint.sh
 
       # used to test whether the changelog generation process works
@@ -74,7 +74,7 @@ jobs:
       - lint
     strategy:
       matrix:
-        k8s-version: [1.27.3, 1.28.0, 1.29.0]
+        k8s-version: [1.28.9, 1.29.4, 1.30.2]
     steps:
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
