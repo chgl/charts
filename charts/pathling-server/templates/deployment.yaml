@@ -54,6 +54,8 @@ spec:
           env:
             - name: MINIO_ENDPOINT_URL
               value: {{ template "pathling-server.s3Endpoint" . }}
+            - name: MINIO_UPDATE
+              value: "off"
           command: ["/bin/sh", "-c"]
           args:
             - |
