@@ -300,6 +300,10 @@ minio:
   # the server to use it for storage
   enabled: true
 
+  extraEnvVars:
+    - name: MINIO_UPDATE
+      value: "off"
+
   # -- create a bucket used for the pathling server warehouse by default.
   # See `warehouse.url`.
   defaultBuckets: "pathling-warehouse"
@@ -351,7 +355,6 @@ initContainers:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
-
 
 tmpVolume:
   persistence:
