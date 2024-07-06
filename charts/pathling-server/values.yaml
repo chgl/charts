@@ -72,19 +72,18 @@ metrics:
     # interval: 30s
     # scrapeTimeout: 10s
 
-# resource requests and limits
-resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+# More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+resourcesPreset: "large"
+
+# configure the resource requests and limits
+resources: {}
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
 
 # -- extra environment variables to apply to the container
 extraEnv:
@@ -206,8 +205,8 @@ serviceAccount:
   # -- The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
-  # -- whether to automount the SA token
-  automountServiceAccountToken: true
+  # -- whether to automount the SA token. Note the SA token is also automatically mounted if `spark.cluster.enabled=true`
+  automountServiceAccountToken: false
 
 deployment:
   # -- Deployment strategy type <https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#update-strategies>
@@ -327,7 +326,11 @@ minio:
       type: RuntimeDefault
 
 tests:
-  # -- configure the test pods resource requests and limits
+  automountServiceAccountToken: false
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "nano"
+  # configure the test pods resource requests and limits
   resources: {}
   # limits:
   #   cpu: 100m
@@ -335,6 +338,20 @@ tests:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+
+initContainers:
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "nano"
+  # configure the init containers pods resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
 
 tmpVolume:
   persistence:

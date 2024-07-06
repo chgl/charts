@@ -87,8 +87,19 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 16.3.0-debian-12-r12@sha256:9d7c8db688f0775a7fcbef547e88b31d193edc311788dcf8643780d69309800c
+      tag: 16.3.0-debian-12-r19@sha256:b0248a5e2bf4fda5208183d4a6203287828666823a7a57431cfa4d31688bae97
       pullPolicy: IfNotPresent
+
+  serviceAccount:
+    # Specifies whether a service account should be created.
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+    # whether to automount the SA token
+    automountServiceAccountToken: false
 
   podDisruptionBudget:
     # create a PodDisruptionBudget resource for the OHDSI Atlas pods
@@ -194,6 +205,10 @@ webApi:
     type: ClusterIP
     port: 8080
 
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "large"
+
   # resource requests and limits for the container. <br>
   # 2Gi+ of RAM are recommended (<https://github.com/OHDSI/WebAPI/issues/1811#issuecomment-792988811>) <br>
   # You might also want to use `webApi.extraEnv` to set `MinRAMPercentage` and `MaxRAMPercentage`:
@@ -202,16 +217,13 @@ webApi:
   # helm template charts/ohdsi \
   #    --set webApi.extraEnv[0].name="JAVA_OPTS" \
   #    --set webApi.extraEnv[0].value="-XX:MinRAMPercentage=60.0 -XX:MaxRAMPercentage=80.0"
-  resources:
-    {}
-    # If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
   # readiness probe
   readinessProbe: # +doc-gen:ignore
@@ -312,6 +324,17 @@ atlas:
     # Maximum unavailable instances; ignored if there is no PodDisruptionBudget
     maxUnavailable: ""
 
+  serviceAccount:
+    # Specifies whether a service account should be created.
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+    # whether to automount the SA token
+    automountServiceAccountToken: false
+
   # the base URL of the OHDSI WebAPI, e.g. `https://example.com/WebAPI`
   # if this value is not set but `ingress.enabled=true` and `constructWebApiUrlFromIngress=true`,
   # then this URL is constructed from `ingress`
@@ -345,19 +368,18 @@ atlas:
     type: ClusterIP
     port: 8080
 
-  # resource requests and limits for the container
-  resources:
-    {}
-    # We usually recommend not to specify default resources and to leave this as a conscious
-    # choice for the user. This also increases chances charts run on environments with little
-    # resources, such as Minikube. If you do want to specify resources, uncomment the following
-    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-    # limits:
-    #   cpu: 100m
-    #   memory: 128Mi
-    # requests:
-    #   cpu: 100m
-    #   memory: 128Mi
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "small"
+
+  # configure the resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
   # readiness probe
   readinessProbe: # +doc-gen:ignore
@@ -442,6 +464,19 @@ cdmInitJob:
   # ContainerSecurityContext for the cdm-init container
   securityContext: {}
 
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "medium"
+
+  # configure the resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
   # extra environment variables to set
   extraEnv:
     []
@@ -476,6 +511,17 @@ achilles:
   # The number of failed finished jobs to retain. Value must be non-negative integer.
   failedJobsHistoryLimit: 1
 
+  serviceAccount:
+    # Specifies whether a service account should be created.
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+    # whether to automount the SA token
+    automountServiceAccountToken: false
+
   # Specifies how to treat concurrent executions of a Job. Valid values are:
   # - "Allow" (default): allows CronJobs to run concurrently;
   # - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet;
@@ -509,6 +555,19 @@ achilles:
 
   # annotations applied to the pod managed by this CronJob
   podAnnotations: {}
+
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "small"
+
+  # configure the resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
 
 ingress:
   # whether to create an Ingress to expose the Atlas web interface
@@ -557,6 +616,19 @@ loadCohortDefinitionsJob:
     # - name: "TEST"
     #   value: "TEST"
 
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "micro"
+
+  # configure the resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
   # the cohort defintions to send to the WebAPI as a list of JSON objects.
   # See the [ci/kitchen-sink-test-values.yaml](ci/kitchen-sink-test-values.yaml) file for an example of the expected format.
   cohortDefinitions: []
@@ -569,7 +641,24 @@ curl: # +doc-gen:ignore
     tag: 8.8.0@sha256:73e4d532ea62d7505c5865b517d3704966ffe916609bedc22af6833dc9969bcd
 
 tests:
+  automountServiceAccountToken: false
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "nano"
   # configure the test pods resource requests and limits
+  resources: {}
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+initContainers:
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "micro"
+  # configure the init containers pods resource requests and limits
   resources: {}
   # limits:
   #   cpu: 100m

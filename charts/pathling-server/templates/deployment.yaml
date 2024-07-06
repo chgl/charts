@@ -29,7 +29,7 @@ spec:
         {{- include "pathling-server.matchLabels" . | nindent 8 }}
     spec:
       serviceAccountName: {{ include "pathling-server.serviceAccountName" . }}
-      automountServiceAccountToken: {{ .Values.serviceAccount.automountServiceAccountToken }}
+      automountServiceAccountToken: {{ or .Values.serviceAccount.automountServiceAccountToken .Values.spark.cluster.enabled }}
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -44,6 +44,11 @@ spec:
           {{- with .Values.restrictedContainerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if $.Values.initContainers.resources }}
+          resources: {{- toYaml $.Values.initContainers.resources | nindent 12 }}
+          {{- else if ne $.Values.initContainers.resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" $.Values.initContainers.resourcesPreset) | nindent 12 }}
           {{- end }}
           env:
             - name: MINIO_ENDPOINT_URL
@@ -171,8 +176,11 @@ spec:
             - name: spark-blck-mngr
               containerPort: 7078
               protocol: TCP
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.resources }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- else if ne .Values.resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" .Values.resourcesPreset) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume

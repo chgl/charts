@@ -4,10 +4,12 @@ metadata:
   name: "{{ include "pathling-server.fullname" . }}-test-connection"
   labels:
     {{- include "pathling-server.labels" . | nindent 4 }}
+    app.kubernetes.io/component: test-connection
   annotations:
     helm.sh/hook: test-success
 spec:
   restartPolicy: Never
+  automountServiceAccountToken: {{ .Values.tests.automountServiceAccountToken }}
   containers:
     - name: probe-fhir-metadata-endpoint
       image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
@@ -18,9 +20,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tests.resources }}
-      resources:
-        {{- toYaml . | nindent 8 }}
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
       {{- end }}
       livenessProbe:
         exec:
@@ -37,9 +40,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tests.resources }}
-      resources:
-        {{- toYaml . | nindent 8 }}
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
       {{- end }}
       livenessProbe:
         exec:
@@ -56,9 +60,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tests.resources }}
-      resources:
-        {{- toYaml . | nindent 8 }}
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
       {{- end }}
       livenessProbe:
         exec:
@@ -75,9 +80,30 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tests.resources }}
-      resources:
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
+      {{- end }}
+      livenessProbe:
+        exec:
+          command: ["true"]
+      readinessProbe:
+        exec:
+          command: ["true"]
+    - name: probe-actuator-metrics-endpoint
+      image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
+      imagePullPolicy: IfNotPresent
+      command: ["curl", "--fail-with-body"]
+      args: ["http://{{ include "pathling-server.fullname" . }}:{{ .Values.service.metrics.port }}/actuator/prometheus"]
+      {{- with $.Values.restrictedContainerSecurityContext }}
+      securityContext:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
       {{- end }}
       livenessProbe:
         exec:

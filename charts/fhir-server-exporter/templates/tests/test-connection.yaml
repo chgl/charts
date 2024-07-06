@@ -25,9 +25,10 @@ spec:
         runAsNonRoot: true
         seccompProfile:
           type: RuntimeDefault
-      {{- with .Values.tests.resources }}
-      resources:
-        {{- toYaml . | nindent 8 }}
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
       {{- end }}
       livenessProbe:
         exec:

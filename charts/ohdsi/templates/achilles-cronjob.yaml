@@ -37,6 +37,8 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          serviceAccountName: {{ include "ohdsi.achilles.serviceAccountName" $ }}
+          automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
           containers:
             - name: achilles-cron
               image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
@@ -45,9 +47,10 @@ spec:
               securityContext:
                 {{- toYaml . | nindent 16 }}
               {{- end }}
-              {{- with .resources}}
-              resources:
-                {{- toYaml . | nindent 16 }}
+              {{- if .resources }}
+              resources: {{- toYaml .resources | nindent 16 }}
+              {{- else if ne .resourcesPreset "none" }}
+              resources: {{- include "common.resources.preset" (dict "type" .resourcesPreset) | nindent 16 }}
               {{- end }}
               volumeMounts:
                 - mountPath: /opt/achilles/workspace

@@ -38,6 +38,8 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      serviceAccountName: {{ include "ohdsi.atlas.serviceAccountName" $ }}
+      automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
       containers:
         - name: atlas
           {{- with .securityContext}}
@@ -72,9 +74,10 @@ spec:
             successThreshold: {{ .successThreshold }}
             failureThreshold: {{ .failureThreshold }}
           {{- end }}
-          {{- with .resources}}
-          resources:
-            {{- toYaml . | nindent 12 }}
+          {{- if .resources }}
+          resources: {{- toYaml .resources | nindent 12 }}
+          {{- else if ne .resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" .resourcesPreset) | nindent 12 }}
           {{- end }}
           env:
             {{- if .webApiUrl }}

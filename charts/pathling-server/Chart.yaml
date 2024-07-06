@@ -13,7 +13,10 @@ dependencies:
     version: 14.6.3
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
-version: 0.7.2
+  - name: common
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 2.20.3
+version: 0.8.0
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -29,6 +32,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8.8.0"
-    - kind: changed
-      description: "update minio docker tag to v14.6.3"
+      description: "Set default resources using presets"

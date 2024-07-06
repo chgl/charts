@@ -229,3 +229,41 @@ env vars set on the webapi container for otel tracing and metrics
 {{- end }}
 {{- end }}
 {{- end -}}
+
+
+{{/*
+TODO: refactor to pass the module name (webapi, atlas, achilles) and the `.serviceAccount` context as 2 parameters
+*/}}
+
+{{/*
+Create the name of the webapi service account to use
+*/}}
+{{- define "ohdsi.webApi.serviceAccountName" -}}
+{{- if .Values.webApi.serviceAccount.create -}}
+    {{ default (printf "%s-webapi" (include "ohdsi.fullname" .)) .Values.webApi.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.webApi.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create the name of the atlas service account to use
+*/}}
+{{- define "ohdsi.atlas.serviceAccountName" -}}
+{{- if .Values.atlas.serviceAccount.create -}}
+    {{ default (printf "%s-atlas" (include "ohdsi.fullname" .)) .Values.atlas.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.atlas.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create the name of the atlas service account to use
+*/}}
+{{- define "ohdsi.achilles.serviceAccountName" -}}
+{{- if .Values.achilles.serviceAccount.create -}}
+    {{ default (printf "%s-achilles" (include "ohdsi.fullname" .)) .Values.achilles.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.achilles.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
