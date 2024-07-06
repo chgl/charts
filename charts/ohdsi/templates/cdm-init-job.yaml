@@ -45,6 +45,11 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if .resources }}
+          resources: {{- toYaml .resources | nindent 12 }}
+          {{- else if ne .resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" .resourcesPreset) | nindent 12 }}
+          {{- end }}
           env:
             - name: PGPASSWORD
               valueFrom:

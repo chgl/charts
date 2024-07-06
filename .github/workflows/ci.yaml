@@ -6,11 +6,23 @@ on:
 
 permissions: read-all
 
+# https://stackoverflow.com/a/72408109
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+
 jobs:
   lint:
     runs-on: ubuntu-22.04
     container: ghcr.io/chgl/kube-powertools:v2.3.8@sha256:f3af3dd7afc01e7127b12c91f513828ff9fd790afcbaf25201cdab882b9c4088
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+        with:
+          egress-policy: audit # change to 'egress-policy: block' after couple of runs
+          disable-sudo: true
+          disable-telemetry: true
+
       - name: Add workspace as safe directory
         run: |
           git config --global --add safe.directory /__w/charts/charts
@@ -56,7 +68,7 @@ jobs:
 
       - name: Run Powerlint
         env:
-          KUBERNETES_VERSIONS: "1.26.0 1.27.0 1.28.0 1.29.0"
+          KUBERNETES_VERSIONS: "1.28.0 1.29.0 1.30.0"
         run: chart-powerlint.sh
 
       # used to test whether the changelog generation process works
@@ -69,8 +81,15 @@ jobs:
       - lint
     strategy:
       matrix:
-        k8s-version: [1.27.3, 1.28.0, 1.29.0]
+        k8s-version: [1.28.9, 1.29.4, 1.30.2]
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+        with:
+          egress-policy: audit # change to 'egress-policy: block' after couple of runs
+          disable-sudo: true
+          disable-telemetry: true
+
       - name: Checkout
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:

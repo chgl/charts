@@ -15,13 +15,16 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgresql
-    version: 15.5.2
+    version: 15.5.14
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: postgresql.enabled
+  - name: common
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 2.20.3
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.23.2
+version: 0.24.0
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -41,8 +44,6 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update docker.io/bitnami/postgresql docker tag to v16.3.0-debian-12-r12"
+      description: "Set default resources using presets"
     - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8.8.0"
-    - kind: changed
-      description: "update postgresql docker tag to v15.5.2"
+      description: "create service accounts for all components by default. But don't automount the account."

@@ -12,26 +12,26 @@ checks:
   topologySpreadConstraint: ignore
 
   # efficiency
-  cpuRequestsMissing: ignore
-  cpuLimitsMissing: ignore
-  memoryRequestsMissing: ignore
-  memoryLimitsMissing: ignore
+  cpuRequestsMissing: danger
+  cpuLimitsMissing: danger
+  memoryRequestsMissing: danger
+  memoryLimitsMissing: danger
 
   # security
-  automountServiceAccountToken: ignore
+  automountServiceAccountToken: danger
   hostIPCSet: danger
   hostPIDSet: danger
-  linuxHardening: warning
+  linuxHardening: danger
   missingNetworkPolicy: ignore
   notReadOnlyRootFilesystem: warning
   privilegeEscalationAllowed: danger
   runAsRootAllowed: danger
   runAsPrivileged: danger
   dangerousCapabilities: danger
-  insecureCapabilities: warning
+  insecureCapabilities: danger
   hostNetworkSet: danger
-  hostPortSet: warning
-  tlsSettingsMissing: warning
+  hostPortSet: danger
+  tlsSettingsMissing: ignore
   sensitiveContainerEnvVar: ignore
   sensitiveConfigmapContent: danger
   clusterrolePodExecAttach: danger

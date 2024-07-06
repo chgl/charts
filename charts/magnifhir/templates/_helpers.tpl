@@ -49,3 +49,14 @@ Selector labels
 app.kubernetes.io/name: {{ include "magnifhir.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Create the name of the atlas service account to use
+*/}}
+{{- define "magnifhir.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "magnifhir.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}

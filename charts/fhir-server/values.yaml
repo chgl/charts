@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: mcr.microsoft.com
   repository: healthcareapis/r4-fhir-server
-  tag: 4.0.149@sha256:1d655bed0ed9668760ae249af271e488e9d6e2c625b7248f0f417c31a4f29c75
+  tag: 4.0.196@sha256:5409815c8006992596cb92ba7c05d6d12216d9ae62ccb2a284033f0c4c3f28ef
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -42,6 +42,17 @@ securityContext: # +doc-gen:ignore
 service:
   type: ClusterIP
   port: 80
+
+serviceAccount:
+  # Specifies whether a service account should be created.
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  # whether to automount the SA token
+  automountServiceAccountToken: false
 
 database:
   # options: ExistingSqlServer, SqlServer, SqlContainer, CosmosDb
@@ -79,6 +90,9 @@ database:
     port: 1433
     databaseName: FHIR
     userName: sa
+    # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+    # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+    resourcesPreset: "medium"
     resources: {}
     persistence:
       storageClass: ""
@@ -141,6 +155,10 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+# set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+# More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+resourcesPreset: "medium"
+
 resources:
   {}
   # We usually recommend not to specify default resources and to leave this as a conscious
@@ -171,6 +189,10 @@ curl: # +doc-gen:ignore
     tag: 8.8.0@sha256:73e4d532ea62d7505c5865b517d3704966ffe916609bedc22af6833dc9969bcd
 
 tests:
+  automountServiceAccountToken: false
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "nano"
   # configure the test pods resource requests and limits
   resources: {}
   # limits:

@@ -27,7 +27,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/fhir-server-exporter
-  tag: v2.3.3@sha256:f9d99b9103843e7b28cf9e9c54e728a52239432688a3ce876a344d9c0fd5406a
+  tag: v2.3.5@sha256:74b1524e2a6e5785bb469dca6e7004fef286a8a4736639a7f87d9535adfa992d
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -59,6 +59,21 @@ securityContext: # +doc-gen:ignore
 service:
   type: ClusterIP
   port: 8080
+
+serviceAccount:
+  # Specifies whether a service account should be created.
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  # whether to automount the SA token
+  automountServiceAccountToken: false
+
+# set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+# More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+resourcesPreset: "medium"
 
 resources:
   {}
@@ -138,6 +153,10 @@ topologySpreadConstraints:
   #       app.kubernetes.io/name: fhir-server-exporter
 
 tests:
+  automountServiceAccountToken: false
+  # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
+  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  resourcesPreset: "nano"
   # configure the test pods resource requests and limits
   resources: {}
   # limits:

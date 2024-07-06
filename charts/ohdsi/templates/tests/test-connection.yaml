@@ -6,9 +6,10 @@ metadata:
     {{- include "ohdsi.labels" . | nindent 4 }}
     app.kubernetes.io/component: test-connection
   annotations:
-    "helm.sh/hook": test-success
+    helm.sh/hook: test-success
 spec:
   restartPolicy: Never
+  automountServiceAccountToken: {{ .Values.tests.automountServiceAccountToken }}
   containers:
     {{- if .Values.webApi.enabled }}
     - name: test-webapi
@@ -20,9 +21,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tests.resources }}
-      resources:
-        {{- toYaml . | nindent 8 }}
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
       {{- end }}
       livenessProbe:
         exec:
@@ -41,9 +43,10 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tests.resources }}
-      resources:
-        {{- toYaml . | nindent 8 }}
+      {{- if .Values.tests.resources }}
+      resources: {{- toYaml .Values.tests.resources | nindent 10 }}
+      {{- else if ne .Values.tests.resourcesPreset "none" }}
+      resources: {{- include "common.resources.preset" (dict "type" .Values.tests.resourcesPreset) | nindent 10 }}
       {{- end }}
       livenessProbe:
         exec:

@@ -32,6 +32,8 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "fhir-server-exporter.serviceAccountName" $ }}
+      automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
       containers:
         - name: fhir-server-exporter
           securityContext:
@@ -64,10 +66,13 @@ spec:
             successThreshold: {{ .successThreshold }}
             failureThreshold: {{ .failureThreshold }}
           {{- end }}
-          resources:
-            {{- toYaml .resources | nindent 12 }}
+          {{- if .resources }}
+          resources: {{- toYaml .resources | nindent 12 }}
+          {{- else if ne .resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" .resourcesPreset) | nindent 12 }}
+          {{- end }}
           env:
-            - name: COMPlus_EnableDiagnostics
+            - name: DOTNET_EnableDiagnostics
               value: "0"
             - name: FhirServerUrl
               value: {{ tpl .fhirServerUrl $ }}

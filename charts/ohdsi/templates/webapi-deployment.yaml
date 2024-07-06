@@ -33,6 +33,8 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "ohdsi.webApi.serviceAccountName" $ }}
+      automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
       initContainers:
         - name: wait-for-db
           image: {{ include "ohdsi.webapi.waitForDatabaseInitContainerImage" $ }}
@@ -40,6 +42,11 @@ spec:
           {{- with $.Values.restrictedContainerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if $.Values.initContainers.resources }}
+          resources: {{- toYaml $.Values.initContainers.resources | nindent 12 }}
+          {{- else if ne $.Values.initContainers.resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" $.Values.initContainers.resourcesPreset) | nindent 12 }}
           {{- end }}
           env:
             - name: PGHOST
@@ -195,8 +202,11 @@ spec:
             successThreshold: {{ .successThreshold }}
             failureThreshold: {{ .failureThreshold }}
           {{- end }}
-          resources:
-            {{- toYaml .resources | nindent 12 }}
+          {{- if .resources }}
+          resources: {{- toYaml .resources | nindent 12 }}
+          {{- else if ne .resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" .resourcesPreset) | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume

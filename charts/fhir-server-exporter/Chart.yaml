@@ -13,7 +13,11 @@ keywords:
   - "telemetry"
   - "prometheus exporter"
 kubeVersion: ">= 1.19.0"
-version: 1.0.33
+dependencies:
+  - name: common
+    repository: oci://registry-1.docker.io/bitnamicharts
+    version: 2.20.3
+version: 1.1.0
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -26,6 +30,6 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update ghcr.io/chgl/fhir-server-exporter docker tag to v2.3.3"
+      description: "Set default resources using presets"
     - kind: changed
-      description: "update docker.io/curlimages/curl docker tag to v8.8.0"
+      description: "update ghcr.io/chgl/fhir-server-exporter tag to v2.3.5"
