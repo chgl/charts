@@ -49,3 +49,14 @@ Selector labels
 app.kubernetes.io/name: {{ include "fhir-server-exporter.fullname" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
+
+{{/*
+Create the name of the atlas service account to use
+*/}}
+{{- define "fhir-server-exporter.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "fhir-server-exporter.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}

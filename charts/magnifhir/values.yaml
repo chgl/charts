@@ -176,6 +176,17 @@ ingress:
   #    hosts:
   #      - magnifhir.127.0.0.1.nip.io
 
+serviceAccount:
+  # Specifies whether a service account should be created.
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+  # whether to automount the SA token
+  automountServiceAccountToken: false
+
 # @ignored
 curl: # +doc-gen:ignore
   image:
@@ -184,6 +195,7 @@ curl: # +doc-gen:ignore
     tag: 8.8.0@sha256:73e4d532ea62d7505c5865b517d3704966ffe916609bedc22af6833dc9969bcd
 
 tests:
+  automountServiceAccountToken: false
   # -- set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
   # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
   resourcesPreset: "nano"

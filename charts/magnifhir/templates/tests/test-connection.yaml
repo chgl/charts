@@ -6,9 +6,10 @@ metadata:
     {{- include "magnifhir.labels" . | nindent 4 }}
     app.kubernetes.io/component: test-connection
   annotations:
-    "helm.sh/hook": test
+    helm.sh/hook: test
 spec:
   restartPolicy: Never
+  automountServiceAccountToken: {{ .Values.tests.automountServiceAccountToken }}
   containers:
     - name: probe-web-endpoint
       image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"

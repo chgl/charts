@@ -32,6 +32,8 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "fhir-server-exporter.serviceAccountName" $ }}
+      automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
       containers:
         - name: fhir-server-exporter
           securityContext:

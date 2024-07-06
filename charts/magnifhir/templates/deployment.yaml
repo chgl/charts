@@ -33,6 +33,8 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .podSecurityContext | nindent 8 }}
+      serviceAccountName: {{ include "magnifhir.serviceAccountName" $ }}
+      automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
       containers:
         - name: magnifhir
           securityContext:
