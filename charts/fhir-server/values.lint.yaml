@@ -1,0 +1,5 @@
+---
+database:
+  dataStore: "SqlContainer"
+  sqlContainer:
+    acceptEula: "y"

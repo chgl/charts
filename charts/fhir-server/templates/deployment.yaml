@@ -205,8 +205,11 @@ spec:
               path: /health/check
               port: http
             timeoutSeconds: 10
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
+          {{- if .Values.resources }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
+          {{- else if ne .Values.resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" .Values.resourcesPreset) | nindent 12 }}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
