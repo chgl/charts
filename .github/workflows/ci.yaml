@@ -6,6 +6,11 @@ on:
 
 permissions: read-all
 
+# https://stackoverflow.com/a/72408109
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+
 jobs:
   lint:
     runs-on: ubuntu-22.04
