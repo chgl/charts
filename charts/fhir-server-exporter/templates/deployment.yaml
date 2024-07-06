@@ -72,7 +72,7 @@ spec:
           resources: {{- include "common.resources.preset" (dict "type" .resourcesPreset) | nindent 12 }}
           {{- end }}
           env:
-            - name: COMPlus_EnableDiagnostics
+            - name: DOTNET_EnableDiagnostics
               value: "0"
             - name: FhirServerUrl
               value: {{ tpl .fhirServerUrl $ }}

@@ -34,7 +34,7 @@ spec:
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: COMPlus_EnableDiagnostics
+            - name: DOTNET_EnableDiagnostics
               value: "0"
             - name: ASPNETCORE_FORWARDEDHEADERS_ENABLED
               value: "true"
