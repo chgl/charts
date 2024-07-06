@@ -56,6 +56,8 @@ spec:
               value: {{ template "pathling-server.s3Endpoint" . }}
             - name: MINIO_UPDATE
               value: "off"
+            - name: MINIO_CALLHOME_ENABLE
+              value: "off"
           command: ["/bin/sh", "-c"]
           args:
             - |

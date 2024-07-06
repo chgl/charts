@@ -303,6 +303,8 @@ minio:
   extraEnvVars:
     - name: MINIO_UPDATE
       value: "off"
+    - name: MINIO_CALLHOME_ENABLE
+      value: "off"
 
   # -- create a bucket used for the pathling server warehouse by default.
   # See `warehouse.url`.
