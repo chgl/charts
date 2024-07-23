@@ -17,7 +17,7 @@ jobs:
     container: ghcr.io/chgl/kube-powertools:v2.3.10@sha256:38602b0d06b4d8d8f47c2a2c88bf56d27a27919b17d9d6d0c3e4a89090b3b5cb
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -84,7 +84,7 @@ jobs:
         k8s-version: [1.28.9, 1.29.4, 1.30.2]
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@17d0e2bd7d51742c71671bd19fa12bdc9d40a3d6 # v2.8.1
+        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
