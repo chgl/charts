@@ -17,7 +17,7 @@ dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 2.20.3
-version: 1.1.0
+version: 1.1.1
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -30,6 +30,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Set default resources using presets"
-    - kind: changed
-      description: "update ghcr.io/chgl/fhir-server-exporter tag to v2.3.5"
+      description: "Set default resources preset to micro"
