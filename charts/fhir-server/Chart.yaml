@@ -10,12 +10,12 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.11.0
+version: 0.11.1
 deprecated: false
 dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.20.3
+    version: 2.21.0
 annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
