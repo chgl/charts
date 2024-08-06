@@ -16,8 +16,8 @@ kubeVersion: ">= 1.19.0"
 dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.20.3
-version: 1.1.1
+    version: 2.21.0
+version: 1.1.2
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -30,4 +30,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Set default resources preset to micro"
+      description: "update all non-major dependencies"

@@ -14,10 +14,10 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-22.04
-    container: ghcr.io/chgl/kube-powertools:v2.3.10@sha256:38602b0d06b4d8d8f47c2a2c88bf56d27a27919b17d9d6d0c3e4a89090b3b5cb
+    container: ghcr.io/chgl/kube-powertools:v2.3.16@sha256:b6a3c4e90c464625993680560780f2888f6df75b6564066cc51aea7a67c67074
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -84,7 +84,7 @@ jobs:
         k8s-version: [1.28.9, 1.29.4, 1.30.2]
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0d381219ddf674d61a7572ddd19d7941e271515c # v2.9.0
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafbde # v2.9.1
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -124,7 +124,7 @@ jobs:
     if: ${{ false }}
     needs:
       - test
-    container: ghcr.io/chgl/kube-powertools:v2.3.10@sha256:38602b0d06b4d8d8f47c2a2c88bf56d27a27919b17d9d6d0c3e4a89090b3b5cb
+    container: ghcr.io/chgl/kube-powertools:v2.3.16@sha256:b6a3c4e90c464625993680560780f2888f6df75b6564066cc51aea7a67c67074
     permissions:
       pull-requests: write
       contents: write
