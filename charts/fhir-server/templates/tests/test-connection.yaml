@@ -39,7 +39,7 @@ spec:
     - name: probe-condition-count-endpoint
       image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
       command: ["curl", "--fail-with-body"]
-      args: ['http://{{ include "fhir-server.fullname" . }}:{{ .Values.service.port }}/Condition?summary=count']
+      args: ['http://{{ include "fhir-server.fullname" . }}:{{ .Values.service.port }}/Condition?_summary=count']
       securityContext:
         allowPrivilegeEscalation: false
         capabilities:
