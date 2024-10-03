@@ -8,6 +8,33 @@ entries:
         - kind: changed
           description: "update all non-major dependencies"
     apiVersion: v2
+    created: "2024-10-03T14:03:48.035114623Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.24.0
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: bf8d7d1331f319b45342a73a5709004106ba76b5b83c066dcfe0b1e97d99b8fd
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.11.5/fhir-server-0.11.5.tgz
+    version: 0.11.5
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "update all non-major dependencies"
+    apiVersion: v2
     created: "2024-09-17T14:23:21.855323093Z"
     dependencies:
     - name: common
@@ -1836,6 +1863,43 @@ entries:
     - https://github.com/chgl/charts/releases/download/fhir-server-0.4.1/fhir-server-0.4.1.tgz
     version: 0.4.1
   fhir-server-exporter:
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "update all non-major dependencies"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 2.x
+    created: "2024-10-03T14:03:48.181251794Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.24.0
+    description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
+    digest: c49e1b5dd83efeae22bc88d1afe9a7fb9413c432195934eb76e404641fdd712e
+    home: https://github.com/chgl/fhir-server-exporter
+    keywords:
+    - fhir
+    - metrics
+    - telemetry
+    - prometheus exporter
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.1.6/fhir-server-exporter-1.1.6.tgz
+    version: 1.1.6
   - annotations:
       artifacthub.io/changes: |
         # When using the list of objects option the valid supported kinds are
@@ -4331,6 +4395,45 @@ entries:
           url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-record-conditions.png
     apiVersion: v2
     appVersion: 1.x
+    created: "2024-10-03T14:03:48.322237728Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.24.0
+    description: A Helm chart for deploying the magniFHIR app on Kubernetes.
+    digest: c5ba212f169195d8c89f465dd48ed71b886b7b0eb954ab1ab4e79cc0b1be0f17
+    home: https://github.com/chgl/magniFHIR
+    keywords:
+    - fhir
+    - healthcare
+    - electronic health record
+    - blazor
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: magnifhir
+    sources:
+    - https://github.com/chgl/magniFHIR
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/magnifhir-1.3.4/magnifhir-1.3.4.tgz
+    version: 1.3.4
+  - annotations:
+      artifacthub.io/changes: |
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "update all non-major dependencies"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/screenshots: |
+        - title: Configure multiple FHIR servers to connect to
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/server-selection.png
+        - title: List all Patient resources stored in the server
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-browser.png
+        - title: See a Patient's conditions, observations, and medications
+          url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-record-conditions.png
+    apiVersion: v2
+    appVersion: 1.x
     created: "2024-09-13T21:08:04.236489192Z"
     dependencies:
     - name: common
@@ -5432,6 +5535,57 @@ entries:
     - https://github.com/chgl/charts/releases/download/magnifhir-1.0.0/magnifhir-1.0.0.tgz
     version: 1.0.0
   ohdsi:
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "update all non-major dependencies"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: OHDSI Homepage
+          url: https://www.ohdsi.org/
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/postgresql
+      artifacthub.io/screenshots: |
+        - title: Defining a cohort in OHDSI ATLAS
+          url: https://ohdsi.github.io/TheBookOfOhdsi/images/OhdsiAnalyticsTools/atlas.png
+        - title: OHDSI ACHILLES Dashboard
+          url: https://www.ohdsi.org/wp-content/uploads/2020/06/Screen-Shot-2020-06-01-at-3.31.29-PM.png
+    apiVersion: v2
+    created: "2024-10-03T14:03:48.455698609Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 15.5.38
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.24.0
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: 01ee484d831cec5492ecf98e5484ed8027ded81669f0f56fc21bb16e60e0e245
+    home: https://github.com/OHDSI
+    icon: https://avatars.githubusercontent.com/u/6570077
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.24.5/ohdsi-0.24.5.tgz
+    version: 0.24.5
   - annotations:
       artifacthub.io/changes: |-
         # When using the list of objects option the valid supported kinds are
@@ -9838,6 +9992,43 @@ entries:
         - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
     apiVersion: v2
     appVersion: 7.x
+    created: "2024-10-03T14:03:48.607440629Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 14.7.15
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.24.0
+    description: A Helm chart for deploying the Pathling server
+    digest: de3cc7d2360234ed3d2c448a1f5d698858c1ffe5417fcf94fa483bda65035ca0
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.8.5/pathling-server-0.8.5.tgz
+    version: 0.8.5
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
+          description: "update all non-major dependencies"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 7.x
     created: "2024-09-17T14:23:22.193009895Z"
     dependencies:
     - condition: minio.enabled
@@ -11352,4 +11543,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2024-09-17T14:23:22.193958043Z"
+generated: "2024-10-03T14:03:48.608563398Z"
