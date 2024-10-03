@@ -27,7 +27,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/fhir-server-exporter
-  tag: v2.3.12@sha256:37b80b5b6daa88648eb2ca0e573a908375cf23b3c232c3cf9a63f7c3fd9c1499
+  tag: v2.3.15@sha256:2d3a16d1871c5b0446891ca7e045781516b9e7b5b612fd64bf08158ca0443fee
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -130,7 +130,7 @@ curl: # +doc-gen:ignore
   image:
     registry: docker.io
     repository: curlimages/curl
-    tag: 8.10.0@sha256:a3838a5cf24fe940ec63e98fc37ce1dbe1d43286dc2b803c5bc5e9f067c7ad6d
+    tag: 8.10.1@sha256:d9b4541e214bcd85196d6e92e2753ac6d0ea699f0af5741f8c6cccbfcf00ef4b
 
 podDisruptionBudget:
   # create a PodDisruptionBudget resource for the pods

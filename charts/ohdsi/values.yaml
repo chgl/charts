@@ -87,7 +87,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 16.4.0-debian-12-r9@sha256:75c5d322fd11bb10a0e4ddebf4ab312aa9ec2bbcf2b64986f7d87127483e2b14
+      tag: 16.4.0-debian-12-r14@sha256:94bc968141e790ef9a23202cca6b53b44f295672b0bbdb1d5855384e6c2dac1f
       pullPolicy: IfNotPresent
 
   serviceAccount:
@@ -638,7 +638,7 @@ curl: # +doc-gen:ignore
   image:
     registry: docker.io
     repository: curlimages/curl
-    tag: 8.10.0@sha256:a3838a5cf24fe940ec63e98fc37ce1dbe1d43286dc2b803c5bc5e9f067c7ad6d
+    tag: 8.10.1@sha256:d9b4541e214bcd85196d6e92e2753ac6d0ea699f0af5741f8c6cccbfcf00ef4b
 
 tests:
   automountServiceAccountToken: false
