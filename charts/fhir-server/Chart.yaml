@@ -10,7 +10,7 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.11.6
+version: 0.11.7
 deprecated: false
 dependencies:
   - name: common
