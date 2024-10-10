@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Kubescape Scan Report</title>
+  </head>
+  <style>
+  :root {
+    --cell-padding-vertical: 0.25em;
+    --cell-padding-horizontal: 0.25em;
+    --font-family-sans: system-ui, -apple-system, sans-serif;
+  }
+  body {
+    max-width: 60em;
+    margin: auto;
+    font-family: var(--font-family-sans);
+  }
+  table {
+    width: 100%;
+    border-top: 0.1em solid black;
+    border-bottom: 0.1em solid black;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  th {
+    text-align: left;
+  }
+  td, th {
+    padding-top: var(--cell-padding-vertical);
+    padding-bottom: var(--cell-padding-vertical);
+    padding-right: var(--cell-padding-horizontal);
+    vertical-align: top;
+  }
+  td > p {
+    margin: 0;
+    word-break: break-all;
+    hyphens: auto;
+  }
+  thead {
+    border-bottom: 0.01em solid black;
+  }
+  .numericCell {
+    text-align: right;
+  }
+  .controlSeverityCell {
+    width: 10%;
+  }
+  .controlNameCell {
+    width: 50%;
+  }
+  .controlRiskCell {
+    width: 10%;
+  }
+  .resourceSeverityCell {
+    width: 10%;
+  }
+  .resourceNameCell {
+    width: 30%;
+  }
+  .resourceURLCell {
+    width: 10%;
+  }
+  .resourceRemediationCell {
+    width: 50%;
+  }
+  .logo {
+    width: 25%;
+    float: right;
+  }
+  </style>
+  <body>
+    <img class="logo" src="https://raw.githubusercontent.com/kubescape/kubescape/master/core/pkg/resultshandling/printer/v2/pdf/logo.png">
+    <h1>Kubescape Scan Report</h1>
+    
+    </br>
+    <h2>Summary:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>All</th>
+          <th>Failed</th>
+          <th>Skipped</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>23</td>
+          <td>2</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    </br>
+    <h2>Details</h2>
+    <table>
+      <thead>
+      <tr>
+        <th class="controlSeverityCell">Severity</th>
+        <th class="controlNameCell">Control Name</th>
+        <th class="controlRiskCell">Failed Resources</th>
+        <th class="controlRiskCell">All Resources</th>
+        <th class="controlRiskCell">Risk Score, %</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">CIS-5.1.3 Minimize wildcard use in Roles and ClusterRoles</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">CIS-5.2.11 Minimize the admission of Windows HostProcess Containers</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">CIS-5.2.2 Minimize the admission of privileged containers</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="controlRiskCell numericCell">11</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">85</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.1.2 Minimize access to secrets</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.1.4 Minimize access to create pods</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.1.5 Ensure that default service accounts are not actively used</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.1.6 Ensure that Service Account Tokens are only mounted where necessary</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">21</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.1.8 Limit use of the Bind, Impersonate and Escalate permissions in the Kubernetes cluster</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.1 Ensure that the cluster has at least one active policy control mechanism in place</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.10 Minimize the admission of containers with capabilities assigned</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.12 Minimize the admission of HostPath volumes</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.13 Minimize the admission of containers which use HostPorts</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.3 Minimize the admission of containers wishing to share the host process ID namespace</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.4 Minimize the admission of containers wishing to share the host IPC namespace</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.5 Minimize the admission of containers wishing to share the host network namespace</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.6 Minimize the admission of containers with allowPrivilegeEscalation</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.7 Minimize the admission of root containers</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.8 Minimize the admission of containers with the NET_RAW capability</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.2.9 Minimize the admission of containers with added capabilities</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.3.2 Ensure that all Namespaces have Network Policies defined</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.4.1 Prefer using secrets as files over secrets as environment variables</td>
+          <td class="controlRiskCell numericCell">5</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">38</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">CIS-5.7.2 Ensure that the seccomp profile is set to docker/default in your pod definitions</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+      <tbody>
+    </table>
+    
+    </br>
+    <h2>Failed Resources:</h2>
+    </br>
+    
+    
+    <h3>Name: -postgresql</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: StatefulSet</p>
+      <p>Name: -postgresql</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">CIS-5.4.1 Prefer using secrets as files over secrets as environment variables</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0207">C-0207</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[4].name</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -fhir-server</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">CIS-5.4.1 Prefer using secrets as files over secrets as environment variables</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0207">C-0207</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[10].name</p>  <p>spec.template.spec.containers[0].env[11].name</p>  <p>spec.template.spec.containers[0].env[9].name</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroup=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p>  <p>spec.template.spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-exporter</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -fhir-server-exporter</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroup=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p>  <p>spec.template.spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-exporter-test-metrics-endpoint</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -fhir-server-exporter-test-metrics-endpoint</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -pathling-server</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -pathling-server</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">CIS-5.4.1 Prefer using secrets as files over secrets as environment variables</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0207">C-0207</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[4].name</p>  <p>spec.template.spec.containers[0].env[5].name</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroup=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p>  <p>spec.template.spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -magnifhir</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -magnifhir</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroup=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p>  <p>spec.template.spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-atlas</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -ohdsi-atlas</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem=true</p>  <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -ohdsi-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -fhir-server-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -magnifhir-test</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -magnifhir-test</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -pathling-server-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -pathling-server-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.containers[2].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.containers[3].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-webapi</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -ohdsi-webapi</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">CIS-5.4.1 Prefer using secrets as files over secrets as environment variables</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0207">C-0207</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[14].name</p>  <p>spec.template.spec.containers[0].env[4].name</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">CIS-5.7.3 Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroup=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p>  <p>spec.template.spec.securityContext.sysctls.name=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.sysctls.value=YOUR_VALUE</p>  <p>spec.template.spec.securityContext.supplementalGroups=YOUR_VALUE</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -minio</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -minio</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">CIS-5.4.1 Prefer using secrets as files over secrets as environment variables</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0207">C-0207</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[4].name</p>  <p>spec.template.spec.containers[0].env[5].name</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+  </body>
+</html>

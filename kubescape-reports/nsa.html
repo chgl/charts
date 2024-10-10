@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <title>Kubescape Scan Report</title>
+  </head>
+  <style>
+  :root {
+    --cell-padding-vertical: 0.25em;
+    --cell-padding-horizontal: 0.25em;
+    --font-family-sans: system-ui, -apple-system, sans-serif;
+  }
+  body {
+    max-width: 60em;
+    margin: auto;
+    font-family: var(--font-family-sans);
+  }
+  table {
+    width: 100%;
+    border-top: 0.1em solid black;
+    border-bottom: 0.1em solid black;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  th {
+    text-align: left;
+  }
+  td, th {
+    padding-top: var(--cell-padding-vertical);
+    padding-bottom: var(--cell-padding-vertical);
+    padding-right: var(--cell-padding-horizontal);
+    vertical-align: top;
+  }
+  td > p {
+    margin: 0;
+    word-break: break-all;
+    hyphens: auto;
+  }
+  thead {
+    border-bottom: 0.01em solid black;
+  }
+  .numericCell {
+    text-align: right;
+  }
+  .controlSeverityCell {
+    width: 10%;
+  }
+  .controlNameCell {
+    width: 50%;
+  }
+  .controlRiskCell {
+    width: 10%;
+  }
+  .resourceSeverityCell {
+    width: 10%;
+  }
+  .resourceNameCell {
+    width: 30%;
+  }
+  .resourceURLCell {
+    width: 10%;
+  }
+  .resourceRemediationCell {
+    width: 50%;
+  }
+  .logo {
+    width: 25%;
+    float: right;
+  }
+  </style>
+  <body>
+    <img class="logo" src="https://raw.githubusercontent.com/kubescape/kubescape/master/core/pkg/resultshandling/printer/v2/pdf/logo.png">
+    <h1>Kubescape Scan Report</h1>
+    
+    </br>
+    <h2>Summary:</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>All</th>
+          <th>Failed</th>
+          <th>Skipped</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>19</td>
+          <td>3</td>
+          <td>0</td>
+        </tr>
+      </tbody>
+    </table>
+    </br>
+    <h2>Details</h2>
+    <table>
+      <thead>
+      <tr>
+        <th class="controlSeverityCell">Severity</th>
+        <th class="controlNameCell">Control Name</th>
+        <th class="controlRiskCell">Failed Resources</th>
+        <th class="controlRiskCell">All Resources</th>
+        <th class="controlRiskCell">Risk Score, %</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">Applications credentials in configuration files</td>
+          <td class="controlRiskCell numericCell">2</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">15</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">CVE-2021-25742-nginx-ingress-snippet-annotation-vulnerability</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">Ensure CPU limits are set</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">Ensure memory limits are set</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">Host PID/IPC privileges</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">HostNetwork access</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">Insecure capabilities</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">High</td>
+          <td class="controlNameCell">Privileged container</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Administrative Roles</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Allow privilege escalation</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Automatic mapping of service account</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">21</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Cluster internal networking</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Container hostPort</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Ingress and Egress blocked</td>
+          <td class="controlRiskCell numericCell">11</td>
+          <td class="controlRiskCell numericCell">15</td>
+          <td class="controlRiskCell numericCell">73</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Linux hardening</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Non-root containers</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Medium</td>
+          <td class="controlNameCell">Prevent containers from allowing command execution</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Low</td>
+          <td class="controlNameCell">Immutable container filesystem</td>
+          <td class="controlRiskCell numericCell">1</td>
+          <td class="controlRiskCell numericCell">13</td>
+          <td class="controlRiskCell numericCell">8</td>
+        </tr>
+      </tr>
+      
+        <tr>
+          <td class="controlSeverityCell">Low</td>
+          <td class="controlNameCell">PSP enabled</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">0</td>
+        </tr>
+      </tr>
+      
+      <tbody>
+    </table>
+    
+    </br>
+    <h2>Failed Resources:</h2>
+    </br>
+    
+    
+    <h3>Name: -ohdsi-webapi</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -ohdsi-webapi</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -ohdsi-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -minio</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -minio</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Applications credentials in configuration files</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0012">C-0012</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[2].name</p>  <p>spec.template.spec.containers[0].env[2].value</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-exporter-test-metrics-endpoint</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -fhir-server-exporter-test-metrics-endpoint</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-exporter</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -fhir-server-exporter</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -magnifhir</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -magnifhir</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -magnifhir-test</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -magnifhir-test</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -fhir-server</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -pathling-server</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -pathling-server</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Applications credentials in configuration files</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0012">C-0012</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[3].name</p>  <p>spec.template.spec.containers[0].env[3].value</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -pathling-server-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -pathling-server-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -fhir-server-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-atlas</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -ohdsi-atlas</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Immutable container filesystem</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0017">C-0017</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem=true</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+  </body>
+</html>
