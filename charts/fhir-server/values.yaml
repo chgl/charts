@@ -7,7 +7,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: mcr.microsoft.com
   repository: healthcareapis/r4-fhir-server
-  tag: 4.0.264@sha256:ef6ed5bcafd71e7c99d554519e883b6ee5a2eb151623ee9677bb23ce6c120e37
+  tag: 4.0.267@sha256:bd01377ce1d0a523372f4228c286b2628700675871ee16e6ebea8805ef2315dd
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -84,7 +84,7 @@ database:
     image:
       registry: mcr.microsoft.com
       repository: mssql/server
-      tag: 2022-latest@sha256:c4369c38385eba011c10906dc8892425831275bb035d5ce69656da8e29de50d8
+      tag: 2022-latest@sha256:9c6f1af95e6cc28d47d82d9afe9ceedd2b57e2c9bfb6813da8985d2971bce38c
       pullPolicy: IfNotPresent
     replicaCount: 1
     port: 1433
