@@ -3,8 +3,6 @@
   "extends": ["config:best-practices", "group:allNonMajor"],
   "bumpVersion": "patch",
   "gitIgnoredAuthors": ["github-actions"],
-  "autodiscover": false,
-  "allowedPostUpgradeCommands": [".*"],
   "postUpgradeTasks": {
     "commands": [".github/renovate-bump-version.sh {{depName}}"],
     "fileFilters": ["**/Chart.yaml"],
