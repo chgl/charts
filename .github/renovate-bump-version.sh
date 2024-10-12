@@ -1,6 +1,7 @@
+#!/bin/bash
+
 # via https://github.com/argoproj/argo-helm/blob/main/scripts/renovate-bump-version.sh
 
-#!/bin/bash
 depName="${1}"
 if [ -z "${depName}" ]; then
     echo "Missing argument 'depName'" >&2
