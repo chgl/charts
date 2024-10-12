@@ -1,12 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:best-practices", "group:allNonMajor"],
-  "bumpVersion": "patch",
   "gitIgnoredAuthors": ["github-actions"],
   "postUpgradeTasks": {
-    "commands": [".github/renovate-bump-version.sh {{depName}}"],
-    "fileFilters": ["**/Chart.yaml"],
-    "executionMode": "update"
+    "commands": [".github/renovate-bump-version.sh {{depName}}"]
   },
   "customManagers": [
     {
