@@ -17,7 +17,7 @@ dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 2.24.0
-version: 1.1.9
+version: 1.1.10
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -26,8 +26,8 @@ annotations:
   artifacthub.io/prerelease: "false"
   artifacthub.io/recommendations: |
     - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
-  artifacthub.io/changes: |
+  artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "updated dependencies"
+      description: "Updated ghcr.io/chgl/fhir-server-exporter to v2.3.20"
