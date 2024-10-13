@@ -68,7 +68,7 @@ jobs:
 
       - name: Run Powerlint
         env:
-          KUBERNETES_VERSIONS: "1.28.0 1.29.0 1.30.0"
+          KUBERNETES_VERSIONS: "1.29.0 1.30.0 1.31.0"
         run: chart-powerlint.sh
 
       # used to test whether the changelog generation process works
@@ -81,7 +81,7 @@ jobs:
       - lint
     strategy:
       matrix:
-        k8s-version: [1.28.9, 1.29.4, 1.30.2]
+        k8s-version: [1.29.8, 1.30.4, 1.31.1]
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@91182cccc01eb5e619899d80e4e971d6181294a7 # v2.10.1
@@ -101,7 +101,7 @@ jobs:
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
-          changed=$(ct list-changed)
+          changed=$(ct list-changed --config .github/ct/install.yaml)
           if [[ -n "$changed" ]]; then
             echo "changed=true" >> "${GITHUB_OUTPUT}"
           fi
@@ -114,54 +114,5 @@ jobs:
           node_image: kindest/node:v${{ matrix.k8s-version }}
 
       - name: Run chart-testing (install)
+        if: ${{steps.list-changed.outputs.changed == 'true'}}
         run: ct install --config .github/ct/install.yaml
-
-  generate-renovate-chart-changelogs:
-    runs-on: ubuntu-24.04
-    # run only on PRs created by renovate
-    # TODO: also check if the author of the last commit was renovate
-    # ${{ startsWith(github.head_ref, 'renovate/') }}
-    if: ${{ false }}
-    needs:
-      - test
-    container: ghcr.io/chgl/kube-powertools:v2.3.25@sha256:99b5cc7a49cd443fb953ca4ab52dc45245a5c43ad03e3503be06d0d0f512b67d
-    permissions:
-      pull-requests: write
-      contents: write
-    steps:
-      - name: Add workspace as safe directory
-        run: |
-          git config --global --add safe.directory /__w/charts/charts
-
-      - name: Checkout
-        uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4.2.1
-        with:
-          fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
-
-      - name: Generate Chart.yaml changelog for renovate PRs
-        run: |
-          HEAD_COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
-
-          CHANGELOG_ENTRY=$(cat << EOF
-          # When using the list of objects option the valid supported kinds are
-          # added, changed, deprecated, removed, fixed and security.
-          - kind: changed
-            description: "${HEAD_COMMIT_MESSAGE}"
-          EOF
-          )
-
-          export CHANGELOG_ENTRY
-
-          CHANGED_CHARTS=$(ct list-changed)
-
-          for CHART in $CHANGED_CHARTS
-          do
-              echo "$CHART: updating Chart.yaml with auto-generated changelog annotation"
-              yq -i '.annotations."artifacthub.io/changes" = strenv(CHANGELOG_ENTRY)' "$CHART/Chart.yaml"
-          done
-
-      - name: Add and commit updated Chart.yaml changelogs
-        uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
-        with:
-          message: "docs: auto-generated Chart.yaml changelog annotations"

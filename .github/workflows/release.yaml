@@ -66,3 +66,16 @@ jobs:
             OCI_ARTIFACT_DIGEST="$(awk -F "[, ]+" '/Digest/{print $NF}' < .digest)"
             cosign sign --yes "${OCI_ARTIFACT_PATH}@${OCI_ARTIFACT_DIGEST}"
           done
+
+      - name: Generate kubescape reports
+        run: |
+          kubescape scan framework cis-v1.23-t1.0.1 --format=html --output=kubescape-reports/cis-v1.23-t1.0.1.html charts/
+          kubescape scan framework nsa --format=html --output=kubescape-reports/nsa.html charts/
+          kubescape scan framework mitre --format=html --output=kubescape-reports/mitre.html charts/
+
+      - uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
+        with:
+          add: "kubescape-reports/"
+          message: "docs: updated kubescape reports"
+          new_branch: gh-pages
+          # push: origin HEAD:gh-pages
