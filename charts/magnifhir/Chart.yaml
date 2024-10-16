@@ -17,8 +17,8 @@ deprecated: false
 dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.24.0
-version: 1.3.4
+    version: 2.26.0
+version: 1.3.9
 appVersion: 1.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -29,8 +29,8 @@ annotations:
       url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-browser.png
     - title: See a Patient's conditions, observations, and medications
       url: https://github.com/chgl/magniFHIR/raw/master/docs/img/screenshots/patient-record-conditions.png
-  artifacthub.io/changes: |
+  artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "update all non-major dependencies"
+      description: "Updated common to 2.26.0"
