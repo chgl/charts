@@ -3,7 +3,7 @@
   "extends": ["config:best-practices"],
   "gitIgnoredAuthors": ["github-actions"],
   "postUpgradeTasks": {
-    "commands": [".github/renovate-post-upgrade.sh {{depName}} {{newVersion}}"]
+    "commands": [".github/renovate-post-upgrade.sh {{depName}} {{newVersion}} {{newDigest}}"]
   },
   "customManagers": [
     {
