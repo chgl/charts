@@ -15,8 +15,8 @@ dependencies:
     condition: minio.enabled
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.28.0
-version: 0.8.38
+    version: 2.29.0
+version: 0.8.43
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -32,4 +32,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated minio to 14.10.3"
+      description: "Updated common to 2.29.0"
