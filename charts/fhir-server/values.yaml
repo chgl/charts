@@ -81,7 +81,7 @@ database:
     # Accept EULA when deploying with --set database.sqlContainer.acceptEula="Y"
     acceptEula: "n"
     edition: "Developer"
-    image:
+    image: # +doc-gen:ignore
       registry: mcr.microsoft.com
       repository: mssql/server
       tag: 2022-latest@sha256:9c6f1af95e6cc28d47d82d9afe9ceedd2b57e2c9bfb6813da8985d2971bce38c

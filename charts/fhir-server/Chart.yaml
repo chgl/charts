@@ -10,7 +10,7 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.11.56
+version: 0.11.57
 deprecated: false
 dependencies:
   - name: common
@@ -21,4 +21,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated common to 2.29.1"
+      description: "docs: ignore sql server image tag in README"
