@@ -6,6 +6,33 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated mcr.microsoft.com/mssql/server to sha256:d252932ef839c24c61c1139cc98f69c85ca774fa7c6bfaaa0015b7eb02b9dc87"
+    apiVersion: v2
+    created: "2025-01-27T23:38:52.640215861Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.29.1
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: b4c565a6e20e7fca40bade8dc46a4c8047e6b91d010e43d452ea5703e24e189c
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.11.58/fhir-server-0.11.58.tgz
+    version: 0.11.58
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "docs: ignore sql server image tag in README"
     apiVersion: v2
     created: "2025-01-26T14:49:55.834807082Z"
@@ -14284,4 +14311,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2025-01-26T14:49:55.835593613Z"
+generated: "2025-01-27T23:38:52.641035784Z"
