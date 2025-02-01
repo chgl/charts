@@ -41,7 +41,7 @@ jobs:
         run: generate-chart-changelog.sh
 
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@a917fd15b20e8b64b94d9158ad54cd6345335584 # v1.6.0
+        uses: helm/chart-releaser-action@cae68fefc6b5f367a0275617c9f83181ba54714f # v1.7.0
         with:
           config: .github/ct/ct.yaml
         env:
@@ -73,7 +73,7 @@ jobs:
           kubescape scan framework mitre --format=html --output=kubescape-reports/mitre.html charts/
 
       - name: "Upload kubescape reports"
-        uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b # v4.5.0
+        uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08 # v4.6.0
         with:
           name: kubescape-reports
           path: kubescape-reports/
