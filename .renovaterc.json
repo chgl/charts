@@ -3,6 +3,7 @@
   "extends": ["config:best-practices", ":automergeStableNonMajor"],
   "gitIgnoredAuthors": ["github-actions"],
   "postUpgradeTasks": {
+    "executionMode": "branch",
     "commands": [".github/renovate-post-upgrade.sh {{depName}} {{newVersion}} {{newDigest}}"]
   },
   "customManagers": [
