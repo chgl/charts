@@ -14,7 +14,7 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:v2.3.44@sha256:8cc17596d1d6d83ab25c32b45fe5ddbe7add14ad3042bde31cb5339bc5bbce3f
+    container: ghcr.io/chgl/kube-powertools:v2.3.45@sha256:f49d2b3ed02ccad382d71689697c74240fdaf821fa5eaa1de23daaf02bd1d131
     permissions:
       contents: write
       packages: write
@@ -81,7 +81,7 @@ jobs:
 
   update-kubescape-reports:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:v2.3.44@sha256:8cc17596d1d6d83ab25c32b45fe5ddbe7add14ad3042bde31cb5339bc5bbce3f
+    container: ghcr.io/chgl/kube-powertools:v2.3.45@sha256:f49d2b3ed02ccad382d71689697c74240fdaf821fa5eaa1de23daaf02bd1d131
     permissions:
       contents: write
     needs:
