@@ -17,7 +17,7 @@ dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 2.30.0
-version: 1.1.66
+version: 1.1.67
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -29,4 +29,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated ghcr.io/chgl/fhir-server-exporter to v2.3.31"
+      description: "Updated ghcr.io/chgl/fhir-server-exporter to v2.3.32"
