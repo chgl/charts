@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-24.04
     if: ${{ github.repository == 'chgl/charts' }}
     steps:
-      - uses: actions/create-github-app-token@0d564482f06ca65fa9e77e2510873638c82206f2 # v1.11.5
+      - uses: actions/create-github-app-token@af35edadc00be37caa72ed9f3e6d5f7801bfdf09 # v1.11.7
         id: app-token
         with:
           app-id: ${{ secrets.RENOVATE_APP_ID }}
@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 0
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@02f4fdeb479bbb229caa7ad82cb5e691c07e80b3 # v41.0.14
+        uses: renovatebot/github-action@08ed9fa83e24bfe6222557f9e221395c57972127 # v41.0.16
         with:
           token: "${{ steps.app-token.outputs.token }}"
           configurationFile: .renovaterc.json
