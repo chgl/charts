@@ -28,6 +28,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           fetch-depth: 0
+          persist-credentials: true
 
       - name: Configure Git
         run: |
@@ -49,9 +50,10 @@ jobs:
 
       - name: Login to GitHub Container Registry
         run: |
-          echo "${GHCR_REGISTRY_PASSWORD}" | helm registry login ghcr.io --username ${{ github.actor }} --password-stdin
-          echo "${GHCR_REGISTRY_PASSWORD}" | crane auth login ghcr.io --username ${{ github.actor }} --password-stdin
+          echo "${GHCR_REGISTRY_PASSWORD}" | helm registry login ghcr.io --username "${GHCR_REGISTRY_USERNAME}" --password-stdin
+          echo "${GHCR_REGISTRY_PASSWORD}" | crane auth login ghcr.io --username "${GHCR_REGISTRY_USERNAME}" --password-stdin
         env:
+          GHCR_REGISTRY_USERNAME: "${{ github.actor }}"
           GHCR_REGISTRY_PASSWORD: "${{ secrets.GITHUB_TOKEN }}"
 
       - name: Push Charts to ghcr.io
@@ -95,6 +97,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: gh-pages
+          persist-credentials: true
 
       - name: Download reports
         uses: actions/download-artifact@95815c38cf2ff2164869cbab79da8d1f422bc89e # v4.2.1
