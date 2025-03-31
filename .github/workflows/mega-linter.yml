@@ -8,7 +8,8 @@ on:
   pull_request:
     branches: [master]
 
-permissions: read-all
+permissions:
+  contents: read
 
 env: # Comment env block if you do not want to apply fixes
   # Apply linter fixes configuration
@@ -36,6 +37,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # If you use VALIDATE_ALL_CODEBASE = true, you can remove this line to improve performances
+          persist-credentials: false
 
       # necessary for trivy when scanning the charts for misconfigurations
       - name: Update dependencies
