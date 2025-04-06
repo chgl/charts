@@ -16,7 +16,7 @@ dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 2.30.0
-version: 0.8.60
+version: 0.8.61
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -32,4 +32,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated minio to 16.0.0"
+      description: "Updated docker.io/curlimages/curl to docker.io/curlimages/curl"
