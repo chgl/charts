@@ -13891,6 +13891,43 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated minio to 16.0.8"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 7.x
+    created: "2025-05-01T12:42:13.061922287Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 16.0.8
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.30.2
+    description: A Helm chart for deploying the Pathling server
+    digest: 2f180be655e08f4d4fe72f3381ef84430bb9c62e83c8e439db066477fee43736
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.8.63/pathling-server-0.8.63.tgz
+    version: 0.8.63
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Updated common to common"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -16229,4 +16266,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2025-05-01T06:30:19.792889927Z"
+generated: "2025-05-01T12:42:13.062628435Z"
