@@ -16,8 +16,8 @@ kubeVersion: ">= 1.19.0"
 dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.30.0
-version: 1.1.71
+    version: 2.30.2
+version: 1.1.72
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -29,4 +29,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/curlimages/curl to docker.io/curlimages/curl"
+      description: "Updated common to common"
