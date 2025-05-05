@@ -20,11 +20,11 @@ dependencies:
     condition: postgresql.enabled
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.30.2
+    version: 2.31.0
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.24.71
+version: 0.24.72
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,4 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated postgresql to 16.6.6"
+      description: "Updated common to common"

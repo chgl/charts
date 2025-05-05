@@ -16,8 +16,8 @@ kubeVersion: ">= 1.19.0"
 dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.30.2
-version: 1.1.72
+    version: 2.31.0
+version: 1.1.73
 appVersion: 2.x
 annotations:
   artifacthub.io/license: Apache-2.0
