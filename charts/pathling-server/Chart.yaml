@@ -15,8 +15,8 @@ dependencies:
     condition: minio.enabled
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.31.0
-version: 0.8.64
+    version: 2.31.1
+version: 0.8.65
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
