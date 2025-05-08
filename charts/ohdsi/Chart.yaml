@@ -20,11 +20,11 @@ dependencies:
     condition: postgresql.enabled
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
-    version: 2.31.0
+    version: 2.31.1
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.24.72
+version: 0.24.73
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
