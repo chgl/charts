@@ -1,12 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:best-practices",
-    ":automergeStableNonMajor"
-  ],
-  "gitIgnoredAuthors": [
-    "github-actions"
-  ],
+  "extends": ["config:best-practices", ":automergeStableNonMajor"],
+  "gitIgnoredAuthors": ["github-actions"],
   "postUpgradeTasks": {
     "executionMode": "branch",
     "commands": [
@@ -32,32 +27,17 @@
   "packageRules": [
     {
       "groupName": "GitHub Actions",
-      "matchManagers": [
-        "github-actions"
-      ],
-      "extends": [
-        "schedule:monthly"
-      ]
+      "matchManagers": ["github-actions"],
+      "extends": ["schedule:monthly"]
     },
     {
-      "matchManagers": [
-        "helmv3"
-      ],
+      "matchManagers": ["helmv3"],
       "pinDigests": false
     },
     {
-      "matchDatasources": [
-        "docker",
-        "helm"
-      ],
-      "matchDepNames": [
-        "postgresql",
-        "docker.io/bitnami/postgresql",
-        "minio"
-      ],
-      "extends": [
-        "schedule:monthly"
-      ]
+      "matchDatasources": ["docker", "helm"],
+      "matchDepNames": ["postgresql", "docker.io/bitnami/postgresql", "minio"],
+      "extends": ["schedule:monthly"]
     }
   ]
 }
