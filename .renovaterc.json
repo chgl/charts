@@ -4,16 +4,18 @@
   "gitIgnoredAuthors": ["github-actions"],
   "postUpgradeTasks": {
     "executionMode": "branch",
-    "commands": [".github/renovate-post-upgrade.sh {{depName}} {{newVersion}} {{newDigest}}"]
+    "commands": [
+      ".github/renovate-post-upgrade.sh {{depName}} {{newVersion}} {{newDigest}}"
+    ]
   },
   "customManagers": [
     {
       "customType": "regex",
       "description": "Update kube-powertools container image",
-      "fileMatch": [
-        "README.md$",
-        ".github/workflows/ci.yaml",
-        ".github/workflows/release.yaml"
+      "managerFilePatterns": [
+        "/README.md$/",
+        "/.github/workflows/ci.yaml/",
+        "/.github/workflows/release.yaml/"
       ],
       "matchStrings": [
         "(?<depName>ghcr.io\\/chgl\\/kube-powertools):(?<currentValue>[a-z0-9.-]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?"
