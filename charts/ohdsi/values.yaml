@@ -87,7 +87,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: bitnami/postgresql
-      tag: 17.4.0-debian-12-r17@sha256:9d75ed4556cedefaff8f3aa2ccd39093dcf3f7968d013a82f175bff25c2761e4
+      tag: 17.5.0-debian-12-r6@sha256:34385dbc2f886ec4d487857bcb83ded1a061644c99f85773aea1660ed438f9bf
       pullPolicy: IfNotPresent
 
   serviceAccount:
