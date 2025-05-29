@@ -10,13 +10,13 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 16.0.8
+    version: 16.0.10
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 2.31.1
-version: 0.8.66
+version: 0.8.67
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -32,4 +32,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Set pod security context to run as non-root user"
+      description: "Updated minio to 16.0.10"
