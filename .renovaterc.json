@@ -1,6 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:best-practices", ":automergeStableNonMajor"],
+  "extends": [
+    "config:best-practices",
+    ":automergeStableNonMajor",
+    ":automergeDigest"
+  ],
   "gitIgnoredAuthors": ["github-actions"],
   "postUpgradeTasks": {
     "executionMode": "branch",
