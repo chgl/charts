@@ -40,9 +40,11 @@ deploymentAnnotations: {}
 # annotations applied to the server pod
 podAnnotations: {}
 
-podSecurityContext:
-  {}
-  # fsGroup: 2000
+podSecurityContext: # +doc-gen:ignore
+  fsGroup: 65532
+  runAsGroup: 65532
+  runAsUser: 65532
+  runAsNonRoot: true
 
 securityContext: # +doc-gen:ignore
   allowPrivilegeEscalation: false

@@ -183,9 +183,11 @@ webApi:
     allowedOrigin: ""
 
   # security context for the pod
-  podSecurityContext:
-    {}
-    # fsGroup: 2000
+  podSecurityContext: # +doc-gen:ignore
+    fsGroup: 65534
+    runAsGroup: 65534
+    runAsUser: 65534
+    runAsNonRoot: true
 
   # security context for the WebAPI container
   securityContext: # +doc-gen:ignore
@@ -347,9 +349,11 @@ atlas:
   podAnnotations: {}
 
   # security context for the pod
-  podSecurityContext:
-    {}
-    # fsGroup: 2000
+  podSecurityContext: # +doc-gen:ignore
+    fsGroup: 101
+    runAsGroup: 101
+    runAsUser: 101
+    runAsNonRoot: true
 
   # ContainerSecurityContext for the Atlas container
   securityContext: # +doc-gen:ignore
@@ -533,6 +537,13 @@ achilles:
 
   # the CDM source name. Equivalent to the Achilles `ACHILLES_SOURCE` env var.
   sourceName: "synpuf-5.3.1"
+
+  # PodSecurityContext for the Achilles Pod
+  podSecurityContext: # +doc-gen:ignore
+    fsGroup: 10001
+    runAsGroup: 10001
+    runAsUser: 10001
+    runAsNonRoot: true
 
   # ContainerSecurityContext for the Achilles container
   securityContext: # +doc-gen:ignore

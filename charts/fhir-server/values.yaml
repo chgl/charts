@@ -23,9 +23,11 @@ export:
   enabled: false
   blobStorageUri: https://mystorageaccount.blob.core.windows.net
 
-podSecurityContext:
-  {}
-  # fsGroup: 2000
+podSecurityContext: # +doc-gen:ignore
+  fsGroup: 65534
+  runAsGroup: 65534
+  runAsUser: 65534
+  runAsNonRoot: true
 
 securityContext: # +doc-gen:ignore
   allowPrivilegeEscalation: false

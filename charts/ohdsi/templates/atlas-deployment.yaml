@@ -34,7 +34,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .podSecurityContext}}
+      {{- with .podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -42,7 +42,7 @@ spec:
       automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
       containers:
         - name: atlas
-          {{- with .securityContext}}
+          {{- with .securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -52,7 +52,7 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          {{- with .livenessProbe}}
+          {{- with .livenessProbe }}
           livenessProbe:
             httpGet:
               path: /atlas/
@@ -63,7 +63,7 @@ spec:
             successThreshold: {{ .successThreshold }}
             failureThreshold: {{ .failureThreshold }}
           {{- end }}
-          {{- with .readinessProbe}}
+          {{- with .readinessProbe }}
           readinessProbe:
             httpGet:
               path: /atlas/

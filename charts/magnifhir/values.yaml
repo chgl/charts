@@ -32,9 +32,12 @@ deploymentAnnotations: {}
 podAnnotations: {}
 
 # -- security context applied at the Pod level
+# @ignored
 podSecurityContext:
-  {}
-  # fsGroup: 2000
+  fsGroup: 65532
+  runAsGroup: 65532
+  runAsUser: 65532
+  runAsNonRoot: true
 
 # @ignored
 securityContext:
