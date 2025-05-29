@@ -6,3 +6,18 @@ AVD-KSV-0014
 # https://avd.aquasec.com/misconfig/kubernetes/general/avd-ksv-0056/
 # No Manage Networking Resources
 AVD-KSV-0056
+
+# See https://avd.aquasec.com/misconfig/ksv0125
+# Can't change much about the source of images...
+AVD-KSV-0125
+
+# Checks whether a workload is running in the default namespace.
+# https://avd.aquasec.com/misconfig/ksv110
+# Fine for the locally templated charts.
+AVD-KSV-0110
+
+# Force the container to run with group ID > 10000 to avoid conflicts with the host’s user table.
+# https://avd.aquasec.com/misconfig/ksv021
+# https://avd.aquasec.com/misconfig/ksv020
+AVD-KSV-0021
+AVD-KSV-0020
