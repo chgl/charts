@@ -6,6 +6,33 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated mcr.microsoft.com/mssql/server to sha256:e2e5bcfe395924ff49694542191d3aefe86b6b3bd6c024f9ea01bf5a8856c56e"
+    apiVersion: v2
+    created: "2025-06-26T16:32:20.272994681Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.31.1
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: b3b47a326a937c935f1c971ee1f7ff4c8e5c690a47fc09c719ebdb18c255471b
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.11.82/fhir-server-0.11.82.tgz
+    version: 0.11.82
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Set pod security context to run as non-root user"
     apiVersion: v2
     created: "2025-05-29T20:54:16.608023597Z"
@@ -17294,4 +17321,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2025-06-06T18:59:12.657763175Z"
+generated: "2025-06-26T16:32:20.273837134Z"
