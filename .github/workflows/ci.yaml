@@ -15,10 +15,10 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:v2.3.63@sha256:923f253e093bac8df4ba3b9a5d6062f9425fa61be687d8dfd56df605241c68fd
+    container: ghcr.io/chgl/kube-powertools:v2.3.64@sha256:31f0cd0afefc41bbe5fb8790475c5266e26114b6332f5965cfca39635d9ff12f
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -86,7 +86,7 @@ jobs:
         k8s-version: [1.29.8, 1.30.4, 1.31.1]
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@0634a2670c59f64b4a01f0f96f84700a4088b9f0 # v2.12.0
+        uses: step-security/harden-runner@002fdce3c6a235733a90a27c80493a3241e56863 # v2.12.1
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
