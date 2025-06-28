@@ -16,7 +16,7 @@ dependencies:
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 2.31.3
-version: 0.8.70
+version: 0.8.71
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -31,5 +31,5 @@ annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: changed
-      description: "Updated common to common"
+    - kind: added
+      description: "Support setting env variables as a dictionary in values.yaml via extraEnvDict."

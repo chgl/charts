@@ -5,3 +5,8 @@ ingress:
 extraEnv:
   - name: pathling.spark.appName
     value: "aDifferentName"
+
+
+extraEnvDict:
+  pathling.terminology.enabled: "false"
+  pathling.terminology.serverUrl: http://localhost:8080/i-dont-exist
