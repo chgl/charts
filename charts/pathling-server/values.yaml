@@ -94,6 +94,11 @@ extraEnv:
   # - name: pathling.spark.appName
   #   value: "aDifferentName"
 
+# -- extra environment variables to apply to the container as a key-value dictionary
+extraEnvDict:
+  {}
+  # pathling.spark.appName: "aDifferentName"
+
 ingress:
   # create an Ingress for the application
   enabled: false
