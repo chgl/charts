@@ -78,7 +78,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/webapi
-    tag: 2.14.0@sha256:582b59b186fde5936081c1df6e41cba53e45e112d5b4875ddfda1e4dee4b2981
+    tag: 2.15.0@sha256:884c104440cf69e1b1db8a46a293b81c829db0d694ec9b26ca7dbb7125e9843a
     pullPolicy: IfNotPresent
 
   waitForDatabaseInitContainer:
@@ -315,7 +315,7 @@ atlas:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/atlas
-    tag: 2.14.1@sha256:bd095ed794a6619f877d72c13ecfc22c8bb8a863937392857866e4bd6015157f
+    tag: 2.15.0@sha256:6814e8c5b5366b50bc197b1eb2881689e5852784742b91b9636eec514f5a555e
     pullPolicy: IfNotPresent
 
   podDisruptionBudget:
