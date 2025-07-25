@@ -10,13 +10,13 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 17.0.3
+    version: 17.0.16
     repository: oci://registry-1.docker.io/bitnamicharts
     condition: minio.enabled
   - name: common
     repository: oci://registry-1.docker.io/bitnamicharts
     version: 2.31.3
-version: 0.8.72
+version: 0.8.73
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -32,4 +32,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/curlimages/curl to docker.io/curlimages/curl"
+      description: "Updated minio to 17.0.16"
