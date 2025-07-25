@@ -9,7 +9,7 @@
   "postUpgradeTasks": {
     "executionMode": "branch",
     "commands": [
-      ".github/renovate-post-upgrade.sh {{depName}} {{newVersion}} {{newDigest}}"
+      ".github/renovate-post-upgrade.sh \"{{depName}}\" {{newVersion}} {{newDigest}}"
     ]
   },
   "customManagers": [
