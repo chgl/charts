@@ -42,6 +42,10 @@
       "matchDatasources": ["docker", "helm"],
       "matchDepNames": ["postgresql", "docker.io/bitnami/postgresql", "minio"],
       "extends": ["schedule:monthly"]
+    },
+    {
+      "matchPackageNames": ["/docker\\.io\\/ohdsi\\/.*/"],
+      "groupName": "ohdsi"
     }
   ]
 }
