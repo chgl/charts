@@ -36,7 +36,7 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
       - name: Update dependencies
-        run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+        run: find charts/ -maxdepth 1 ! -path charts/ -type d -exec helm dependency update {} \;
 
       - name: Generate changelogs
         run: generate-chart-changelog.sh
@@ -70,9 +70,7 @@ jobs:
 
       - name: Generate kubescape reports
         run: |
-          kubescape scan framework cis-v1.23-t1.0.1 --format=html --output=kubescape-reports/cis-v1.23-t1.0.1.html charts/
-          kubescape scan framework nsa --format=html --output=kubescape-reports/nsa.html charts/
-          kubescape scan framework mitre --format=html --output=kubescape-reports/mitre.html charts/
+          kubescape scan framework AllControls --keep-local --format=html --output=kubescape-reports/allcontrols.html charts/
 
       - name: "Upload kubescape reports"
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -104,9 +102,6 @@ jobs:
         with:
           name: kubescape-reports
           path: "kubescape-reports/"
-
-      - run: |
-          ls -lsa ./
 
       - uses: EndBug/add-and-commit@a94899bca583c204427a224a7af87c02f9b325d5 # v9.1.4
         with:
