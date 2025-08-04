@@ -15,11 +15,8 @@ helm repo update
 
 ## Compliance Reports
 
-Each update to the charts is scanned using [Kubescape](https://kubescape.io/) against several [security frameworks](https://kubescape.io/docs/frameworks-and-controls/). The reports are published online at:
-
-- NSA: <https://chgl.github.io/charts/kubescape-reports/nsa.html>
-- MITRE: <https://chgl.github.io/charts/kubescape-reports/mitre.html>
-- CIS: https://chgl.github.io/charts/kubescape-reports/cis-v1.23-t1.0.1.html
+Each update to the charts is scanned using [Kubescape](https://kubescape.io/) against the [AllControls security frameworks](https://kubescape.io/docs/frameworks-and-controls/).
+The report is published online at: <https://chgl.github.io/charts/kubescape-reports/allcontrols.html>
 
 ## Development
 

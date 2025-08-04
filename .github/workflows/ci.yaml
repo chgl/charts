@@ -77,6 +77,12 @@ jobs:
       - name: Generate changelogs (test)
         run: generate-chart-changelog.sh
 
+      # used to test whether the kubescape reports generation works
+      # otherwise it is only run in the release job
+      - name: Generate kubescape reports
+        run: |
+          kubescape scan framework AllControls --keep-local --format=html --output=kubescape-reports/allcontrols.html charts/
+
   test:
     runs-on: ubuntu-24.04
     needs:
