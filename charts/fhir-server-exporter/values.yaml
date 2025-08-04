@@ -167,3 +167,12 @@ tests:
   # requests:
   #   cpu: 100m
   #   memory: 128Mi
+
+networkPolicy:
+  # whether to create a default NetworkPolicy for each processor deployment.
+  # extra rules can be added on a per-processor level as `.networkPolicy.extraIngress/Egress`
+  enabled: false
+  # add extra ingress rules to the default NetworkPolicy. Useful e.g. for allowing access from Prometheus.
+  extraIngress: []
+  # add extra egress rules to the default NetworkPolicy
+  extraEgress: []
