@@ -4,6 +4,6 @@ dependencies:
   version: 16.7.21
 - name: common
   repository: oci://registry-1.docker.io/bitnamicharts
-  version: 2.31.3
-digest: sha256:6cac828750b3b8b655ee89ad16b45616a335344b888aa66107fb770d922ff043
-generated: "2025-07-25T22:30:47.037066906Z"
+  version: 2.31.4
+digest: sha256:f0fde3d36f8c4e7c6a3a66aa98bcccd79cb21f3d93510c4e0243190b7a9ebdd7
+generated: "2025-08-12T18:32:39.213076327Z"
