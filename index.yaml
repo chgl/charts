@@ -15889,6 +15889,43 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated minio to 17.0.21"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/bitnami/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 7.x
+    created: "2025-08-16T14:54:19.205451078Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 17.0.21
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.31.4
+    description: A Helm chart for deploying the Pathling server
+    digest: ff8dbc8c267e9770490b5fb4984729a77cb05d7815d269fe91d2eab8c4389873
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.8.75/pathling-server-0.8.75.tgz
+    version: 0.8.75
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Updated common common common common common to 2.31.4"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -18671,4 +18708,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2025-08-16T14:54:06.032423215Z"
+generated: "2025-08-16T14:54:19.206175689Z"
