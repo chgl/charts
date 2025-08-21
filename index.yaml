@@ -6,6 +6,33 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated mcr.microsoft.com/mssql/server to sha256:2fa59c23272a23dfd9600abf4ee52c0de6ae7ac640f14c617bc717ec139a5295"
+    apiVersion: v2
+    created: "2025-08-21T06:40:51.935037219Z"
+    dependencies:
+    - name: common
+      repository: oci://registry-1.docker.io/bitnamicharts
+      version: 2.31.4
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 6b100709197ef81783328d131c91ddca3af2575fee436b6463dd21c4ffe1b516
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.11.90/fhir-server-0.11.90.tgz
+    version: 0.11.90
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Updated mcr.microsoft.com/healthcareapis/r4-fhir-server to 4.0.489"
     apiVersion: v2
     created: "2025-08-15T01:47:22.923574181Z"
@@ -18846,4 +18873,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2025-08-17T06:31:09.48963548Z"
+generated: "2025-08-21T06:40:51.936020117Z"
