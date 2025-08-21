@@ -1,5 +1,6 @@
-postgresql:
+postgres:
   auth:
     enablePostgresUser: false
+    database: "ohdsi"
     username: "ohdsi_admin"
     password: "ohdsi_password"

@@ -10,6 +10,10 @@ helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} --crea
 
 ## Breaking Changes
 
+### 0.25
+
+Switched from Bitnami PostgreSQL to Cloud Pirates PostgreSQL chart. The integrated PostgreSQL configuration is now under `.Values.postgres`.
+
 ### 0.14
 
 Updates all object labels to follow the Bitnami chart conventions: <https://github.com/bitnami/charts/blob/master/bitnami/common/templates/_labels.tpl>.
