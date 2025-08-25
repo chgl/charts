@@ -17,7 +17,7 @@ postgres:
     enablePostgresUser: false
     database: "ohdsi"
     username: "ohdsi"
-  resources:
+  resources: # +doc-gen:ignore
     requests:
       memory: 512Mi
       cpu: 250m
