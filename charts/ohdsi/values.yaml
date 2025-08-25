@@ -17,6 +17,13 @@ postgres:
     enablePostgresUser: false
     database: "ohdsi"
     username: "ohdsi"
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 512Mi
+      cpu: 500m
 
 # container security context applied to init containers and the Helm test pods
 restrictedContainerSecurityContext: # +doc-gen:ignore
