@@ -45,3 +45,7 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: "⚠️ BREAKING CHANGE: Switched from Bitnami PostgreSQL to Cloud Pirates PostgreSQL chart."
+    - kind: changed
+      description: "⚠️ BREAKING CHANGE: Removed integrated tracing support."
+    - kind: added
+      description: "⚠️ BREAKING CHANGE: init container to wait for WebAPI in Atlas deployment."

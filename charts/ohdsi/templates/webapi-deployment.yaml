@@ -156,7 +156,6 @@ spec:
               value: {{ tpl .auth.basic.query $ }}
             {{- end }}
             {{- end }}
-            {{- include "ohdsi.webApi.otel.envVars" $ | nindent 12 }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
           {{- end }}

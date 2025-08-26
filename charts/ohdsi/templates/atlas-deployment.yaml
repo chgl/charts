@@ -40,6 +40,26 @@ spec:
       {{- end }}
       serviceAccountName: {{ include "ohdsi.atlas.serviceAccountName" $ }}
       automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
+      {{- if $.Values.webApi.enabled }}
+      initContainers:
+        - name: wait-for-webapi
+          image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
+          imagePullPolicy: IfNotPresent
+          {{- with $.Values.restrictedContainerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          env:
+            - name: WEBAPI_BASE_URL
+              value: "http://{{ include "ohdsi.fullname" $ }}-webapi:{{ $.Values.webApi.service.port }}/WebAPI"
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              until [ "$(curl -s -o /dev/null -L -w '%{http_code}' "$WEBAPI_BASE_URL/info")" == "200" ]; do
+                echo "$(date): Waiting for FHIR server @ $WEBAPI_BASE_URL to be up";
+                sleep 10;
+              done;
+      {{- end }}
       containers:
         - name: atlas
           {{- with .securityContext }}

@@ -261,21 +261,6 @@ webApi:
       # interval: 30s
       # scrapeTimeout: 10s
 
-  tracing:
-    # if enabled, export traces to the specified endpoint.
-    # this also implicitly enables the OpenTelemetry Java agent by setting the
-    # `JAVA_OPTS` environment variable to `"-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"`
-    enabled: false
-    jaeger:
-      # specify the transport protocol. Sets the `OTEL_EXPORTER_JAEGER_PROTOCOL` env var
-      protocol: "grpc"
-      # full URL of the Jaeger HTTP endpoint. Sets the `OTEL_EXPORTER_JAEGER_ENDPOINT` env var
-      endpoint: http://simplest-collector.observability.svc:14250 # http://localhost:14250
-      # hostname of the Jaeger agenr. Sets the `OTEL_EXPORTER_JAEGER_AGENT_HOST` env var
-      agentHost: localhost
-      # udp/thrift.compact port of the Jaeger agent. Sets the `OTEL_EXPORTER_JAEGER_AGENT_PORT` env var
-      agentPort: 6831
-
 atlas:
   # enable the OHDSI Atlas deployment
   enabled: true
