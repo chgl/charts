@@ -111,6 +111,7 @@ jobs:
 
       - name: Run chart-testing (list-changed)
         id: list-changed
+        shell: bash
         run: |
           changed=$(ct list-changed --config .github/ct/install.yaml)
           if [[ -n "$changed" ]]; then
