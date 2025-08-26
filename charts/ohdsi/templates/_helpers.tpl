@@ -53,7 +53,7 @@ Create a default fully qualified postgresql name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 */}}
 {{- define "ohdsi.postgresql.fullname" -}}
-{{- $name := default "postgresql" .Values.postgresql.nameOverride -}}
+{{- $name := default "postgres" .Values.postgres.nameOverride -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -61,9 +61,9 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 Get the name of the secret containing the DB password
 */}}
 {{- define "ohdsi.webapi.db-secret-name" -}}
-{{- if .Values.postgresql.enabled -}}
-    {{- if .Values.postgresql.auth.existingSecret -}}
-        {{ .Values.postgresql.auth.existingSecret | quote }}
+{{- if .Values.postgres.enabled -}}
+    {{- if .Values.postgres.auth.existingSecret -}}
+        {{ .Values.postgres.auth.existingSecret | quote }}
     {{- else -}}
         {{ ( include "ohdsi.postgresql.fullname" . ) }}
     {{- end -}}
@@ -79,8 +79,8 @@ Get the name of the secret containing the DB password
 Get the key inside the secret containing the DB user's password
 */}}
 {{- define "ohdsi.webapi.db-secret-key" -}}
-{{- if .Values.postgresql.enabled -}}
-    {{- if (or .Values.postgresql.auth.username .Values.postgresql.auth.existingSecret ) -}}
+{{- if .Values.postgres.enabled -}}
+    {{- if (or .Values.postgres.auth.username .Values.postgres.auth.existingSecret ) -}}
         {{ "password" }}
     {{- else -}}
         {{ "postgres-password" }}
@@ -96,16 +96,16 @@ Get the key inside the secret containing the DB user's password
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.host" -}}
-{{- ternary (include "ohdsi.postgresql.fullname" .) .Values.webApi.db.host .Values.postgresql.enabled -}}
+{{- ternary (include "ohdsi.postgresql.fullname" .) .Values.webApi.db.host .Values.postgres.enabled -}}
 {{- end -}}
 
 {{/*
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.user" -}}
-{{- if .Values.postgresql.enabled -}}
-    {{- if .Values.postgresql.auth.username -}}
-        {{ .Values.postgresql.auth.username | quote }}
+{{- if .Values.postgres.enabled -}}
+    {{- if .Values.postgres.auth.username -}}
+        {{ .Values.postgres.auth.username | quote }}
     {{- else -}}
         {{ "postgres" }}
     {{- end -}}
@@ -118,14 +118,14 @@ Add environment variables to configure database values
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.name" -}}
-{{- ternary .Values.postgresql.auth.database .Values.webApi.db.database .Values.postgresql.enabled -}}
+{{- ternary .Values.postgres.auth.database .Values.webApi.db.database .Values.postgres.enabled -}}
 {{- end -}}
 
 {{/*
 Add environment variables to configure database values
 */}}
 {{- define "ohdsi.database.port" -}}
-{{- ternary "5432" .Values.webApi.db.port .Values.postgresql.enabled -}}
+{{- ternary "5432" .Values.webApi.db.port .Values.postgres.enabled -}}
 {{- end -}}
 
 {{/*
@@ -198,38 +198,6 @@ not the one used by ATLAS which needs to be accessible from the user's browser.
     {{ printf "http://%s:%d/WebAPI" $webApiServiceName (int .Values.webApi.service.port) }}
 {{- end }}
 {{- end -}}
-
-{{/*
-env vars set on the webapi container for otel tracing and metrics
-*/}}
-{{- define "ohdsi.webApi.otel.envVars" -}}
-{{- if (or .Values.webApi.metrics.serviceMonitor.enabled .Values.webApi.tracing.enabled) }}
-{{- $webApiServiceName := printf "%s-webapi" (include "ohdsi.fullname" .) -}}
-{{- $metricsExporter := (ternary "prometheus" "none" .Values.webApi.metrics.serviceMonitor.enabled) -}}
-{{- $tracesExporter := (ternary "jaeger" "none" .Values.webApi.tracing.enabled) -}}
-- name: JAVA_OPTS
-  value: "-javaagent:/var/lib/ohdsi/webapi/opentelemetry-javaagent.jar"
-- name: OTEL_LOGS_EXPORTER
-  value: "none"
-- name: OTEL_METRICS_EXPORTER
-  value: "{{ $metricsExporter }}"
-- name: OTEL_TRACES_EXPORTER
-  value: "{{ $tracesExporter }}"
-{{- if .Values.webApi.tracing.enabled }}
-- name: OTEL_SERVICE_NAME
-  value: "{{ $webApiServiceName }}"
-- name: OTEL_EXPORTER_JAEGER_ENDPOINT
-  value: "{{ .Values.webApi.tracing.jaeger.endpoint }}"
-- name: OTEL_EXPORTER_JAEGER_PROTOCOL
-  value: "{{ .Values.webApi.tracing.jaeger.protocol }}"
-- name: OTEL_EXPORTER_JAEGER_AGENT_HOST
-  value: "{{ .Values.webApi.tracing.jaeger.agentHost }}"
-- name: OTEL_EXPORTER_JAEGER_AGENT_PORT
-  value: "{{ .Values.webApi.tracing.jaeger.agentPort }}"
-{{- end }}
-{{- end }}
-{{- end -}}
-
 
 {{/*
 TODO: refactor to pass the module name (webapi, atlas, achilles) and the `.serviceAccount` context as 2 parameters
