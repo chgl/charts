@@ -24,7 +24,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.25.0
+version: 0.25.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,8 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "⚠️ BREAKING CHANGE: Switched from Bitnami PostgreSQL to Cloud Pirates PostgreSQL chart."
-    - kind: changed
-      description: "⚠️ BREAKING CHANGE: Removed integrated tracing support."
-    - kind: added
-      description: "⚠️ BREAKING CHANGE: init container to wait for WebAPI in Atlas deployment."
+      description: "Updated docker.io/library/postgres to sha256:29e0bb09c8e7e7fc265ea9f4367de9622e55bae6b0b97e7cce740c2d63c2ebc0"
