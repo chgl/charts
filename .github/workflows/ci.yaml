@@ -85,7 +85,6 @@ jobs:
 
   test:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:master@sha256:dd181abdfd2f6fd4528b93a1e93f590e372c58ea66368291577463dde7dd21f5
     needs:
       - lint
     strategy:
@@ -108,6 +107,13 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+
+      # after some trying, we can't simply use the kube-powertools container and its included ct.
+      # the latest problem is that the kubectl inside the container can't access the kind cluster created on the host:
+      # err="couldn't get current server API group list: Get \"https://127.0.0.1:37679/api?timeout=30s\": dial tcp 127.0.0.1:37679: connect: connection refused"
+      # it might work if we override the api host to the host.docker.internal address.
+      - name: Set up chart-testing
+        uses: helm/chart-testing-action@0d28d3144d3a25ea2cc349d6e59901c4ff469b3b # v2.7.0
 
       - name: Run chart-testing (list-changed)
         id: list-changed
