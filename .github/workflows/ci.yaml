@@ -85,7 +85,7 @@ jobs:
 
   test:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:v2.3.71@sha256:85a2583eb772efbe0c28471bd54b321f98be41d64c0248dbdf0a858155a52972
+    container: ghcr.io/chgl/kube-powertools:master@sha256:dd181abdfd2f6fd4528b93a1e93f590e372c58ea66368291577463dde7dd21f5
     needs:
       - lint
     strategy:
