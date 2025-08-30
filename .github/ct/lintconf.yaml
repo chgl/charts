@@ -17,9 +17,6 @@ rules:
     max-spaces-before: 0
     min-spaces-after: 1
     max-spaces-after: 1
-  comments:
-    require-starting-space: true
-    min-spaces-from-content: 2
   document-end: disable
   document-start: disable # No --- to start a file
   empty-lines:

@@ -40,7 +40,7 @@
     },
     {
       "matchDatasources": ["docker", "helm"],
-      "matchDepNames": ["postgresql", "docker.io/bitnami/postgresql", "minio"],
+      "matchDepNames": ["postgres", "docker.io/library/postgresql", "minio"],
       "extends": ["schedule:monthly"]
     },
     {

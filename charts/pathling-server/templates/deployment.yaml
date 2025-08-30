@@ -65,6 +65,45 @@ spec:
                 echo "$(date): Waiting for minio server @ ${MINIO_ENDPOINT_URL} to be up";
                 sleep 15;
               done;
+        - name: create-warehouse-bucket
+          image: "{{- printf "%s" (include "minio.image" $.Subcharts.minio) -}}"
+          imagePullPolicy: "IfNotPresent"
+          {{- with .Values.restrictedContainerSecurityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if $.Values.initContainers.resources }}
+          resources: {{- toYaml $.Values.initContainers.resources | nindent 12 }}
+          {{- else if ne $.Values.initContainers.resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" $.Values.initContainers.resourcesPreset) | nindent 12 }}
+          {{- end }}
+          env:
+            - name: MINIO_ENDPOINT_URL
+              value: {{ template "pathling-server.s3Endpoint" . }}
+            - name: MINIO_UPDATE
+              value: "off"
+            - name: MINIO_CALLHOME_ENABLE
+              value: "off"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "pathling-server.s3CredentialsSecretName" . }}
+                  key: {{ include "pathling-server.s3AccessKeySecretKey" . }}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "pathling-server.s3CredentialsSecretName" . }}
+                  key: {{ include "pathling-server.s3SecretKeySecretKey" . }}
+            - name: DEFAULT_BUCKET_NAME
+              value: {{ $.Values.minio.defaultBucket | quote }}
+          volumeMounts:
+            - mountPath: /tmp
+              name: tmp-volume
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              /usr/bin/mc alias set minio "${MINIO_ENDPOINT_URL}" "${AWS_ACCESS_KEY_ID}" "${AWS_SECRET_ACCESS_KEY}";
+              /usr/bin/mc mb --ignore-existing minio/${DEFAULT_BUCKET_NAME};
       {{- end }}
       containers:
         - name: pathling-server
