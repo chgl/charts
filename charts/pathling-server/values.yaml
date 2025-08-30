@@ -326,6 +326,15 @@ minio:
   service:
     port: 9000
 
+  # @ignored
+  resources: # +doc-gen:ignore
+    requests:
+      memory: 512Mi
+      cpu: 250m
+    limits:
+      memory: 512Mi
+      cpu: 500m
+
 tests:
   automountServiceAccountToken: false
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
