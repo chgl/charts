@@ -67,7 +67,7 @@ Return the S3 endpoint to use
 */}}
 {{- define "pathling-server.s3Endpoint" -}}
 {{- if .Values.minio.enabled -}}
-    {{- printf "http://%s:%d" (include "common.names.fullname" .Subcharts.minio) (int64 .Values.minio.service.ports.api) -}}
+    {{- printf "http://%s:%d" (include "minio.fullname" .Subcharts.minio) (int64 .Values.minio.service.port) -}}
 {{- else -}}
     {{- .Values.warehouse.s3.endpoint -}}
 {{- end -}}
@@ -81,7 +81,7 @@ Return the name of the secret containing the S3 credentials
     {{- if .Values.minio.auth.existingSecret -}}
         {{ .Values.minio.auth.existingSecret | quote }}
     {{- else -}}
-        {{- printf "%s" (include "common.names.fullname" .Subcharts.minio) -}}
+        {{- printf "%s" (include "minio.fullname" .Subcharts.minio) -}}
     {{- end -}}
 {{- else -}}
     {{- if .Values.warehouse.s3.credentials.existingSecret.name -}}

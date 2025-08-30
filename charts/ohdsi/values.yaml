@@ -8,7 +8,7 @@ fullnameOverride: ""
 # annotations applied to all deployments and jobs
 commonAnnotations: []
 
-# see <https://github.com/bitnami/charts/tree/master/bitnami/postgresql> for details
+# see <https://github.com/CloudPirates-io/helm-charts/tree/main/charts/postgres> for details
 postgres:
   # enable an included PostgreSQL DB.
   # if set to `false`, the values under `webApi.db` are used
@@ -178,7 +178,7 @@ webApi:
     port: 8080
 
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "large"
 
   # resource requests and limits for the container. <br>
@@ -328,7 +328,7 @@ atlas:
     port: 8080
 
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "small"
 
   # configure the resource requests and limits
@@ -424,7 +424,7 @@ cdmInitJob:
   securityContext: {}
 
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "medium"
 
   # configure the resource requests and limits
@@ -523,7 +523,7 @@ achilles:
   podAnnotations: {}
 
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "small"
 
   # configure the resource requests and limits
@@ -583,7 +583,7 @@ loadCohortDefinitionsJob:
     #   value: "TEST"
 
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "micro"
 
   # configure the resource requests and limits
@@ -609,7 +609,7 @@ curl: # +doc-gen:ignore
 tests:
   automountServiceAccountToken: false
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "nano"
   # configure the test pods resource requests and limits
   resources: {}
@@ -622,7 +622,7 @@ tests:
 
 initContainers:
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "micro"
   # configure the init containers pods resource requests and limits
   resources: {}

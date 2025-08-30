@@ -76,7 +76,7 @@ metrics:
     # scrapeTimeout: 10s
 
 # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-# More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+# More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
 resourcesPreset: "large"
 
 # configure the resource requests and limits
@@ -316,7 +316,7 @@ minio:
 
   # -- create a bucket used for the pathling server warehouse by default.
   # See `warehouse.url`.
-  defaultBuckets: "pathling-warehouse"
+  defaultBucket: "pathling-warehouse"
 
   # @ignored
   auth:
@@ -324,25 +324,12 @@ minio:
 
   # @ignored
   service:
-    ports:
-      api: 9000
-
-  # @ignored
-  containerSecurityContext:
-    enabled: true
-    allowPrivilegeEscalation: false
-    runAsUser: 1001
-    runAsNonRoot: true
-    capabilities:
-      drop:
-        - ALL
-    seccompProfile:
-      type: RuntimeDefault
+    port: 9000
 
 tests:
   automountServiceAccountToken: false
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "nano"
   # configure the test pods resource requests and limits
   resources: {}
@@ -355,7 +342,7 @@ tests:
 
 initContainers:
   # set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).
-  # More information: <https://github.com/bitnami/charts/blob/main/bitnami/common/templates/_resources.tpl#L15>
+  # More information: <https://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl>
   resourcesPreset: "nano"
   # configure the init containers pods resource requests and limits
   resources: {}

@@ -5,7 +5,9 @@
     ":automergeStableNonMajor",
     ":automergeDigest"
   ],
-  "gitIgnoredAuthors": ["github-actions"],
+  "gitIgnoredAuthors": [
+    "github-actions"
+  ],
   "postUpgradeTasks": {
     "executionMode": "branch",
     "commands": [
@@ -31,20 +33,37 @@
   "packageRules": [
     {
       "groupName": "GitHub Actions",
-      "matchManagers": ["github-actions"],
-      "extends": ["schedule:monthly"]
+      "matchManagers": [
+        "github-actions"
+      ],
+      "extends": [
+        "schedule:monthly"
+      ]
     },
     {
-      "matchManagers": ["helmv3"],
+      "matchManagers": [
+        "helmv3"
+      ],
       "pinDigests": false
     },
     {
-      "matchDatasources": ["docker", "helm"],
-      "matchDepNames": ["postgresql", "docker.io/bitnami/postgresql", "minio"],
-      "extends": ["schedule:monthly"]
+      "matchDatasources": [
+        "docker",
+        "helm"
+      ],
+      "matchDepNames": [
+        "postgres",
+        "docker.io/library/postgresql",
+        "minio"
+      ],
+      "extends": [
+        "schedule:monthly"
+      ]
     },
     {
-      "matchPackageNames": ["/docker\\.io\\/ohdsi\\/.*/"],
+      "matchPackageNames": [
+        "/docker\\.io\\/ohdsi\\/.*/"
+      ],
       "groupName": "ohdsi"
     }
   ]

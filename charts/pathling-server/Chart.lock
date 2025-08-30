@@ -1,9 +1,9 @@
 dependencies:
 - name: minio
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 17.0.21
+  repository: oci://registry-1.docker.io/cloudpirates
+  version: 0.1.8
 - name: common
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 2.31.4
-digest: sha256:760e061408f6a060c8b9180ee6af8501c44a3c272138f8abc4e30d0a7e146f6c
-generated: "2025-08-16T14:35:17.757827292Z"
+  repository: oci://ghcr.io/chgl/charts
+  version: 0.1.0
+digest: sha256:2984c514ece475b9ef71fd2fef62d3d8fae211a3bf49b64164e497bc86e34ad8
+generated: "2025-08-30T20:26:16.91375782+02:00"
