@@ -9,6 +9,7 @@ keywords:
   - helper
   - template
   - function
+home: https://github.com/chgl/charts/tree/master/charts/common
 version: 0.1.0
 annotations:
   artifacthub.io/license: Apache-2.0
