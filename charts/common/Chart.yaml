@@ -1,0 +1,23 @@
+apiVersion: v2
+name: common
+description: Common logic
+type: library
+sources:
+  - https://github.com/chgl/charts/tree/master/charts/common
+keywords:
+  - common
+  - helper
+  - template
+  - function
+home: https://github.com/chgl/charts/tree/master/charts/common
+version: 0.1.0
+annotations:
+  artifacthub.io/license: Apache-2.0
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/operator: "false"
+  artifacthub.io/prerelease: "false"
+  artifacthub.io/changes: |-
+    # When using the list of objects option the valid supported kinds are
+    # added, changed, deprecated, removed, fixed and security.
+    - kind: changed
+      description: "First version"

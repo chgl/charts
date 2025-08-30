@@ -3,3 +3,5 @@ chart-dirs:
 debug: true
 remote: origin
 target-branch: master
+excluded-charts:
+  - common
