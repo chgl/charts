@@ -15,7 +15,7 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgres
-    version: 0.2.1
+    version: 0.2.2
     repository: oci://registry-1.docker.io/cloudpirates
     condition: postgres.enabled
   - name: common
@@ -24,7 +24,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.25.2
+version: 0.25.3
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,4 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Switched from bitnami/common to chgl/common dependency"
+      description: "Updated postgres to 0.2.2"
