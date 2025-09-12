@@ -16,7 +16,7 @@ dependencies:
   - name: common
     repository: oci://ghcr.io/chgl/charts
     version: 0.1.0
-version: 0.9.0
+version: 0.9.1
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -32,6 +32,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Switched from bitnami/common to chgl/common dependency"
-    - kind: changed
-      description: "Switched from bitnami/minio to cloudpirates/minio dependency"
+      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to 8.16.0"
