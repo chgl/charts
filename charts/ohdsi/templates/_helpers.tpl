@@ -85,8 +85,8 @@ Get the key inside the secret containing the DB user's password
     {{- else -}}
         {{ "postgres-password" }}
     {{- end -}}
-{{- else if .Values.webApi.db.existingSecret.name -}}
-    {{ .Values.webApi.db.existingSecret.key | quote }}
+{{- else if .Values.webApi.db.existingSecret -}}
+    {{ .Values.webApi.db.existingSecretKey | quote }}
 {{- else -}}
     {{ "postgres-password" }}
 {{- end -}}
