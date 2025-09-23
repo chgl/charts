@@ -80,13 +80,13 @@ Get the key inside the secret containing the DB user's password
 */}}
 {{- define "ohdsi.webapi.db-secret-key" -}}
 {{- if .Values.postgres.enabled -}}
-    {{- if (or .Values.postgres.auth.username .Values.postgres.auth.existingSecret ) -}}
-        {{ "password" }}
+    {{- if .Values.postgres.auth.existingSecret -}}
+        {{ default "postgres-password" .Values.postgres.auth.secretKeys.passwordKey }}
     {{- else -}}
         {{ "postgres-password" }}
     {{- end -}}
-{{- else if .Values.webApi.db.existingSecret -}}
-    {{ .Values.webApi.db.existingSecretKey | quote }}
+{{- else if .Values.database.existingSecret.name -}}
+    {{ .Values.database.existingSecret.key | quote }}
 {{- else -}}
     {{ "postgres-password" }}
 {{- end -}}
