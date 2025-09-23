@@ -57,13 +57,13 @@ spec:
                   name: {{ include "ohdsi.webapi.db-secret-name" $ }}
                   key: {{ include "ohdsi.webapi.db-secret-key" $ }}
             - name: PGUSER
-              value: {{ include "ohdsi.database.user" $ | quote }}
+              value: {{ include "ohdsi.database.user" $ }}
             - name: PGHOST
-              value: {{ include "ohdsi.database.host" $ | quote }}
+              value: {{ include "ohdsi.database.host" $ }}
             - name: PGPORT
               value: {{ include "ohdsi.database.port" $ | quote }}
             - name: PGDATABASE
-              value: {{ include "ohdsi.database.name" $ | quote }}
+              value: {{ include "ohdsi.database.name" $ }}
             - name: WEBAPI_URL
               value: {{ include "ohdsi.webApi.url" $ }}
             {{- if .extraEnv }}
