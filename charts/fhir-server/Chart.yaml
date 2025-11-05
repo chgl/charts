@@ -10,7 +10,7 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.12.10
+version: 0.12.11
 deprecated: false
 dependencies:
   - name: common
@@ -21,4 +21,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated mcr.microsoft.com/healthcareapis/r4-fhir-server to 4.0.561"
+      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to 8.17.0"
