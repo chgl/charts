@@ -10,7 +10,7 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.12.12
+version: 0.12.13
 deprecated: false
 dependencies:
   - name: common
@@ -21,4 +21,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to sha256:935d9100e9ba842cdb060de42472c7ca90cfe9a7c96e4dacb55e79e560b3ff40"
+      description: "Updated mcr.microsoft.com/mssql/server to sha256:54b23ca766287dab5f6f55162923325f07cdec6ccb42108f37c55c87e7688ebd"
