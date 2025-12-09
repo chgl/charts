@@ -15,7 +15,7 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:v2.4.34@sha256:79110999067d90ace73e43419682be6235aee525958e817c5d004b1eeab422b0
+    container: ghcr.io/chgl/kube-powertools:v2.4.35@sha256:4fabe3f9bde3440ceb99ac1c471365f51c2ceeeb9e135b1764da79573b8c6f9a
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@f4a75cfd619ee5ce8d5b864b0d183aff3c69b55a # v2.13.1
