@@ -18,7 +18,7 @@ dependencies:
   - name: common
     repository: oci://ghcr.io/chgl/charts
     version: 0.1.0
-version: 1.3.65
+version: 1.3.66
 appVersion: 1.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -33,4 +33,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to 8.18.0"
+      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to sha256:d94d07ba9e7d6de898b6d96c1a072f6f8266c687af78a74f380087a0addf5d17"
