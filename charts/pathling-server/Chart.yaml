@@ -10,13 +10,13 @@ maintainers:
     url: https://github.com/chgl
 dependencies:
   - name: minio
-    version: 0.5.5
+    version: 0.7.0
     repository: oci://registry-1.docker.io/cloudpirates
     condition: minio.enabled
   - name: common
     repository: oci://ghcr.io/chgl/charts
     version: 0.1.0
-version: 0.9.8
+version: 0.9.9
 appVersion: "7.x"
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -32,4 +32,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to sha256:d94d07ba9e7d6de898b6d96c1a072f6f8266c687af78a74f380087a0addf5d17"
+      description: "Updated minio to 0.7.0"
