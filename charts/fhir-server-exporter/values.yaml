@@ -176,3 +176,9 @@ networkPolicy:
   extraIngress: []
   # add extra egress rules to the default NetworkPolicy
   extraEgress: []
+
+# extra volumeMounts for the main fhir-pseudonymizer container
+extraVolumeMounts: []
+
+# extra volumes
+extraVolumes: []
