@@ -41,9 +41,9 @@ deploymentAnnotations: {}
 podAnnotations: {}
 
 podSecurityContext: # +doc-gen:ignore
-  fsGroup: 65532
-  runAsGroup: 65532
-  runAsUser: 65532
+  fsGroup: 1654
+  runAsGroup: 1654
+  runAsUser: 1654
   runAsNonRoot: true
 
 securityContext: # +doc-gen:ignore
@@ -53,8 +53,8 @@ securityContext: # +doc-gen:ignore
       - ALL
   readOnlyRootFilesystem: true
   runAsNonRoot: true
-  runAsUser: 65532
-  runAsGroup: 65532
+  runAsUser: 1654
+  runAsGroup: 1654
   seccompProfile:
     type: RuntimeDefault
 
