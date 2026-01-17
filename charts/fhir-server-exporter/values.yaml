@@ -27,7 +27,7 @@ replicaCount: 1
 image: # +doc-gen:ignore
   registry: ghcr.io
   repository: chgl/fhir-server-exporter
-  tag: v2.3.50@sha256:f8fad5ddbbf109dfa1906620eec6940307c5f0884ec7ce4362fb9fda7c1da044
+  tag: v3.0.0@sha256:e1c24280e7fcdae3fddc5f19e1c2f032e83374128634a3e553109546c4c6e446
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -41,9 +41,9 @@ deploymentAnnotations: {}
 podAnnotations: {}
 
 podSecurityContext: # +doc-gen:ignore
-  fsGroup: 65532
-  runAsGroup: 65532
-  runAsUser: 65532
+  fsGroup: 1654
+  runAsGroup: 1654
+  runAsUser: 1654
   runAsNonRoot: true
 
 securityContext: # +doc-gen:ignore
@@ -53,8 +53,8 @@ securityContext: # +doc-gen:ignore
       - ALL
   readOnlyRootFilesystem: true
   runAsNonRoot: true
-  runAsUser: 65532
-  runAsGroup: 65532
+  runAsUser: 1654
+  runAsGroup: 1654
   seccompProfile:
     type: RuntimeDefault
 
