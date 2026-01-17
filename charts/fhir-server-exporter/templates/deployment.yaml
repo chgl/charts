@@ -90,7 +90,6 @@ spec:
               subPath: queries.yaml
               readOnly: true
           {{- end }}
-          volumeMounts:
           {{- if .Values.extraVolumeMounts }}
             {{- toYaml .Values.extraVolumeMounts | nindent 12 }}
           {{- end }}
