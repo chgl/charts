@@ -24,7 +24,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.25.46
+version: 0.25.47
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,4 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/library/postgres to sha256:1090bc3a8ccfb0b55f78a494d76f8d603434f7e4553543d6e807bc7bd6bbd17f"
+      description: "Updated docker.io/library/postgres to 18.2"
