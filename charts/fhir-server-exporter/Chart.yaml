@@ -17,7 +17,7 @@ dependencies:
   - name: common
     repository: oci://ghcr.io/chgl/charts
     version: 0.1.0
-version: 1.2.20
+version: 1.2.21
 appVersion: 3.x
 annotations:
   artifacthub.io/license: Apache-2.0
@@ -29,4 +29,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated ghcr.io/chgl/fhir-server-exporter to v3.0.5"
+      description: "Updated ghcr.io/chgl/fhir-server-exporter to v3.0.6"
