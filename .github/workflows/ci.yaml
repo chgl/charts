@@ -18,7 +18,7 @@ jobs:
     container: ghcr.io/chgl/kube-powertools:v2.5.14@sha256:6599410af05496640c190d1847904f89392cea8cecead5d4e9c3d3468b2b403f
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
+        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -29,7 +29,7 @@ jobs:
           git config --global --add safe.directory /__w/charts/charts
 
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -63,7 +63,7 @@ jobs:
 
       - name: Cache kubeconform schemas
         id: cache-powerlint-kubeconform
-        uses: actions/cache@9255dc7a253b0ccc959486e2bca901246202afeb # v5.0.1
+        uses: actions/cache@cdf6c1fa76f9f475f3d7449005a359c84ca0f306 # v5.0.3
         with:
           path: /tmp
           key: ${{ runner.os }}-powerlint-kubeconform
@@ -92,7 +92,7 @@ jobs:
         k8s-version: [1.31.9, 1.32.5, 1.33.2]
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
+        uses: step-security/harden-runner@5ef0c079ce82195b2a36a210272d6b661572d83e # v2.14.2
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -103,7 +103,7 @@ jobs:
           git config --global --add safe.directory /__w/charts/charts
 
       - name: Checkout
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
           persist-credentials: false
@@ -125,7 +125,7 @@ jobs:
           fi
 
       - name: Create k8s Kind Cluster
-        uses: helm/kind-action@92086f6be054225fa813e0a4b13787fc9088faab # v1.13.0
+        uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
         if: ${{steps.list-changed.outputs.changed == 'true'}}
         with:
           cluster_name: kind-cluster-k8s-${{ matrix.k8s-version }}
