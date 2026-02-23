@@ -12,11 +12,19 @@ ingress:
 minio:
   ingress:
     enabled: true
-    hostname: pathling-server-minio.127.0.0.1.nip.io
-  apiIngress:
+    hosts:
+      - host: minio.127.0.0.1.nip.io
+        paths:
+          - path: /
+            pathType: Prefix
+  consoleIngress:
     enabled: true
-    hostname: pathling-server-minio-api.127.0.0.1.nip.io
+    hosts:
+      - host: minio-console.127.0.0.1.nip.io
+        paths:
+          - path: /
+            pathType: Prefix
 
 spark:
   cluster:
-    enabled: true
+    enabled: false
