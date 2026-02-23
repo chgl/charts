@@ -12,9 +12,9 @@ imagePullSecrets: []
 
 # @ignored
 image:
-  registry: docker.io
+  registry: ghcr.io
   repository: aehrc/pathling
-  tag: 7.2.0@sha256:31b5ef50294e55136ae2278c2d0b8435a96a15b5da040ec785effb51875d08d3
+  tag: 1.2.0@sha256:9550acf9b12d882a3fa4bb522bf92bd6dac49bdcb7e43754ffd574190fac65fd
   pullPolicy: IfNotPresent
 
 # -- number of replicas. This components can also be easily scaled horizontally if necessary.
@@ -273,7 +273,7 @@ restrictedContainerSecurityContext:
 
 warehouse:
   # -- base URL at which Pathling will look for data files (`pathling.storage.warehouseUrl`).
-  url: s3://pathling-warehouse
+  url: s3a://pathling-warehouse
   s3:
     # -- S3 endpoint (`fs.s3a.endpoint`)
     endpoint: ""
