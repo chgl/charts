@@ -1,7 +1,7 @@
 # Charts
 
 [![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/chgl)](https://artifacthub.io/packages/search?repo=chgl)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/chgl/charts/badge)](https://api.securityscorecards.dev/projects/github.com/chgl/charts)
+[![OpenSSF Scorecard](https://img.shields.io/ossf-scorecard/github.com/chgl/charts?label=openssf%20scorecard&style=flat)](https://scorecard.dev/viewer/?uri=github.com/chgl/charts)
 
 > A collection of Helm charts
 
