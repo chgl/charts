@@ -18,6 +18,7 @@ DISABLE_LINTERS:
   - SPELL_CSPELL
   - SPELL_PROSELINT
   - SPELL_LYCHEE
+  - REPOSITORY_KINGFISHER
 SHOW_ELAPSED_TIME: true
 FILEIO_REPORTER: false
 # DISABLE_ERRORS: true # Uncomment if you want MegaLinter to detect errors but not block CI to pass
