@@ -1,9 +1,9 @@
 dependencies:
 - name: postgres
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.17.1
+  version: 0.18.3
 - name: common
   repository: oci://ghcr.io/chgl/charts
   version: 0.1.0
-digest: sha256:a4e80c56c39c8d38de42ff152c55733611bd0b57cbea47597773f467f497f2a8
-generated: "2026-03-03T02:23:02.908935711Z"
+digest: sha256:247545e1f66ee81b58e0e2a15bdec8c78cf3c70f587401336b5056427487fa77
+generated: "2026-03-24T07:07:54.424296598Z"
