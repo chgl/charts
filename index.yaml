@@ -4164,6 +4164,42 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated ghcr.io/chgl/fhir-server-exporter to v3.0.12"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 3.x
+    created: "2026-05-06T15:05:56.083737079Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/chgl/charts
+      version: 0.1.0
+    description: A Helm chart for deploying the FHIR® server exporter on Kubernetes.
+    digest: 5389964d0e5144691b56b08d1ec04e1bc2c40767ae92bb399e80efb887d06111
+    home: https://github.com/chgl/fhir-server-exporter
+    keywords:
+    - fhir
+    - metrics
+    - telemetry
+    - prometheus exporter
+    kubeVersion: '>= 1.19.0'
+    maintainers:
+    - name: chgl
+    name: fhir-server-exporter
+    sources:
+    - https://github.com/chgl/fhir-server-exporter
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-exporter-1.2.31/fhir-server-exporter-1.2.31.tgz
+    version: 1.2.31
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Updated ghcr.io/chgl/fhir-server-exporter to v3.0.11"
       artifacthub.io/license: Apache-2.0
       artifacthub.io/operator: "false"
@@ -25195,4 +25231,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2026-05-04T21:26:47.962755393Z"
+generated: "2026-05-06T15:05:56.085056802Z"
