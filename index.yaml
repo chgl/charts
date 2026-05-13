@@ -34,6 +34,33 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated mcr.microsoft.com/mssql/server to sha256:320daf857745ef0092c6e53e82d0bf81ed6bca2794e6ccbffb72cf6a8d14a441"
+    apiVersion: v2
+    created: "2026-05-13T03:34:18.584222509Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/chgl/charts
+      version: 0.1.0
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 43330de5fb7ed42d890bfca82aa0ef2f4a50f1735f31921685db939f5c438e65
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-0.12.35/fhir-server-0.12.35.tgz
+    version: 0.12.35
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to 8.20.0"
     apiVersion: v2
     created: "2026-05-01T13:22:10.213884708Z"
@@ -25370,4 +25397,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2026-05-11T03:39:42.054183384Z"
+generated: "2026-05-13T03:34:18.586042171Z"
