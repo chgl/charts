@@ -57,7 +57,7 @@ webApi:
     image: # +doc-gen:ignore
       registry: docker.io
       repository: library/postgres
-      tag: 18.4@sha256:775a0820dd34e907ec63277e388d145056d427548e461d7953a070edb5de3a3a
+      tag: 18.4@sha256:f7ce845ee6873dd84be93c9828fe0d1fab0f9707dc9ac569694657398b290bce
       pullPolicy: IfNotPresent
 
   serviceAccount:
