@@ -44,7 +44,7 @@ The report is published online at: <https://chgl.github.io/charts/kubescape-repo
 1. Mount the folder in the [kube-powertools](https://github.com/chgl/kube-powertools) container to easily run linters and checks
 
    ```sh
-   docker run --rm -it -v $PWD:/root/workspace ghcr.io/chgl/kube-powertools:v2.5.54@sha256:a67e6b419bc463e5f44c67d28ce0c4d91c72afda758e00efadb1d6031d9a1764
+   docker run --rm -it -v $PWD:/root/workspace ghcr.io/chgl/kube-powertools:v2.5.55@sha256:ac80f43e5cc4c3ab24c9bcb20157ed13f6144fa4a708e10a9e6a4166a51b5f0a
    ```
 
 1. Run chart-testing and the `chart-powerlint.sh` script to lint the chart
@@ -56,7 +56,7 @@ The report is published online at: <https://chgl.github.io/charts/kubescape-repo
 1. (Optional) View the results of the [polaris audit check](https://github.com/FairwindsOps/polaris) in your browser
 
    ```sh
-   $ docker run --rm -it -p 9090:8080 -v $PWD:/root/workspace ghcr.io/chgl/kube-powertools:v2.5.54@sha256:a67e6b419bc463e5f44c67d28ce0c4d91c72afda758e00efadb1d6031d9a1764
+   $ docker run --rm -it -p 9090:8080 -v $PWD:/root/workspace ghcr.io/chgl/kube-powertools:v2.5.55@sha256:ac80f43e5cc4c3ab24c9bcb20157ed13f6144fa4a708e10a9e6a4166a51b5f0a
    bash-5.0: helm template charts/fhir-server/ | polaris dashboard --config=.polaris.yaml --audit-path=-
    ```
 
