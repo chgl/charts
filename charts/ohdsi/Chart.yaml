@@ -15,7 +15,7 @@ maintainers:
   - name: chgl
 dependencies:
   - name: postgres
-    version: 0.18.3
+    version: 0.19.6
     repository: oci://registry-1.docker.io/cloudpirates
     condition: postgres.enabled
   - name: common
@@ -24,7 +24,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.25.78
+version: 0.25.79
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,4 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/library/postgres to sha256:22c89fe0d0f507606260237fd55e51f6137f58b2d5bcf6152242b96d9fe8f9a4"
+      description: "Updated postgres to 0.19.6"
