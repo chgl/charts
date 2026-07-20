@@ -10,7 +10,7 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.12.52
+version: 0.12.53
 deprecated: false
 dependencies:
   - name: common
@@ -21,4 +21,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated mcr.microsoft.com/mssql/server to sha256:86cc6144ef39bb0fbed2329e1ad79b13ee82e7b2e4739213a0db0800e668a74a"
+      description: "Updated mcr.microsoft.com/healthcareapis/r4-fhir-server to 5.0.0"
