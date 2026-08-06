@@ -1,9 +1,9 @@
 dependencies:
 - name: minio
   repository: oci://registry-1.docker.io/cloudpirates
-  version: 0.13.0
+  version: 0.13.1
 - name: common
   repository: oci://ghcr.io/chgl/charts
   version: 0.1.0
-digest: sha256:f1f31906ba7fca13cd718376c4e23c4b22a60447914ed6c32f6eff59fcb7db3b
-generated: "2026-05-02T02:49:32.584747403Z"
+digest: sha256:2a38492b1185029c1155b05f44939215e666609c7b8a30b88cba59ab2728959e
+generated: "2026-08-06T08:38:49.994672802Z"
