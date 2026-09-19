@@ -24,7 +24,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.25.91
+version: 0.25.92
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,4 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to 8.22.0"
+      description: "Updated docker.io/library/postgres to sha256:86c951e05bf56c93d95d397747fb8820ac76cc3bedb78f43abd83eedbe3666ae"
