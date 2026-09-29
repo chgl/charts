@@ -10,7 +10,7 @@ keywords:
   - template
   - function
 home: https://github.com/chgl/charts/tree/master/charts/common
-version: 0.1.0
+version: 0.1.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -19,5 +19,5 @@ annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: changed
-      description: "First version"
+    - kind: fixed
+      description: "Replaced the empty values.yaml document with an explicit empty map so it can be parsed by Kubescape"

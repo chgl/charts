@@ -10,8 +10,8 @@ maintainers:
 sources:
   - https://github.com/microsoft/fhir-server
 type: application
-version: 0.12.64
-deprecated: false
+version: 1.0.0
+deprecated: true
 dependencies:
   - name: common
     repository: oci://ghcr.io/chgl/charts
@@ -20,5 +20,5 @@ annotations:
   artifacthub.io/changes: |-
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
-    - kind: changed
-      description: "Updated mcr.microsoft.com/mssql/server to sha256:b036b61e953e6e660f04514fc3f703b995a9cdda569cf96d07d3f751240f615a"
+    - kind: deprecated
+      description: "deprecated chart"
