@@ -1,6 +1,6 @@
 dependencies:
 - name: common
   repository: oci://ghcr.io/chgl/charts
-  version: 0.1.0
-digest: sha256:c471b2c8899392300dab8f6d720467aead388b04af1ef9c4b6c80b7caa507462
-generated: "2025-08-30T20:23:17.79132053+02:00"
+  version: 0.1.1
+digest: sha256:34270ab196e2bcb43f54042d5c7b04a11f579ab5608f115546ab14145f0c7db8
+generated: "2026-09-29T08:37:50.23667781Z"
