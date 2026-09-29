@@ -5,6 +5,33 @@ entries:
       artifacthub.io/changes: |-
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
+        - kind: fixed
+          description: "Replaced the empty values.yaml document with an explicit empty map so it can be parsed by Kubescape"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    created: "2026-09-29T08:11:48.01947902Z"
+    description: Common logic
+    digest: 5ba4643443136f029812152cde6e3feee1058dde01ae3d86fc546c8bc92a1e5f
+    home: https://github.com/chgl/charts/tree/master/charts/common
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    name: common
+    sources:
+    - https://github.com/chgl/charts/tree/master/charts/common
+    type: library
+    urls:
+    - https://github.com/chgl/charts/releases/download/common-0.1.1/common-0.1.1.tgz
+    version: 0.1.1
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
         - kind: changed
           description: "First version"
       artifacthub.io/containsSecurityUpdates: "false"
@@ -29,6 +56,34 @@ entries:
     - https://github.com/chgl/charts/releases/download/common-0.1.0/common-0.1.0.tgz
     version: 0.1.0
   fhir-server:
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: deprecated
+          description: "deprecated chart"
+    apiVersion: v2
+    created: "2026-09-29T08:11:48.216200977Z"
+    dependencies:
+    - name: common
+      repository: oci://ghcr.io/chgl/charts
+      version: 0.1.0
+    deprecated: true
+    description: A Helm chart for deploying the Microsoft FHIR Server for Azure.
+    digest: 292c2fbff0642dd130c071c2f81d48f9b1793bff3d2aad63b49766ee9e30c1fb
+    home: https://github.com/microsoft/fhir-server
+    keywords:
+    - fhir
+    - fhir-server
+    maintainers:
+    - name: chgl
+    name: fhir-server
+    sources:
+    - https://github.com/microsoft/fhir-server
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/fhir-server-1.0.0/fhir-server-1.0.0.tgz
+    version: 1.0.0
   - annotations:
       artifacthub.io/changes: |-
         # When using the list of objects option the valid supported kinds are
@@ -27969,4 +28024,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2026-09-08T20:50:34.366290086Z"
+generated: "2026-09-29T08:11:48.217695638Z"
