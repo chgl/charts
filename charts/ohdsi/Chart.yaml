@@ -20,11 +20,11 @@ dependencies:
     condition: postgres.enabled
   - name: common
     repository: oci://ghcr.io/chgl/charts
-    version: 0.1.0
+    version: 0.1.1
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.19.0"
-version: 0.25.91
+version: 0.25.92
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,4 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "Updated docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl docker.io/curlimages/curl to 8.22.0"
+      description: "Updated common common common common to 0.1.1"
