@@ -24565,6 +24565,45 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "Updated ghcr.io/aehrc/pathling to 3.0.0"
+        - kind: changed
+          description: "Changed default container user and group from 99 to 65534 (nobody), since UID 99 no longer exists in the Pathling 3.x image"
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/cloudpirates-minio/minio
+        - url: https://artifacthub.io/packages/helm/prometheus-community/kube-prometheus-stack
+    apiVersion: v2
+    appVersion: 3.0.0
+    created: "2026-10-02T17:55:16.635013913Z"
+    dependencies:
+    - condition: minio.enabled
+      name: minio
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.14.0
+    - name: common
+      repository: oci://ghcr.io/chgl/charts
+      version: 0.1.1
+    description: A Helm chart for deploying the Pathling server
+    digest: 6afd64352173af970bcc5d7c7cc48c56fd1a1b0575232d324b91db2fb741598b
+    home: https://pathling.csiro.au/docs/server
+    maintainers:
+    - name: chgl
+      url: https://github.com/chgl
+    name: pathling-server
+    sources:
+    - https://github.com/aehrc/pathling
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/pathling-server-0.10.14/pathling-server-0.10.14.tgz
+    version: 0.10.14
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Updated minio to 0.14.0"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -28311,4 +28350,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2026-10-02T17:16:30.152202989Z"
+generated: "2026-10-02T17:55:16.636477921Z"
