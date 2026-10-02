@@ -17,7 +17,8 @@ dependencies:
     repository: oci://ghcr.io/chgl/charts
     version: 0.1.1
 version: 0.10.14
-appVersion: "1.2.0"
+# renovate: image=ghcr.io/aehrc/pathling
+appVersion: "3.0.0"
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -33,3 +34,5 @@ annotations:
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
       description: "Updated ghcr.io/aehrc/pathling to 3.0.0"
+    - kind: changed
+      description: "Changed default container user and group from 99 to 65534 (nobody), since UID 99 no longer exists in the Pathling 3.x image"

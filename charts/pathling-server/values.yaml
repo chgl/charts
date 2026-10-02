@@ -26,10 +26,11 @@ podAnnotations: {}
 # -- the pod security context
 # @ignored
 podSecurityContext:
-  fsGroup: 99
-  runAsGroup: 99
-  runAsUser: 99
+  fsGroup: 65534
+  runAsGroup: 65534
+  runAsUser: 65534
   runAsNonRoot: true
+  fsGroupChangePolicy: OnRootMismatch
 
 # -- the container security context
 # @ignored
@@ -41,8 +42,8 @@ securityContext:
       - ALL
   readOnlyRootFilesystem: true
   runAsNonRoot: true
-  runAsUser: 99
-  runAsGroup: 99
+  runAsUser: 65534
+  runAsGroup: 65534
   seccompProfile:
     type: RuntimeDefault
 
