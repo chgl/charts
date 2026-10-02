@@ -14,7 +14,7 @@ imagePullSecrets: []
 image:
   registry: ghcr.io
   repository: aehrc/pathling
-  tag: 2.0.1@sha256:f173027daaa5383597badb52bc294645b657f2ebc2a74d1a2304edce179185e0
+  tag: 3.0.0@sha256:463d11d0e757c6b838afbc6553fc726d2d46dd1eccd65bc37fd2b5da0f1f59eb
   pullPolicy: IfNotPresent
 
 # -- number of replicas. This components can also be easily scaled horizontally if necessary.
@@ -26,10 +26,11 @@ podAnnotations: {}
 # -- the pod security context
 # @ignored
 podSecurityContext:
-  fsGroup: 99
-  runAsGroup: 99
-  runAsUser: 99
+  fsGroup: 65534
+  runAsGroup: 65534
+  runAsUser: 65534
   runAsNonRoot: true
+  fsGroupChangePolicy: OnRootMismatch
 
 # -- the container security context
 # @ignored
@@ -41,8 +42,8 @@ securityContext:
       - ALL
   readOnlyRootFilesystem: true
   runAsNonRoot: true
-  runAsUser: 99
-  runAsGroup: 99
+  runAsUser: 65534
+  runAsGroup: 65534
   seccompProfile:
     type: RuntimeDefault
 

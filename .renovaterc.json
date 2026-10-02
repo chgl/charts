@@ -26,6 +26,16 @@
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Keep Chart.yaml appVersion in sync with the chart's main container image",
+      "managerFilePatterns": ["/(^|/)Chart\\.yaml$/"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*image=(?<depName>\\S+)\\s+appVersion:\\s*[\"']?(?<currentValue>[^\\s\"'@]+)[\"']?"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
     }
   ],
   "packageRules": [
@@ -36,6 +46,12 @@
     },
     {
       "matchManagers": ["helmv3"],
+      "pinDigests": false
+    },
+    {
+      "description": "appVersion is a plain version, never pin it to a digest",
+      "matchManagers": ["custom.regex"],
+      "matchFileNames": ["**/Chart.yaml"],
       "pinDigests": false
     },
     {
