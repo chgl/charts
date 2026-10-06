@@ -857,7 +857,7 @@
           <td class="controlSeverityCell">Medium</td>
           <td class="controlNameCell">Minimize the admission of containers wishing to share the host IPC namespace</td>
           <td class="controlRiskCell numericCell">0</td>
-          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">12</td>
           <td class="controlRiskCell numericCell">0</td>
         </tr>
       </tr>
@@ -866,7 +866,7 @@
           <td class="controlSeverityCell">Medium</td>
           <td class="controlNameCell">Minimize the admission of containers wishing to share the host IPC namespace</td>
           <td class="controlRiskCell numericCell">0</td>
-          <td class="controlRiskCell numericCell">12</td>
+          <td class="controlRiskCell numericCell">0</td>
           <td class="controlRiskCell numericCell">0</td>
         </tr>
       </tr>
@@ -893,7 +893,7 @@
           <td class="controlSeverityCell">Medium</td>
           <td class="controlNameCell">Minimize the admission of containers wishing to share the host process ID namespace</td>
           <td class="controlRiskCell numericCell">0</td>
-          <td class="controlRiskCell numericCell">0</td>
+          <td class="controlRiskCell numericCell">12</td>
           <td class="controlRiskCell numericCell">0</td>
         </tr>
       </tr>
@@ -902,7 +902,7 @@
           <td class="controlSeverityCell">Medium</td>
           <td class="controlNameCell">Minimize the admission of containers wishing to share the host process ID namespace</td>
           <td class="controlRiskCell numericCell">0</td>
-          <td class="controlRiskCell numericCell">12</td>
+          <td class="controlRiskCell numericCell">0</td>
           <td class="controlRiskCell numericCell">0</td>
         </tr>
       </tr>
@@ -1347,6 +1347,68 @@
     </br>
     
     
+    <h3>Name: -magnifhir</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -magnifhir</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Pods in default namespace</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Label usage for resources</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p>  <p>spec.template.metadata.labels[app]=YOUR_VALUE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (magnifhir)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Check if signature exists</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: ghcr.io/chgl/magnifhir:v1.5.2@sha256:13f121613edd4e52051e864892fa532714c9ab935688c00fb9b772f502c413e9) (magnifhir)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Missing network policy</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
     <h3>Name: -ohdsi-achilles-cron</h3>
       <p>ApiVersion: batch/v1beta1</p>
       <p>Kind: CronJob</p>
@@ -1430,137 +1492,6 @@
           <td class="resourceSeverityCell">Medium</td>
           <td class="resourceNameCell">Non-existent service account</td>
           <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0307">C-0307</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </div>
-    
-    <h3>Name: -fhir-server-exporter</h3>
-      <p>ApiVersion: apps/v1</p>
-      <p>Kind: Deployment</p>
-      <p>Name: -fhir-server-exporter</p>
-      <p>Namespace: </p>
-      <table>
-        <thead>
-        <tr>
-          <th class="resourceSeverityCell">Severity</th>
-          <th class="resourceNameCell">Name</th>
-          <th class="resourceURLCell">Docs</th>
-          <th class="resourceRemediationCell">Assisted Remediation</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Ingress and Egress blocked</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Pods in default namespace</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Label usage for resources</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p>  <p>spec.template.metadata.labels[app]=YOUR_VALUE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (fhir-server-exporter)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Check if signature exists</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: ghcr.io/chgl/fhir-server-exporter:v3.0.19@sha256:26f8963a44d4e714c3413afad9afb3d9726f7ff6add1b755dda82145e5c03df9) (fhir-server-exporter)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Missing network policy</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </div>
-    
-    <h3>Name: -ohdsi-webapi</h3>
-      <p>ApiVersion: apps/v1</p>
-      <p>Kind: Deployment</p>
-      <p>Name: -ohdsi-webapi</p>
-      <p>Namespace: </p>
-      <table>
-        <thead>
-        <tr>
-          <th class="resourceSeverityCell">Severity</th>
-          <th class="resourceNameCell">Name</th>
-          <th class="resourceURLCell">Docs</th>
-          <th class="resourceRemediationCell">Assisted Remediation</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Ingress and Egress blocked</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Pods in default namespace</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Label usage for resources</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p>  <p>spec.template.metadata.labels[app]=YOUR_VALUE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Prefer using secrets as files over secrets as environment variables</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0207">C-0207</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[14].name (webapi)</p>  <p>spec.template.spec.containers[0].env[4].name (webapi)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (webapi)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Check if signature exists</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: docker.io/ohdsi/webapi:2.15.2@sha256:bc5cffde0d6f29bccc994876bf3cb290e8c3f4e5c087ab28c7163343c0b67393) (webapi)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Missing network policy</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
           <td class="resourceRemediationCell"></td>
         </tr>
         
@@ -1658,351 +1589,6 @@
       </table>
     </div>
     
-    <h3>Name: -ohdsi-test-connection</h3>
-      <p>ApiVersion: v1</p>
-      <p>Kind: Pod</p>
-      <p>Name: -ohdsi-test-connection</p>
-      <p>Namespace: </p>
-      <table>
-        <thead>
-        <tr>
-          <th class="resourceSeverityCell">Severity</th>
-          <th class="resourceNameCell">Name</th>
-          <th class="resourceURLCell">Docs</th>
-          <th class="resourceRemediationCell">Assisted Remediation</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Ingress and Egress blocked</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Pods in default namespace</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Naked pods</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Label usage for resources</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (test-webapi)</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE (test-atlas)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Check if signature exists</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (test-webapi)</p>  <p>spec.containers[1].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (test-atlas)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Missing network policy</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </div>
-    
-    <h3>Name: -ohdsi-atlas</h3>
-      <p>ApiVersion: apps/v1</p>
-      <p>Kind: Deployment</p>
-      <p>Name: -ohdsi-atlas</p>
-      <p>Namespace: </p>
-      <table>
-        <thead>
-        <tr>
-          <th class="resourceSeverityCell">Severity</th>
-          <th class="resourceNameCell">Name</th>
-          <th class="resourceURLCell">Docs</th>
-          <th class="resourceRemediationCell">Assisted Remediation</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Immutable container filesystem</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0017">C-0017</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem=true (atlas)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Ingress and Egress blocked</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Pods in default namespace</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Label usage for resources</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p>  <p>spec.template.metadata.labels[app]=YOUR_VALUE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem=true (atlas)</p>  <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (atlas)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Check if signature exists</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: docker.io/ohdsi/atlas:2.15.0@sha256:6814e8c5b5366b50bc197b1eb2881689e5852784742b91b9636eec514f5a555e) (atlas)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Missing network policy</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </div>
-    
-    <h3>Name: -pathling-server-test-connection</h3>
-      <p>ApiVersion: v1</p>
-      <p>Kind: Pod</p>
-      <p>Name: -pathling-server-test-connection</p>
-      <p>Namespace: </p>
-      <table>
-        <thead>
-        <tr>
-          <th class="resourceSeverityCell">Severity</th>
-          <th class="resourceNameCell">Name</th>
-          <th class="resourceURLCell">Docs</th>
-          <th class="resourceRemediationCell">Assisted Remediation</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Ingress and Egress blocked</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Pods in default namespace</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Naked pods</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Label usage for resources</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (probe-fhir-metadata-endpoint)</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE (probe-fhir-patient-endpoint)</p>  <p>spec.containers[2].securityContext.seLinuxOptions=YOUR_VALUE (probe-fhir-condition-count-endpoint)</p>  <p>spec.containers[3].securityContext.seLinuxOptions=YOUR_VALUE (probe-actuator-health-endpoint)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Check if signature exists</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-fhir-metadata-endpoint)</p>  <p>spec.containers[1].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-fhir-patient-endpoint)</p>  <p>spec.containers[2].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-fhir-condition-count-endpoint)</p>  <p>spec.containers[3].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-actuator-health-endpoint)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Missing network policy</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </div>
-    
-    <h3>Name: -fhir-server-exporter-test-metrics-endpoint</h3>
-      <p>ApiVersion: v1</p>
-      <p>Kind: Pod</p>
-      <p>Name: -fhir-server-exporter-test-metrics-endpoint</p>
-      <p>Namespace: </p>
-      <table>
-        <thead>
-        <tr>
-          <th class="resourceSeverityCell">Severity</th>
-          <th class="resourceNameCell">Name</th>
-          <th class="resourceURLCell">Docs</th>
-          <th class="resourceRemediationCell">Assisted Remediation</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Ingress and Egress blocked</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Pods in default namespace</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Naked pods</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Label usage for resources</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (probe-metrics-endpoint)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Check if signature exists</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-metrics-endpoint)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Missing network policy</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </div>
-    
-    <h3>Name: -magnifhir-test</h3>
-      <p>ApiVersion: v1</p>
-      <p>Kind: Pod</p>
-      <p>Name: -magnifhir-test</p>
-      <p>Namespace: </p>
-      <table>
-        <thead>
-        <tr>
-          <th class="resourceSeverityCell">Severity</th>
-          <th class="resourceNameCell">Name</th>
-          <th class="resourceURLCell">Docs</th>
-          <th class="resourceRemediationCell">Assisted Remediation</th>
-        </tr>
-        </thead>
-        <tbody>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Ingress and Egress blocked</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Pods in default namespace</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Naked pods</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Low</td>
-          <td class="resourceNameCell">Label usage for resources</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
-          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (probe-web-endpoint)</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE (probe-metrics-endpoint)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">High</td>
-          <td class="resourceNameCell">Check if signature exists</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-web-endpoint)</p>  <p>spec.containers[1].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-metrics-endpoint)</p> </td>
-        </tr>
-        
-        <tr>
-          <td class="resourceSeverityCell">Medium</td>
-          <td class="resourceNameCell">Missing network policy</td>
-          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
-          <td class="resourceRemediationCell"></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </div>
-    
     <h3>Name: -postgres</h3>
       <p>ApiVersion: apps/v1</p>
       <p>Kind: StatefulSet</p>
@@ -2093,10 +1679,148 @@
       </table>
     </div>
     
-    <h3>Name: -magnifhir</h3>
+    <h3>Name: -magnifhir-test</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -magnifhir-test</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Pods in default namespace</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Naked pods</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Label usage for resources</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (probe-web-endpoint)</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE (probe-metrics-endpoint)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Check if signature exists</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-web-endpoint)</p>  <p>spec.containers[1].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-metrics-endpoint)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Missing network policy</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-exporter-test-metrics-endpoint</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -fhir-server-exporter-test-metrics-endpoint</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Pods in default namespace</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Naked pods</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Label usage for resources</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (probe-metrics-endpoint)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Check if signature exists</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-metrics-endpoint)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Missing network policy</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-webapi</h3>
       <p>ApiVersion: apps/v1</p>
       <p>Kind: Deployment</p>
-      <p>Name: -magnifhir</p>
+      <p>Name: -ohdsi-webapi</p>
       <p>Namespace: </p>
       <table>
         <thead>
@@ -2131,17 +1855,93 @@
         </tr>
         
         <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Prefer using secrets as files over secrets as environment variables</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0207">C-0207</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].env[14].name (webapi)</p>  <p>spec.template.spec.containers[0].env[4].name (webapi)</p> </td>
+        </tr>
+        
+        <tr>
           <td class="resourceSeverityCell">High</td>
           <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
           <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (magnifhir)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (webapi)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
         </tr>
         
         <tr>
           <td class="resourceSeverityCell">High</td>
           <td class="resourceNameCell">Check if signature exists</td>
           <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
-          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: ghcr.io/chgl/magnifhir:v1.5.2@sha256:13f121613edd4e52051e864892fa532714c9ab935688c00fb9b772f502c413e9) (magnifhir)</p> </td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: docker.io/ohdsi/webapi:2.15.2@sha256:bc5cffde0d6f29bccc994876bf3cb290e8c3f4e5c087ab28c7163343c0b67393) (webapi)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Missing network policy</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-atlas</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -ohdsi-atlas</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Immutable container filesystem</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0017">C-0017</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem=true (atlas)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Pods in default namespace</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Label usage for resources</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p>  <p>spec.template.metadata.labels[app]=YOUR_VALUE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.readOnlyRootFilesystem=true (atlas)</p>  <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (atlas)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Check if signature exists</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: docker.io/ohdsi/atlas:2.15.0@sha256:6814e8c5b5366b50bc197b1eb2881689e5852784742b91b9636eec514f5a555e) (atlas)</p> </td>
         </tr>
         
         <tr>
@@ -2232,6 +2032,206 @@
           <td class="resourceNameCell">No rolling update strategy</td>
           <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0305">C-0305</a></td>
           <td class="resourceRemediationCell"> <p>spec.strategy.type=RollingUpdate</p>  <p>spec.strategy.type (current: Recreate)</p> </td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -ohdsi-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -ohdsi-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Pods in default namespace</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Naked pods</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Label usage for resources</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (test-webapi)</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE (test-atlas)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Check if signature exists</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (test-webapi)</p>  <p>spec.containers[1].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (test-atlas)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Missing network policy</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -fhir-server-exporter</h3>
+      <p>ApiVersion: apps/v1</p>
+      <p>Kind: Deployment</p>
+      <p>Name: -fhir-server-exporter</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Pods in default namespace</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Label usage for resources</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p>  <p>spec.template.metadata.labels[app]=YOUR_VALUE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (fhir-server-exporter)</p>  <p>spec.template.spec.securityContext.fsGroupChangePolicy=Always</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Check if signature exists</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
+          <td class="resourceRemediationCell"> <p>spec.template.spec.containers[0].image (current: ghcr.io/chgl/fhir-server-exporter:v3.0.19@sha256:26f8963a44d4e714c3413afad9afb3d9726f7ff6add1b755dda82145e5c03df9) (fhir-server-exporter)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Missing network policy</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+    <h3>Name: -pathling-server-test-connection</h3>
+      <p>ApiVersion: v1</p>
+      <p>Kind: Pod</p>
+      <p>Name: -pathling-server-test-connection</p>
+      <p>Namespace: </p>
+      <table>
+        <thead>
+        <tr>
+          <th class="resourceSeverityCell">Severity</th>
+          <th class="resourceNameCell">Name</th>
+          <th class="resourceURLCell">Docs</th>
+          <th class="resourceRemediationCell">Assisted Remediation</th>
+        </tr>
+        </thead>
+        <tbody>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Ingress and Egress blocked</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0030">C-0030</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Pods in default namespace</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0061">C-0061</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.namespace=YOUR_NAMESPACE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Naked pods</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0073">C-0073</a></td>
+          <td class="resourceRemediationCell"></td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Low</td>
+          <td class="resourceNameCell">Label usage for resources</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0076">C-0076</a></td>
+          <td class="resourceRemediationCell"> <p>metadata.labels[app]=YOUR_VALUE</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Apply Security Context to Your Pods and Containers</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0211">C-0211</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].securityContext.seLinuxOptions=YOUR_VALUE (probe-fhir-metadata-endpoint)</p>  <p>spec.containers[1].securityContext.seLinuxOptions=YOUR_VALUE (probe-fhir-patient-endpoint)</p>  <p>spec.containers[2].securityContext.seLinuxOptions=YOUR_VALUE (probe-fhir-condition-count-endpoint)</p>  <p>spec.containers[3].securityContext.seLinuxOptions=YOUR_VALUE (probe-actuator-health-endpoint)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">High</td>
+          <td class="resourceNameCell">Check if signature exists</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0237">C-0237</a></td>
+          <td class="resourceRemediationCell"> <p>spec.containers[0].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-fhir-metadata-endpoint)</p>  <p>spec.containers[1].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-fhir-patient-endpoint)</p>  <p>spec.containers[2].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-fhir-condition-count-endpoint)</p>  <p>spec.containers[3].image (current: docker.io/curlimages/curl:8.22.0@sha256:58adaa4e8dca9c988bae2aba4ab3434a0bb2da16bbe3f92dec39ec7785166777) (probe-actuator-health-endpoint)</p> </td>
+        </tr>
+        
+        <tr>
+          <td class="resourceSeverityCell">Medium</td>
+          <td class="resourceNameCell">Missing network policy</td>
+          <td class="resourceURLCell"><a href="https://hub.armosec.io/docs/c-0260">C-0260</a></td>
+          <td class="resourceRemediationCell"></td>
         </tr>
         
         </tbody>
