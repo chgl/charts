@@ -352,7 +352,7 @@ webApi:
     openid:
       enabled: true
       clientId: "ohdsi"
-      clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa"
+      clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa" # betterleaks:allow
       # Required. Points to the openid-configuration endpoint of the provider,
       oidUrl: "https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration"
       # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
