@@ -18,7 +18,7 @@ jobs:
     container: ghcr.io/chgl/kube-powertools:v2.6.13@sha256:5e6cab6409850248d60d3686f02bf903f5f25aa8aa72058031aa5427d7f1c5cf
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -92,7 +92,7 @@ jobs:
         k8s-version: [1.31.9, 1.32.5, 1.33.2]
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@8d3c67de8e2fe68ef647c8db1e6a09f647780f40 # v2.19.0
+        uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1
         with:
           egress-policy: audit # change to 'egress-policy: block' after couple of runs
           disable-sudo: true
@@ -113,7 +113,7 @@ jobs:
       # err="couldn't get current server API group list: Get \"https://127.0.0.1:37679/api?timeout=30s\": dial tcp 127.0.0.1:37679: connect: connection refused"
       # it might work if we override the api host to the host.docker.internal address.
       - name: Set up chart-testing
-        uses: helm/chart-testing-action@6ec842c01de15ebb84c8627d2744a0c2f2755c9f # v2.8.0
+        uses: helm/chart-testing-action@720270857a28afd41e2426521a7801db09e9b510 # v2.9.0
 
       - name: Run chart-testing (list-changed)
         id: list-changed
@@ -125,7 +125,7 @@ jobs:
           fi
 
       - name: Create k8s Kind Cluster
-        uses: helm/kind-action@ef37e7f390d99f746eb8b610417061a60e82a6cc # v1.14.0
+        uses: helm/kind-action@1544676c07bb3570fcb70166beaa07c4528fd4aa # v1.15.1
         if: ${{steps.list-changed.outputs.changed == 'true'}}
         with:
           cluster_name: kind-cluster-k8s-${{ matrix.k8s-version }}
