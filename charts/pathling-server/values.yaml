@@ -14,7 +14,7 @@ imagePullSecrets: []
 image:
   registry: ghcr.io
   repository: aehrc/pathling
-  tag: 3.0.0@sha256:463d11d0e757c6b838afbc6553fc726d2d46dd1eccd65bc37fd2b5da0f1f59eb
+  tag: 3.1.0@sha256:e2289c6f2e82a2693ba04df2dc1e1b1f7e182ee0f6fba0101385e56b8c7fb63f
   pullPolicy: IfNotPresent
 
 # -- number of replicas. This components can also be easily scaled horizontally if necessary.
