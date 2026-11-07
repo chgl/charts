@@ -48,7 +48,7 @@ webApi:
   image: # +doc-gen:ignore
     registry: docker.io
     repository: ohdsi/webapi
-    tag: 2.15.2@sha256:bc5cffde0d6f29bccc994876bf3cb290e8c3f4e5c087ab28c7163343c0b67393
+    tag: 3.0.0@sha256:16a7fb6446775152421831dc319cf72dda274a7af8cb4cae0bf1e0450af5a6ac
     pullPolicy: IfNotPresent
 
   waitForDatabaseInitContainer:
