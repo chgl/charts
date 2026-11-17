@@ -24,7 +24,7 @@ dependencies:
 icon: https://avatars.githubusercontent.com/u/6570077
 deprecated: false
 kubeVersion: ">= 1.21.0-0"
-version: 0.26.0
+version: 0.26.1
 annotations:
   artifacthub.io/license: Apache-2.0
   artifacthub.io/containsSecurityUpdates: "false"
@@ -44,24 +44,4 @@ annotations:
     # When using the list of objects option the valid supported kinds are
     # added, changed, deprecated, removed, fixed and security.
     - kind: changed
-      description: "BREAKING: updated the OHDSI WebAPI to v3.0.1. See the README for details."
-    - kind: changed
-      description: "BREAKING: replaced the legacy OHDSI ATLAS with ATLAS 3 (ghcr.io/ohdsi/atlas3:3.0.1). `atlas.config.local` now expects a `config-local.json`."
-    - kind: removed
-      description: "BREAKING: removed `atlas.constructWebApiUrlFromIngress`, `webApi.auth.basic.query`, `webApi.auth.openid.callbackApi`, and `webApi.auth.openid.redirectUrl`."
-    - kind: added
-      description: "Added `webApi.auth.jwt` and `webApi.auth.adminLogins` settings and `loadCohortDefinitionsJob.auth` to authenticate the cohort definition loader."
-    - kind: changed
-      description: "Replaced the default `cdmInitJob.image` `docker/whalesay` with `busybox`."
-    - kind: fixed
-      description: "Annotations of the cdm-init and load-cohortdefinitions jobs were rendered as labels."
-    - kind: changed
-      description: "BREAKING: the cdm-init and load-cohortdefinitions jobs now run as Helm hooks; cohort definitions are only loaded if their name doesn't exist yet."
-    - kind: removed
-      description: "BREAKING: removed the non-functional `webApi.metrics.serviceMonitor` and the unused `webApi.cors.enabled`."
-    - kind: fixed
-      description: "Fixed ServiceAccount names, the missing Achilles ServiceAccount, and the NOTES.txt URLs."
-    - kind: changed
-      description: "BREAKING: `achilles.enabled` defaults to `false`, `commonAnnotations` is a map, and Kubernetes 1.21+ is required."
-    - kind: added
-      description: "Added a values.schema.json and `ingress.ingressClassName`."
+      description: "Excluded the `cdmInitJob.image` from the generated README."
