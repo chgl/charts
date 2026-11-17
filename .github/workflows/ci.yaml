@@ -55,16 +55,19 @@ jobs:
       # the flags must match the ones used to generate the schemas locally:
       # helm schema -c charts/<chart> -a -m -K -k required,title
       - name: Check if values.schema.json files are up-to-date
+        env:
+          # GitHub Actions overrides HOME for container jobs, so point helm to the plugins installed in the image
+          HELM_PLUGINS: /root/.local/share/helm/plugins
         run: |
           for chart in charts/*/; do
             if test -f "${chart}values.schema.json"; then
               if ! helm schema -c "${chart}" -a -m -K -k required,title --check; then
-                echo -e "\033[0;31m${chart}values.schema.json outdated! Please run 'helm schema -c ${chart} -a -m -K -k required,title' locally and push the changes.\033[0m ❌"
+                printf "\033[0;31m%svalues.schema.json outdated! Please run 'helm schema -c %s -a -m -K -k required,title' locally and push the changes.\033[0m ❌\n" "${chart}" "${chart}"
                 exit 1
               fi
             fi
           done
-          echo -e "\033[0;32mSchemas up to date\033[0m ✔"
+          printf "\033[0;32mSchemas up to date\033[0m ✔\n"
 
       - name: Run YAML lint
         run: yamllint .
