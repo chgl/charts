@@ -15,8 +15,7 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-24.04
-    # TODO: switch to the next kube-powertools release once it includes helm-schema >= 0.24.0 (chgl/kube-powertools#718)
-    container: ghcr.io/chgl/kube-powertools:pr-718@sha256:435e7dfe53581f4c003b4b724da9b3551714e6e86e8bf09c75f4d0748b1e5aed
+    container: ghcr.io/chgl/kube-powertools:v2.6.17@sha256:3f2fd810df4ede185b10cc72a571132c4e9912b7988b4508a24287ea6cc9bba7
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1
