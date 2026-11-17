@@ -13240,6 +13240,77 @@ entries:
         # When using the list of objects option the valid supported kinds are
         # added, changed, deprecated, removed, fixed and security.
         - kind: changed
+          description: "BREAKING: updated the OHDSI WebAPI to v3.0.1. See the README for details."
+        - kind: changed
+          description: "BREAKING: replaced the legacy OHDSI ATLAS with ATLAS 3 (ghcr.io/ohdsi/atlas3:3.0.1). `atlas.config.local` now expects a `config-local.json`."
+        - kind: removed
+          description: "BREAKING: removed `atlas.constructWebApiUrlFromIngress`, `webApi.auth.basic.query`, `webApi.auth.openid.callbackApi`, and `webApi.auth.openid.redirectUrl`."
+        - kind: added
+          description: "Added `webApi.auth.jwt` and `webApi.auth.adminLogins` settings and `loadCohortDefinitionsJob.auth` to authenticate the cohort definition loader."
+        - kind: changed
+          description: "Replaced the default `cdmInitJob.image` `docker/whalesay` with `busybox`."
+        - kind: fixed
+          description: "Annotations of the cdm-init and load-cohortdefinitions jobs were rendered as labels."
+        - kind: changed
+          description: "BREAKING: the cdm-init and load-cohortdefinitions jobs now run as Helm hooks; cohort definitions are only loaded if their name doesn't exist yet."
+        - kind: removed
+          description: "BREAKING: removed the non-functional `webApi.metrics.serviceMonitor` and the unused `webApi.cors.enabled`."
+        - kind: fixed
+          description: "Fixed ServiceAccount names, the missing Achilles ServiceAccount, and the NOTES.txt URLs."
+        - kind: changed
+          description: "BREAKING: `achilles.enabled` defaults to `false`, `commonAnnotations` is a map, and Kubernetes 1.21+ is required."
+        - kind: added
+          description: "Added a values.schema.json and `ingress.ingressClassName`."
+      artifacthub.io/containsSecurityUpdates: "false"
+      artifacthub.io/license: Apache-2.0
+      artifacthub.io/links: |
+        - name: OHDSI Homepage
+          url: https://www.ohdsi.org/
+      artifacthub.io/operator: "false"
+      artifacthub.io/prerelease: "false"
+      artifacthub.io/recommendations: |
+        - url: https://artifacthub.io/packages/helm/cloudpirates-postgres/postgres
+      artifacthub.io/screenshots: |
+        - title: Defining a cohort in OHDSI ATLAS
+          url: https://ohdsi.github.io/TheBookOfOhdsi/images/OhdsiAnalyticsTools/atlas.png
+        - title: OHDSI ACHILLES Dashboard
+          url: https://www.ohdsi.org/wp-content/uploads/2020/06/Screen-Shot-2020-06-01-at-3.31.29-PM.png
+    apiVersion: v2
+    created: "2026-11-17T22:36:52.891002862Z"
+    dependencies:
+    - condition: postgres.enabled
+      name: postgres
+      repository: oci://registry-1.docker.io/cloudpirates
+      version: 0.22.0
+    - name: common
+      repository: oci://ghcr.io/chgl/charts
+      version: 0.1.1
+    description: A Helm chart for deploying the OHDSI stack consisting of Atlas, WebAPI,
+      and Achilles as a cron job.
+    digest: d05846436bf153db6fc11a635f9d6020b6e5abe5735170a15270b0ad98396de5
+    home: https://github.com/OHDSI
+    icon: https://avatars.githubusercontent.com/u/6570077
+    keywords:
+    - ohdsi
+    - health care
+    - research
+    kubeVersion: '>= 1.21.0-0'
+    maintainers:
+    - name: chgl
+    name: ohdsi
+    sources:
+    - https://github.com/OHDSI/Atlas3
+    - https://github.com/OHDSI/WebAPI
+    - https://github.com/OHDSI/Broadsea-Achilles
+    type: application
+    urls:
+    - https://github.com/chgl/charts/releases/download/ohdsi-0.26.0/ohdsi-0.26.0.tgz
+    version: 0.26.0
+  - annotations:
+      artifacthub.io/changes: |-
+        # When using the list of objects option the valid supported kinds are
+        # added, changed, deprecated, removed, fixed and security.
+        - kind: changed
           description: "Updated docker.io/library/postgres to sha256:2ea8630df176ad090ec92136dee850397c5af8781e4bcf2e4162593691c61bbc"
       artifacthub.io/containsSecurityUpdates: "false"
       artifacthub.io/license: Apache-2.0
@@ -29524,4 +29595,4 @@ entries:
     urls:
     - https://github.com/chgl/charts/releases/download/vfps-0.4.2/vfps-0.4.2.tgz
     version: 0.4.2
-generated: "2026-11-15T13:34:40.311173403Z"
+generated: "2026-11-17T22:36:52.892008554Z"
