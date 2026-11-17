@@ -1,6 +1,6 @@
 {{- with .Values.achilles }}
 {{- if .enabled }}
-apiVersion: {{ include "ohdsi.cronJob.apiVersion" $ }}
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: {{ include "ohdsi.fullname" $ }}-achilles-cron
@@ -59,14 +59,14 @@ spec:
                   name: r-tempdir-volume
               env:
                 - name: ACHILLES_DB_URI
-                  value: {{ include "ohdsi.achilles.dbUrl" $ }}
+                  value: {{ include "ohdsi.achilles.dbUrl" $ | quote }}
                 - name: ACHILLES_DB_USERNAME
-                  value: {{ include "ohdsi.database.user" $ }}
+                  value: {{ include "ohdsi.database.user" $ | quote }}
                 - name: ACHILLES_DB_PASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                      key: {{ include "ohdsi.webapi.db-secret-key" $ }}
+                      name: {{ include "ohdsi.webapi.db-secret-name" $ | quote }}
+                      key: {{ include "ohdsi.webapi.db-secret-key" $ | quote }}
                 - name: ACHILLES_CDM_SCHEMA
                   value: {{ .schemas.cdm | quote }}
                 - name: ACHILLES_VOCAB_SCHEMA

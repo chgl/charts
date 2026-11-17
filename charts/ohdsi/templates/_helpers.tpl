@@ -63,12 +63,12 @@ Get the name of the secret containing the DB password
 {{- define "ohdsi.webapi.db-secret-name" -}}
 {{- if .Values.postgres.enabled -}}
     {{- if .Values.postgres.auth.existingSecret -}}
-        {{ .Values.postgres.auth.existingSecret | quote }}
+        {{ .Values.postgres.auth.existingSecret }}
     {{- else -}}
         {{ ( include "ohdsi.postgresql.fullname" . ) }}
     {{- end -}}
 {{- else if .Values.webApi.db.existingSecret -}}
-    {{ .Values.webApi.db.existingSecret | quote }}
+    {{ .Values.webApi.db.existingSecret }}
 {{- else -}}
     {{- $fullname := ( include "ohdsi.fullname" . ) -}}
     {{ printf "%s-%s" $fullname "webapi-db-secret" }}
@@ -86,7 +86,7 @@ Get the key inside the secret containing the DB user's password
         {{ "postgres-password" }}
     {{- end -}}
 {{- else if .Values.webApi.db.existingSecret -}}
-    {{ .Values.webApi.db.existingSecretKey | quote }}
+    {{ .Values.webApi.db.existingSecretKey }}
 {{- else -}}
     {{ "postgres-password" }}
 {{- end -}}
@@ -105,12 +105,12 @@ Add environment variables to configure database values
 {{- define "ohdsi.database.user" -}}
 {{- if .Values.postgres.enabled -}}
     {{- if .Values.postgres.auth.username -}}
-        {{ .Values.postgres.auth.username | quote }}
+        {{ .Values.postgres.auth.username }}
     {{- else -}}
         {{ "postgres" }}
     {{- end -}}
 {{- else -}}
-    {{ .Values.webApi.db.username}}
+    {{ .Values.webApi.db.username }}
 {{- end -}}
 {{- end -}}
 
@@ -163,40 +163,12 @@ Create the Achilles DB URL from the host, port and database name.
 {{- end -}}
 
 {{/*
-Return the appropriate apiVersion for Ingress
-*/}}
-{{- define "ohdsi.ingress.apiVersion" -}}
-{{- if semverCompare "<1.14-0" .Capabilities.KubeVersion.Version -}}
-{{- print "extensions/v1beta1" -}}
-{{- else if semverCompare "<1.19-0" .Capabilities.KubeVersion.Version -}}
-{{- print "networking.k8s.io/v1beta1" -}}
-{{- else -}}
-{{- print "networking.k8s.io/v1" -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
-Return the appropriate apiVersion for CronJob
-*/}}
-{{- define "ohdsi.cronJob.apiVersion" -}}
-{{- if semverCompare ">=1.21-0" .Capabilities.KubeVersion.Version -}}
-{{- print "batch/v1" -}}
-{{- else -}}
-{{- print "batch/v1beta1" -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
 Return the URL to access the WebAPI service at. This is the cluster-internal service URL,
 not the one used by ATLAS which needs to be accessible from the user's browser.
 */}}
 {{- define "ohdsi.webApi.url" -}}
-{{- if .Values.atlas.webApiUrl }}
-    {{ .Values.atlas.webApiUrl }}
-{{- else }}
-    {{- $webApiServiceName := printf "%s-webapi" (include "ohdsi.fullname" .) -}}
-    {{ printf "http://%s:%d/WebAPI" $webApiServiceName (int .Values.webApi.service.port) }}
-{{- end }}
+{{- $webApiServiceName := printf "%s-webapi" (include "ohdsi.fullname" .) -}}
+{{- printf "http://%s:%d/WebAPI" $webApiServiceName (int .Values.webApi.service.port) }}
 {{- end -}}
 
 {{/*
@@ -226,7 +198,7 @@ Create the name of the atlas service account to use
 {{- end -}}
 
 {{/*
-Create the name of the atlas service account to use
+Create the name of the achilles service account to use
 */}}
 {{- define "ohdsi.achilles.serviceAccountName" -}}
 {{- if .Values.achilles.serviceAccount.create -}}

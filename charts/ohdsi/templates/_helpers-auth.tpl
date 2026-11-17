@@ -15,6 +15,32 @@
 {{- end -}}
 {{- end }}
 
+{{- define "ohdsi.auth.jwt.secretName" -}}
+{{- if .Values.webApi.auth.jwt.existingSecret -}}
+    {{ .Values.webApi.auth.jwt.existingSecret }}
+{{- else -}}
+    {{- $fullname := ( include "ohdsi.fullname" . ) -}}
+    {{ printf "%s-%s" $fullname "webapi-auth" }}
+{{- end -}}
+{{- end }}
+
+{{- define "ohdsi.auth.jwt.secretKey" -}}
+{{- if .Values.webApi.auth.jwt.existingSecret -}}
+    {{ .Values.webApi.auth.jwt.existingSecretKey }}
+{{- else -}}
+    {{ printf "%s" "webapi-jwt-secret" }}
+{{- end -}}
+{{- end }}
+
+{{/*
+Whether any WebAPI authentication provider is enabled
+*/}}
+{{- define "ohdsi.auth.enabled" -}}
+{{- if (or .Values.webApi.auth.openid.enabled .Values.webApi.auth.basic.enabled) -}}
+true
+{{- end -}}
+{{- end }}
+
 {{- define "ohdsi.ingress.protocol" -}}
     {{- if .Values.ingress.tls -}}
     {{ "https" }}
@@ -24,51 +50,23 @@
 {{- end -}}
 
 {{/*
-SECURITY_OAUTH_CALLBACK_API
+The origin (scheme://host) of the first ingress host
 */}}
-{{- define "ohdsi.oauth.callback.api" -}}
-{{- if .Values.webApi.auth.openid.callbackApi -}}
-    {{ .Values.webApi.auth.openid.callbackApi }}
-{{- else -}}
+{{- define "ohdsi.ingress.origin" -}}
     {{- $protocol := include "ohdsi.ingress.protocol" . }}
     {{- $host := (index .Values.ingress.hosts 0).host }}
-    {{- printf "%s://%s/%s" $protocol $host "WebAPI/user/oauth/callback" }}
+    {{- printf "%s://%s" $protocol $host }}
 {{- end -}}
-{{- end }}
 
 {{/*
-SECURITY_OAUTH_CALLBACK_UI
+SECURITY_AUTH_OAUTH_CALLBACK_UI
 */}}
 {{- define "ohdsi.oauth.callback.ui" -}}
 {{- if .Values.webApi.auth.openid.callbackUI -}}
     {{ .Values.webApi.auth.openid.callbackUI }}
+{{- else if not .Values.ingress.enabled -}}
+    {{- fail "webApi.auth.openid.callbackUI must be set if webApi.auth.openid.enabled=true and ingress.enabled=false" -}}
 {{- else -}}
-    {{- $protocol := include "ohdsi.ingress.protocol" . }}
-    {{- $host := (index .Values.ingress.hosts 0).host }}
-    {{- printf "%s://%s/%s" $protocol $host "atlas/index.html#/welcome/" }}
-{{- end -}}
-{{- end }}
-
-{{/*
-SECURITY_OID_LOGOUTURL
-*/}}
-{{- define "ohdsi.oid.logoutUrl" -}}
-{{- if .Values.webApi.auth.openid.logoutUrl -}}
-    {{ .Values.webApi.auth.openid.logoutUrl }}
-{{- else -}}
-    {{- printf "%s" (include "ohdsi.oauth.callback.ui" .) }}
-{{- end -}}
-{{- end }}
-
-{{/*
-SECURITY_OID_REDIRECTURL
-*/}}
-{{- define "ohdsi.oid.redirectUrl" -}}
-{{- if .Values.webApi.auth.openid.redirectUrl -}}
-    {{ .Values.webApi.auth.openid.redirectUrl }}
-{{- else -}}
-    {{- $protocol := include "ohdsi.ingress.protocol" . }}
-    {{- $host := (index .Values.ingress.hosts 0).host }}
-    {{- printf "%s://%s/%s" $protocol $host "atlas/index.html#/welcome/null" }}
+    {{- printf "%s/%s" (include "ohdsi.ingress.origin" .) "atlas/#/oauth/callback" }}
 {{- end -}}
 {{- end }}

@@ -7,12 +7,17 @@ metadata:
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
     app.kubernetes.io/component: cdm-init
-  {{- with .annotations }}
+  annotations:
+    # run as a hook so the job is re-created instead of failing to patch the immutable Job spec
+    helm.sh/hook: {{ ternary "post-install,post-upgrade" "post-install" .runOnUpgrade }}
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: before-hook-creation
+    {{- with .annotations }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with $.Values.commonAnnotations }}
+    {{- end }}
+    {{- with $.Values.commonAnnotations }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- end }}
 spec:
   backoffLimit: {{ .backoffLimit }}
   {{- with .ttlSecondsAfterFinished }}
@@ -29,6 +34,7 @@ spec:
         app.kubernetes.io/component: cdm-init
     spec:
       restartPolicy: {{ .restartPolicy }}
+      automountServiceAccountToken: false
       {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -54,18 +60,18 @@ spec:
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ | quote }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ | quote }}
             - name: PGUSER
-              value: {{ include "ohdsi.database.user" $ }}
+              value: {{ include "ohdsi.database.user" $ | quote }}
             - name: PGHOST
-              value: {{ include "ohdsi.database.host" $ }}
+              value: {{ include "ohdsi.database.host" $ | quote }}
             - name: PGPORT
               value: {{ include "ohdsi.database.port" $ | quote }}
             - name: PGDATABASE
-              value: {{ include "ohdsi.database.name" $ }}
+              value: {{ include "ohdsi.database.name" $ | quote }}
             - name: WEBAPI_URL
-              value: {{ include "ohdsi.webApi.url" $ }}
+              value: {{ include "ohdsi.webApi.url" $ | quote }}
             {{- if .extraEnv }}
             {{- toYaml .extraEnv | nindent 12 }}
             {{- end }}

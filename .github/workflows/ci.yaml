@@ -15,7 +15,7 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:v2.6.13@sha256:5e6cab6409850248d60d3686f02bf903f5f25aa8aa72058031aa5427d7f1c5cf
+    container: ghcr.io/chgl/kube-powertools:v2.6.17@sha256:3f2fd810df4ede185b10cc72a571132c4e9912b7988b4508a24287ea6cc9bba7
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1
@@ -51,6 +51,23 @@ jobs:
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+
+      # the flags must match the ones used to generate the schemas locally:
+      # helm schema -c charts/<chart> -a -m -K -k required,title
+      - name: Check if values.schema.json files are up-to-date
+        env:
+          # GitHub Actions overrides HOME for container jobs, so point helm to the plugins installed in the image
+          HELM_PLUGINS: /root/.local/share/helm/plugins
+        run: |
+          for chart in charts/*/; do
+            if test -f "${chart}values.schema.json"; then
+              if ! helm schema -c "${chart}" -a -m -K -k required,title --check; then
+                printf "\033[0;31m%svalues.schema.json outdated! Please run 'helm schema -c %s -a -m -K -k required,title' locally and push the changes.\033[0m ❌\n" "${chart}" "${chart}"
+                exit 1
+              fi
+            fi
+          done
+          printf "\033[0;32mSchemas up to date\033[0m ✔\n"
 
       - name: Run YAML lint
         run: yamllint .

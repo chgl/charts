@@ -1,36 +1,25 @@
 postgres:
   auth:
     postgresPassword: "ohdsi-pg-pw"
-  # not yet supported in the chart
-  # primary:
-  #   initdb:
-  #     scripts:
-  #       00-init-db-for-basic-security.sh: |
-  #         #!/bin/bash
-  #         set -e
-  #         export PGPASSWORD=${POSTGRES_PASSWORD}
-  #         export PGDATABASE=${POSTGRES_DATABASE}
-  #         psql -v ON_ERROR_STOP=1 <<-EOSQL
-  #             CREATE SCHEMA IF NOT EXISTS ohdsi;
-
-  #             CREATE TABLE IF NOT EXISTS ohdsi.basic_security_users
-  #             (
-  #                 username    character varying(255),
-  #                 password    character varying(255),
-  #                 first_name  character varying(255),
-  #                 middle_name character varying(255),
-  #                 last_name   character varying(255),
-  #                 email       character varying(255)
-  #             );
-
-  #             -- note that we escaped the dollar signs to prevent '\$2: unbound variable' errors
-  #             -- bcrypt 'pass123' = '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy'
-  #             INSERT INTO ohdsi.basic_security_users (username, password, email)
-  #             VALUES ('test', '\$2a\$10\$7RGwXpZ9mEb8uVPs/scj3OykBTsdtb8QyTE7Os6m8Ty7n56et.1Oy', 'test@example.com')
-  #         EOSQL
-  #   extraEnvVars:
-  #     - name: OHDSI_ADMIN_PASSWORD
-  #       value: admin1
+  initdb:
+    scripts:
+      00-init-db-auth-users.sql: |
+        -- the WebAPI database authentication users are kept in a separate schema
+        -- so the WebAPI's Flyway migrations still run against an empty `ohdsi` schema
+        CREATE SCHEMA IF NOT EXISTS webapi_security;
+        CREATE TABLE IF NOT EXISTS webapi_security.auth_user (
+          login           VARCHAR(100) PRIMARY KEY,
+          password_hash   VARCHAR(255) NOT NULL,
+          first_name      VARCHAR(100) NULL,
+          middle_name     VARCHAR(100) NULL,
+          last_name       VARCHAR(100) NULL,
+          enabled         BOOLEAN      NOT NULL DEFAULT TRUE,
+          failed_attempts INT          NOT NULL DEFAULT 0,
+          locked_until    TIMESTAMP    NULL
+        );
+        INSERT INTO webapi_security.auth_user (login, password_hash, first_name, last_name)
+        VALUES ('ci-admin', '{noop}ci-admin', 'CI', 'Admin')
+        ON CONFLICT DO NOTHING;
 
 cdmInitJob:
   enabled: true
@@ -43,8 +32,11 @@ webApi:
   auth:
     basic:
       enabled: true
+      schema: webapi_security
+    adminLogins: "ci-admin"
     openid:
-      enabled: true
+      # WebAPI v3 resolves the OIDC issuer at startup, so this can only be enabled with a reachable provider
+      enabled: false
       clientId: "ohdsi"
       clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa" # betterleaks:allow
       oidUrl: "https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration"
@@ -59,11 +51,14 @@ webApi:
         matchLabels:
           app.kubernetes.io/component: webapi
 
+achilles:
+  # only rendered, the CronJob won't run during the test
+  enabled: true
+
 ingress:
   enabled: true
 
 atlas:
-  constructWebApiUrlFromIngress: false
   replicaCount: 2
   podDisruptionBudget:
     enabled: true
@@ -76,46 +71,19 @@ atlas:
           app.kubernetes.io/component: atlas
   config:
     local: |
-      define([], function () {
-        var configLocal = {};
-
-        // clearing local storage otherwise source cache will obscure the override settings
-        localStorage.clear();
-
-        var getUrl = window.location;
-        var baseUrl = getUrl.protocol + "//" + getUrl.host;
-
-        // WebAPI
-        configLocal.api = {
-          name: "OHDSI",
-          url: baseUrl + "/WebAPI/",
-        };
-
-        configLocal.cohortComparisonResultsEnabled = false;
-        configLocal.userAuthenticationEnabled = true;
-        configLocal.plpResultsEnabled = false;
-
-        configLocal.authProviders = [
-          {
-            name: "Basic Security Login",
-            url: "user/login/db",
-            ajax: true,
-            icon: "fa fa-database",
-            isUseCredentialsForm: true
-          },
-          {
-            name: "OpenID Connect",
-            url: "user/login/openid",
-            ajax: false,
-            icon: "fa fa-openid",
-          },
-        ];
-
-        return configLocal;
-      });
+      {
+        "api": { "url": "/WebAPI" },
+        "userAuthenticationEnabled": true,
+        "enableSkipLogin": true,
+        "enablePermissionManagement": true
+      }
 
 loadCohortDefinitionsJob:
   enabled: true
+  auth:
+    db:
+      login: "ci-admin"
+      password: "ci-admin"
   cohortDefinitions:
     - |
       {
