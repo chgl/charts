@@ -106,7 +106,16 @@ jobs:
       - lint
     strategy:
       matrix:
-        k8s-version: [1.31.9, 1.32.5, 1.33.2]
+        # the three latest Kubernetes minor versions supported by kind, kept up-to-date by Renovate.
+        # The oldest and middle versions only receive patch updates. A minor update of the newest version
+        # rotates the list via .github/renovate-post-upgrade.sh, dropping the oldest minor version.
+        k8s-version:
+          # renovate: k8s-version=k8s-oldest
+          - 1.35.8
+          # renovate: k8s-version=k8s-middle
+          - 1.36.4
+          # renovate: k8s-version=k8s-newest
+          - 1.37.0
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1

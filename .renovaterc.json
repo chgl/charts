@@ -9,7 +9,7 @@
   "postUpgradeTasks": {
     "executionMode": "branch",
     "commands": [
-      ".github/renovate-post-upgrade.sh \"{{depName}}\" {{newVersion}} {{newDigest}}"
+      ".github/renovate-post-upgrade.sh \"{{depName}}\" \"{{newVersion}}\" \"{{newDigest}}\" \"{{depType}}\" \"{{currentVersion}}\""
     ]
   },
   "customManagers": [
@@ -36,6 +36,18 @@
       ],
       "datasourceTemplate": "docker",
       "versioningTemplate": "docker"
+    },
+    {
+      "customType": "regex",
+      "description": "Keep the Kubernetes versions of the kind cluster test matrix up-to-date",
+      "managerFilePatterns": ["/^\\.github/workflows/ci\\.yaml$/"],
+      "matchStrings": [
+        "#\\s*renovate:\\s*k8s-version=(?<depType>k8s-(?:oldest|middle|newest))\\s*\\n\\s*-\\s*(?<currentValue>\\d+\\.\\d+\\.\\d+)"
+      ],
+      "depNameTemplate": "kindest/node",
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "semver",
+      "extractVersionTemplate": "^v(?<version>\\d+\\.\\d+\\.\\d+)$"
     }
   ],
   "packageRules": [
@@ -62,6 +74,30 @@
     {
       "matchPackageNames": ["/docker\\.io\\/ohdsi\\/.*/"],
       "groupName": "ohdsi"
+    },
+    {
+      "description": "kind test matrix: no digests, separate patch updates, and one branch per matrix entry so the rotation in renovate-post-upgrade.sh sees the newest version's update on its own",
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["kindest/node"],
+      "pinDigests": false,
+      "separateMinorPatch": true,
+      "additionalBranchPrefix": "{{depType}}-",
+      "commitMessageTopic": "kind test matrix {{depType}} Kubernetes version"
+    },
+    {
+      "description": "kind test matrix: only patch updates for the older Kubernetes versions, the newest one rotates the list on a minor update",
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["kindest/node"],
+      "matchDepTypes": ["k8s-oldest", "k8s-middle"],
+      "matchUpdateTypes": ["major", "minor"],
+      "enabled": false
+    },
+    {
+      "description": "kind test matrix: never jump to a new major version",
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["kindest/node"],
+      "matchUpdateTypes": ["major"],
+      "enabled": false
     }
   ]
 }
