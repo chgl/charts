@@ -494,6 +494,7 @@ cdmInitJob:
   # Only enable this if the container is idempotent.
   runOnUpgrade: false
   # -- the container image used to create the CDM initialization job
+  # @ignored
   image:
     registry: docker.io
     repository: library/busybox
