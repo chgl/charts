@@ -8,7 +8,12 @@ metadata:
     app.kubernetes.io/component: load-cohortdefinitions
 data:
   {{- range $i, $val := .Values.loadCohortDefinitionsJob.cohortDefinitions }}
+  {{- $name := (fromJson $val).name }}
+  {{- if not $name }}
+  {{- fail (printf "loadCohortDefinitionsJob.cohortDefinitions[%d] must be valid JSON containing a 'name'" $i) }}
+  {{- end }}
   cohort-{{ $i }}.json: |
-{{ $val | indent 4}}
-  {{ end -}}
+    {{- $val | nindent 4 }}
+  cohort-{{ $i }}.name: {{ $name | quote }}
+  {{- end }}
 {{- end }}

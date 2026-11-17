@@ -1,4 +1,4 @@
-{{- if .Values.atlas.config.local }}
+{{- if .Values.atlas.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,6 +7,38 @@ metadata:
     {{- include "ohdsi.labels" . | nindent 4 }}
     app.kubernetes.io/component: atlas
 data:
-  config-local.js: |
-{{ .Values.atlas.config.local | indent 4 }}
+  config-local.json: |
+    {{- if .Values.atlas.config.local }}
+    {{- .Values.atlas.config.local | nindent 4 }}
+    {{- else }}
+    {{- $config := dict
+      "api" (dict "url" (.Values.atlas.webApiUrl | default "/WebAPI"))
+      "userAuthenticationEnabled" (eq (include "ohdsi.auth.enabled" .) "true")
+    }}
+    {{- $config | toPrettyJson | nindent 4 }}
+    {{- end }}
+  Caddyfile: |
+    {
+      admin off
+      auto_https off
+      persist_config off
+    }
+
+    :8080 {
+      redir / /atlas/ permanent
+      redir /atlas /atlas/ permanent
+
+      {{- if .Values.webApi.enabled }}
+
+      handle /WebAPI/* {
+        reverse_proxy {{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}
+      }
+      {{- end }}
+
+      handle_path /atlas/* {
+        root * /srv/atlas
+        try_files {path} /index.html
+        file_server
+      }
+    }
 {{- end }}

@@ -1,14 +1,61 @@
-# {{ .Project.ShortName }}
+{{ template "chart.header" . }}
 
-[{{ .Project.Name }}]({{ .Project.URL }}) - {{ .Project.Description }}
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}
+
+[OHDSI](https://github.com/OHDSI) - Helm chart for deploying OHDSI ATLAS and WebAPI.
 
 ## TL;DR
 
 ```sh
-helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} --create-namespace -n {{ .Release.Namespace }}
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi --create-namespace -n ohdsi
 ```
 
 ## Breaking Changes
+
+### 0.26
+
+Updates the OHDSI WebAPI to v3 and replaces the legacy ATLAS with [ATLAS 3](https://github.com/OHDSI/Atlas3).
+ATLAS 3 requires WebAPI v3, which is a major rewrite (Spring Boot 3, Spring Security, Java 21).
+Existing WebAPI 2.x databases are migrated automatically by Flyway on first start, but make sure to back up the database first.
+
+- `atlas.config.local` now has to contain the contents of a JSON `config-local.json` file instead of the `config-local.js`
+  JavaScript module. If unset, a minimal config is generated. Auth providers no longer need to be listed in the
+  ATLAS config as ATLAS 3 discovers them from the WebAPI's `/auth/providers` endpoint.
+- `atlas.constructWebApiUrlFromIngress` was removed. ATLAS now uses the relative `/WebAPI` path by default, which is served
+  by the ingress or proxied to the WebAPI service by the ATLAS container itself. Use `atlas.webApiUrl` to override it.
+- The ATLAS container now listens on port 8080 using Caddy instead of nginx and runs with a read-only root filesystem.
+- `webApi.auth.basic.query` was removed. WebAPI v3's database authentication requires a table called `auth_user`
+  with a fixed set of columns inside `webApi.auth.basic.schema`.
+  See <https://github.com/OHDSI/WebAPI/blob/master/articles/DatabaseAuth_HOWTO.md> for details.
+- `webApi.auth.openid.callbackApi` and `webApi.auth.openid.redirectUrl` were removed. The default `webApi.auth.openid.callbackUI`
+  changed to `<ingress>/atlas/#/oauth/callback`.
+  Note that WebAPI v3 fails to start if the OIDC provider at `webApi.auth.openid.oidUrl` is not reachable.
+- `webApi.cors.allowedOrigin` now sets `security.cors.allowed-origins`, which WebAPI v3 always enforces, even if `webApi.cors.enabled=false`.
+  If unset, it now defaults to the ingress origin (`<scheme>://<ingress.hosts[0].host>`) whenever the ingress is enabled.
+  When accessing ATLAS through any other origin, e.g. a `kubectl port-forward`, add that origin, otherwise logins fail with
+  `403 Forbidden`. See [Accessing ATLAS via port-forward](#accessing-atlas-via-port-forward).
+- The WebAPI now signs JWTs using a secret from `webApi.auth.jwt`. If unset, a random secret is generated.
+- WebAPI v3 no longer allows anonymous users to create cohort definitions. Configure `loadCohortDefinitionsJob.auth`
+  to let the job authenticate with an API key or a database authentication user.
+- `webApi.cors.enabled` was removed as WebAPI v3 no longer reads it.
+- `webApi.metrics.serviceMonitor` was removed. It never produced metrics and WebAPI v3 doesn't include a Prometheus registry.
+- The WebAPI now runs as UID/GID `101`, matching its container image, instead of `65534`.
+- `cdmInitJob` and `loadCohortDefinitionsJob` now run as Helm hooks (`post-install` and, for the cohort definitions, `post-upgrade`)
+  instead of plain Jobs. The cohort definition loader skips definitions whose name already exists.
+  Set `cdmInitJob.runOnUpgrade=true` to also run the CDM init job on upgrades.
+- `cdmInitJob` now runs as a non-root user with a read-only root filesystem by default. Override
+  `cdmInitJob.podSecurityContext` and `cdmInitJob.securityContext` if your image requires otherwise.
+  The default `cdmInitJob.image` changed from `docker/whalesay` to `busybox`.
+- `achilles.enabled` now defaults to `false`, since the default schemas don't exist in a fresh installation.
+- The jobs and init containers now always use the cluster-internal WebAPI service URL instead of `atlas.webApiUrl`.
+- ServiceAccounts are now named according to `*.serviceAccount.name` and the Achilles ServiceAccount is actually created.
+- `commonAnnotations` is now a map instead of a list.
+- `webApi.auth.openid.callbackUI` is required if OpenID Connect is enabled without an ingress.
+- Requires Kubernetes 1.21+. The fallbacks for older Ingress and CronJob API versions were removed.
+- The chart now ships a `values.schema.json`, so unknown or removed keys (e.g. `atlas.constructWebApiUrlFromIngress`)
+  are rejected instead of being silently ignored.
 
 ### 0.25
 
@@ -69,58 +116,60 @@ mapping to the WebAPI and Atlas service respectively. Set `ingress.enabled=true`
 
 ## Introduction
 
-This chart deploys {{ .Project.App }} on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
+This chart deploys the OHDSI WebAPI and ATLAS app on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 ## Prerequisites
-{{ range .Prerequisites }}
-- {{ . }}
-{{- end }}
+
+- Kubernetes v1.21+
+- Helm v3
 
 ## Installing the Chart
 
-To install the chart with the release name `{{ .Release.Name }}`:
+To install the chart with the release name `ohdsi`:
 
 ```sh
-helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }}
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi -n ohdsi
 ```
 
-The command deploys {{ .Project.App }} on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
+The command deploys the OHDSI WebAPI and ATLAS app on the Kubernetes cluster in the default configuration. The [configuration](#configuration) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `{{ .Release.Name }}`:
+To uninstall/delete the `ohdsi`:
 
 ```sh
-helm delete {{ .Release.Name }} -n {{ .Release.Namespace }}
+helm delete ohdsi -n ohdsi
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
 
 ## Configuration
 
-The following table lists the configurable parameters of the `{{ .Chart.Name }}` chart and their default values.
+The following table lists the configurable parameters of the `ohdsi` chart and their default values.
 
-{{ .Chart.Values }}
+{{ template "chart.valuesTable" . }}
 
 Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example:
 
 ```sh
-helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }} --set {{ .Chart.ValuesExample }}
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi -n ohdsi --set atlas.replicaCount=2
 ```
 
 Alternatively, a YAML file that specifies the values for the parameters can be provided while
 installing the chart. For example:
 
 ```sh
-helm install {{ .Release.Name }} {{ .Repository.Name }}/{{ .Chart.Name }} -n {{ .Release.Namespace }} --values values.yaml
+helm install ohdsi oci://ghcr.io/chgl/charts/ohdsi -n ohdsi --values values.yaml
 ```
 
 ## Initialize the CDM using a custom container
 
 The `cdmInitJob` configuration parameter can be used to configure a custom container that is run as a Kubernetes Job
-when the chart is installed. See [templates/cdm-init-job.yaml](templates/cdm-init-job.yaml) for a list of default environment
+when the chart is installed (a `post-install` Helm hook). Set `cdmInitJob.runOnUpgrade=true` to also run it on every upgrade,
+which requires the container to be idempotent. The job runs as a non-root user with a read-only root filesystem by default,
+see `cdmInitJob.podSecurityContext` and `cdmInitJob.securityContext`. See [templates/cdm-init-job.yaml](templates/cdm-init-job.yaml) for a list of default environment
 variables passed to the container.
 
 As an example, here's one such container's `entrypoint.sh` and the associated Dockerfile below:
@@ -251,56 +300,50 @@ ENTRYPOINT [ "/bin/bash" ]
 CMD [ "/entrypoint.sh" ]
 ```
 
-## Override config-local.js for Atlas
+## Accessing ATLAS via port-forward
 
-To use a custom config-local.js file to configure Atlas, you can use the `atlas.config.local` key:
+The ATLAS container proxies `/WebAPI` to the WebAPI service, so a port-forward to the ATLAS service is sufficient to use it:
+
+```sh
+kubectl port-forward -n ohdsi svc/ohdsi-atlas 8080:8080
+```
+
+and open <http://localhost:8080/atlas/>.
+
+The WebAPI v3 rejects state-changing requests like logins with `403 Forbidden` if their `Origin` isn't allowed.
+If authentication is enabled, add the port-forward's origin to the allowed origins. Include the ingress origin as well
+if you use one, since setting `webApi.cors.allowedOrigin` replaces the default derived from the ingress:
+
+```yaml
+webApi:
+  cors:
+    allowedOrigin: "https://ohdsi.example.com,http://localhost:8080"
+```
+
+## Override config-local.json for Atlas
+
+To use a custom `config-local.json` file to configure ATLAS, you can use the `atlas.config.local` key.
+See <https://github.com/OHDSI/Atlas3/blob/develop/public/config-local.example.json> for all available settings:
 
 ```yaml
 atlas:
-  # makes sure the WEBAPI_URL env var isn't automatically set to ingress.host
-  # this is needed when setting config.local
-  constructWebApiUrlFromIngress: false
   config:
     local: |
-      define([], function () {
-        var configLocal = {};
-
-        // clearing local storage otherwise source cache will obscure the override settings
-        localStorage.clear();
-
-        var getUrl = window.location;
-        var baseUrl = getUrl.protocol + "//" + getUrl.host;
-
-        // WebAPI
-        configLocal.api = {
-          name: "OHDSI",
-          url: baseUrl + "/WebAPI/",
-        };
-
-        configLocal.cohortComparisonResultsEnabled = false;
-        configLocal.userAuthenticationEnabled = true;
-        configLocal.plpResultsEnabled = false;
-
-        configLocal.authProviders = [
-          {
-            name: "OpenID",
-            url: "user/login/openid",
-            ajax: false,
-            icon: "fa fa-openid",
-          },
-        ];
-
-        return configLocal;
-      });
+      {
+        "api": { "url": "/WebAPI" },
+        "userAuthenticationEnabled": true,
+        "enableSkipLogin": false,
+        "enablePermissionManagement": true
+      }
 ```
 
 ## Securing Atlas using OpenID Connect
 
-You can secure the access to the WebAPI and consequently limit what Atlas users can and cannot do.
+You can secure the access to the WebAPI and consequently limit what ATLAS users can and cannot do.
+ATLAS automatically shows the auth providers enabled in the WebAPI and `userAuthenticationEnabled` is set in the generated
+`config-local.json` if any of the `webApi.auth` providers is enabled.
 
-See <https://github.com/OHDSI/WebAPI/wiki/Security-Configuration> and <https://github.com/OHDSI/WebAPI/wiki/Atlas-Security> for details.
-
-As an example, here's a values.yaml file that enables OpenID Connect authentication (tested using Keycloak):
+As an example, here's a values.yaml file that enables OpenID Connect authentication:
 
 ```yaml
 ingress:
@@ -311,62 +354,20 @@ ingress:
     - secretName: omop.example.com-tls
       hosts:
         - omop.example.com
-atlas:
-  # makes sure the WEBAPI_URL env var isn't automatically set to ingress.host
-  # this needed is when specifying config.local
-  constructWebApiUrlFromIngress: false
-  config:
-    local: |
-      define([], function () {
-        var configLocal = {};
-
-        // clearing local storage otherwise source cache will obscure the override settings
-        localStorage.clear();
-
-        var getUrl = window.location;
-        var baseUrl = getUrl.protocol + "//" + getUrl.host;
-
-        // WebAPI
-        configLocal.api = {
-          name: "OHDSI",
-          url: baseUrl + "/WebAPI/",
-        };
-
-        configLocal.cohortComparisonResultsEnabled = false;
-        configLocal.userAuthenticationEnabled = true;
-        configLocal.plpResultsEnabled = false;
-
-        configLocal.authProviders = [
-          {
-            name: "OpenID Connect",
-            url: "user/login/openid",
-            ajax: false,
-            icon: "fa fa-openid",
-          },
-        ];
-
-        return configLocal;
-      });
 webApi:
   auth:
+    # comma-separated logins to grant the built-in admin role at authentication
+    adminLogins: "alice"
     openid:
       enabled: true
       clientId: "ohdsi"
       clientSecret: "a5f55a03-ca7d-4a52-a352-498defb2f6fa" # betterleaks:allow
-      # Required. Points to the openid-configuration endpoint of the provider,
-      oidUrl: "https://auth.example.com/auth/realms/OHDSI/.well-known/openid-configuration"
-      # URL including the OHDSI WebAPI oauth callback, e.g. `https://example.com/WebAPI/user/oauth/callback`.
-      # If unset, a URL is constructed from `ingress.hosts[0]`
-      callbackApi: ""
-      # URL including the callback URL referring to the ATLAS UI, e.g. `https://example.com/atlas/index.html#/welcome/`.
+      # Required. Points to the issuer or openid-configuration endpoint of the provider.
+      # Note that the WebAPI fails to start if this URL is unreachable.
+      oidUrl: "https://auth.example.com/realms/OHDSI/.well-known/openid-configuration"
+      # URL of the ATLAS UI OAuth callback, e.g. `https://example.com/atlas/#/oauth/callback`.
       # If unset, a URL is constructed from `ingress.hosts[0]`
       callbackUI: ""
-      # URL to be redirected to when logging out, e.g. `https://example.com/atlas/index.html#/welcome/`.
-      # If unset, a URL is constructed from `ingress.hosts[0]`
-      logoutUrl: ""
-      # OpenID redirect URL, e.g. `https://example.com/atlas/index.html#/welcome/null`
-      # If unset, a URL is constructed from `ingress.hosts[0]`
-      redirectUrl: ""
 ```
 
-Make sure to give any logged-in user the appropriate permissions by following: <https://github.com/OHDSI/WebAPI/wiki/Atlas-Security#defining-an-administrator>.
+The WebAPI's OAuth redirect URI that needs to be registered with the provider is `https://omop.example.com/WebAPI/user/oauth/callback/openid`.

@@ -31,8 +31,10 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- with .podSecurityContext }}
       securityContext:
-        {{- toYaml .podSecurityContext | nindent 8 }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ include "ohdsi.webApi.serviceAccountName" $ }}
       automountServiceAccountToken: {{ .serviceAccount.automountServiceAccountToken }}
       initContainers:
@@ -50,11 +52,11 @@ spec:
           {{- end }}
           env:
             - name: PGHOST
-              value: {{ include "ohdsi.database.host" $ }}
+              value: {{ include "ohdsi.database.host" $ | quote }}
             - name: PGPORT
               value: {{ include "ohdsi.database.port" $ | quote }}
             - name: PGUSER
-              value: {{ include "ohdsi.database.user" $ }}
+              value: {{ include "ohdsi.database.user" $ | quote }}
           command: ["/bin/sh", "-c"]
           args:
             - |
@@ -64,33 +66,29 @@ spec:
               done;
       containers:
         - name: webapi
+          {{- with .securityContext }}
           securityContext:
-            {{- toYaml .securityContext | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           image: "{{ .image.registry }}/{{ .image.repository }}:{{ .image.tag }}"
           imagePullPolicy: {{ .image.pullPolicy }}
           env:
-            - name: SECURITY_CORS_ENABLED
-              value: {{ .cors.enabled | quote }}
-            {{- if and .cors.enabled (or .cors.allowedOrigin $.Values.ingress.enabled) }}
-            - name: SECURITY_ORIGIN
-              {{- if .cors.allowedOrigin }}
-              value: {{ .cors.allowedOrigin | quote }}
-              {{- else if $.Values.ingress.enabled}}
-              {{- $host := (index $.Values.ingress.hosts 0) }}
-              value: {{ $host.host | quote }}
-              {{- end }}
+            {{- /* WebAPI v3 always enforces the allowed origins, regardless of `security.cors.enabled` */}}
+            {{- if (or .cors.allowedOrigin $.Values.ingress.enabled) }}
+            - name: SECURITY_CORS_ALLOWED_ORIGINS
+              value: {{ .cors.allowedOrigin | default (include "ohdsi.ingress.origin" $) | quote }}
             {{- end }}
             - name: DATASOURCE_DRIVERCLASSNAME
               value: org.postgresql.Driver
             - name: DATASOURCE_URL
-              value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
+              value: {{ include "ohdsi.webapi.jdbcUrl" $ | quote }}
             - name: DATASOURCE_USERNAME
-              value: {{ include "ohdsi.database.user" $ }}
+              value: {{ include "ohdsi.database.user" $ | quote }}
             - name: DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ | quote }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ | quote }}
             - name: DATASOURCE_OHDSI_SCHEMA
               value: {{ .db.schema }}
             - name: SPRING_JPA_PROPERTIES_HIBERNATE_DEFAULT_SCHEMA
@@ -99,62 +97,71 @@ spec:
               value: org.hibernate.dialect.PostgreSQLDialect
             - name: SPRING_BATCH_REPOSITORY_TABLEPREFIX
               value: {{ .db.schema }}.BATCH_
-            - name: FLYWAY_DATASOURCE_DRIVERCLASSNAME
-              value: org.postgresql.Driver
-            - name: FLYWAY_SCHEMAS
-              value: {{ .db.schema }}
-            - name: FLYWAY_PLACEHOLDERS_OHDSISCHEMA
-              value: {{ .db.schema }}
-            - name: FLYWAY_DATASOURCE_URL
-              value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
-            - name: FLYWAY_DATASOURCE_USERNAME
-              value: {{ include "ohdsi.database.user" $ }}
-            - name: FLYWAY_DATASOURCE_PASSWORD
+            - name: SPRING_FLYWAY_URL
+              value: {{ include "ohdsi.webapi.jdbcUrl" $ | quote }}
+            - name: SPRING_FLYWAY_USER
+              value: {{ include "ohdsi.database.user" $ | quote }}
+            - name: SPRING_FLYWAY_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
-            {{- if (or .auth.openid.enabled .auth.basic.enabled) }}
-            - name: SECURITY_PROVIDER
-              value: "AtlasRegularSecurity"
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ | quote }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ | quote }}
+            - name: SPRING_FLYWAY_SCHEMAS
+              value: {{ .db.schema }}
+            - name: SPRING_FLYWAY_PLACEHOLDERS_OHDSISCHEMA
+              value: {{ .db.schema }}
+            - name: SECURITY_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "ohdsi.auth.jwt.secretName" $ | quote }}
+                  key: {{ include "ohdsi.auth.jwt.secretKey" $ | quote }}
+            {{- if .auth.adminLogins }}
+            - name: SECURITY_ADMIN_LOGIN
+              value: {{ .auth.adminLogins | quote }}
+            {{- end }}
             {{- if .auth.openid.enabled }}
-            - name: SECURITY_AUTH_OPENID_ENABLED
+            - name: SECURITY_AUTH_OIDC_ENABLED
               value: "true"
-            - name: SECURITY_OID_CLIENTID
+            - name: SECURITY_AUTH_OIDC_CLIENTID
               value: {{ .auth.openid.clientId | quote }}
-            - name: SECURITY_OID_APISECRET
+            - name: SECURITY_AUTH_OIDC_APISECRET
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "ohdsi.auth.secretName" $ }}
-                  key: {{ include "ohdsi.auth.secretKey" $ }}
-            - name: SECURITY_OAUTH_CALLBACK_API
-              value: {{ include "ohdsi.oauth.callback.api" $ }}
-            - name: SECURITY_OAUTH_CALLBACK_UI
-              value: {{ include "ohdsi.oauth.callback.ui" $ }}
-            - name: SECURITY_OID_LOGOUTURL
-              value: {{ include "ohdsi.oid.logoutUrl" $ }}
-            - name: SECURITY_OID_REDIRECTURL
-              value: {{ include "ohdsi.oid.redirectUrl" $ }}
-            - name: SECURITY_OID_URL
+                  name: {{ include "ohdsi.auth.secretName" $ | quote }}
+                  key: {{ include "ohdsi.auth.secretKey" $ | quote }}
+            - name: SECURITY_AUTH_OIDC_URL
               value: {{ .auth.openid.oidUrl | quote }}
+            - name: SECURITY_AUTH_OAUTH_CALLBACK_UI
+              value: {{ include "ohdsi.oauth.callback.ui" $ | quote }}
+            {{- with .auth.openid.logoutUrl }}
+            - name: SECURITY_AUTH_OIDC_LOGOUTURL
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .auth.openid.rolesClaim }}
+            - name: SECURITY_AUTH_OIDC_ROLESCLAIM
+              value: {{ . | quote }}
+            {{- end }}
+            {{- with .auth.openid.extraScopes }}
+            - name: SECURITY_AUTH_OIDC_EXTRASCOPES
+              value: {{ . | quote }}
+            {{- end }}
             {{- end }}
             {{- if .auth.basic.enabled }}
-            - name: SECURITY_DB_DATASOURCE_URL
-              value: {{ include "ohdsi.webapi.jdbcUrl" $ }}
-            - name: SECURITY_DB_DATASOURCE_DRIVERCLASSNAME
+            - name: SECURITY_AUTH_DB_ENABLED
+              value: "true"
+            - name: SECURITY_AUTH_DB_DATASOURCE_URL
+              value: {{ include "ohdsi.webapi.jdbcUrl" $ | quote }}
+            - name: SECURITY_AUTH_DB_DATASOURCE_DRIVER_CLASS_NAME
               value: "org.postgresql.Driver"
-            - name: SECURITY_DB_DATASOURCE_SCHEMA
+            - name: SECURITY_AUTH_DB_DATASOURCE_SCHEMA
               value: {{ default .db.schema .auth.basic.schema }}
-            - name: SECURITY_DB_DATASOURCE_USERNAME
-              value: {{ include "ohdsi.database.user" $ }}
-            - name: SECURITY_DB_DATASOURCE_PASSWORD
+            - name: SECURITY_AUTH_DB_DATASOURCE_USERNAME
+              value: {{ include "ohdsi.database.user" $ | quote }}
+            - name: SECURITY_AUTH_DB_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ include "ohdsi.webapi.db-secret-name" $ }}
-                  key: {{ include "ohdsi.webapi.db-secret-key" $ }}
-            - name: SECURITY_DB_DATASOURCE_AUTHENTICATIONQUERY
-              value: {{ tpl .auth.basic.query $ }}
-            {{- end }}
+                  name: {{ include "ohdsi.webapi.db-secret-name" $ | quote }}
+                  key: {{ include "ohdsi.webapi.db-secret-key" $ | quote }}
             {{- end }}
           {{- if .extraEnv }}
           {{- toYaml .extraEnv | nindent 12 }}
@@ -163,11 +170,6 @@ spec:
             - name: http
               containerPort: 8080
               protocol: TCP
-          {{- if .metrics.serviceMonitor.enabled }}
-            - name: http-metrics
-              containerPort: 9464
-              protocol: TCP
-          {{- end }}
           {{- with .readinessProbe }}
           readinessProbe:
             httpGet:
@@ -209,6 +211,10 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: tmp-volume
+            - mountPath: /var/lib/ohdsi/webapi/logs
+              name: logs-volume
+            - mountPath: /var/lib/ohdsi/webapi/data
+              name: data-volume
       {{- with .nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -227,6 +233,10 @@ spec:
       {{- end }}
       volumes:
         - name: tmp-volume
+          emptyDir: {}
+        - name: logs-volume
+          emptyDir: {}
+        - name: data-volume
           emptyDir: {}
 {{- end }}
 {{- end }}

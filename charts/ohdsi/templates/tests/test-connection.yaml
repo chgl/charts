@@ -14,7 +14,7 @@ spec:
     {{- if .Values.webApi.enabled }}
     - name: test-webapi
       image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: {{ .Values.curl.image.pullPolicy }}
       command: ["curl", "--fail-with-body"]
       args: ["http://{{ include "ohdsi.fullname" . }}-webapi:{{ .Values.webApi.service.port }}/WebAPI/info"]
       {{- with $.Values.restrictedContainerSecurityContext }}
@@ -36,7 +36,7 @@ spec:
     {{ if .Values.atlas.enabled }}
     - name: test-atlas
       image: "{{ .Values.curl.image.registry }}/{{ .Values.curl.image.repository }}:{{ .Values.curl.image.tag }}"
-      imagePullPolicy: IfNotPresent
+      imagePullPolicy: {{ .Values.curl.image.pullPolicy }}
       command: ["curl", "--fail-with-body"]
       args: ["http://{{ include "ohdsi.fullname" . }}-atlas:{{ .Values.atlas.service.port }}/atlas/"]
       {{- with $.Values.restrictedContainerSecurityContext }}

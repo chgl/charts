@@ -7,12 +7,18 @@ metadata:
   labels:
     {{- include "ohdsi.labels" $ | nindent 4 }}
     app.kubernetes.io/component: load-cohortdefinitions
-  {{- with .annotations }}
+  annotations:
+    # run as a hook after the WebAPI is up so the job is re-created on every upgrade
+    # instead of failing to patch the immutable Job spec
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "10"
+    helm.sh/hook-delete-policy: before-hook-creation
+    {{- with .annotations }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with $.Values.commonAnnotations }}
+    {{- end }}
+    {{- with $.Values.commonAnnotations }}
     {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- end }}
 spec:
   backoffLimit: {{ .backoffLimit }}
   {{- with .ttlSecondsAfterFinished }}
@@ -29,6 +35,7 @@ spec:
         app.kubernetes.io/component: load-cohortdefinitions
     spec:
       restartPolicy: {{ .restartPolicy }}
+      automountServiceAccountToken: false
       {{- with $.Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -40,6 +47,7 @@ spec:
       initContainers:
         - name: wait-for-webapi
           image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
+          imagePullPolicy: {{ $.Values.curl.image.pullPolicy }}
           {{- with $.Values.restrictedContainerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
@@ -58,20 +66,55 @@ spec:
               done;
           env:
             - name: WEBAPI_URL
-              value: {{ include "ohdsi.webApi.url" $ }}
+              value: {{ include "ohdsi.webApi.url" $ | quote }}
       containers:
         - name: load-cohortdefinitions
           image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
+          imagePullPolicy: {{ $.Values.curl.image.pullPolicy }}
           command: ["/bin/sh", "-c"]
           args:
             - |
+              set -e
+              set --
+              if [ -n "${WEBAPI_API_KEY:-}" ]; then
+                echo "Authenticating using the API key"
+                set -- --header "X-API-KEY: ${WEBAPI_API_KEY}"
+              elif [ -n "${WEBAPI_LOGIN:-}" ]; then
+                echo "Logging in as ${WEBAPI_LOGIN} @ ${WEBAPI_URL}/user/login/db"
+                JWT="$(curl --fail-with-body --silent --show-error \
+                     --retry 5 \
+                     --retry-connrefused \
+                     --data-urlencode "login=${WEBAPI_LOGIN}" \
+                     --data-urlencode "password=${WEBAPI_PASSWORD}" \
+                     "${WEBAPI_URL}/user/login/db" | sed -n 's/.*"jwt" *: *"\([^"]*\)".*/\1/p')"
+                if [ -z "${JWT}" ]; then
+                  echo "Failed to obtain a JWT from the WebAPI"
+                  exit 1
+                fi
+                set -- --header "Authorization: Bearer ${JWT}"
+              fi
+
               for cohort_definition_file in /cohorts/*.json; do
-                echo "Sending cohort definition ${cohort_definition_file} to WebAPI @ ${WEBAPI_URL}/cohortdefinition"
+                cohort_name="$(cat "${cohort_definition_file%.json}.name")"
+                exists="$(curl --fail-with-body --silent --show-error \
+                     --retry 5 \
+                     --retry-connrefused \
+                     --get \
+                     --data-urlencode "name=${cohort_name}" \
+                     "$@" \
+                     "${WEBAPI_URL}/cohortdefinition/0/exists")"
+                if [ "${exists}" != "0" ]; then
+                  echo "Cohort definition '${cohort_name}' already exists. Skipping."
+                  continue
+                fi
+
+                echo "Sending cohort definition '${cohort_name}' (${cohort_definition_file}) to WebAPI @ ${WEBAPI_URL}/cohortdefinition"
                 curl --fail-with-body \
                      --retry 5 \
                      --retry-connrefused \
                      --request POST \
                      --header 'Content-Type: application/json' \
+                     "$@" \
                      --data "@${cohort_definition_file}" "${WEBAPI_URL}/cohortdefinition"
               done;
           {{- with $.Values.restrictedContainerSecurityContext }}
@@ -85,7 +128,29 @@ spec:
           {{- end }}
           env:
             - name: WEBAPI_URL
-              value: {{ include "ohdsi.webApi.url" $ }}
+              value: {{ include "ohdsi.webApi.url" $ | quote }}
+            {{- if .auth.apiKey.existingSecret }}
+            - name: WEBAPI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .auth.apiKey.existingSecret }}
+                  key: {{ .auth.apiKey.existingSecretKey }}
+            {{- else if .auth.db.login }}
+            - name: WEBAPI_LOGIN
+              value: {{ .auth.db.login | quote }}
+            - name: WEBAPI_PASSWORD
+              {{- if .auth.db.existingSecret }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .auth.db.existingSecret }}
+                  key: {{ .auth.db.existingSecretKey }}
+              {{- else }}
+              value: {{ .auth.db.password | quote }}
+              {{- end }}
+            {{- end }}
+            {{- with .extraEnv }}
+            {{- toYaml . | nindent 12 }}
+            {{- end }}
           volumeMounts:
             - name: cohort-definitions
               mountPath: /cohorts

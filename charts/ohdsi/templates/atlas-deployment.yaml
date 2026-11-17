@@ -20,9 +20,7 @@ spec:
   template:
     metadata:
       annotations:
-        {{- if .config.local }}
         checksum/config: {{ include (print $.Template.BasePath "/atlas-config-cm.yaml") $ | sha256sum | quote }}
-        {{- end }}
         {{- with .podAnnotations }}
           {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -44,19 +42,24 @@ spec:
       initContainers:
         - name: wait-for-webapi
           image: "{{ $.Values.curl.image.registry }}/{{ $.Values.curl.image.repository }}:{{ $.Values.curl.image.tag }}"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: {{ $.Values.curl.image.pullPolicy }}
           {{- with $.Values.restrictedContainerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- if $.Values.initContainers.resources }}
+          resources: {{- toYaml $.Values.initContainers.resources | nindent 12 }}
+          {{- else if ne $.Values.initContainers.resourcesPreset "none" }}
+          resources: {{- include "common.resources.preset" (dict "type" $.Values.initContainers.resourcesPreset) | nindent 12 }}
+          {{- end }}
           env:
             - name: WEBAPI_BASE_URL
-              value: "http://{{ include "ohdsi.fullname" $ }}-webapi:{{ $.Values.webApi.service.port }}/WebAPI"
+              value: {{ include "ohdsi.webApi.url" $ | quote }}
           command: ["/bin/sh", "-c"]
           args:
             - |
               until [ "$(curl -s -o /dev/null -L -w '%{http_code}' "$WEBAPI_BASE_URL/info")" == "200" ]; do
-                echo "$(date): Waiting for FHIR server @ $WEBAPI_BASE_URL to be up";
+                echo "$(date): Waiting for WebAPI @ $WEBAPI_BASE_URL to be up";
                 sleep 10;
               done;
       {{- end }}
@@ -99,27 +102,23 @@ spec:
           {{- else if ne .resourcesPreset "none" }}
           resources: {{- include "common.resources.preset" (dict "type" .resourcesPreset) | nindent 12 }}
           {{- end }}
-          env:
-            {{- if .webApiUrl }}
-            - name: WEBAPI_URL
-              value: {{ .webApiUrl }}
-            {{- else if (and .constructWebApiUrlFromIngress $.Values.ingress.enabled) }}
-            - name: WEBAPI_URL
-              {{- $host := (index $.Values.ingress.hosts 0) }}
-              value: http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/WebAPI
-            {{- else }}
-            - name: WEBAPI_URL
-              value: ""
-            {{- end }}
           {{- if .extraEnv }}
-          {{- toYaml .extraEnv | nindent 12 }}
+          env:
+            {{- toYaml .extraEnv | nindent 12 }}
           {{- end }}
-          {{- if .config.local }}
           volumeMounts:
             - name: atlas-config
-              mountPath: /usr/share/nginx/html/atlas/js/config-local.js
-              subPath: config-local.js
-          {{- end }}
+              mountPath: /srv/atlas/config-local.json
+              subPath: config-local.json
+              readOnly: true
+            - name: atlas-config
+              mountPath: /etc/caddy/Caddyfile
+              subPath: Caddyfile
+              readOnly: true
+            - name: caddy-data
+              mountPath: /data
+            - name: caddy-config
+              mountPath: /config
       {{- with .nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -136,11 +135,13 @@ spec:
       topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- if .config.local }}
       volumes:
         - name: atlas-config
           configMap:
             name: {{ include "ohdsi.fullname" $ }}-atlas-config
-      {{- end }}
+        - name: caddy-data
+          emptyDir: {}
+        - name: caddy-config
+          emptyDir: {}
 {{- end }}
 {{- end }}

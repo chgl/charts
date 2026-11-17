@@ -1,43 +1,38 @@
-{{- if .Values.webApi.enabled }}
-- Get the application URL for the WebAPI running these commands:
+{{- $fullname := include "ohdsi.fullname" . }}
 {{- if .Values.ingress.enabled }}
 {{- range $host := .Values.ingress.hosts }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/WebAPI/
+{{- $origin := printf "%s://%s" (include "ohdsi.ingress.protocol" $) $host.host }}
+{{- if $.Values.atlas.enabled }}
+- ATLAS is available at {{ $origin }}/atlas/
 {{- end }}
-{{- else if contains "NodePort" .Values.webApi.service.type }}
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "ohdsi.fullname" . }})
-  export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
-{{- else if contains "LoadBalancer" .Values.webApi.service.type }}
-     NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "ohdsi.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "ohdsi.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  echo http://$SERVICE_IP:{{ .Values.webApi.service.port }}
-{{- else if contains "ClusterIP" .Values.webApi.service.type }}
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/instance={{ .Release.Name }},app.kubernetes.io/component=webapi" -o jsonpath="{.items[0].metadata.name}")
-  echo "Visit http://127.0.0.1:8080 to use your application"
-  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:80
+{{- if $.Values.webApi.enabled }}
+- The WebAPI is available at {{ $origin }}/WebAPI/
 {{- end }}
 {{- end }}
-
+{{- else }}
 {{- if .Values.atlas.enabled }}
 - Get the application URL for ATLAS by running these commands:
-{{- if .Values.ingress.enabled }}
-{{- range $host := .Values.ingress.hosts }}
-  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}/atlas/
-{{- end }}
-{{- else if contains "NodePort" .Values.atlas.service.type }}
-  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "ohdsi.fullname" . }})
+{{- if contains "NodePort" .Values.atlas.service.type }}
+  export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ $fullname }}-atlas)
   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
-  echo http://$NODE_IP:$NODE_PORT
+  echo http://$NODE_IP:$NODE_PORT/atlas/
 {{- else if contains "LoadBalancer" .Values.atlas.service.type }}
      NOTE: It may take a few minutes for the LoadBalancer IP to be available.
-           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ include "ohdsi.fullname" . }}'
-  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ include "ohdsi.fullname" . }} --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
-  echo http://$SERVICE_IP:{{ .Values.atlas.service.port }}
+           You can watch the status of by running 'kubectl get --namespace {{ .Release.Namespace }} svc -w {{ $fullname }}-atlas'
+  export SERVICE_IP=$(kubectl get svc --namespace {{ .Release.Namespace }} {{ $fullname }}-atlas --template "{{"{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}"}}")
+  echo http://$SERVICE_IP:{{ .Values.atlas.service.port }}/atlas/
 {{- else if contains "ClusterIP" .Values.atlas.service.type }}
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/instance={{ .Release.Name }},app.kubernetes.io/component=atlas" -o jsonpath="{.items[0].metadata.name}")
-  echo "Visit http://127.0.0.1:8080 to use your application"
-  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME 8080:80
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ $fullname }}-atlas 8080:{{ .Values.atlas.service.port }}
+  echo "Visit http://localhost:8080/atlas/ to use ATLAS"
+{{- end }}
+{{- if (eq (include "ohdsi.auth.enabled" .) "true") }}
+
+  NOTE: logins via a port-forward or other URLs than the ingress require adding their origin
+        (e.g. `http://localhost:8080`) to `webApi.cors.allowedOrigin`.
+{{- end }}
+{{- else if .Values.webApi.enabled }}
+- Get the application URL for the WebAPI by running these commands:
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ $fullname }}-webapi 8080:{{ .Values.webApi.service.port }}
+  echo "Visit http://localhost:8080/WebAPI/info to access the WebAPI"
 {{- end }}
 {{- end }}

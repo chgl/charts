@@ -15,7 +15,8 @@ concurrency:
 jobs:
   lint:
     runs-on: ubuntu-24.04
-    container: ghcr.io/chgl/kube-powertools:v2.6.13@sha256:5e6cab6409850248d60d3686f02bf903f5f25aa8aa72058031aa5427d7f1c5cf
+    # TODO: switch to the next kube-powertools release once it includes helm-schema >= 0.24.0 (chgl/kube-powertools#718)
+    container: ghcr.io/chgl/kube-powertools:pr-718@sha256:435e7dfe53581f4c003b4b724da9b3551714e6e86e8bf09c75f4d0748b1e5aed
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@ccd8616d44fd3846e67624a50d5aad6d37bf2d25 # v2.22.1
@@ -51,6 +52,20 @@ jobs:
 
       - name: Update dependencies
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
+
+      # the flags must match the ones used to generate the schemas locally:
+      # helm schema -c charts/<chart> -a -m -K -k required,title
+      - name: Check if values.schema.json files are up-to-date
+        run: |
+          for chart in charts/*/; do
+            if test -f "${chart}values.schema.json"; then
+              if ! helm schema -c "${chart}" -a -m -K -k required,title --check; then
+                echo -e "\033[0;31m${chart}values.schema.json outdated! Please run 'helm schema -c ${chart} -a -m -K -k required,title' locally and push the changes.\033[0m ❌"
+                exit 1
+              fi
+            fi
+          done
+          echo -e "\033[0;32mSchemas up to date\033[0m ✔"
 
       - name: Run YAML lint
         run: yamllint .

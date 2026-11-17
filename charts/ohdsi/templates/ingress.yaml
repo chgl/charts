@@ -1,6 +1,6 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "ohdsi.fullname" $ -}}
-apiVersion: {{ include "ohdsi.ingress.apiVersion" . }}
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: {{ $fullName }}-ingress
@@ -8,9 +8,12 @@ metadata:
     {{- include "ohdsi.labels" $ | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
+    {{- tpl (toYaml .) $ | nindent 4 }}
   {{- end }}
 spec:
+  {{- with .Values.ingress.ingressClassName }}
+  ingressClassName: {{ . | quote }}
+  {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
     {{- range .Values.ingress.tls }}
@@ -23,41 +26,27 @@ spec:
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    {{- $pathType := .pathType }}
+    {{- $pathType := .pathType | default "ImplementationSpecific" }}
     - host: {{ .host | quote }}
       http:
         paths:
           {{- if $.Values.webApi.enabled }}
           - path: /WebAPI
-            {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
-            pathType: {{ $pathType | default "ImplementationSpecific" }}
-            {{- end }}
+            pathType: {{ $pathType }}
             backend:
-              {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
               service:
                 name: {{ $fullName }}-webapi
                 port:
                   number: {{ $.Values.webApi.service.port }}
-              {{ else }}
-              serviceName: {{ $fullName }}-webapi
-              servicePort: {{ $.Values.webApi.service.port }}
-              {{- end }}
           {{- end }}
           {{- if $.Values.atlas.enabled }}
           - path: /atlas
-            {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
-            pathType: {{ $pathType | default "ImplementationSpecific" }}
-            {{- end }}
+            pathType: {{ $pathType }}
             backend:
-              {{- if eq (include "ohdsi.ingress.apiVersion" $) "networking.k8s.io/v1" }}
               service:
                 name: {{ $fullName }}-atlas
                 port:
                   number: {{ $.Values.atlas.service.port }}
-              {{ else }}
-              serviceName: {{ $fullName }}-atlas
-              servicePort: {{ $.Values.atlas.service.port }}
-              {{- end }}
           {{- end }}
     {{- end }}
-  {{- end }}
+{{- end }}

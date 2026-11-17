@@ -14,12 +14,6 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
-    {{- if .metrics.serviceMonitor.enabled }}
-    - port: 9464
-      targetPort: http-metrics
-      protocol: TCP
-      name: http-metrics
-    {{- end }}
   selector:
     {{- include "ohdsi.matchLabels" $ | nindent 4 }}
     app.kubernetes.io/component: webapi
