@@ -7,17 +7,14 @@
       "description": "by default, Achilles connects to the same DB that the WebAPI uses\nthis assumes that it contains both the WebAPI schema (`ohdsi`) as well\nas any CDM schemas. See \u003chttps://github.com/OHDSI/Broadsea-Achilles\u003e for details on the container used.",
       "properties": {
         "cdmVersion": {
-          "default": "5.3",
           "description": "version of the CDM. Equivalent to the Achilles `ACHILLES_CDM_VERSION` env var.",
           "type": "string"
         },
         "concurrencyPolicy": {
-          "default": "Forbid",
           "description": "Specifies how to treat concurrent executions of a Job. Valid values are:\n- \"Allow\" (default): allows CronJobs to run concurrently;\n- \"Forbid\": forbids concurrent runs, skipping next run if previous run hasn't finished yet;\n- \"Replace\": cancels currently running job and replaces it with a new one",
           "type": "string"
         },
         "enabled": {
-          "default": false,
           "description": "whether or not to enable the Achilles cron job. Make sure to set the `schemas` below to point to an existing CDM.",
           "type": "boolean"
         },
@@ -29,7 +26,6 @@
           "type": "array"
         },
         "failedJobsHistoryLimit": {
-          "default": 1,
           "description": "The number of failed finished jobs to retain. Value must be non-negative integer.",
           "type": "integer"
         },
@@ -38,19 +34,15 @@
           "description": "the Achilles image",
           "properties": {
             "pullPolicy": {
-              "default": "IfNotPresent",
               "type": "string"
             },
             "registry": {
-              "default": "docker.io",
               "type": "string"
             },
             "repository": {
-              "default": "ohdsi/broadsea-achilles",
               "type": "string"
             },
             "tag": {
-              "default": "sha-bccd396@sha256:a881063aff6200d0d368ec30eb633381465fb8aa15e7d7138b7d48b6256a6feb",
               "type": "string"
             }
           },
@@ -67,19 +59,15 @@
           "description": "PodSecurityContext for the Achilles Pod",
           "properties": {
             "fsGroup": {
-              "default": 10001,
               "type": "integer"
             },
             "runAsGroup": {
-              "default": 10001,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 10001,
               "type": "integer"
             }
           },
@@ -91,12 +79,10 @@
           "required": []
         },
         "resourcesPreset": {
-          "default": "small",
           "description": "set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).\nMore information: \u003chttps://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl\u003e",
           "type": "string"
         },
         "schedule": {
-          "default": "@daily",
           "description": "when to run the Achilles job. See \u003chttps://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/#cron-schedule-syntax\u003e",
           "type": "string"
         },
@@ -104,17 +90,14 @@
           "additionalProperties": false,
           "properties": {
             "cdm": {
-              "default": "synpuf_cdm",
               "description": "name of the schema containing the OMOP CDM. Equivalent to the Achilles `ACHILLES_CDM_SCHEMA` env var.",
               "type": "string"
             },
             "res": {
-              "default": "synpuf_results",
               "description": "name of the schema containing the cohort generation results. Equivalent to the Achilles `ACHILLES_RES_SCHEMA` env var.",
               "type": "string"
             },
             "vocab": {
-              "default": "synpuf_vocab",
               "description": "name of the schema containing the vocabulary. Equivalent to the Achilles `ACHILLES_VOCAB_SCHEMA` env var.",
               "type": "string"
             }
@@ -127,7 +110,6 @@
           "description": "ContainerSecurityContext for the Achilles container",
           "properties": {
             "allowPrivilegeEscalation": {
-              "default": false,
               "type": "boolean"
             },
             "capabilities": {
@@ -148,26 +130,21 @@
               "required": []
             },
             "readOnlyRootFilesystem": {
-              "default": true,
               "type": "boolean"
             },
             "runAsGroup": {
-              "default": 10001,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 10001,
               "type": "integer"
             },
             "seccompProfile": {
               "additionalProperties": true,
               "properties": {
                 "type": {
-                  "default": "RuntimeDefault",
                   "type": "string"
                 }
               },
@@ -185,17 +162,14 @@
               "required": []
             },
             "automountServiceAccountToken": {
-              "default": false,
               "description": "whether to automount the SA token",
               "type": "boolean"
             },
             "create": {
-              "default": true,
               "description": "Specifies whether a service account should be created.",
               "type": "boolean"
             },
             "name": {
-              "default": "",
               "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
               "type": "string"
             }
@@ -204,12 +178,10 @@
           "type": "object"
         },
         "sourceName": {
-          "default": "synpuf-5.3.1",
           "description": "the CDM source name. Equivalent to the Achilles `ACHILLES_SOURCE` env var.",
           "type": "string"
         },
         "successfulJobsHistoryLimit": {
-          "default": 3,
           "description": "The number of successful finished jobs to retain. Value must be non-negative integer.",
           "type": "integer"
         }
@@ -230,7 +202,6 @@
           "description": "override the config files to configure Atlas",
           "properties": {
             "local": {
-              "default": "",
               "description": "the contents of the `config-local.json` file. See\n\u003chttps://github.com/OHDSI/Atlas3/blob/develop/public/config-local.example.json\u003e for an example.\nIf unset, a config is generated which points to the WebAPI and enables user authentication\nif any of the `webApi.auth` providers is enabled.",
               "type": "string"
             }
@@ -239,7 +210,6 @@
           "type": "object"
         },
         "enabled": {
-          "default": true,
           "description": "enable the OHDSI Atlas deployment",
           "type": "boolean"
         },
@@ -255,19 +225,15 @@
           "description": "the Atlas image",
           "properties": {
             "pullPolicy": {
-              "default": "IfNotPresent",
               "type": "string"
             },
             "registry": {
-              "default": "ghcr.io",
               "type": "string"
             },
             "repository": {
-              "default": "ohdsi/atlas3",
               "type": "string"
             },
             "tag": {
-              "default": "3.0.1@sha256:64d91a6a176179887b19998d2c8daefc1e44defe53049c82f8ef612c11267c37",
               "type": "string"
             }
           },
@@ -279,23 +245,18 @@
           "description": "liveness probe",
           "properties": {
             "failureThreshold": {
-              "default": 5,
               "type": "integer"
             },
             "initialDelaySeconds": {
-              "default": 30,
               "type": "integer"
             },
             "periodSeconds": {
-              "default": 15,
               "type": "integer"
             },
             "successThreshold": {
-              "default": 1,
               "type": "integer"
             },
             "timeoutSeconds": {
-              "default": 15,
               "type": "integer"
             }
           },
@@ -316,12 +277,10 @@
           "additionalProperties": false,
           "properties": {
             "enabled": {
-              "default": false,
               "description": "create a PodDisruptionBudget resource for the OHDSI Atlas pods.\nConfigure it using either `minAvailable` (default: `1`) or `maxUnavailable`, both accept a number or a percentage.",
               "type": "boolean"
             },
             "maxUnavailable": {
-              "default": "",
               "description": "Maximum unavailable instances; ignored if there is no PodDisruptionBudget",
               "required": [],
               "type": [
@@ -330,7 +289,6 @@
               ]
             },
             "minAvailable": {
-              "default": 1,
               "description": "Minimum available instances; ignored if there is no PodDisruptionBudget",
               "required": [],
               "type": [
@@ -347,19 +305,15 @@
           "description": "security context for the pod",
           "properties": {
             "fsGroup": {
-              "default": 101,
               "type": "integer"
             },
             "runAsGroup": {
-              "default": 101,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 101,
               "type": "integer"
             }
           },
@@ -370,23 +324,18 @@
           "description": "readiness probe",
           "properties": {
             "failureThreshold": {
-              "default": 5,
               "type": "integer"
             },
             "initialDelaySeconds": {
-              "default": 30,
               "type": "integer"
             },
             "periodSeconds": {
-              "default": 15,
               "type": "integer"
             },
             "successThreshold": {
-              "default": 1,
               "type": "integer"
             },
             "timeoutSeconds": {
-              "default": 15,
               "type": "integer"
             }
           },
@@ -394,7 +343,6 @@
           "type": "object"
         },
         "replicaCount": {
-          "default": 1,
           "description": "number of replicas",
           "type": "integer"
         },
@@ -404,7 +352,6 @@
           "required": []
         },
         "resourcesPreset": {
-          "default": "small",
           "description": "set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).\nMore information: \u003chttps://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl\u003e",
           "type": "string"
         },
@@ -413,7 +360,6 @@
           "description": "ContainerSecurityContext for the Atlas container",
           "properties": {
             "allowPrivilegeEscalation": {
-              "default": false,
               "type": "boolean"
             },
             "capabilities": {
@@ -434,26 +380,21 @@
               "required": []
             },
             "readOnlyRootFilesystem": {
-              "default": true,
               "type": "boolean"
             },
             "runAsGroup": {
-              "default": 101,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 101,
               "type": "integer"
             },
             "seccompProfile": {
               "additionalProperties": true,
               "properties": {
                 "type": {
-                  "default": "RuntimeDefault",
                   "type": "string"
                 }
               },
@@ -467,11 +408,9 @@
           "description": "the service used to expose the Atlas web port",
           "properties": {
             "port": {
-              "default": 8080,
               "type": "integer"
             },
             "type": {
-              "default": "ClusterIP",
               "type": "string"
             }
           },
@@ -487,17 +426,14 @@
               "required": []
             },
             "automountServiceAccountToken": {
-              "default": false,
               "description": "whether to automount the SA token",
               "type": "boolean"
             },
             "create": {
-              "default": true,
               "description": "Specifies whether a service account should be created.",
               "type": "boolean"
             },
             "name": {
-              "default": "",
               "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
               "type": "string"
             }
@@ -520,7 +456,6 @@
           "type": "array"
         },
         "webApiUrl": {
-          "default": "",
           "description": "the base URL of the OHDSI WebAPI as seen by the browser, e.g. `https://example.com/WebAPI`.\nSets `api.url` in the generated `config-local.json`. Defaults to the relative `/WebAPI` path\nwhich is served by the ingress or proxied to the WebAPI service by the ATLAS container itself.",
           "type": "string"
         }
@@ -538,12 +473,10 @@
           "required": []
         },
         "backoffLimit": {
-          "default": 6,
           "description": "the number of retries before considering the Job as failed",
           "type": "integer"
         },
         "enabled": {
-          "default": false,
           "description": "if enabled, create a Kubernetes Job running the specified container as a `post-install` Helm hook.\nsee [cdm-init-job.yaml](templates/cdm-init-job.yaml) for the env vars\nthat are passed by default",
           "type": "boolean"
         },
@@ -559,19 +492,15 @@
           "description": "the container image used to create the CDM initialization job",
           "properties": {
             "pullPolicy": {
-              "default": "IfNotPresent",
               "type": "string"
             },
             "registry": {
-              "default": "docker.io",
               "type": "string"
             },
             "repository": {
-              "default": "library/busybox",
               "type": "string"
             },
             "tag": {
-              "default": "1.37.0@sha256:a7dbc319b1438115a207e11930dc4bb3e643dcb3ec0bdd694bb36cd8fad289ec",
               "type": "string"
             }
           },
@@ -588,19 +517,15 @@
           "description": "PodSecurityContext for the cdm-init pod",
           "properties": {
             "fsGroup": {
-              "default": 65534,
               "type": "integer"
             },
             "runAsGroup": {
-              "default": 65534,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 65534,
               "type": "integer"
             }
           },
@@ -612,17 +537,14 @@
           "required": []
         },
         "resourcesPreset": {
-          "default": "medium",
           "description": "set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).\nMore information: \u003chttps://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl\u003e",
           "type": "string"
         },
         "restartPolicy": {
-          "default": "Never",
           "description": "restartPolicy of the job \u003chttps://kubernetes.io/docs/concepts/workloads/controllers/job/#handling-pod-and-container-failures\u003e",
           "type": "string"
         },
         "runOnUpgrade": {
-          "default": false,
           "description": "if enabled, the job is also run as a `post-upgrade` hook, i.e. on every `helm upgrade`.\nOnly enable this if the container is idempotent.",
           "type": "boolean"
         },
@@ -631,7 +553,6 @@
           "description": "ContainerSecurityContext for the cdm-init container",
           "properties": {
             "allowPrivilegeEscalation": {
-              "default": false,
               "type": "boolean"
             },
             "capabilities": {
@@ -652,30 +573,24 @@
               "required": []
             },
             "privileged": {
-              "default": false,
               "type": "boolean"
             },
             "readOnlyRootFilesystem": {
-              "default": true,
               "type": "boolean"
             },
             "runAsGroup": {
-              "default": 65534,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 65534,
               "type": "integer"
             },
             "seccompProfile": {
               "additionalProperties": true,
               "properties": {
                 "type": {
-                  "default": "RuntimeDefault",
                   "type": "string"
                 }
               },
@@ -685,7 +600,6 @@
           "required": []
         },
         "ttlSecondsAfterFinished": {
-          "default": 120,
           "description": "clean up Job and dependent objects after job completion \u003chttps://kubernetes.io/docs/concepts/workloads/controllers/job/#ttl-mechanism-for-finished-jobs\u003e",
           "type": "integer"
         }
@@ -710,19 +624,15 @@
           "additionalProperties": false,
           "properties": {
             "pullPolicy": {
-              "default": "IfNotPresent",
               "type": "string"
             },
             "registry": {
-              "default": "docker.io",
               "type": "string"
             },
             "repository": {
-              "default": "curlimages/curl",
               "type": "string"
             },
             "tag": {
-              "default": "8.23.0@sha256:3fb7e13e5d179a845c97d78204f3f1064d1907037f26a3ebf91710571151fd93",
               "type": "string"
             }
           },
@@ -734,7 +644,6 @@
       "type": "object"
     },
     "fullnameOverride": {
-      "default": "",
       "description": "fully override the release name",
       "type": "string"
     },
@@ -759,7 +668,6 @@
           "required": []
         },
         "enabled": {
-          "default": false,
           "description": "whether to create an Ingress to expose the Atlas web interface",
           "type": "boolean"
         },
@@ -771,11 +679,9 @@
                 "additionalProperties": false,
                 "properties": {
                   "host": {
-                    "default": "ohdsi.127.0.0.1.nip.io",
                     "type": "string"
                   },
                   "pathType": {
-                    "default": "ImplementationSpecific",
                     "type": "string"
                   }
                 },
@@ -788,7 +694,6 @@
           "type": "array"
         },
         "ingressClassName": {
-          "default": "",
           "description": "the name of the IngressClass to use",
           "type": "string"
         },
@@ -812,7 +717,6 @@
           "required": []
         },
         "resourcesPreset": {
-          "default": "micro",
           "description": "set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).\nMore information: \u003chttps://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl\u003e",
           "type": "string"
         }
@@ -837,12 +741,10 @@
               "additionalProperties": false,
               "properties": {
                 "existingSecret": {
-                  "default": "",
                   "description": "name of an existing secret containing a personal WebAPI API key (`wa_...`), sent as the `X-API-KEY` header.\nSee \u003chttps://github.com/OHDSI/WebAPI/blob/master/articles/APIKey_HOWTO.md\u003e.",
                   "type": "string"
                 },
                 "existingSecretKey": {
-                  "default": "api-key",
                   "description": "name of the key inside the secret whose value is the API key",
                   "type": "string"
                 }
@@ -854,22 +756,18 @@
               "additionalProperties": false,
               "properties": {
                 "existingSecret": {
-                  "default": "",
                   "description": "name of an existing secret containing the user's password",
                   "type": "string"
                 },
                 "existingSecretKey": {
-                  "default": "password",
                   "description": "name of the key inside the secret whose value is the password",
                   "type": "string"
                 },
                 "login": {
-                  "default": "",
                   "description": "login of a database authentication user. Requires `webApi.auth.basic.enabled=true`.",
                   "type": "string"
                 },
                 "password": {
-                  "default": "",
                   "description": "password of the database authentication user. Ignored if `existingSecret` is set.",
                   "type": "string"
                 }
@@ -882,7 +780,6 @@
           "type": "object"
         },
         "backoffLimit": {
-          "default": 1,
           "description": "the number of retries before considering the Job as failed",
           "type": "integer"
         },
@@ -894,7 +791,6 @@
           "type": "array"
         },
         "enabled": {
-          "default": false,
           "description": "whether to enable a job for loading custom cohort definitions in JSON format.\nThe job runs as a `post-install` and `post-upgrade` Helm hook and skips definitions whose `name` already exists.",
           "type": "boolean"
         },
@@ -921,17 +817,14 @@
           "required": []
         },
         "resourcesPreset": {
-          "default": "micro",
           "description": "set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).\nMore information: \u003chttps://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl\u003e",
           "type": "string"
         },
         "restartPolicy": {
-          "default": "Never",
           "description": "restartPolicy of the job \u003chttps://kubernetes.io/docs/concepts/workloads/controllers/job/#handling-pod-and-container-failures\u003e",
           "type": "string"
         },
         "ttlSecondsAfterFinished": {
-          "default": 120,
           "description": "clean up Job and dependent objects after job completion \u003chttps://kubernetes.io/docs/concepts/workloads/controllers/job/#ttl-mechanism-for-finished-jobs\u003e",
           "type": "integer"
         }
@@ -940,7 +833,6 @@
       "type": "object"
     },
     "nameOverride": {
-      "default": "",
       "description": "partially override the release name",
       "type": "string"
     },
@@ -1774,7 +1666,6 @@
       "description": "container security context applied to init containers and the Helm test pods",
       "properties": {
         "allowPrivilegeEscalation": {
-          "default": false,
           "type": "boolean"
         },
         "capabilities": {
@@ -1795,30 +1686,24 @@
           "required": []
         },
         "privileged": {
-          "default": false,
           "type": "boolean"
         },
         "readOnlyRootFilesystem": {
-          "default": true,
           "type": "boolean"
         },
         "runAsGroup": {
-          "default": 65534,
           "type": "integer"
         },
         "runAsNonRoot": {
-          "default": true,
           "type": "boolean"
         },
         "runAsUser": {
-          "default": 65534,
           "type": "integer"
         },
         "seccompProfile": {
           "additionalProperties": true,
           "properties": {
             "type": {
-              "default": "RuntimeDefault",
               "type": "string"
             }
           },
@@ -1831,7 +1716,6 @@
       "additionalProperties": false,
       "properties": {
         "automountServiceAccountToken": {
-          "default": false,
           "description": "whether to automount the SA token for the Helm test pods",
           "type": "boolean"
         },
@@ -1841,7 +1725,6 @@
           "required": []
         },
         "resourcesPreset": {
-          "default": "nano",
           "description": "set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).\nMore information: \u003chttps://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl\u003e",
           "type": "string"
         }
@@ -1861,7 +1744,6 @@
           "additionalProperties": false,
           "properties": {
             "adminLogins": {
-              "default": "",
               "description": "Comma-separated logins to grant the built-in admin role at authentication (`security.admin-login`).",
               "type": "string"
             },
@@ -1869,12 +1751,10 @@
               "additionalProperties": false,
               "properties": {
                 "enabled": {
-                  "default": false,
                   "description": "enable securing access to the WebAPI using database authentication (`security.auth.db`).\nRequires an `auth_user` table to exist within the `schema` below. See\n\u003chttps://github.com/OHDSI/WebAPI/blob/master/articles/DatabaseAuth_HOWTO.md\u003e for details.",
                   "type": "boolean"
                 },
                 "schema": {
-                  "default": "",
                   "description": "schema inside the database specified in `.Values.webApi.db` which contains the `auth_user` table.\nIf unset, defaults to `.Values.webApi.db.schema`.",
                   "type": "string"
                 }
@@ -1886,17 +1766,14 @@
               "additionalProperties": false,
               "properties": {
                 "existingSecret": {
-                  "default": "",
                   "description": "name of an existing Kubernetes secret containing the JWT signing secret",
                   "type": "string"
                 },
                 "existingSecretKey": {
-                  "default": "webapi-jwt-secret",
                   "description": "name of the key inside the secret whose value is the JWT signing secret",
                   "type": "string"
                 },
                 "secret": {
-                  "default": "",
                   "description": "the secret used to sign the JWTs issued by the WebAPI (`security.jwt.secret`).\nIf unset and `existingSecret` is empty, a random secret is generated and kept across upgrades.",
                   "type": "string"
                 }
@@ -1908,52 +1785,42 @@
               "additionalProperties": false,
               "properties": {
                 "callbackUI": {
-                  "default": "",
                   "description": "URL of the ATLAS UI OAuth callback the WebAPI redirects to after a successful login,\ne.g. `https://example.com/atlas/#/oauth/callback`. Sets the `security.auth.oauth.callback.ui` property.\nIf unset, a URL is constructed from `ingress.hosts[0]`",
                   "type": "string"
                 },
                 "clientId": {
-                  "default": "",
                   "description": "the client id",
                   "type": "string"
                 },
                 "clientSecret": {
-                  "default": "",
                   "description": "the client secret",
                   "type": "string"
                 },
                 "enabled": {
-                  "default": false,
                   "description": "enable securing the WebAPI via an OpenId connect provider.\nATLAS automatically discovers the enabled auth providers from the WebAPI.\nSee \"[Securing Atlas using OpenID Connect](#securing-atlas-using-openid-connect)\" below",
                   "type": "boolean"
                 },
                 "existingSecret": {
-                  "default": "",
                   "description": "name of an existing Kubernetes secret containing the OpenId client secret",
                   "type": "string"
                 },
                 "existingSecretKey": {
-                  "default": "webapi-openid-client-secret",
                   "description": "name of the key inside the secret whose value is the OpenId client secret",
                   "type": "string"
                 },
                 "extraScopes": {
-                  "default": "",
                   "description": "additional scopes to request, e.g. `email,profile`. Sets the `security.auth.oidc.extraScopes` property.",
                   "type": "string"
                 },
                 "logoutUrl": {
-                  "default": "",
                   "description": "URL to be redirected to when logging out, e.g. the end-session endpoint of the OIDC provider.\nSets the `security.auth.oidc.logoutUrl` property.",
                   "type": "string"
                 },
                 "oidUrl": {
-                  "default": "",
                   "description": "Required. Points to the issuer or openid-configuration endpoint of the provider,\ne.g. `https://auth.example.com/realms/OHDSI/.well-known/openid-configuration`.\nSets the `security.auth.oidc.url` property.",
                   "type": "string"
                 },
                 "rolesClaim": {
-                  "default": "",
                   "description": "name of the claim in the ID token containing the user's roles/groups.\nSets the `security.auth.oidc.rolesClaim` property.",
                   "type": "string"
                 }
@@ -1969,7 +1836,6 @@
           "additionalProperties": false,
           "properties": {
             "allowedOrigin": {
-              "default": "",
               "description": "comma-separated list of allowed origins, e.g. `https://example.com,http://localhost:8080`.\nSets the `security.cors.allowed-origins` property, which the WebAPI v3 checks for all requests\nwhose `Origin` it doesn't consider its own, e.g. a login via `kubectl port-forward`.\nIf unset and `ingress.enabled=true`, the origin of `ingress.hosts[0]` (`\u003cscheme\u003e://\u003chost\u003e`) is used.\nIf unset and the ingress is disabled, the WebAPI's default of `http://localhost` is used.",
               "type": "string"
             }
@@ -1981,42 +1847,34 @@
           "additionalProperties": false,
           "properties": {
             "database": {
-              "default": "ohdsi",
               "description": "name of the external database. Only used if `postgres.enabled=false`, otherwise `postgres.auth.database` is used.",
               "type": "string"
             },
             "existingSecret": {
-              "default": "",
               "description": "name of an existing secret containing the password to the external database. Only used if `postgres.enabled=false`.",
               "type": "string"
             },
             "existingSecretKey": {
-              "default": "postgres-password",
               "description": "name of the key in `webApi.db.existingSecret` to use as the password to the DB.",
               "type": "string"
             },
             "host": {
-              "default": "host.example.com",
               "description": "database hostname of an external database. Only used if `postgres.enabled=false`.",
               "type": "string"
             },
             "password": {
-              "default": "postgres",
               "description": "the database password. Only used if `postgres.enabled=false` and `existingSecret` is unset,\notherwise the secret created by the postgres chart is used.",
               "type": "string"
             },
             "port": {
-              "default": 5432,
               "description": "port used to connect to the external database. Only used if `postgres.enabled=false`.",
               "type": "integer"
             },
             "schema": {
-              "default": "ohdsi",
               "description": "schema used for the WebAPI's tables. Also referred to as the \"OHDSI schema\"",
               "type": "string"
             },
             "username": {
-              "default": "postgres",
               "description": "username used to connect to the external database. Only used if `postgres.enabled=false`, otherwise `postgres.auth.username` is used.",
               "type": "string"
             }
@@ -2025,7 +1883,6 @@
           "type": "object"
         },
         "enabled": {
-          "default": true,
           "description": "enable the OHDSI WebAPI deployment",
           "type": "boolean"
         },
@@ -2041,19 +1898,15 @@
           "description": "the WebAPI image",
           "properties": {
             "pullPolicy": {
-              "default": "IfNotPresent",
               "type": "string"
             },
             "registry": {
-              "default": "docker.io",
               "type": "string"
             },
             "repository": {
-              "default": "ohdsi/webapi",
               "type": "string"
             },
             "tag": {
-              "default": "3.0.1@sha256:00fdc8866d9c0c22e155b5e690ac57e0a81a535e2e1bcccebe693879dee824bd",
               "type": "string"
             }
           },
@@ -2065,23 +1918,18 @@
           "description": "liveness probe",
           "properties": {
             "failureThreshold": {
-              "default": 5,
               "type": "integer"
             },
             "initialDelaySeconds": {
-              "default": 10,
               "type": "integer"
             },
             "periodSeconds": {
-              "default": 15,
               "type": "integer"
             },
             "successThreshold": {
-              "default": 1,
               "type": "integer"
             },
             "timeoutSeconds": {
-              "default": 15,
               "type": "integer"
             }
           },
@@ -2102,12 +1950,10 @@
           "additionalProperties": false,
           "properties": {
             "enabled": {
-              "default": false,
               "description": "create a PodDisruptionBudget resource for the OHDSI WebAPI pods.\nConfigure it using either `minAvailable` (default: `1`) or `maxUnavailable`, both accept a number or a percentage.",
               "type": "boolean"
             },
             "maxUnavailable": {
-              "default": "",
               "description": "Maximum unavailable instances; ignored if there is no PodDisruptionBudget",
               "required": [],
               "type": [
@@ -2116,7 +1962,6 @@
               ]
             },
             "minAvailable": {
-              "default": 1,
               "description": "Minimum available instances; ignored if there is no PodDisruptionBudget",
               "required": [],
               "type": [
@@ -2133,19 +1978,15 @@
           "description": "security context for the pod. The user matches the one in the WebAPI image.",
           "properties": {
             "fsGroup": {
-              "default": 101,
               "type": "integer"
             },
             "runAsGroup": {
-              "default": 101,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 101,
               "type": "integer"
             }
           },
@@ -2156,23 +1997,18 @@
           "description": "readiness probe",
           "properties": {
             "failureThreshold": {
-              "default": 5,
               "type": "integer"
             },
             "initialDelaySeconds": {
-              "default": 10,
               "type": "integer"
             },
             "periodSeconds": {
-              "default": 15,
               "type": "integer"
             },
             "successThreshold": {
-              "default": 1,
               "type": "integer"
             },
             "timeoutSeconds": {
-              "default": 15,
               "type": "integer"
             }
           },
@@ -2180,7 +2016,6 @@
           "type": "object"
         },
         "replicaCount": {
-          "default": 1,
           "description": "number of pod replicas for the WebAPI",
           "type": "integer"
         },
@@ -2190,7 +2025,6 @@
           "required": []
         },
         "resourcesPreset": {
-          "default": "large",
           "description": "set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if primary.resources is set (primary.resources is recommended for production).\nMore information: \u003chttps://github.com/chgl/charts/blob/master/charts/common/templates/_resources.tpl\u003e",
           "type": "string"
         },
@@ -2199,7 +2033,6 @@
           "description": "security context for the WebAPI container",
           "properties": {
             "allowPrivilegeEscalation": {
-              "default": false,
               "type": "boolean"
             },
             "capabilities": {
@@ -2220,26 +2053,21 @@
               "required": []
             },
             "readOnlyRootFilesystem": {
-              "default": true,
               "type": "boolean"
             },
             "runAsGroup": {
-              "default": 101,
               "type": "integer"
             },
             "runAsNonRoot": {
-              "default": true,
               "type": "boolean"
             },
             "runAsUser": {
-              "default": 101,
               "type": "integer"
             },
             "seccompProfile": {
               "additionalProperties": true,
               "properties": {
                 "type": {
-                  "default": "RuntimeDefault",
                   "type": "string"
                 }
               },
@@ -2253,11 +2081,9 @@
           "description": "the service used to expose the WebAPI web port",
           "properties": {
             "port": {
-              "default": 8080,
               "type": "integer"
             },
             "type": {
-              "default": "ClusterIP",
               "type": "string"
             }
           },
@@ -2273,17 +2099,14 @@
               "required": []
             },
             "automountServiceAccountToken": {
-              "default": false,
               "description": "whether to automount the SA token",
               "type": "boolean"
             },
             "create": {
-              "default": true,
               "description": "Specifies whether a service account should be created.",
               "type": "boolean"
             },
             "name": {
-              "default": "",
               "description": "The name of the service account to use.\nIf not set and create is true, a name is generated using the fullname template",
               "type": "string"
             }
@@ -2296,23 +2119,18 @@
           "description": "startup probe",
           "properties": {
             "failureThreshold": {
-              "default": 10,
               "type": "integer"
             },
             "initialDelaySeconds": {
-              "default": 60,
               "type": "integer"
             },
             "periodSeconds": {
-              "default": 20,
               "type": "integer"
             },
             "successThreshold": {
-              "default": 1,
               "type": "integer"
             },
             "timeoutSeconds": {
-              "default": 30,
               "type": "integer"
             }
           },
@@ -2341,19 +2159,15 @@
               "description": "image to use for the init container which waits until the database\nis ready to accept connections",
               "properties": {
                 "pullPolicy": {
-                  "default": "IfNotPresent",
                   "type": "string"
                 },
                 "registry": {
-                  "default": "docker.io",
                   "type": "string"
                 },
                 "repository": {
-                  "default": "library/postgres",
                   "type": "string"
                 },
                 "tag": {
-                  "default": "18.7@sha256:2ea8630df176ad090ec92136dee850397c5af8781e4bcf2e4162593691c61bbc",
                   "type": "string"
                 }
               },

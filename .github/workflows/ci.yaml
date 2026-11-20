@@ -53,7 +53,7 @@ jobs:
         run: find charts/ ! -path charts/ -maxdepth 1 -type d -exec helm dependency update {} \;
 
       # the flags must match the ones used to generate the schemas locally:
-      # helm schema -c charts/<chart> -a -m -K -k required,title
+      # helm schema -c charts/<chart> -a -m -K -k required,title,default
       - name: Check if values.schema.json files are up-to-date
         env:
           # GitHub Actions overrides HOME for container jobs, so point helm to the plugins installed in the image
@@ -61,8 +61,8 @@ jobs:
         run: |
           for chart in charts/*/; do
             if test -f "${chart}values.schema.json"; then
-              if ! helm schema -c "${chart}" -a -m -K -k required,title --check; then
-                printf "\033[0;31m%svalues.schema.json outdated! Please run 'helm schema -c %s -a -m -K -k required,title' locally and push the changes.\033[0m ❌\n" "${chart}" "${chart}"
+              if ! helm schema -c "${chart}" -a -m -K -k required,title,default --check; then
+                printf "\033[0;31m%svalues.schema.json outdated! Please run 'helm schema -c %s -a -m -K -k required,title,default' locally and push the changes.\033[0m ❌\n" "${chart}" "${chart}"
                 exit 1
               fi
             fi
