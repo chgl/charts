@@ -84,7 +84,7 @@ webApi:
     image:
       registry: docker.io
       repository: library/postgres
-      tag: 18.7@sha256:2ea8630df176ad090ec92136dee850397c5af8781e4bcf2e4162593691c61bbc
+      tag: 18.7@sha256:64c8b0d31e4ab6ea665e8426ea406a94bf52de3c05b3a4a8bf713704eefa9328
       pullPolicy: IfNotPresent
 
   serviceAccount:
